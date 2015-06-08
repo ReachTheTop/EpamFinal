@@ -47,7 +47,7 @@ public class User extends Validator implements Serializable {
 	private Boolean is_active;
 
 	@Column(value = "is_confirmed")
-	private Boolean is_deleted;
+	private Boolean is_confirmed;
 
 	@Column(value = "key1")
 	private String key;
@@ -160,11 +160,11 @@ public class User extends Validator implements Serializable {
 	}
 
 	public Boolean getIs_deleted() {
-		return is_deleted;
+		return is_confirmed;
 	}
 
-	public void setIs_deleted(Boolean is_deleted) {
-		this.is_deleted = is_deleted;
+	public void setIs_deleted(Boolean is_confirmed) {
+		this.is_confirmed = is_confirmed;
 	}
 
 	public String getKey() {
