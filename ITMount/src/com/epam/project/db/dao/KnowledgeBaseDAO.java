@@ -11,9 +11,15 @@ import com.epam.project.db.transformer.KnowledgeBaseTransfomer;
 
 public class KnowledgeBaseDAO {
 
+	private static final String INSERT = "INSERT INTO knowlegdebase(path,available,is_active,course_id) VALUES(?,?,?,?);";
+	private static final String UPDATE = "UPDATE knowlegdebase SET path=?, available=?, is_active=?, course_id=? WHERE id=?";
+	private static final String DELETE = "DELETE FROM knowlegdebase WHERE id=?";
+	private static final String SELECTALL = "SELECT * FROM knowlegdebase";
+	private static final String SELECT = "SELECT * FROM knowlegdebase WHERE id=?";
+	
 	public static void addKnowledgeBase(KnowledgeBase kBase, Connection connection){
 		try{
-		PreparedStatement st = connection.prepareStatement("INSERT INTO knowlegdebase(path,available,is_active,course_id) VALUES(?,?,?,?);");
+		PreparedStatement st = connection.prepareStatement(INSERT);
 		st.setString(1,kBase.getPath());
 		st.setBoolean(2, kBase.getAvailable());
 		st.setBoolean(3, kBase.getIs_active());
@@ -29,7 +35,7 @@ public class KnowledgeBaseDAO {
 	
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("DELETE FROM knowlegdebase WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(DELETE);
 			st.setInt(1, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
@@ -41,7 +47,7 @@ public class KnowledgeBaseDAO {
 	public static void updateKnowledgeBase(KnowledgeBase kBase, Connection connection){
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("UPDATE knowlegdebase SET path=?, available=?, is_active=?, course_id=? WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(UPDATE);
 			
 			st.setString(1,kBase.getPath());
 			st.setBoolean(2, kBase.getAvailable());
@@ -59,7 +65,7 @@ public class KnowledgeBaseDAO {
 		List<KnowledgeBase> list = null;
 		try {
 		
-			PreparedStatement st = connection.prepareStatement("SELECT * FROM knowlegdebase");
+			PreparedStatement st = connection.prepareStatement(SELECTALL);
 			rs = st.executeQuery();
 			list =KnowledgeBaseTransfomer.getAllKnowledgeBase(rs);
 		} catch (SQLException e) {
@@ -72,7 +78,7 @@ public class KnowledgeBaseDAO {
 		KnowledgeBase kBase =null;
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("SELECT * FROM knowlegdebase WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(SELECT);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			kBase= KnowledgeBaseTransfomer.getKnowledgeBase(rs);

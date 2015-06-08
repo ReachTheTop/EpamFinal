@@ -13,9 +13,15 @@ import java.util.List;
 
 public class CourseDAO {
 
+	private static final String INSERT = "INSERT INTO course(name,icon,description,status,date_exam) VALUES(?,?,?,?,?);";
+	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?";
+	private static final String DELETE = "DELETE FROM course WHERE id=?";
+	private static final String SELECTALL = "SELECT * FROM course";
+	private static final String SELECT = "SELECT * FROM course WHERE id=?";
+	
 	public static void addCourse(Course course, Connection connection){
 		try{
-		PreparedStatement st = connection.prepareStatement("INSERT INTO course(name,icon,description,status,date_exam) VALUES(?,?,?,?,?);");
+		PreparedStatement st = connection.prepareStatement(INSERT);
 		st.setString(1,course.getName());
 		st.setString(2, course.getIcon());
 		st.setString(3, course.getDescription());
@@ -32,7 +38,7 @@ public class CourseDAO {
 	
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("DELETE FROM course WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(DELETE);
 			st.setInt(1, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
@@ -44,7 +50,7 @@ public class CourseDAO {
 	public static void updateCourse(Course course, Connection connection){
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(UPDATE);
 			
 			st.setString(1,course.getName());
 			st.setString(2, course.getIcon());
@@ -63,7 +69,7 @@ public class CourseDAO {
 		List<Course> list = null;
 		try {
 		
-			PreparedStatement st = connection.prepareStatement("SELECT * FROM course");
+			PreparedStatement st = connection.prepareStatement(SELECTALL);
 			rs = st.executeQuery();
 			list =CourseTransformer.getAllCourse(rs);
 		} catch (SQLException e) {
@@ -76,7 +82,7 @@ public class CourseDAO {
 		Course course =null;
 		try {
 			
-			PreparedStatement st = connection.prepareStatement("SELECT * FROM course WHERE id=?");
+			PreparedStatement st = connection.prepareStatement(SELECT);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			course= CourseTransformer.getCourse(rs);
