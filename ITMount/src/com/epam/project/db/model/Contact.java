@@ -59,4 +59,11 @@ public class Contact extends Validator implements Serializable {
 		this.user_id = user_id;
 	}
 
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", skype=" + skype + ", phone=" + phone
+				+ ", user_id=" + user_id + "]";
+	}
+	
+
 }
