@@ -18,7 +18,7 @@ public class DBConnection {
 		HikariConfig config = new HikariConfig();
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/");		//SET DATA BASE
 		config.setUsername("root");								//CHANGE TO YOUR DB USER NAME
-		config.setPassword("1111");								//CHANGE TO YOUR DB PASSWORD
+		config.setPassword("rt6745683");								//CHANGE TO YOUR DB PASSWORD
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

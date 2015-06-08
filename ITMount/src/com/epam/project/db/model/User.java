@@ -49,7 +49,7 @@ public class User extends Validator implements Serializable {
 	@Column(value = "is_deleted")
 	private Boolean is_deleted;
 
-	@Column(value = "key")
+	@Column(value = "key1")
 	private String key;
 
 	@Column(value = "image")
