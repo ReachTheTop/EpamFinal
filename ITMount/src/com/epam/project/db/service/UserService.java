@@ -1,52 +1,70 @@
 package com.epam.project.db.service;
 
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
+import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.CourseDAO;
 import com.epam.project.db.dao.UserDAO;
+import com.epam.project.db.model.Course;
 import com.epam.project.db.model.User;
 
 public class UserService {
 	
-	public static void updateUserSalt(String salt, int id) {
-
-		UserDAO.updateUserSalt(salt, id);
-
+	public static User getUser(Integer id){
+		
+		Connection connection =  DBConnection.getConnection();
+		User user = UserDAO.getUser(id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+		
 	}
 	
+	public static List<User> getAllUsers() {
+		Connection connection =  DBConnection.getConnection();
+		List<User> list = UserDAO.getAllUser(connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
-	public static void updateUserPasswordHash(String passwordHash, int id) {
-
-		UserDAO.updateUserPasswordHash(passwordHash, id);
-
+	public static void updateUser(User user){
+		
+		Connection connection =  DBConnection.getConnection();
+		
+		UserDAO.updateUser(user, connection);
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
-	public static void updateUserBirthDay(Date userBirthDay, int id) {
+	public static void addNewUser(User user) {
 
-		UserDAO.updateUserBirthDay(userBirthDay, id);
-
-	}
-
-	public static void updateUserSurname(String userSurname, int id) {
-
-		UserDAO.updateUserSurname(userSurname, id);
-
-	}
-
-	public static void updateUserMiddleName(String userMiddleName, int id) {
-
-		UserDAO.updateUserMiddleName(userMiddleName, id);
-
-	}
-
-	public static void updateUserName(String userName, int id) {
-
-		UserDAO.updateUserName(userName, id);
-
-	}
-
-	public static void insertNewUser(User user) {
-
-		UserDAO.insertNewUser(user);
+		Connection connection =  DBConnection.getConnection();
+		UserDAO.addNewUser(user,connection);
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
