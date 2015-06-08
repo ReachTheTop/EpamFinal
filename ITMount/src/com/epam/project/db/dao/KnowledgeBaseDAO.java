@@ -50,7 +50,7 @@ public class KnowledgeBaseDAO {
 			st.setBoolean(2, kBase.getAvailable());
 			st.setBoolean(3, kBase.getIs_active());
 			st.setInt(4, kBase.getCourse_id());
-			st.setInt(6, kBase.getId());
+			st.setInt(5, kBase.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
