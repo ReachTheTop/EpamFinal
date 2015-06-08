@@ -46,7 +46,7 @@ public class User extends Validator implements Serializable {
 	@Column(value = "is_active")
 	private Boolean is_active;
 
-	@Column(value = "is_deleted")
+	@Column(value = "is_confirmed")
 	private Boolean is_deleted;
 
 	@Column(value = "key1")
