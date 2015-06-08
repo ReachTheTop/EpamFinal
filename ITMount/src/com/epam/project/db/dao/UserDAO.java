@@ -10,7 +10,7 @@ import com.epam.project.db.model.User;
 
 public class UserDAO {
 
-	public static final String SQL_INSERT_NEW_USER = "Insert into user (name,midle_name,surname,birthday,password_hash,salt,curriculum_vitae,description,role,is_active,is_deleted, key1,image,email) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String SQL_INSERT_NEW_USER = "Insert into user (name,midle_name,surname,birthday,password_hash,salt,curriculum_vitae,description,role,is_active,is_confirmed, key1,image,email) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String SQL_UPDATE_USER_NAME = "update user set name = ? where user.id = ?";
 	public static final String SQL_UPDATE_USER_MIDDLE_NAME = "update user set midle_name = ? where user.id = ?";
 	public static final String SQL_UPDATE_USER_SURNAME = "update user set surname = ? where user.id = ?";
