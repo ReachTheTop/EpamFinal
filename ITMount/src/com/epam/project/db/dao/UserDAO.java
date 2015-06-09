@@ -3,159 +3,70 @@ package com.epam.project.db.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.model.Course;
 import com.epam.project.db.model.User;
+import com.epam.project.db.transformer.CourseTransformer;
+import com.epam.project.db.transformer.UserTransformer;
 
 public class UserDAO {
 
-	public static final String SQL_INSERT_NEW_USER = "Insert into user (name,midle_name,surname,birthday,password_hash,salt,curriculum_vitae,description,role,is_active,is_confirmed, key1,image,email) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	public static final String SQL_UPDATE_USER_NAME = "update user set name = ? where user.id = ?";
-	public static final String SQL_UPDATE_USER_MIDDLE_NAME = "update user set midle_name = ? where user.id = ?";
-	public static final String SQL_UPDATE_USER_SURNAME = "update user set surname = ? where user.id = ?";
-	public static final String SQL_UPDATE_USER_BIRTHDAY = "update user set birthday = ? where user.id = ?";
-	public static final String SQL_UPDATE_USER_PASSWORD_HASH = "update user set password_hash = ? where user.id = ?";
-	public static final String SQL_UPDATE_USER_SALT = "update user set salt = ? where user.id = ?";
+	public static final String SQL_UPDATE_USER = "UPDATE user SET name=?, midle_name=?, surname=?, birthday=?,"
+			+ " password_hash=?, salt =?, curriculum_vitae=?, description=?, role=?, is_active=?, is_confirmed=?, key1=?,"
+			+ " image=?, email=? WHERE id=?";
 
-	
-	public static void updateUserSalt(String salt, int id) {
+	public static final String SQL_ADD_NEW_USER = "Insert into user (name,midle_name,surname,birthday,password_hash,"
+			+ "salt,curriculum_vitae,description,role,is_active,is_confirmed, key1,image,email)"
+			+ "value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-		PreparedStatement stmt;
+	public static final String SQL_GET_ALL_USERS = "SELECT * FROM user";
+	public static final String SQL_GET_USER = "SELECT * FROM user WHERE id=?";
 
-		Connection con = DBConnection.getConnection();
+	public static User getUser(Integer id, Connection connection) {
 
+		ResultSet rs = null;
+		User user = null;
 		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_SALT);
 
-			stmt.setString(1,salt);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
+			PreparedStatement st = connection.prepareStatement(SQL_GET_USER);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			user = UserTransformer.getUser(rs);
 		} catch (SQLException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-	
-	public static void updateUserPasswordHash(String passwordHash, int id) {
-
-		PreparedStatement stmt;
-
-		Connection con = DBConnection.getConnection();
-
-		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_PASSWORD_HASH);
-
-			stmt.setString(1,passwordHash);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-	
-	
-	public static void updateUserBirthDay(Date userBirthDay, int id) {
-
-		PreparedStatement stmt;
-
-		Connection con = DBConnection.getConnection();
-
-		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_BIRTHDAY);
-
-			stmt.setDate(1,userBirthDay);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-	
-	
-	public static void updateUserSurname(String userSurname, int id) {
-
-		PreparedStatement stmt;
-
-		Connection con = DBConnection.getConnection();
-
-		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_SURNAME);
-
-			stmt.setString(1, userSurname);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-	
-	
-	public static void updateUserMiddleName(String userMiddleName, int id) {
-
-		PreparedStatement stmt;
-
-		Connection con = DBConnection.getConnection();
-
-		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_MIDDLE_NAME);
-
-			stmt.setString(1, userMiddleName);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
+		return user;
 
 	}
 
-	public static void updateUserName(String userName, int id) {
-
-		PreparedStatement stmt;
-
-		Connection con = DBConnection.getConnection();
-
+	public static List<User> getAllUsers(Connection connection) {
+		ResultSet rs = null;
+		List<User> list = null;
 		try {
-			stmt = con.prepareStatement(SQL_UPDATE_USER_NAME);
 
-			stmt.setString(1, userName);
-			stmt.setInt(2, id);
-
-			stmt.executeUpdate();
-
+			PreparedStatement st = connection
+					.prepareStatement(SQL_GET_ALL_USERS);
+			rs = st.executeQuery();
+			list = UserTransformer.getAllUsers(rs);
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
-
+		return list;
 	}
 
-	public static void insertNewUser(User user) {
+	public static void addNewUser(User user, Connection connection) {
 
 		PreparedStatement stmt;
 
 		Connection con = DBConnection.getConnection();
 
 		try {
-			stmt = con.prepareStatement(SQL_INSERT_NEW_USER);
+			stmt = con.prepareStatement(SQL_ADD_NEW_USER);
 
 			stmt.setString(1, user.getName());
 			stmt.setString(2, user.getMiddle_name());
@@ -167,7 +78,7 @@ public class UserDAO {
 			stmt.setString(8, user.getDescription());
 			stmt.setString(9, user.getRole());
 			stmt.setBoolean(10, user.getIs_active());
-			stmt.setBoolean(11, user.getIs_deleted());
+			stmt.setBoolean(11, user.getIs_confirmed());
 			stmt.setString(12, user.getKey());
 			stmt.setString(13, user.getImage());
 			stmt.setString(14, user.getEmail());
@@ -176,6 +87,37 @@ public class UserDAO {
 
 		} catch (SQLException e) {
 
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void updateUser(User user, Connection connection) {
+
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement("UPDATE user SET name=?, midle_name=?, surname=?, birthday=?, password_hash=?, salt =?, curriculum_vitae=?, description=?, role=?, is_active=?, is_confirmed=?, key1=?, image=?, email=? WHERE id=?");
+
+			st.setString(1, user.getName());
+			st.setString(2, user.getMiddle_name());
+			st.setString(3, user.getSurname());
+			st.setDate(4, new Date(user.getBirtday().getTime()));
+			st.setString(5, user.getPassword_hash());
+			st.setString(6, user.getSalt());
+			st.setString(7, user.getCurriculum_vitae());
+			st.setString(8, user.getDescription());
+			st.setString(9, user.getRole());
+			st.setBoolean(10, user.getIs_active());
+			st.setBoolean(11, user.getIs_confirmed());
+			st.setString(12, user.getKey());
+			st.setString(13, user.getImage());
+			st.setString(14, user.getEmail());
+
+			st.setInt(15, user.getId());
+
+			st.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
