@@ -20,17 +20,16 @@ public class UserTransformer {
 				user.setName(rs.getString(2));
 				user.setMiddle_name(rs.getString(3));
 				user.setSurname(rs.getString(4));
-				user.setBirtday(rs.getDate(5));				
-				user.setPassword_hash(rs.getString(6));
-				user.setSalt(rs.getString(7));
+				user.setBirtday(rs.getDate(5));
+				user.setRole_id(rs.getInt(6));
+				user.setPassword_hash(rs.getString(7));
 				user.setCurriculum_vitae(rs.getString(8));
 				user.setDescription(rs.getString(9));
-				user.setRole(rs.getString(10));
-				user.setIs_active(rs.getBoolean(11));
-				user.setIs_confirmed(rs.getBoolean(12));
-				user.setKey(rs.getString(13));
-				user.setImage(rs.getString(14));
-				user.setEmail(rs.getString(15));
+				user.setIs_active(rs.getBoolean(10));
+				user.setIs_confirmed(rs.getBoolean(11));
+				user.setKey(rs.getString(12));
+				user.setImage(rs.getString(13));
+				user.setEmail(rs.getString(14));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -54,17 +53,16 @@ public class UserTransformer {
 				user.setName(rs.getString(2));
 				user.setMiddle_name(rs.getString(3));
 				user.setSurname(rs.getString(4));
-				user.setBirtday(rs.getDate(5));				
-				user.setPassword_hash(rs.getString(6));
-				user.setSalt(rs.getString(7));
+				user.setBirtday(rs.getDate(5));
+				user.setRole_id(rs.getInt(6));
+				user.setPassword_hash(rs.getString(7));
 				user.setCurriculum_vitae(rs.getString(8));
 				user.setDescription(rs.getString(9));
-				user.setRole(rs.getString(10));
-				user.setIs_active(rs.getBoolean(11));
-				user.setIs_confirmed(rs.getBoolean(12));
-				user.setKey(rs.getString(13));
-				user.setImage(rs.getString(14));
-				user.setEmail(rs.getString(15));
+				user.setIs_active(rs.getBoolean(10));
+				user.setIs_confirmed(rs.getBoolean(11));
+				user.setKey(rs.getString(12));
+				user.setImage(rs.getString(13));
+				user.setEmail(rs.getString(14));
 			
 				list.add(user);
 			}

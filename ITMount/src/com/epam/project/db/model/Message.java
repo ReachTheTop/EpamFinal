@@ -1,6 +1,7 @@
 package com.epam.project.db.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
@@ -22,6 +23,10 @@ public class Message extends Validator implements Serializable {
 
 	@Column(value = "sender_id")
 	private Integer sender_id;
+	
+	
+	@Column(value = "date")
+	private Date sendDate;
 
 	public Message() {
 		// TODO Auto-generated constructor stub
@@ -58,5 +63,22 @@ public class Message extends Validator implements Serializable {
 	public void setSender_id(Integer sender_id) {
 		this.sender_id = sender_id;
 	}
+
+	public Date getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(Date sendDate) {
+		this.sendDate = sendDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", subject=" + subject + ", content="
+				+ content + ", sender_id=" + sender_id + ", sendDate="
+				+ sendDate + "]";
+	}
+	
+	
 
 }

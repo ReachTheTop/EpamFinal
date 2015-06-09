@@ -71,4 +71,13 @@ public class Event extends Validator implements Serializable {
 		this.is_active = is_active;
 	}
 
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", description=" + description + ", date="
+				+ date + ", group_id=" + group_id + ", is_active=" + is_active
+				+ "]";
+	}
+	
+	
+
 }

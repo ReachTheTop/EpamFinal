@@ -8,7 +8,7 @@ import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.CourseDAO;
 import com.epam.project.db.model.Course;
 
-
+/*
 
 public class CourseService {
 
@@ -71,3 +71,4 @@ public class CourseService {
 		return course;
 	}
 }
+*/

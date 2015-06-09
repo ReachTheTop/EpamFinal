@@ -23,7 +23,6 @@ public class UserService {
 			e.printStackTrace();
 		}
 		return user;
-		
 	}
 	
 	public static List<User> getAllUsers() {

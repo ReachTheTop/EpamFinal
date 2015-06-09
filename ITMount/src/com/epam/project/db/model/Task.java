@@ -10,9 +10,6 @@ import com.epam.project.db.model.validator.Validator;
 @Table(name = "task")
 public class Task extends Validator implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(value = "id")

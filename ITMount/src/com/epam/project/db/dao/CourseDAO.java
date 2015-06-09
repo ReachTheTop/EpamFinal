@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class CourseDAO {
-
+/*
 	private static final String INSERT = "INSERT INTO course(name,icon,description,status,date_exam) VALUES(?,?,?,?,?);";
 	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?";
 	private static final String DELETE = "DELETE FROM course WHERE id=?";
@@ -93,5 +93,5 @@ public class CourseDAO {
 		return course;
 	}
 	
-	
+	*/
 }

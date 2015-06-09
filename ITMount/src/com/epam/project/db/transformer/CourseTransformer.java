@@ -9,7 +9,7 @@ import com.epam.project.db.model.Course;
 
 
 public class CourseTransformer {
-
+/*
 	public static Course getCourse(ResultSet rs) {
 
 		Course course = null;
@@ -55,4 +55,5 @@ public class CourseTransformer {
 		return list;
 
 	}
+	*/
 }

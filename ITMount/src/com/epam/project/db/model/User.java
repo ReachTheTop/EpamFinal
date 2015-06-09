@@ -27,12 +27,13 @@ public class User extends Validator implements Serializable {
 
 	@Column(value = "birthday")
 	private Date birtday;
+	
+	@Column(value = "role_id")
+	private Integer role_id;
 
 	@Column(value = "password_hash")
 	private String password_hash;
 
-	@Column(value = "salt")
-	private String salt;
 
 	@Column(value = "curriculum_vitae")
 	private String curriculum_vitae;
@@ -40,8 +41,6 @@ public class User extends Validator implements Serializable {
 	@Column(value = "description")
 	private String description;
 
-	@Column(value = "role")
-	private String role;
 
 	@Column(value = "is_active")
 	private Boolean is_active;
@@ -61,14 +60,6 @@ public class User extends Validator implements Serializable {
 
 	public User() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Integer getId() {
@@ -111,20 +102,20 @@ public class User extends Validator implements Serializable {
 		this.birtday = birtday;
 	}
 
+	public Integer getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(Integer role_id) {
+		this.role_id = role_id;
+	}
+
 	public String getPassword_hash() {
 		return password_hash;
 	}
 
 	public void setPassword_hash(String password_hash) {
 		this.password_hash = password_hash;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	public String getCurriculum_vitae() {
@@ -143,14 +134,6 @@ public class User extends Validator implements Serializable {
 		this.description = description;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public Boolean getIs_active() {
 		return is_active;
 	}
@@ -161,12 +144,10 @@ public class User extends Validator implements Serializable {
 
 	public Boolean getIs_confirmed() {
 		return is_confirmed;
-
 	}
 
-	public void setIs_confirmed(Boolean is_deleted) {
+	public void setIs_confirmed(Boolean is_confirmed) {
 		this.is_confirmed = is_confirmed;
-
 	}
 
 	public String getKey() {
@@ -184,5 +165,26 @@ public class User extends Validator implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", middle_name="
+				+ middle_name + ", surname=" + surname + ", birtday=" + birtday
+				+ ", role_id=" + role_id + ", password_hash=" + password_hash
+				+ ", curriculum_vitae=" + curriculum_vitae + ", description="
+				+ description + ", is_active=" + is_active + ", is_confirmed="
+				+ is_confirmed + ", key=" + key + ", image=" + image
+				+ ", email=" + email + "]";
+	}
+
+	
 
 }
