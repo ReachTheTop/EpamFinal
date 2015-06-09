@@ -31,6 +31,20 @@ import com.epam.project.db.model.annotation.Unique;
 public class Validator {
 
 	private Map<String, List<String>> errors;
+	private boolean isValid;
+
+	public Map<String, List<String>> getErrors() {
+		return errors;
+	};
+
+	public boolean isValid() {
+		isValid = false;
+		validate();
+		if (errors.isEmpty()) {
+			isValid = true;
+		}
+		return isValid;
+	}
 
 	public Map<String, List<String>> validate() {
 		errors = new HashMap<String, List<String>>();
@@ -55,6 +69,7 @@ public class Validator {
 			}
 
 		}
+
 		return errors;
 	}
 
