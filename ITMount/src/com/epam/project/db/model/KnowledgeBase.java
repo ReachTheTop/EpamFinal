@@ -60,5 +60,12 @@ public class KnowledgeBase extends Validator implements Serializable {
 	public void setCourse_id(Integer course_id) {
 		this.course_id = course_id;
 	}
+
+	@Override
+	public String toString() {
+		return "KnowledgeBase [id=" + id + ", path=" + path + ", available="
+				+ available + ", is_active=" + is_active + ", course_id="
+				+ course_id + "]";
+	}
 	
 }

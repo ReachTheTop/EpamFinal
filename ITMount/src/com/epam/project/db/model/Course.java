@@ -81,5 +81,12 @@ public class Course extends Validator implements Serializable {
 		this.exam_date = exam_date;
 	}
 
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", icon=" + icon
+				+ ", description=" + description + ", status=" + status
+				+ ", exam_date=" + exam_date + "]";
+	}
+
 	
 }
