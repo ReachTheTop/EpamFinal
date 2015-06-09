@@ -69,15 +69,15 @@ public class UserDAO {
 			stmt = con.prepareStatement(SQL_ADD_NEW_USER);
 
 			stmt.setString(1, user.getName());
-			stmt.setString(2, user.getMiddle_name());
-			stmt.setString(3, user.getSurname());
+			stmt.setString(2, user.getMiddleName());
+			stmt.setString(3, user.getSurName());
 			stmt.setDate(4, new Date(user.getBirtday().getTime()));
-			stmt.setInt(5, user.getRole_id());
-			stmt.setString(6, user.getPassword_hash());
-			stmt.setString(7, user.getCurriculum_vitae());
+			stmt.setInt(5, user.getRoleID());
+			stmt.setString(6, user.getPasswordHash());
+			stmt.setString(7, user.getCurriculumVitae());
 			stmt.setString(8, user.getDescription());
-			stmt.setBoolean(9, user.getIs_active());
-			stmt.setBoolean(10, user.getIs_confirmed());
+			stmt.setBoolean(9, user.getIsActive());
+			stmt.setBoolean(10, user.getIsConfirmed());
 			stmt.setString(11, user.getKey());
 			stmt.setString(12, user.getImage());
 			stmt.setString(13, user.getEmail());
@@ -99,15 +99,15 @@ public class UserDAO {
 					.prepareStatement(SQL_UPDATE_USER);
 
 			stmt.setString(1, user.getName());
-			stmt.setString(2, user.getMiddle_name());
-			stmt.setString(3, user.getSurname());
+			stmt.setString(2, user.getMiddleName());
+			stmt.setString(3, user.getSurName());
 			stmt.setDate(4, new Date(user.getBirtday().getTime()));
-			stmt.setInt(5, user.getRole_id());
-			stmt.setString(6, user.getPassword_hash());
-			stmt.setString(7, user.getCurriculum_vitae());
+			stmt.setInt(5, user.getRoleID());
+			stmt.setString(6, user.getPasswordHash());
+			stmt.setString(7, user.getCurriculumVitae());
 			stmt.setString(8, user.getDescription());
-			stmt.setBoolean(9, user.getIs_active());
-			stmt.setBoolean(10, user.getIs_confirmed());
+			stmt.setBoolean(9, user.getIsActive());
+			stmt.setBoolean(10, user.getIsConfirmed());
 			stmt.setString(11, user.getKey());
 			stmt.setString(12, user.getImage());
 			stmt.setString(13, user.getEmail());

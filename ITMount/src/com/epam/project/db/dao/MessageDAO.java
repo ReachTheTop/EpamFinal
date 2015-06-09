@@ -67,7 +67,7 @@ public class MessageDAO {
 			stmt = con.prepareStatement(SQL_ADD_NEW_MESSAGE);
 			stmt.setString(1, message.getSubject());
 			stmt.setString(2, message.getContent());
-			stmt.setInt(3, message.getSender_id());
+			stmt.setInt(3, message.getSenderID());
 		
 			stmt.executeUpdate();
 
@@ -88,7 +88,7 @@ public class MessageDAO {
 
 			stmt.setString(1, message.getSubject());
 			stmt.setString(2, message.getContent());
-			stmt.setInt(3, message.getSender_id());
+			stmt.setInt(3, message.getSenderID());
 			
 			stmt.setInt(4, message.getId());
 
