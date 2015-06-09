@@ -159,11 +159,11 @@ public class User extends Validator implements Serializable {
 		this.is_active = is_active;
 	}
 
-	public Boolean getIs_deleted() {
+	public Boolean getIs_confirmed() {
 		return is_deleted;
 	}
 
-	public void setIs_deleted(Boolean is_deleted) {
+	public void setIs_confirmed(Boolean is_deleted) {
 		this.is_deleted = is_deleted;
 	}
 

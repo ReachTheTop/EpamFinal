@@ -45,7 +45,7 @@ public class UserDAO {
 		
 	}
 	
-	public static List<User> getAllUser(Connection connection) {
+	public static List<User> getAllUsers(Connection connection) {
 		ResultSet rs = null;
 		List<User> list = null;
 		try {

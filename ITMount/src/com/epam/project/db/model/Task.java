@@ -102,4 +102,14 @@ public class Task extends Validator implements Serializable {
 	public void setIs_active(Boolean is_active) {
 		this.is_active = is_active;
 	}
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", name=" + name + ", description="
+				+ description + ", deadline=" + deadline + ", available="
+				+ available + ", file=" + file + ", is_active=" + is_active
+				+ ", groupID=" + groupID + "]";
+	}
+	
+	
 }
