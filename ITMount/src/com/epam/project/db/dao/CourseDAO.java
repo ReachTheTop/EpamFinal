@@ -13,12 +13,30 @@ import java.util.List;
 
 public class CourseDAO {
 /*
-	private static final String INSERT = "INSERT INTO course(name,icon,description,status,date_exam) VALUES(?,?,?,?,?);";
-	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?";
+	private static final String SQL_INSERT_NEW_COURSE = "INSERT INTO course(name,icon,description,status,date_exam) VALUES(?,?,?,?,?);";
+	private static final String SQL_UPDATE_COURSE = "UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?";
 	private static final String DELETE = "DELETE FROM course WHERE id=?";
 	private static final String SELECTALL = "SELECT * FROM course";
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 	
+	
+	public static Course getCourse(Integer id,Connection connection){
+		ResultSet rs = null;
+		Course course =null;
+		try {
+			
+			PreparedStatement st = connection.prepareStatement(SELECT);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			course= CourseTransformer.getCourse(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return course;
+	}
+	
+	/*
 	public static void addCourse(Course course, Connection connection){
 		try{
 		PreparedStatement st = connection.prepareStatement(INSERT);
@@ -76,21 +94,6 @@ public class CourseDAO {
 			e.printStackTrace();
 		}
 		return list;
-	}
-	public static Course getCourse(Integer id,Connection connection){
-		ResultSet rs = null;
-		Course course =null;
-		try {
-			
-			PreparedStatement st = connection.prepareStatement(SELECT);
-			st.setInt(1, id);
-			rs = st.executeQuery();
-			course= CourseTransformer.getCourse(rs);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return course;
 	}
 	
 	*/
