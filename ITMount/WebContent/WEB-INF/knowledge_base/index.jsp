@@ -32,7 +32,7 @@
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
 							<h3>
-								<c:out value="${course.path }" />
+								<c:out value="${item.path }" />
 							</h3>
 
 						</div>
