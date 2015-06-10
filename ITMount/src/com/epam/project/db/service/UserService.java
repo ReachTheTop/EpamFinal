@@ -24,6 +24,19 @@ public class UserService {
 		}
 		return user;
 	}
+public static User getUserWhereEmail(String email){
+		
+		Connection connection =  DBConnection.getConnection();
+		User user = UserDAO.getUserWhereEmail(email, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+		
+	}
 	
 	public static List<User> getAllUsers() {
 		Connection connection =  DBConnection.getConnection();

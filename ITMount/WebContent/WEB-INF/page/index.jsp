@@ -22,7 +22,7 @@
 						<!-- Slide Text -->
 						<h3 class="subtitle">It looks great on desktops, laptops, tablets and smartphones</h3>
 						<!-- Slide Image -->
-						<img class="slide-img" src="WebContent/resources/img/homepage-slider/slide1.png" alt="Slide 1" />
+						<img class="slide-img" src="resources/img/homepage-slider/slide1.png" alt="Slide 1" />
 					</li>
 					<!-- End Slide 1 -->
 					<!-- Slide 2 -->

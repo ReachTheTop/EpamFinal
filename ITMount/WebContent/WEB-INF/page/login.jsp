@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 <jsp:include page="head.jsp"/>
 </head>
 <body>
@@ -27,18 +32,23 @@
 				<div class="row">
 					<div class="col-sm-5">
 						<div class="basic-login">
-							<form role="form" role="form">
+						<c:if test="${errorLogin!=null}">
+					<div class="alert alert-danger">
+							<strong>Error!</strong>${errorLogin}
+						</div>
+					</c:if>
+							<form action="<c:url value="/login" />"  method="post" role="form">
 								<div class="form-group">
 		        				 	<label for="login-username"><i class="icon-user"></i> <b>Username or Email</b></label>
-									<input class="form-control" id="login-username" type="text" placeholder="">
+									<input class="form-control" id="login-username" name="emaill"  type="email" value="${emaill}" placeholder="">
 								</div>
 								<div class="form-group">
 		        				 	<label for="login-password"><i class="icon-lock"></i> <b>Password</b></label>
-									<input class="form-control" id="login-password" type="password" placeholder="">
+									<input class="form-control" id="login-password" name="password" type="password" placeholder="">
 								</div>
 								<div class="form-group">
 									<label class="checkbox">
-										<input type="checkbox"> Remember me
+										<input type="checkbox" name="check"> Remember me
 									</label>
 									<a href="<c:url value="/reset" />" class="forgot-password">Forgot password?</a>
 									<button type="submit" class="btn pull-right">Login</button>
@@ -61,6 +71,35 @@
 				</div>
 			</div>
 		</div>
+		<c:if test="${confirmemail!=null}" >
+		${confirmemail=null}
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+		</c:if>
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Підтвердіть свій email ітд</p>
+                <p class="text-warning"><small>Щоб відправити силку для підтвредження ще раз нажміть на конпу сенд</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="<c:url value="/sendconfirm" />" class="btn btn-primary">Send</a>
+               
+            </div>
+        </div>
+    </div>
+    </div>
+    
 <jsp:include page="footer.jsp"/>
 <jsp:include page="script.jsp"/>
 </body>

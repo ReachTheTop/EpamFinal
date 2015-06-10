@@ -20,33 +20,33 @@ public class User extends Validator implements Serializable {
 	private String name;
 
 	@Column(value = "midle_name")
-	private String middleName;
+	private String middle_name;
 
 	@Column(value = "surname")
-	private String surName;
+	private String surname;
 
 	@Column(value = "birthday")
 	private Date birtday;
 	
 	@Column(value = "role_id")
-	private Integer roleID;
+	private Integer role_id;
 
 	@Column(value = "password_hash")
-	private String passwordHash;
+	private String password_hash;
 
 
 	@Column(value = "curriculum_vitae")
-	private String curriculumVitae;
+	private String curriculum_vitae;
 
 	@Column(value = "description")
 	private String description;
 
 
 	@Column(value = "is_active")
-	private Boolean isActive;
+	private Boolean is_active;
 
 	@Column(value = "is_confirmed")
-	private Boolean isConfirmed;
+	private Boolean is_confirmed;
 
 	@Column(value = "key1")
 	private String key;
@@ -78,20 +78,20 @@ public class User extends Validator implements Serializable {
 		this.name = name;
 	}
 
-	public String getMiddleName() {
-		return middleName;
+	public String getMiddle_name() {
+		return middle_name;
 	}
 
-	public void setMiddleName(String middle_name) {
-		this.middleName = middle_name;
+	public void setMiddle_name(String middle_name) {
+		this.middle_name = middle_name;
 	}
 
-	public String getSurName() {
-		return surName;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setSurName(String surname) {
-		this.surName = surname;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public Date getBirtday() {
@@ -102,28 +102,28 @@ public class User extends Validator implements Serializable {
 		this.birtday = birtday;
 	}
 
-	public Integer getRoleID() {
-		return roleID;
+	public Integer getRole_id() {
+		return role_id;
 	}
 
-	public void setRoleID(Integer role_id) {
-		this.roleID = role_id;
+	public void setRole_id(Integer role_id) {
+		this.role_id = role_id;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getPassword_hash() {
+		return password_hash;
 	}
 
-	public void setPasswordHash(String password_hash) {
-		this.passwordHash = password_hash;
+	public void setPassword_hash(String password_hash) {
+		this.password_hash = password_hash;
 	}
 
-	public String getCurriculumVitae() {
-		return curriculumVitae;
+	public String getCurriculum_vitae() {
+		return curriculum_vitae;
 	}
 
-	public void setCurriculumVitae(String curriculum_vitae) {
-		this.curriculumVitae = curriculum_vitae;
+	public void setCurriculum_vitae(String curriculum_vitae) {
+		this.curriculum_vitae = curriculum_vitae;
 	}
 
 	public String getDescription() {
@@ -134,20 +134,20 @@ public class User extends Validator implements Serializable {
 		this.description = description;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
+	public Boolean getIs_active() {
+		return is_active;
 	}
 
-	public void setIsActive(Boolean is_active) {
-		this.isActive = is_active;
+	public void setIs_active(Boolean is_active) {
+		this.is_active = is_active;
 	}
 
-	public Boolean getIsConfirmed() {
-		return isConfirmed;
+	public Boolean getIs_confirmed() {
+		return is_confirmed;
 	}
 
-	public void setIsConfirmed(Boolean is_confirmed) {
-		this.isConfirmed = is_confirmed;
+	public void setIs_confirmed(Boolean is_confirmed) {
+		this.is_confirmed = is_confirmed;
 	}
 
 	public String getKey() {
@@ -177,11 +177,11 @@ public class User extends Validator implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", middle_name="
-				+ middleName + ", surname=" + surName + ", birtday=" + birtday
-				+ ", role_id=" + roleID + ", password_hash=" + passwordHash
-				+ ", curriculum_vitae=" + curriculumVitae + ", description="
-				+ description + ", is_active=" + isActive + ", is_confirmed="
-				+ isConfirmed + ", key=" + key + ", image=" + image
+				+ middle_name + ", surname=" + surname + ", birtday=" + birtday
+				+ ", role_id=" + role_id + ", password_hash=" + password_hash
+				+ ", curriculum_vitae=" + curriculum_vitae + ", description="
+				+ description + ", is_active=" + is_active + ", is_confirmed="
+				+ is_confirmed + ", key=" + key + ", image=" + image
 				+ ", email=" + email + "]";
 	}
 
