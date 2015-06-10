@@ -1,9 +1,8 @@
-package com.epam.project.controller.course;
+package com.epam.project.controller.knowledgebase;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,20 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Menu;
 
 /**
- * Servlet implementation class CourseServlet
+ * Servlet implementation class KnowledgeBaseServlet
  */
-@WebServlet("/CourseServlet")
-@MultipartConfig
-public class CourseServlet extends HttpServlet {
+@WebServlet("/KnowledgeBaseServlet")
+public class KnowledgeBaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Menu menu;
 
-	public CourseServlet() {
+	public KnowledgeBaseServlet() {
 		super();
-		menu = new Menu(new IndexCommand(), new ShowCommand(),
-				new NewCommand(), new CreateCommand(), new EditCommand(),
-				new UpdateCommand());
+		menu = new Menu(new KnowledgeIndex(), new KnowledgeNew());
 	}
 
 	/**

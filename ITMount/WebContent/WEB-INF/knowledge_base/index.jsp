@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Courses</title>
+<title>Resources</title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
@@ -17,9 +17,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Courses</h1>
-					<a href="<c:url value="/CourseServlet?action=new" />">Create
-						New Course</a>
+					<h1>Resources</h1>
+					<a href="<c:url value="/KnowledgeBaseServlet?action=new" />">Add Resource</a>
 
 				</div>
 			</div>
@@ -29,19 +28,12 @@
 	<div class="section">
 		<div class="container">
 			<div class="row">
-				<c:forEach items="${courses }" var="course">
+				<c:forEach items="${base }" var="item">
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
-							<img
-								src="${course.icon }"
-								alt="Service Name">
 							<h3>
-								<c:out value="${course.name }" />
+								<c:out value="${course.path }" />
 							</h3>
-							<p>Nutshell</p>
-							<a
-								href="<c:url value="/CourseServlet?action=show&course_id=${course.id }" />"
-								class="btn">Read more</a>
 
 						</div>
 					</div>

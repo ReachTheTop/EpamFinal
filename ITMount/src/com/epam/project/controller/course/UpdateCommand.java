@@ -3,6 +3,7 @@ package com.epam.project.controller.course;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +11,7 @@ import com.epam.project.command.Action;
 import com.epam.project.db.model.Course;
 import com.epam.project.db.service.CourseService;
 
+@MultipartConfig
 public class UpdateCommand implements Action {
 
 	@Override
@@ -24,9 +26,11 @@ public class UpdateCommand implements Action {
 		course.setStatus(request.getParameter("status"));
 
 		if (course.isValid()) {
+
 			CourseService.updateCourse(course);
-			request.getRequestDispatcher("/CourseServlet?action=show&course_id="
-					+ course.getId()).forward(request, response);
+			request.getRequestDispatcher(
+					"/CourseServlet?action=show&course_id=" + course.getId())
+					.forward(request, response);
 			return;
 		} else {
 			response.sendRedirect(request.getHeader("Referer"));

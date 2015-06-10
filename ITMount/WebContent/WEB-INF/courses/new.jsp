@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="basic-login">
-						<form action="CourseServlet?action=create" method="post"
+						<form action="CourseServlet?action=create" method="post" enctype="multipart/form-data"
 							role="form" role="form">
 							<div class="form-group">
 								<label for="login-username"><i class="icon-user"></i> <b>Course
@@ -45,20 +45,11 @@
 							<div class="form-group">
 								<label for="login-password"><i class="icon-lock"></i> <b>Description</b></label>
 								<input name="description" class="form-control"
-									id="login-password" type="text" placeholder="">
+									type="text" rows="5" id="comment" placeholder="">
 							</div>
 
 
 
-							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>Activate</b></label>
-								<div class="btn-group-form-control" data-toggle="buttons-radio">
-
-									<button name="status" class="btn active" checked>Yes</button>
-									<button name="status" class="btn">No</button>
-
-								</div>
-							</div>
 
 							<div class="form-group">
 

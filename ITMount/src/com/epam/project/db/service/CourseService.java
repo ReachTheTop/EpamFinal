@@ -10,6 +10,18 @@ import com.epam.project.db.model.Course;
 
 public class CourseService {
 
+	public static void trigerCourse(Course course) {
+		Connection connection = DBConnection.getConnection();
+
+		CourseDAO.trigerCourse(course, connection);
+
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static Integer addCourse(Course course) {
 		Connection connection = DBConnection.getConnection();
 		Integer course_id = CourseDAO.addCourse(course, connection);

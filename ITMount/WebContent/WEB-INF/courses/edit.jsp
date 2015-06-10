@@ -28,37 +28,31 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="basic-login">
-						<form action="CourseServlet?action=update&course_id=${course.id }" method="post"
-							role="form" role="form">
+						<form action="CourseServlet?action=update&course_id=${course.id }" enctype="multipart/form-data"
+							method="post" role="form" role="form">
 							<div class="form-group">
 								<label for="login-username"><i class="icon-user"></i> <b>Course
 										Name</b></label> <input name="name" class="form-control"
-									id="login-username" value="${course.name }" type="text" placeholder="">
+									id="login-username" value="${course.name }" type="text"
+									placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="login-password"><i class="icon-lock"></i> <b>Icon</b></label>
-								<input name="icon" class="form-control" value="${course.icon }" id="file" type="file"
-									placeholder="">
+								<input name="icon" class="form-control" value="${course.icon }"
+									id="file" type="file" placeholder="">
 							</div>
 
 
 							<div class="form-group">
 								<label for="login-password"><i class="icon-lock"></i> <b>Description</b></label>
-								<input name="description" value="${course.description }" class="form-control"
-									id="login-password" type="text" placeholder="">
+								<input name="description" value="${course.description }"
+									class="form-control" type="text" rows="5" id="comment"
+									placeholder="">
 							</div>
 
 
 
-							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>Activate</b></label>
-								<div class="btn-group-form-control"  data-toggle="buttons-radio">
 
-									<button name="status" class="btn active" checked>Yes</button>
-									<button name="status" class="btn">No</button>
-
-								</div>
-							</div>
 
 							<div class="form-group">
 

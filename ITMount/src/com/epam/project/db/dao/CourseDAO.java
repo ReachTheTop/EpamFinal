@@ -19,6 +19,20 @@ public class CourseDAO {
 	private static final String SELECTALL = "SELECT * FROM course";
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 
+	private static final String TRIGER = "UPDATE course set status = ? WHERE id = ?";
+
+	public static void trigerCourse(Course course, Connection connection) {
+		PreparedStatement st = null;
+		try {
+			st = connection.prepareStatement(TRIGER);
+			st.setString(1, course.getStatus());
+			st.setInt(2, course.getId());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static Integer addCourse(Course course, Connection connection) {
 		PreparedStatement st = null;
 		Integer course_id = null;
@@ -62,7 +76,7 @@ public class CourseDAO {
 			st.setString(2, course.getIcon());
 			st.setString(3, course.getDescription());
 			st.setString(4, course.getStatus());
-			
+
 			st.setInt(5, course.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
