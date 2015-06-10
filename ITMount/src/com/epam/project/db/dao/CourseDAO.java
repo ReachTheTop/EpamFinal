@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.List;
 
 import com.epam.project.db.model.Course;
@@ -14,7 +13,7 @@ import com.epam.project.db.transformer.CourseTransformer;
 public class CourseDAO {
 
 	private static final String INSERT = "INSERT INTO course(name,icon,description,status) VALUES(?,?,?,?);";
-	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=?, date_exam=? WHERE id=?";
+	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=? WHERE id=?";
 	private static final String DELETE = "DELETE FROM course WHERE id=?";
 	private static final String SELECTALL = "SELECT * FROM course";
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
@@ -62,8 +61,8 @@ public class CourseDAO {
 			st.setString(2, course.getIcon());
 			st.setString(3, course.getDescription());
 			st.setString(4, course.getStatus());
-			st.setTimestamp(5, new Timestamp(course.getExam_date().getTime()));
-			st.setInt(6, course.getId());
+			
+			st.setInt(5, course.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

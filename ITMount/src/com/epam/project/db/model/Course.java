@@ -26,8 +26,7 @@ public class Course extends Validator implements Serializable {
 
 	@Column(value = "status")
 	private String status;
-	@Column(value = "date_exam")
-	private Date exam_date;
+
 	
 	public Course() {
 		// TODO Auto-generated constructor stub
@@ -73,19 +72,13 @@ public class Course extends Validator implements Serializable {
 		this.status = status;
 	}
 
-	public Date getExam_date() {
-		return exam_date;
-	}
 
-	public void setExam_date(Date exam_date) {
-		this.exam_date = exam_date;
-	}
 
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", icon=" + icon
 				+ ", description=" + description + ", status=" + status
-				+ ", exam_date=" + exam_date + "]";
+				+ ", exam_date=" + "]";
 	}
 
 	

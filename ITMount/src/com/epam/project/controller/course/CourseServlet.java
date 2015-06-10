@@ -22,7 +22,8 @@ public class CourseServlet extends HttpServlet {
 	public CourseServlet() {
 		super();
 		menu = new Menu(new IndexCommand(), new ShowCommand(),
-				new NewCommand(), new CreateCommand(), new EditCommand());
+				new NewCommand(), new CreateCommand(), new EditCommand(),
+				new UpdateCommand());
 	}
 
 	/**
