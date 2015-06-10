@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
-import com.epam.project.db.model.Course;
 import com.epam.project.db.model.User;
-import com.epam.project.db.transformer.CourseTransformer;
 import com.epam.project.db.transformer.UserTransformer;
 
 public class UserDAO {
@@ -20,8 +18,8 @@ public class UserDAO {
 			+ " image=?, email=? WHERE id=?";
 
 	public static final String SQL_ADD_NEW_USER = "Insert into user (name,midle_name,surname,birthday,role_id,password_hash,"
-			+ "curriculum_vitae,description,is_active,is_confirmed, key1,image,email)"
-			+ "value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "curriculum_vitae,descriptionkey1,image,email)"
+			+ "value(?,?,?,?,?,?,?,?,?,?,?)";
 
 	public static final String SQL_GET_ALL_USERS = "Select* FROM user";
 	public static final String SQL_GET_USER = "Select* FROM user WHERE id=?";
@@ -76,8 +74,6 @@ public class UserDAO {
 			stmt.setString(6, user.getPasswordHash());
 			stmt.setString(7, user.getCurriculumVitae());
 			stmt.setString(8, user.getDescription());
-			stmt.setBoolean(9, user.getIsActive());
-			stmt.setBoolean(10, user.getIsConfirmed());
 			stmt.setString(11, user.getKey());
 			stmt.setString(12, user.getImage());
 			stmt.setString(13, user.getEmail());

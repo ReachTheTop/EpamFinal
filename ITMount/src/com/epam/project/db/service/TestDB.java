@@ -3,6 +3,7 @@ package com.epam.project.db.service;
 import java.util.List;
 
 import com.epam.project.db.model.GroupUser;
+import com.epam.project.db.model.Journal;
 
 
 public class TestDB {
@@ -11,20 +12,20 @@ public class TestDB {
 		
 	//	GroupUser groupeUser = GroupUserService.getById(1);
 		
-	/*	List<GroupUser> list = GroupUserService.getAllGroupUSer(); 
+		/*List<Journal> list = JournalService.getAllJournals(); 
 		
-		for(GroupUser gu : list){
+		for(Journal gu : list){
 			System.out.println(gu);
 		}
 	 */
 	
-		GroupUser groupeUser = GroupUserService.getById(3);
+		Journal journal = JournalService.getJournal(1);
+		System.out.println(journal);
+	//	journal.setDescription("ваіиави");
 		
-		groupeUser.setUserID(4);
-		groupeUser.setGroupID(4);
-		groupeUser.setIsActive(false);
+		//JournalService.updateJournal(journal);
 		
-		GroupUserService.updateGroupUser(groupeUser);
+		
 		
 	}
 
