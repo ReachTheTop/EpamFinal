@@ -7,9 +7,8 @@ import java.util.List;
 
 import com.epam.project.db.model.Course;
 
-
 public class CourseTransformer {
-/*
+
 	public static Course getCourse(ResultSet rs) {
 
 		Course course = null;
@@ -22,7 +21,6 @@ public class CourseTransformer {
 				course.setIcon(rs.getString(3));
 				course.setDescription(rs.getString(4));
 				course.setStatus(rs.getString(5));
-				course.setExam_date(rs.getTimestamp(6));
 
 			}
 		} catch (SQLException e) {
@@ -45,7 +43,7 @@ public class CourseTransformer {
 				course.setIcon(rs.getString(3));
 				course.setDescription(rs.getString(4));
 				course.setStatus(rs.getString(5));
-				course.setExam_date(rs.getTimestamp(6));
+
 				list.add(course);
 			}
 		} catch (SQLException e) {
@@ -55,5 +53,5 @@ public class CourseTransformer {
 		return list;
 
 	}
-	*/
+
 }

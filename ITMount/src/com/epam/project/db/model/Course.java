@@ -26,9 +26,7 @@ public class Course extends Validator implements Serializable {
 
 	@Column(value = "status")
 	private String status;
-	
-	
-	
+
 	public Course() {
 		// TODO Auto-generated constructor stub
 	}
@@ -76,11 +74,9 @@ public class Course extends Validator implements Serializable {
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", icon=" + icon
-				+ ", description=" + description + ", status=" + status + "]";
+
+		+ ", description=" + description + ", status=" + status + "]";
+
 	}
 
-
-	
-
-	
 }
