@@ -9,19 +9,21 @@ import java.util.List;
 import com.epam.project.db.model.Contact;
 import com.epam.project.db.transformer.ContactTransformer;
 
-
-
 public class ContactDAO {
 
-	private static final String INSERT = "INSERT INTO contact(skype,phone,user_id) VALUES(?,?,?);";
-	private static final String UPDATE = "UPDATE contact SET skype=?, phone=?, user_id=? WHERE id=?";
-	private static final String DELETE = "DELETE FROM contact WHERE id=?";
-	private static final String SELECTALL = "SELECT * FROM contact";
-	private static final String SELECT = "SELECT * FROM contact WHERE id=?";
+
+	private static final String SQL_INSERT_CONTACT = "INSERT INTO contact(skype,phone,user_id) VALUES(?,?,?);";
+	private static final String SQL_UPDATE_CONTACT = "UPDATE contact SET skype=?, phone=?, user_id=? WHERE id=?";
 	
-	public static void addConatct(Contact contact, Connection connection){
+	private static final String SELECT_ALL_CONTACT = "SELECT* FROM contact";
+	private static final String SELECT_CONTACT = "SELECT * FROM contact WHERE id=?";
+	
+	private static final String DELETE = "DELETE FROM contact WHERE id=?";
+	
+	
+	public static void addContact(Contact contact, Connection connection){
 		try{
-		PreparedStatement st = connection.prepareStatement(INSERT);
+		PreparedStatement st = connection.prepareStatement(SQL_INSERT_CONTACT);
 		st.setString(1,contact.getSkype());
 		st.setString(2, contact.getPhone());
 		st.setInt(3, contact.getUser_id());
@@ -48,7 +50,7 @@ public class ContactDAO {
 	public static void updateContact(Contact contact, Connection connection){
 		try {
 			
-			PreparedStatement st = connection.prepareStatement(UPDATE);
+			PreparedStatement st = connection.prepareStatement(SQL_UPDATE_CONTACT);
 			
 			st.setString(1, contact.getSkype());
 			st.setString(2, contact.getPhone());
@@ -65,7 +67,7 @@ public class ContactDAO {
 		List<Contact> list = null;
 		try {
 		
-			PreparedStatement st = connection.prepareStatement(SELECTALL);
+			PreparedStatement st = connection.prepareStatement(SELECT_ALL_CONTACT);
 			rs = st.executeQuery();
 			list =ContactTransformer.getAllContact(rs);
 		} catch (SQLException e) {
@@ -78,7 +80,7 @@ public class ContactDAO {
 		Contact contact =null;
 		try {
 			
-			PreparedStatement st = connection.prepareStatement(SELECT);
+			PreparedStatement st = connection.prepareStatement(SELECT_CONTACT);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			contact= ContactTransformer.getContact(rs);

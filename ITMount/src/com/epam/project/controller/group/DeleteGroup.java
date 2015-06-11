@@ -14,7 +14,7 @@ public class DeleteGroup implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		Integer id = Integer.parseInt(request.getParameter("group_id"));
 		GroupService.deleteGroup(id);
 		response.sendRedirect(request.getHeader("Referer"));

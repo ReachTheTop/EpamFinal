@@ -5,50 +5,31 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
-import com.epam.project.db.dao.CourseDAO;
-import com.epam.project.db.model.Course;
+import com.epam.project.db.dao.JournalDAO;
+import com.epam.project.db.dao.TaskDAO;
+import com.epam.project.db.model.Journal;
+import com.epam.project.db.model.Task;
 
-public class CourseService {
+public class JournalService {
 
-	public static void trigerCourse(Course course) {
+	public static Journal getJournal(Integer id) {
+
 		Connection connection = DBConnection.getConnection();
-
-		CourseDAO.trigerCourse(course, connection);
-
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static Integer addCourse(Course course) {
-		Connection connection = DBConnection.getConnection();
-		Integer course_id = CourseDAO.addCourse(course, connection);
+		Journal journal = JournalDAO.getJournal(id, connection);
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return course_id;
+		return journal;
 
 	}
 
-	public static void updateCourse(Course course) {
-		Connection connection = DBConnection.getConnection();
-		CourseDAO.updateCourse(course, connection);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	public static List<Journal> getAllJournals() {
 
-	public static List<Course> getAllCourses() {
 		Connection connection = DBConnection.getConnection();
-		List<Course> list = CourseDAO.getAllCourse(connection);
+		List<Journal> list = JournalDAO.getAllJournals(connection);
 		try {
 			connection.close();
 		} catch (SQLException e) {
@@ -58,15 +39,30 @@ public class CourseService {
 		return list;
 	}
 
-	public static Course getCourse(Integer id) {
+	public static void addNewJournal(Journal journal) {
+
 		Connection connection = DBConnection.getConnection();
-		Course course = CourseDAO.getCourse(id, connection);
+		JournalDAO.addNewJournal(journal, connection);
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return course;
 	}
+
+	
+public static void updateJournal(Journal journal){
+		
+		Connection connection =  DBConnection.getConnection();
+		JournalDAO.updateJournal(journal, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

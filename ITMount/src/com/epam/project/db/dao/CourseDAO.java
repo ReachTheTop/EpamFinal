@@ -15,10 +15,12 @@ public class CourseDAO {
 	private static final String INSERT = "INSERT INTO course(name,icon,description) VALUES(?,?,?);";
 	private static final String BASE_GROUP = "INSERT INTO group1(course_id, name, is_active) VALUE (?,?,?);";
 
-	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=? WHERE id=?";
+	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, is_active=?, date_exam=? WHERE id=?";
 
-	private static final String DELETE = "DELETE FROM course WHERE id=?";
+	private static final String GET_ALL = "SELECT * FROM course;";
+
 	private static final String SELECTALL = "SELECT * FROM course WHERE is_active =1;";
+
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 
 	private static final String TRIGER = "UPDATE course set is_active = !is_active  WHERE id = ?";
@@ -71,19 +73,6 @@ public class CourseDAO {
 		return course_id;
 	}
 
-	public static void delCourse(Integer id, Connection connection) {
-
-		try {
-
-			PreparedStatement st = connection.prepareStatement(DELETE);
-			st.setInt(1, id);
-			st.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
 	public static void updateCourse(Course course, Connection connection) {
 		try {
 
@@ -112,6 +101,7 @@ public class CourseDAO {
 			e.printStackTrace();
 		}
 		return list;
+
 	}
 
 	public static Course getCourse(Integer id, Connection connection) {
@@ -128,6 +118,7 @@ public class CourseDAO {
 			e.printStackTrace();
 		}
 		return course;
+
 	}
 
 }

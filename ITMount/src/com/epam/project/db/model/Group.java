@@ -8,7 +8,7 @@ import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
 
-@Table(name = "group")
+@Table(name = "group1")
 public class Group extends Validator implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Group extends Validator implements Serializable {
 	private Boolean is_active;
 
 	@Column(value = "date")
-	private Date date;
+	private Date dateExam;
 
 	public Group() {
 		// TODO Auto-generated constructor stub
@@ -94,11 +94,12 @@ public class Group extends Validator implements Serializable {
 		return course;
 	}
 
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", course_id=" + course_id + ", teacher_id="
-				+ teacher_id + ", name=" + name + ", is_active=" + is_active
-				+ ", date=" + date + "]";
+	public Date getDateExam() {
+		return dateExam;
+	}
+
+	public void setDateExam(Date dateExam) {
+		this.dateExam = dateExam;
 	}
 
 }

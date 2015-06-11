@@ -12,7 +12,7 @@ public class ContactService {
 
 	public static void addContact(Contact contact) {
 		Connection connection =  DBConnection.getConnection();
-		ContactDAO.addConatct(contact, connection);
+		ContactDAO.addContact(contact, connection);
 		try {
 			connection.close();
 		} catch (SQLException e) {

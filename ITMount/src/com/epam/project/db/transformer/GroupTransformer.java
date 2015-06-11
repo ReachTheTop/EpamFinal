@@ -3,11 +3,14 @@ package com.epam.project.db.transformer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.epam.project.db.model.Contact;
 import com.epam.project.db.model.Event;
 import com.epam.project.db.model.Group;
 
 public class GroupTransformer {
+	
 	public static Group getGroup(ResultSet data) {
 		Group group = null;
 
@@ -33,6 +36,8 @@ public class GroupTransformer {
 			group.setCourse_id(data.getInt("course_id"));
 			group.setId(data.getInt("id"));
 			group.setIs_active(data.getBoolean("is_active"));
+			group.setDateExam(data.getDate("date_exam"));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,19 +45,29 @@ public class GroupTransformer {
 
 	}
 
-	public static ArrayList<Group> getAllGroups(ResultSet setOfGroups) {
-		ArrayList<Group> events = new ArrayList<>();
+	public static List<Group> getAllGroups(ResultSet setOfGroups) {
+		
+		List<Group> list = new ArrayList<Group>();
 		Group group = null;
+
 		try {
 			while (setOfGroups.next()) {
+				
 				group = new Group();
-				parse(group, setOfGroups);
-				events.add(group);
+				group.setId(setOfGroups.getInt(1));
+				group.setCourse_id(setOfGroups.getInt(2));
+				group.setTeacher_id(setOfGroups.getInt(3));
+				group.setName(setOfGroups.getString(4));
+				group.setIs_active(setOfGroups.getBoolean(5));
+				group.setDateExam(setOfGroups.getDate(6));
+				list.add(group);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return events;
+		return list;
+		
+		
 	}
 }
