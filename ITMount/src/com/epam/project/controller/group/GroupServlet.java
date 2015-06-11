@@ -1,9 +1,8 @@
-package com.epam.project.controller.course;
+package com.epam.project.controller.group;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,20 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Menu;
 
 /**
- * Servlet implementation class CourseServlet
+ * Servlet implementation class GroupServlet
  */
-@WebServlet("/CourseServlet")
-@MultipartConfig
-public class CourseServlet extends HttpServlet {
+@WebServlet("/GroupServlet")
+public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Menu menu;
 
-	public CourseServlet() {
+	public GroupServlet() {
 		super();
-		menu = new Menu(new IndexCommand(), new ShowCommand(),
-				new NewCommand(), new CreateCommand(), new EditCommand(),
-				new UpdateCommand(), new CourseRegistration(), new TrigerCourse());
+		menu = new Menu(new IndexGroup(), new NewGroup(), new DeleteGroup(),
+				new CreateGroup(), new ShowGroup());
 	}
 
 	/**

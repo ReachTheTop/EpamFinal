@@ -23,8 +23,26 @@ public class UserDAO {
 			+ "curriculum_vitae,description,is_active,is_confirmed, key1,image,email)"
 			+ "value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
+	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";
+
 	public static final String SQL_GET_ALL_USERS = "Select* FROM user";
 	public static final String SQL_GET_USER = "Select* FROM user WHERE id=?";
+
+	public static List<User> getByRole(String role, Connection connection) {
+		ResultSet rs = null;
+		List<User> user = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_BY_ROLE);
+			st.setString(1, role);
+			rs = st.executeQuery();
+			user = UserTransformer.getAllUsers(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
 
 	public static User getUser(Integer id, Connection connection) {
 
@@ -58,7 +76,7 @@ public class UserDAO {
 		}
 		return list;
 	}
-	
+
 	public static void addNewUser(User user, Connection connection) {
 
 		PreparedStatement stmt;
@@ -90,7 +108,7 @@ public class UserDAO {
 		}
 
 	}
-	
+
 	public static void updateUser(User user, Connection connection) {
 
 		try {

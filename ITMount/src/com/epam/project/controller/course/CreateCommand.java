@@ -19,7 +19,7 @@ public class CreateCommand implements Action {
 		Course course = new Course();
 		course.setName(request.getParameter("name"));
 		course.setDescription(request.getParameter("description"));
-		course.setStatus(request.getParameter("status"));
+		
 		course.setIcon(request.getParameter("icon"));
 
 		if (course.isValid()) {

@@ -12,21 +12,23 @@ import com.epam.project.db.transformer.CourseTransformer;
 
 public class CourseDAO {
 
-	private static final String INSERT = "INSERT INTO course(name,icon,description,status) VALUES(?,?,?,?);";
-	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, status=? WHERE id=?";
+	private static final String INSERT = "INSERT INTO course(name,icon,description) VALUES(?,?,?);";
+	private static final String BASE_GROUP = "INSERT INTO group1(course_id, name, is_active) VALUE (?,?,?);";
+
+	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=? WHERE id=?";
 
 	private static final String DELETE = "DELETE FROM course WHERE id=?";
-	private static final String SELECTALL = "SELECT * FROM course";
+	private static final String SELECTALL = "SELECT * FROM course WHERE is_active =1;";
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 
-	private static final String TRIGER = "UPDATE course set status = ? WHERE id = ?";
+	private static final String TRIGER = "UPDATE course set is_active = !is_active  WHERE id = ?";
 
 	public static void trigerCourse(Course course, Connection connection) {
 		PreparedStatement st = null;
 		try {
 			st = connection.prepareStatement(TRIGER);
-			st.setString(1, course.getStatus());
-			st.setInt(2, course.getId());
+
+			st.setInt(1, course.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,17 +39,32 @@ public class CourseDAO {
 		PreparedStatement st = null;
 		Integer course_id = null;
 		try {
+			connection.setAutoCommit(false);
 			st = connection.prepareStatement(INSERT,
 					Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, course.getName());
 			st.setString(2, course.getIcon());
 			st.setString(3, course.getDescription());
-			st.setString(4, course.getStatus());
 
 			st.executeUpdate();
+
+			ResultSet resultSet = st.getGeneratedKeys();
+			resultSet.next();
+			Integer id = resultSet.getInt(1);
+			st = connection.prepareStatement(BASE_GROUP);
+
+			st.setInt(1, id);
+			st.setString(2, "Base");
+			st.setBoolean(3, true);
+
+			st.executeUpdate();
+
 			ResultSet result = st.getGeneratedKeys();
 			result.next();
 			course_id = result.getInt(1);
+
+			connection.commit();
+			connection.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -75,9 +92,8 @@ public class CourseDAO {
 			st.setString(1, course.getName());
 			st.setString(2, course.getIcon());
 			st.setString(3, course.getDescription());
-			st.setString(4, course.getStatus());
 
-			st.setInt(5, course.getId());
+			st.setInt(4, course.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

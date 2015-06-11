@@ -32,16 +32,19 @@
 				<c:forEach items="${courses }" var="course">
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
-							<img
-								src="${course.icon }"
-								alt="Service Name">
+							<img src="${course.icon }" alt="Service Name">
 							<h3>
 								<c:out value="${course.name }" />
 							</h3>
 							<p>Nutshell</p>
 							<a
 								href="<c:url value="/CourseServlet?action=show&course_id=${course.id }" />"
-								class="btn">Read more</a>
+								class="btn">Read more</a> <a
+								href="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
+								class="btn">Register On Course</a> <a
+								href="<c:url value="/CourseServlet?action=triger&course_id=${course.id }" />"
+								class="btn">Close Course</a>
+
 
 						</div>
 					</div>

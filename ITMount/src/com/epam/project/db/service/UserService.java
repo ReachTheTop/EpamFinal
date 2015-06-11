@@ -11,10 +11,10 @@ import com.epam.project.db.model.Course;
 import com.epam.project.db.model.User;
 
 public class UserService {
-	
-	public static User getUser(Integer id){
-		
-		Connection connection =  DBConnection.getConnection();
+
+	public static User getUser(Integer id) {
+
+		Connection connection = DBConnection.getConnection();
 		User user = UserDAO.getUser(id, connection);
 		try {
 			connection.close();
@@ -24,9 +24,21 @@ public class UserService {
 		}
 		return user;
 	}
-	
+
+	public static List<User> getByRole(String role) {
+		Connection connection = DBConnection.getConnection();
+		List<User> user = UserDAO.getByRole(role, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+
 	public static List<User> getAllUsers() {
-		Connection connection =  DBConnection.getConnection();
+		Connection connection = DBConnection.getConnection();
 		List<User> list = UserDAO.getAllUsers(connection);
 		try {
 			connection.close();
@@ -36,28 +48,27 @@ public class UserService {
 		}
 		return list;
 	}
-	
-	public static void updateUser(User user){
-		
-		Connection connection =  DBConnection.getConnection();
-		
+
+	public static void updateUser(User user) {
+
+		Connection connection = DBConnection.getConnection();
+
 		UserDAO.updateUser(user, connection);
-		
+
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public static void addNewUser(User user) {
 
-		Connection connection =  DBConnection.getConnection();
-		UserDAO.addNewUser(user,connection);
-		
+		Connection connection = DBConnection.getConnection();
+		UserDAO.addNewUser(user, connection);
+
 		try {
 			connection.close();
 		} catch (SQLException e) {

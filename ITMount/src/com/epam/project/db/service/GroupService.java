@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.model.Group;
+import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.GroupTransformer;
 
 public class GroupService {
 
-	public void newGroup(Group group) {
+	public static void newGroup(Group group) {
 		GroupDAO groupBridge = new GroupDAO();
 
 		groupBridge.newGroup(group);
@@ -16,30 +17,44 @@ public class GroupService {
 
 	}
 
-	public Group getById(Integer id) {
+	public static void addUserToGroup(User user, Integer id) {
+		GroupDAO groupBridge = new GroupDAO();
+
+		groupBridge.addUser(user, id);
+		groupBridge.close();
+	}
+
+	public static Group getById(Integer id) {
 		GroupDAO groupBridge = new GroupDAO();
 		Group group = null;
 		group = GroupTransformer.getGroup(groupBridge.getById(id));
 		groupBridge.close();
+		group.setTeacher(UserService.getUser(group.getTeacher_id()));
+		group.setCourse(CourseService.getCourse(group.getCourse_id()));
 		return group;
 	}
 
-	public List<Group> getAll() {
+	public static List<Group> getAll() {
 		List<Group> groups = null;
 		GroupDAO groupBridge = new GroupDAO();
 		groups = GroupTransformer.getAllGroups(groupBridge.getAll());
 		groupBridge.close();
+		for (Group group : groups) {
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+
+		}
 
 		return groups;
 	}
 
-	public void update(Group group) {
+	public static void update(Group group) {
 		GroupDAO groupBridge = new GroupDAO();
 		groupBridge.update(group);
 		groupBridge.close();
 	}
 
-	public void deleteGroup(Integer id) {
+	public static void deleteGroup(Integer id) {
 		GroupDAO groupBridge = new GroupDAO();
 
 		groupBridge.delete(id);

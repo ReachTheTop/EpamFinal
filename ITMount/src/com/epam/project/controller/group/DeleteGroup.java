@@ -1,4 +1,4 @@
-package com.epam.project.controller.course;
+package com.epam.project.controller.group;
 
 import java.io.IOException;
 
@@ -7,27 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
-import com.epam.project.db.model.Course;
-import com.epam.project.db.service.CourseService;
+import com.epam.project.db.service.GroupService;
 
-public class TrigerCourse implements Action {
+public class DeleteGroup implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
-		Course course = new Course();
-		course.setId(course_id);
-		
-		CourseService.trigerCourse(course);
+		Integer id = Integer.parseInt(request.getParameter("group_id"));
+		GroupService.deleteGroup(id);
 		response.sendRedirect(request.getHeader("Referer"));
 		return;
+
 	}
 
 	@Override
 	public String getName() {
-		return "triger";
+
+		return "delete";
 	}
 
 }

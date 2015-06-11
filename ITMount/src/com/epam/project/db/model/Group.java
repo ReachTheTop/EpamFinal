@@ -3,6 +3,7 @@ package com.epam.project.db.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
@@ -23,9 +24,9 @@ public class Group extends Validator implements Serializable {
 
 	@Column(value = "name")
 	private String name;
-	
+
 	private Boolean is_active;
-	
+
 	@Column(value = "date")
 	private Date date;
 
@@ -73,15 +74,31 @@ public class Group extends Validator implements Serializable {
 		this.is_active = is_active;
 	}
 
+	private User teacher;
+
+	public User getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	private Course course;
+
+	public Course getCourse() {
+		return course;
+	}
+
 	@Override
 	public String toString() {
 		return "Group [id=" + id + ", course_id=" + course_id + ", teacher_id="
 				+ teacher_id + ", name=" + name + ", is_active=" + is_active
 				+ ", date=" + date + "]";
 	}
-
-	
-	
-	
 
 }

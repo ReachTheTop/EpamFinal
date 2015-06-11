@@ -23,7 +23,7 @@ public class UpdateCommand implements Action {
 		course.setDescription(request.getParameter("description"));
 		course.setIcon(request.getParameter("icon"));
 		course.setName(request.getParameter("name"));
-		course.setStatus(request.getParameter("status"));
+	
 
 		if (course.isValid()) {
 
