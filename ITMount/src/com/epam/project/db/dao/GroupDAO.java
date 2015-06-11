@@ -22,7 +22,7 @@ public class GroupDAO {
 	private static final String GET_ALL_GROUP = "SELECT* FROM group1";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ?, date_exam=? WHERE id = ?;";
-	private static final String DELETE = "UPDATE group SET is_active = 0 WHERE id = ?;";
+	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 	private Connection con;
 	private PreparedStatement statement;
 	private ResultSet resultSet;
