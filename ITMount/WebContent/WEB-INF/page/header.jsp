@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+       <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
  <div class="mainmenu-wrapper">
 	        <div class="container">
 	        	<div class="menuextras">
@@ -10,15 +11,14 @@
 						
 							<li>
 							 <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">Language<span class="caret"></span></button>
+                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle"><t:i18n id="hader.language"/><span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 	<c:forEach items="${languageList}" var="lang" >
-                                	<li role="menuitem"><a href="#"><img src="resources/img/flags/${lang.getImage()}" alt="${lang.getName()}">  ${lang.getName()}</a></li>
+                                	<li role="menuitem"><a href="<c:url value="/lenguage?${lang.getLanguage() }" />"><img src="resources/img/flags/${lang.getImage()}" alt="${lang.getName()}">  ${lang.getName()}</a></li>
                                 	
                                 	</c:forEach>
                                 	
-										<li role="menuitem"><a href="#"><img src="resources/img/flags/de.png" alt="Germany"> DE</a></li>
-										<li role="menuitem"><a href="#"><img src="resources/img/flags/es.png" alt="Spain"> ES</a></li>
+									
                             </ul>
                         </div>
 							 </li>

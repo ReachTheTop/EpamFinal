@@ -65,14 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<c:if test="${confirmemail!=null}" >
-		${confirmemail=null}
-		<script type="text/javascript">
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
-</script>
-		</c:if>
+
 
 <div id="myModal" class="modal fade">
     <div class="modal-dialog">
@@ -93,6 +86,46 @@
         </div>
     </div>
     </div>
+    
+    
+    <div id="confirmModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Successful</h4>
+            </div>
+            <div class="modal-body">
+                <p>Ви успішно підтвердили свій емейл!</p>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+               
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    		<c:if test="${infoconfirm!=null}" >
+		${infoconfirm=null}
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$("#confirmModal").modal('show');
+	});
+</script>
+		</c:if>
+    		<c:if test="${confirmemail!=null}" >
+		${confirmemail=null}
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+		</c:if>
+		
+		
     
 <jsp:include page="footer.jsp"/>
 <jsp:include page="script.jsp"/>

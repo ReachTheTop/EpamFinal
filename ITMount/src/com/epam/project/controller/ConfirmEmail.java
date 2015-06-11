@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.UserService;
@@ -31,6 +32,7 @@ public class ConfirmEmail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		String key =request.getParameter("key");
 		String email =request.getParameter("email");
 		User user = UserService.getUserWhereEmail(email);
@@ -38,6 +40,7 @@ public class ConfirmEmail extends HttpServlet {
 			if(user.getKey().equals(key)){
 				user.setIs_confirmed(true);
 				UserService.updateUser(user);
+				session.setAttribute("infoconfirm", "1");
 			}
 		}
 		request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
