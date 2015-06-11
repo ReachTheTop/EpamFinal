@@ -6,7 +6,7 @@
 	        	<div class="menuextras">
 					<div class="extras">
 						<ul>
-							<li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
+		
 							<li>
 								<div class="dropdown choose-country">
 									<a class="#" data-toggle="dropdown" href="#"><img src="resources/img/flags/gb.png" alt="Great Britain"> UK</a>
@@ -17,7 +17,14 @@
 									</ul>
 								</div>
 							</li>
-			        		<li><a href="<c:url value="/login" />">Login</a></li>
+							<c:if test="${user!=null}">
+							<li class="shopping-cart-items"><a href=""><i class="glyphicon glyphicon-user icon-white"><b> ${user.getName()}</b></i></a> </li>
+							<li class="shopping-cart-items"><a href="<c:url value="/exit" />"><i class="glyphicon glyphicon-log-out icon-white"><b> Exit</b></i></a> </li>
+							</c:if>
+							<c:if test="${user==null }">
+								<li class="shopping-cart-items"><a href="<c:url value="/login" />"><i class="glyphicon glyphicon-lock icon-white"> <b>Login</b></i></a></li>
+							</c:if>
+			        	
 			        		
 			        	</ul>
 					</div>
@@ -26,7 +33,7 @@
 					<ul>
 						<li class="logo-wrapper"><a href="index.html"><img src="resources/img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li>
 						<li class="active">
-							<a href="index.html">Home</a>
+							<a href="<c:url value="/home" />">Home</a>
 						</li>
 						<li>
 							<a href="features.html">Features</a>
@@ -38,7 +45,7 @@
 									<div>
 										<h4>Homepage</h4>
 										<ul>
-											<li><a href="index.html">Homepage (Sample 1)</a></li>
+											<li><a href="<c:url value="/home" />">Homepage (Sample 1)</a></li>
 											<li><a href="page-homepage-sample.html">Homepage (Sample 2)</a></li>
 										</ul>
 										<h4>Services & Pricing</h4>

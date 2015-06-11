@@ -18,15 +18,17 @@ public class UserTransformer {
 				user = new User();
 				user.setId(rs.getInt(1));
 				user.setName(rs.getString(2));
-				user.setMiddleName(rs.getString(3));
-				user.setSurName(rs.getString(4));
+				user.setMiddle_name(rs.getString(3));
+				user.setSurname(rs.getString(4));
+
 				user.setBirtday(rs.getDate(5));
-				user.setRoleID(rs.getInt(6));
-				user.setPasswordHash(rs.getString(7));
-				user.setCurriculumVitae(rs.getString(8));
+				user.setRole_id(rs.getInt(6));
+				user.setPassword_hash(rs.getString(7));
+				user.setCurriculum_vitae(rs.getString(8));
 				user.setDescription(rs.getString(9));
-				user.setIsActive(rs.getBoolean(10));
-				user.setIsConfirmed(rs.getBoolean(11));
+
+				user.setIs_active(rs.getBoolean(10));
+				user.setIs_confirmed(rs.getBoolean(11));
 				user.setKey(rs.getString(12));
 				user.setImage(rs.getString(13));
 				user.setEmail(rs.getString(14));
@@ -51,15 +53,17 @@ public class UserTransformer {
 				user = new User();
 				user.setId(rs.getInt(1));
 				user.setName(rs.getString(2));
-				user.setMiddleName(rs.getString(3));
-				user.setSurName(rs.getString(4));
+				user.setMiddle_name(rs.getString(3));
+				user.setSurname(rs.getString(4));
+
 				user.setBirtday(rs.getDate(5));
-				user.setRoleID(rs.getInt(6));
-				user.setPasswordHash(rs.getString(7));
-				user.setCurriculumVitae(rs.getString(8));
+				user.setRole_id(rs.getInt(6));
+				user.setPassword_hash(rs.getString(7));
+				user.setCurriculum_vitae(rs.getString(8));
 				user.setDescription(rs.getString(9));
-				user.setIsActive(rs.getBoolean(10));
-				user.setIsConfirmed(rs.getBoolean(11));
+
+				user.setIs_active(rs.getBoolean(10));
+				user.setIs_confirmed(rs.getBoolean(11));
 				user.setKey(rs.getString(12));
 				user.setImage(rs.getString(13));
 				user.setEmail(rs.getString(14));

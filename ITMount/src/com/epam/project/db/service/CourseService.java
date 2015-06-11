@@ -12,27 +12,36 @@ public class CourseService {
 
 	public static void trigerCourse(Course course) {
 		Connection connection = DBConnection.getConnection();
-
 		CourseDAO.trigerCourse(course, connection);
-
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static Integer addCourse(Course course) {
-		Connection connection = DBConnection.getConnection();
-		Integer course_id = CourseDAO.addCourse(course, connection);
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return course_id;
+	}
 
+	public static void addCourse(Course course) {
+		Connection connection = DBConnection.getConnection();
+		CourseDAO.addCourse(course, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void delCourse(Integer id) {
+		Connection connection = DBConnection.getConnection();
+		CourseDAO.delCourse(id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void updateCourse(Course course) {

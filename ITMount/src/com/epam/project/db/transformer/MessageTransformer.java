@@ -20,7 +20,7 @@ public class MessageTransformer {
 				message.setId(rs.getInt(1));
 				message.setSubject(rs.getString(2));
 				message.setContent(rs.getString(3));
-				message.setSenderID(rs.getInt(4));
+				message.setSender_id(rs.getInt(4));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -41,7 +41,7 @@ public class MessageTransformer {
 				message.setId(rs.getInt(1));
 				message.setSubject(rs.getString(2));
 				message.setContent(rs.getString(3));
-				message.setSenderID(rs.getInt(4));
+				message.setSender_id(rs.getInt(4));
 			
 				list.add(message);
 			}

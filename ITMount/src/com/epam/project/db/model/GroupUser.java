@@ -6,21 +6,20 @@ import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
 
-
 @Table(name = "group_user")
-public class GroupUser  extends Validator implements Serializable{
-	
+public class GroupUser extends Validator implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Column(value = "id")
 	private Integer id;
-	
+
 	@Column(value = "user_id")
 	private Integer userID;
-	
+
 	@Column(value = "group_id")
 	private Integer groupID;
-	
+
 	@Column(value = "is_active")
 	private Boolean isActive;
 
@@ -59,13 +58,4 @@ public class GroupUser  extends Validator implements Serializable{
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-
-	@Override
-	public String toString() {
-		return "GroupUser [id=" + id + ", userID=" + userID + ", groupID="
-				+ groupID + ", isActive=" + isActive + "]";
-	}
-	
-	
-
 }

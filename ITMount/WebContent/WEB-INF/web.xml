@@ -36,8 +36,36 @@
     <servlet-name>reset</servlet-name>
     <url-pattern>/reset</url-pattern>
   </servlet-mapping>
-  <error-page>
-    <error-code>404</error-code>
-    <location>/WEB-INF/error/404.jsp</location>
-  </error-page>
+  <servlet>
+    <servlet-name>lenguage</servlet-name>
+    <servlet-class>com.epam.project.controller.Language</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>lenguage</servlet-name>
+    <url-pattern>/lenguage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>exit</servlet-name>
+    <servlet-class>com.epam.project.controller.Exit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exit</servlet-name>
+    <url-pattern>/exit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>confirm</servlet-name>
+    <servlet-class>com.epam.project.controller.ConfirmEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>confirm</servlet-name>
+    <url-pattern>/confirm</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>sendconfirm</servlet-name>
+    <servlet-class>com.epam.project.controller.SendConfirm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendconfirm</servlet-name>
+    <url-pattern>/sendconfirm</url-pattern>
+  </servlet-mapping>
 </web-app>

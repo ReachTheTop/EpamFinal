@@ -19,13 +19,14 @@ public class CreateCommand implements Action {
 		Course course = new Course();
 		course.setName(request.getParameter("name"));
 		course.setDescription(request.getParameter("description"));
-		
+
 		course.setIcon(request.getParameter("icon"));
 
 		if (course.isValid()) {
-			Integer id = CourseService.addCourse(course);
-			request.getRequestDispatcher("/CourseServlet?action=show&course_id="
-					+ id).forward(request, response);
+			CourseService.addCourse(course);
+			request.getRequestDispatcher(
+					"/CourseServlet?action=show&course_id=" + course.getId())
+					.forward(request, response);
 			return;
 		} else {
 			response.sendRedirect(request.getHeader("Referer"));
