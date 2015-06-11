@@ -18,7 +18,7 @@ public class UserDAO {
 			+ " image=?, email=? WHERE id=?";
 
 	public static final String SQL_ADD_NEW_USER = "Insert into user (name,midle_name,surname,birthday,role_id,password_hash,"
-			+ "curriculum_vitae,descriptionkey1,image,email)"
+			+ "curriculum_vitae,description,key1,image,email)"
 			+ "value(?,?,?,?,?,?,?,?,?,?,?)";
 
 	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";

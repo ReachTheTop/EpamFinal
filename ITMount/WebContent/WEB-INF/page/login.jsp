@@ -6,10 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 
 <jsp:include page="head.jsp"/>
 </head>
@@ -47,9 +44,6 @@
 									<input class="form-control" id="login-password" name="password" type="password" pattern=".{6,}" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="checkbox">
-										<input type="checkbox" name="check"> Remember me
-									</label>
 									<a href="<c:url value="/reset" />" class="forgot-password">Forgot password?</a>
 									<button type="submit" class="btn pull-right">Login</button>
 									<div class="clearfix"></div>

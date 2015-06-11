@@ -2,6 +2,7 @@ package com.epam.project.filter;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -14,16 +15,19 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.epam.project.db.model.Language;
+import com.epam.project.db.service.LanguageService;
+
 /**
  * Servlet Filter implementation class MapLanguage
  */
 
-public class MapLanguage implements Filter {
+public class LanguageFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public MapLanguage() {
+    public LanguageFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -40,7 +44,7 @@ public class MapLanguage implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		session.setAttribute("languageMap", getMapLanguage());
+		session.setAttribute("languageList", getMapLanguage());
 		chain.doFilter(request, response);
 	}
 
@@ -51,10 +55,11 @@ public class MapLanguage implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	private Map<String, String> getMapLanguage(){
-		Map<String, String> map = new LinkedHashMap<>();
-		map.put("Українська", "language=ua&country=UA");
-		map.put("English", "language=en&country=US");
-		return map;
+	private List<Language> getMapLanguage(){
+	
+		List<Language> language= LanguageService.getAllLanguages();
+	
+	
+		return language;
 	}
 }
