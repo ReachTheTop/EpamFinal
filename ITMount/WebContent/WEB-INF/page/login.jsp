@@ -40,11 +40,11 @@
 							<form action="<c:url value="/login" />"  method="post" role="form">
 								<div class="form-group">
 		        				 	<label for="login-username"><i class="icon-user"></i> <b>Username or Email</b></label>
-									<input class="form-control" id="login-username" name="emaill"  type="email" value="${emaill}" placeholder="">
+									<input class="form-control" id="login-username" name="emaill"  type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" value="${emaill}" placeholder="">
 								</div>
 								<div class="form-group">
 		        				 	<label for="login-password"><i class="icon-lock"></i> <b>Password</b></label>
-									<input class="form-control" id="login-password" name="password" type="password" placeholder="">
+									<input class="form-control" id="login-password" name="password" type="password" pattern=".{6,}" placeholder="">
 								</div>
 								<div class="form-group">
 									<label class="checkbox">

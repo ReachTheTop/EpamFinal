@@ -37,38 +37,38 @@
 							enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
-									<b>Email</b></label> <input class="form-control" name="email" value="${email}" id="register-username"
+									<b>Email</b></label> <input class="form-control" name="email" value="${email}" id="register-username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
 									type="email" placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="register-password"><i class="icon-lock"></i>
 									<b>Password</b></label> <input class="form-control"
-									id="register-password" name="password" type="password" placeholder="">
+									id="register-password" name="password" type="password"  pattern=".{6,}" placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Name</b></label> <input class="form-control" name="name" value="${ name}" id="register-username"
-									type="text" placeholder="">
+									type="text" placeholder="" pattern="^[^<>/{}]+$">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Midle name</b></label> <input class="form-control" name="midlename" value="${ midlename}"
-									id="register-username" type="text" placeholder="">
+									id="register-username" type="text" placeholder="" pattern="^[^<>/{}]+$">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Surname</b></label> <input class="form-control" name="surname" value="${ surname}"
-									id="register-username" type="text" placeholder="">
+									id="register-username" type="text" placeholder="" pattern="^[^<>/{}]+$">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>birthday</b></label> <input class="form-control" name="date" value="${date}"
-									id="register-username" type="date" placeholder="">
+									id="register-username" type="date" placeholder="" pattern="^[^<>/{}]+$">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Photo</b></label> <input class="form-control"
-									id="register-username" type="file" placeholder="" name="photo" value="${ photo}">
+									id="register-username" type="file" placeholder="" name="photo" pattern="" value="${ photo}" pattern="^[^<>/{}]+$">
 							</div>
 
 							<div class="form-group">
