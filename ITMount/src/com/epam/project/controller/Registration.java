@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+
 
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.UserService;
 import com.epam.project.mailer.Mailer;
 import com.epam.project.md5.SaltedMD5;
+import com.epam.project.util.file.UploadFile;
 
 /**
  * Servlet implementation class Registration
@@ -65,6 +69,8 @@ public class Registration extends HttpServlet {
 		String password = request.getParameter("password");
 		String date = request.getParameter("date");
 		
+		
+		
 		if(UserService.getUserWhereEmail(email)!=null){
 			 session.setAttribute("errorRegistration", " This email used!");
 			 session.setAttribute("name", name);
@@ -100,9 +106,8 @@ public class Registration extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//System.out.println(request.getPart("photo"));
-			Integer key = new Random().nextInt(Integer.MAX_VALUE);
-			user.setKey(key.toString());
+			String key = SaltedMD5.getPassword(((Integer)new Random().nextInt(Integer.MAX_VALUE)).toString(), email) ;
+			user.setKey(key);
 			try {
 				Mailer.sendEmail(email, "Confirm email", "<a href=\"http://localhost:8080/ITMount/confirm?email="+email+"&key="+key+"\">Verificate</a>");
 			} catch (MessagingException e) {
@@ -110,11 +115,43 @@ public class Registration extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			
+			
 			session.setAttribute("confirmemail", 1);
 			session.setAttribute("userkey", key);
 			session.setAttribute("useremail", email);
 			user.setPassword_hash(SaltedMD5.getPassword(password, email));
+			
+			Part file = request.getPart("photo");
+			UploadFile m = new UploadFile();
+			if (file.getSize()>0) {
+				
+				try{
+					if(m.getExtension(file).contains("image")){
+						
+						String fileName = m.uploadFile(file, getServletContext());
+						user.setImage(fileName);
+					}
+				}catch(Exception e){
+					session.setAttribute("name", name);
+					session.setAttribute("midlename", midlename);
+					session.setAttribute("surname", surname);
+					session.setAttribute("email", email);
+					session.setAttribute("date", date);
+					session.setAttribute("errorRegistration", "Error format photo");
+					 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
+					 return;
+				}
+				
+				
+
+			}else {
+				user.setImage("1.jpg");
+			}
+			
 			UserService.addNewUser(user);
+			
+			
 			request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
 					response);
 		}
@@ -125,5 +162,6 @@ public class Registration extends HttpServlet {
 		
 		
 	}
+	
 
 }

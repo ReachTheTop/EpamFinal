@@ -60,7 +60,7 @@
     <servlet-name>confirm</servlet-name>
     <url-pattern>/confirm</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>sendconfirm</servlet-name>
     <servlet-class>com.epam.project.controller.SendConfirm</servlet-class>
   </servlet>
@@ -68,6 +68,16 @@
     <servlet-name>sendconfirm</servlet-name>
     <url-pattern>/sendconfirm</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>downloadFile</servlet-name>
+    <servlet-class>com.epam.project.controller.DownloadFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>downloadFile</servlet-name>
+    <url-pattern>/downloadFile</url-pattern>
+  </servlet-mapping>
+  
   <filter>
     <filter-name>languageFilter</filter-name>
     <filter-class>com.epam.project.filter.LanguageFilter</filter-class>
@@ -76,6 +86,4 @@
     <filter-name>languageFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  
 </web-app>
