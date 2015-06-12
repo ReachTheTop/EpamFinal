@@ -23,7 +23,7 @@ public class CreateCommand implements Action {
 		course.setIcon(request.getParameter("icon"));
 
 		if (course.isValid()) {
-			CourseService.addCourse(course);
+			course.setId(CourseService.addCourse(course));
 			request.getRequestDispatcher(
 					"/CourseServlet?action=show&course_id=" + course.getId())
 					.forward(request, response);

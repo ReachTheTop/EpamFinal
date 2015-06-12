@@ -25,6 +25,7 @@ public class ShowCommand implements Action {
 				
 				if(course == null){
 					response.sendError(404);
+					return;
 				}
 				request.setAttribute("course", course);
 				request.getRequestDispatcher("/WEB-INF/courses/show.jsp")

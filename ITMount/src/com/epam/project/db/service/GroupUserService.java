@@ -5,10 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
-import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.dao.GroupUserDAO;
-import com.epam.project.db.model.Group;
 import com.epam.project.db.model.GroupUser;
+import com.epam.project.db.model.User;
 
 public class GroupUserService {
 
@@ -26,10 +25,10 @@ public class GroupUserService {
 		return groupUser;
 	}
 
-	public static List<GroupUser> getAllGroupUSer() {
+	public static List<User> getAllGroupUser(Integer group_id) {
 
 		Connection connection = DBConnection.getConnection();
-		List<GroupUser> list = GroupUserDAO.getAllGroupUser(connection);
+		List<User> list = GroupUserDAO.getAllGroupUser(connection, group_id);
 		try {
 			connection.close();
 		} catch (SQLException e) {
@@ -52,10 +51,20 @@ public class GroupUserService {
 		}
 
 	}
-	
+
 	public static void updateGroupUser(GroupUser groupUser) {
-		Connection connection =  DBConnection.getConnection();
+		Connection connection = DBConnection.getConnection();
 		GroupUserDAO.updateGroupUser(groupUser, connection);
+		closeConnection(connection);
+	}
+
+	public static void deleteUser(Integer user_id, Integer group_id) {
+		Connection connection = DBConnection.getConnection();
+		GroupUserDAO.deleteUser(connection, user_id, group_id);
+		closeConnection(connection);
+	}
+
+	private static void closeConnection(Connection connection) {
 		try {
 			connection.close();
 		} catch (SQLException e) {

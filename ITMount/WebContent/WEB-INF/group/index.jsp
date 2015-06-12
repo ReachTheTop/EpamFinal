@@ -33,18 +33,30 @@
 		<th>Group Name</th>
 		<th>Active</th>
 		<th>Delete Group</th>
-		<c:forEach items="${ groups}" var="group">
-			<tr>
-				<td><c:out value="${group.course.name }" /></td>
-				<td><c:out value="${group.teacher.name }" /></td>
-				<td><c:out value="${group.name }"></c:out></td>
-				<td><c:out value="${group.is_active}" /></td>
-				<td><a
-					href="<c:url
-						value="/GroupServlet?action=delete&group_id=${group.id }" />">Delete</a>
-				</td>
-			</tr>
-		</c:forEach>
+		<th>Edit</th>
+		<tbody>
+			<c:forEach items="${ groups}" var="group">
+				<tr>
+					<td><c:out value="${group.course.name }" /></td>
+					<td><c:out
+							value="${group.teacher.name } ${group.teacher.surname } ${group.teacher.middle_name }" /></td>
+					<td><c:out value="${group.name }"></c:out></td>
+					<td><c:out value="${group.is_active}" /></td>
+					<td><a
+						href="<c:url
+						value="/GroupServlet?action=delete&group_id=${group.id}" />">Delete</a>
+					</td>
+					<td><a
+						href="<c:url
+						value="/GroupServlet?action=edit&group_id=${group.id}" />">Edit</a>
+					</td>
+					<td><a
+						href="<c:url
+						value="/GroupServlet?action=show&group_id=${group.id}" />">Show</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 
 	<jsp:include page="../page/footer.jsp" />

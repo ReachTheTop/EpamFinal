@@ -15,17 +15,17 @@ public class CourseDAO {
 
 
 	
-	private static final String BASE_GROUP = "INSERT INTO group1(course_id, name, is_active) VALUE (?,?,?);";
+	private static final String BASE_GROUP = "INSERT INTO group1(course_id, name, is_active, confirmed) VALUE (?,?,?,?);";
 
 	
 
 	private static final String GET_ALL = "SELECT * FROM course;";
 
-	private static final String SELECTALL = "SELECT * FROM course WHERE is_active =1;";
+	private static final String SELECTALL = "SELECT * FROM course WHERE is_active = 1;";
 
 
 	private static final String INSERT = "INSERT INTO course(name,icon,description) VALUES(?,?,?);";
-	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=?, is_active=? WHERE id=?";
+	private static final String UPDATE = "UPDATE course SET name=?, icon=?, description=? WHERE id=?";
 	private static final String DELETE = "DELETE FROM course WHERE id=?";
 	
 
@@ -62,19 +62,17 @@ public class CourseDAO {
 
 			ResultSet resultSet = st.getGeneratedKeys();
 			resultSet.next();
-			Integer id = resultSet.getInt(1);
+			course_id = resultSet.getInt(1);
 			st = connection.prepareStatement(BASE_GROUP);
 
-			st.setInt(1, id);
+			st.setInt(1, course_id);
 			st.setString(2, "Base");
 			st.setBoolean(3, true);
+			st.setBoolean(4, false);
 
 			st.executeUpdate();
 
-			ResultSet result = st.getGeneratedKeys();
-			result.next();
-			course_id = result.getInt(1);
-			course.setId(course_id);
+			
 			connection.commit();
 			connection.setAutoCommit(true);
 		} catch (SQLException e) {

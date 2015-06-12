@@ -14,18 +14,18 @@ import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.GroupTransformer;
 
 public class GroupDAO {
-
+	private static final String GET_COURSE_ID = "SELECT course_id FROM group1 WHERE id = ?;";
+	private static final String NEW_BASE_GROUP = "INSERT INTO group1 SET name = 'Base', confirmed =?, course_id = ?;";
 	private static final String ADD_USER = "INSERT INTO group_user(user_id, group_id) "
-			+ "VALUE (?,(SELECT  id from group1 where course_id = ? AND name = 'Base'));";
-
+			+ "VALUE (?,(SELECT  id from group1 where course_id = ? AND confirmed = 0));";
+	private static final String CONFIRM_GROUP = "UPDATE group1 SET confirmed = 1 WHERE id = ?;";
 	private static final String GET_GROUP_BY_ID = "SELECT * FROM group1 WHERE id=?";
-	private static final String GET_ALL_GROUP = "SELECT* FROM group1";
+	private static final String GET_ALL_GROUP = "SELECT* FROM group1 WHERE is_active =1;";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ?, date_exam=? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 	private Connection con;
 	private PreparedStatement statement;
-	private ResultSet resultSet;
 
 	public static void delete(Integer id, Connection con) {
 		con = DBConnection.getConnection();
@@ -39,11 +39,11 @@ public class GroupDAO {
 		}
 	}
 
-	public void addUser(User user, Integer id) {
-		con = DBConnection.getConnection();
+	public static void addUser(Connection connection, User user, Integer id) {
+
 		PreparedStatement statement = null;
 		try {
-			statement = con.prepareStatement(ADD_USER);
+			statement = connection.prepareStatement(ADD_USER);
 
 			statement.setInt(1, user.getId());
 			statement.setInt(2, id);
@@ -143,12 +143,30 @@ public class GroupDAO {
 		}
 	}
 
-	public void close() {
+	public static void confirmGroup(Connection connection, Integer group_id) {
 		try {
-			con.close();
+			connection.setAutoCommit(false);
+			PreparedStatement ps = connection.prepareStatement(CONFIRM_GROUP);
+			ps.setInt(1, group_id);
+			ps.executeUpdate();
+
+			ps = connection.prepareStatement(GET_COURSE_ID);
+			ps.setInt(1, group_id);
+			ResultSet res = ps.executeQuery();
+			res.next();
+			Integer course_id = res.getInt(1);
+			ps = connection.prepareStatement(NEW_BASE_GROUP);
+			ps.setBoolean(1, false);
+			ps.setInt(2, course_id);
+
+			ps.executeUpdate();
+			connection.commit();
+			connection.setAutoCommit(true);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
 }

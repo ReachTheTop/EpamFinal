@@ -8,27 +8,21 @@ import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.model.Group;
 import com.epam.project.db.model.User;
-import com.epam.project.db.transformer.GroupTransformer;
 
 public class GroupService {
 
 	public static void addUserToGroup(User user, Integer id) {
-		GroupDAO groupBridge = new GroupDAO();
+		Connection connection = DBConnection.getConnection();
+		GroupDAO.addUser(connection, user, id);
+		closeConnection(connection);
 
-		groupBridge.addUser(user, id);
-		groupBridge.close();
 	}
 
 	public static void deleteGroup(Integer id) {
 
-		Connection con = DBConnection.getConnection();
-		GroupDAO.delete(id, con);
-		try {
-			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Connection connection = DBConnection.getConnection();
+		GroupDAO.delete(id, connection);
+		closeConnection(connection);
 	}
 
 	public static Group getById(Integer id) {
@@ -38,12 +32,7 @@ public class GroupService {
 
 		group.setTeacher(UserService.getUser(group.getTeacher_id()));
 		group.setCourse(CourseService.getCourse(group.getCourse_id()));
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 		return group;
 	}
 
@@ -57,12 +46,7 @@ public class GroupService {
 			group.setCourse(CourseService.getCourse(group.getCourse_id()));
 
 		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 		return groups;
 	}
 
@@ -70,24 +54,29 @@ public class GroupService {
 
 		Connection connection = DBConnection.getConnection();
 		GroupDAO.addNewGroupe(group, connection);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 
 	}
 
 	public static void updateGroup(Group group) {
 		Connection connection = DBConnection.getConnection();
 		GroupDAO.updateGroup(group, connection);
+		closeConnection(connection);
+
+	}
+
+	public static void confirmGroup(Integer group_id) {
+		Connection connection = DBConnection.getConnection();
+		GroupDAO.confirmGroup(connection, group_id);
+		closeConnection(connection);
+	}
+
+	private static void closeConnection(Connection connection) {
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 }

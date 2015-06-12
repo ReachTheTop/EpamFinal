@@ -12,12 +12,36 @@
 	<jsp:include page="../page/header.jsp" />
 
 	<h3>
-		<c:out value="${group }" />
+		<c:out value="${group.name }" />
 	</h3>
+	<div class="container">
+		<h2>Group Users</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td>${user.name }${user.surname}</td>
+						<td>${user.email }</td>
+
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 
-
-
+	<c:if test="${not group.isConfirmed  }">
+		<a
+			href="<c:url value="/GroupServlet?action=confirm&group_id=${group.id }" />">Confirm
+			Group </a>
+	</c:if>
 	<jsp:include page="../page/footer.jsp" />
 	<jsp:include page="../page/script.jsp" />
 

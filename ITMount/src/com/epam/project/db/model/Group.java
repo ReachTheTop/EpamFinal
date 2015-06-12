@@ -30,6 +30,8 @@ public class Group extends Validator implements Serializable {
 	@Column(value = "date")
 	private Date dateExam;
 
+	private Boolean isConfirmed;
+
 	public Group() {
 		// TODO Auto-generated constructor stub
 	}
@@ -100,6 +102,14 @@ public class Group extends Validator implements Serializable {
 
 	public void setDateExam(Date dateExam) {
 		this.dateExam = dateExam;
+	}
+
+	public void setIsConfirmed(Boolean value) {
+		isConfirmed = value;
+	}
+
+	public Boolean getIsConfirmed() {
+		return isConfirmed;
 	}
 
 }

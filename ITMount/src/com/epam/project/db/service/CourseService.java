@@ -21,15 +21,17 @@ public class CourseService {
 		}
 	}
 
-	public static void addCourse(Course course) {
+	public static Integer addCourse(Course course) {
 		Connection connection = DBConnection.getConnection();
-		CourseDAO.addCourse(course, connection);
+		Integer course_id = CourseDAO.addCourse(course, connection);
+
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return course_id;
 
 	}
 

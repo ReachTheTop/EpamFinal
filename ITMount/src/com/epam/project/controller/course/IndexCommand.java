@@ -17,7 +17,7 @@ public class IndexCommand implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Course> courses = CourseService.getAllCourses();
-		request.setAttribute("couses", courses);
+		request.setAttribute("courses", courses);
 		request.getRequestDispatcher("/WEB-INF/courses/index.jsp").forward(
 				request, response);
 	}

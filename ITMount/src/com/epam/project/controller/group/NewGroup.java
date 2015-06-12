@@ -16,7 +16,7 @@ public class NewGroup implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setAttribute("teachers", UserService.getByRole("teacher"));
+		request.setAttribute("teachers", UserService.getByRole("lecturer"));
 		request.setAttribute("courses", CourseService.getAllCourses());
 		request.getRequestDispatcher("/WEB-INF/group/new.jsp").forward(request,
 				response);

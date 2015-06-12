@@ -22,9 +22,10 @@ public class CourseRegistration implements Action {
 		user = (User) request.getSession().getAttribute("user");
 
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
-		GroupService.addUserToGroup(user, course_id);
+		
 
 		if (user.getCurriculum_vitae() != null) {
+			GroupService.addUserToGroup(user, course_id);
 			request.setAttribute("message",
 					"You have been registered on cource");
 			request.getRequestDispatcher("/WEB-INF/courses/registration.jsp")

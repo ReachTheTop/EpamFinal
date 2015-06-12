@@ -37,6 +37,7 @@ public class GroupTransformer {
 			group.setId(data.getInt("id"));
 			group.setIs_active(data.getBoolean("is_active"));
 			group.setDateExam(data.getDate("date_exam"));
+			group.setIsConfirmed(data.getBoolean("confirmed"));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -60,6 +61,7 @@ public class GroupTransformer {
 				group.setName(setOfGroups.getString(4));
 				group.setIs_active(setOfGroups.getBoolean(5));
 				group.setDateExam(setOfGroups.getDate(6));
+				group.setIsConfirmed(setOfGroups.getBoolean("confirmed"));
 				list.add(group);
 			}
 		} catch (SQLException e) {
