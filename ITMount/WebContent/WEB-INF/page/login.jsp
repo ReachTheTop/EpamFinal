@@ -6,10 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 
 <jsp:include page="head.jsp"/>
 </head>
@@ -47,9 +44,6 @@
 									<input class="form-control" id="login-password" name="password" type="password" pattern=".{6,}" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="checkbox">
-										<input type="checkbox" name="check"> Remember me
-									</label>
 									<a href="<c:url value="/reset" />" class="forgot-password">Forgot password?</a>
 									<button type="submit" class="btn pull-right">Login</button>
 									<div class="clearfix"></div>
@@ -71,14 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<c:if test="${confirmemail!=null}" >
-		${confirmemail=null}
-		<script type="text/javascript">
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
-</script>
-		</c:if>
+
 
 <div id="myModal" class="modal fade">
     <div class="modal-dialog">
@@ -99,6 +86,46 @@
         </div>
     </div>
     </div>
+    
+    
+    <div id="confirmModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Successful</h4>
+            </div>
+            <div class="modal-body">
+                <p>Ви успішно підтвердили свій емейл!</p>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+               
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    		<c:if test="${infoconfirm!=null}" >
+		${infoconfirm=null}
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$("#confirmModal").modal('show');
+	});
+</script>
+		</c:if>
+    		<c:if test="${confirmemail!=null}" >
+		${confirmemail=null}
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+		</c:if>
+		
+		
     
 <jsp:include page="footer.jsp"/>
 <jsp:include page="script.jsp"/>

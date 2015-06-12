@@ -17,6 +17,7 @@ public class UserDAO {
 			+ "role_id =?, password_hash=?, curriculum_vitae=?, description=?, is_active=?, is_confirmed=?, key1=?,"
 			+ " image=?, email=? WHERE id=?";
 
+
 	public static final String SQL_ADD_NEW_USER = "Insert into user (name,midle_name,surname,birthday,role_id,password_hash,"
 			+ "curriculum_vitae,description, key1,image,email)"
 			+ "value(?,?,?,?,?,?,?,?,?,?,?)";

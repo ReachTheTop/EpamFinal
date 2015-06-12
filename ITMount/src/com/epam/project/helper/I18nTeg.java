@@ -32,6 +32,9 @@ public class I18nTeg extends SimpleTagSupport {
 		PageContext context = (PageContext) getJspContext();
 		HttpServletRequest request = (HttpServletRequest) context.getRequest();
 		HttpSession session = request.getSession();
+		if (session.getAttribute("bundle") != null) {
+			res = (ResourceBundle) session.getAttribute("bundle");
+		}else{
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			String language = null;
@@ -48,10 +51,9 @@ public class I18nTeg extends SimpleTagSupport {
 				}
 
 			}
-			if (session.getAttribute("bundle") != null) {
-				res = (ResourceBundle) session.getAttribute("bundle");
-			}
+			
 
+		}
 		}
 		JspWriter js = getJspContext().getOut();
 		js.print(new String(res.getString(getId()).getBytes("ISO-8859-1"),
