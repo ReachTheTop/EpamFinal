@@ -5,10 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
-import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.dao.GroupUserDAO;
-import com.epam.project.db.model.Group;
 import com.epam.project.db.model.GroupUser;
+import com.epam.project.db.model.User;
 
 public class GroupUserService {
 
@@ -39,6 +38,35 @@ public class GroupUserService {
 		return list;
 
 	}
+	
+	public static List<User> getAllUserByGroupId(Integer groupeId) {
+
+		Connection connection = DBConnection.getConnection();
+		List<User> list = GroupUserDAO.getAllUserByGroupId(connection, groupeId);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+
+	}
+	
+	public static User getTeacherByGroupId(Integer groupeId) {
+
+		Connection connection = DBConnection.getConnection();
+		User user = GroupUserDAO.getTeacherByGroupId(connection, groupeId);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+
+	}
+	
 
 	public static void newGroupUser(GroupUser groupUser) {
 

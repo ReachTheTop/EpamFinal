@@ -23,6 +23,13 @@ public class GroupDAO {
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ?, date_exam=? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
+
+	
+	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.id in"
+			+ "(select group_id from group_user where group_user.id in"
+			+ " (select group_user.id from group_user where user_id = ?))";
+	
+	
 	private Connection con;
 	private PreparedStatement statement;
 	private ResultSet resultSet;
@@ -78,6 +85,24 @@ public class GroupDAO {
 		try {
 
 			PreparedStatement st = connection.prepareStatement(GET_ALL_GROUP);
+			rs = st.executeQuery();
+			list = GroupTransformer.getAllGroups(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	
+	public static List<Group> getGroupsUserStudy(Connection connection , Integer id) {
+
+		ResultSet rs = null;
+		List<Group> list = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_GROUPS_USER_STUDY);
+			st.setInt(1, id);
 			rs = st.executeQuery();
 			list = GroupTransformer.getAllGroups(rs);
 		} catch (SQLException e) {

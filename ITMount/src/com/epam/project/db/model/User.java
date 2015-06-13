@@ -173,6 +173,24 @@ public class User extends Validator implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    // TODO Auto-generated method stub
+	    if(obj instanceof User)
+	    {
+	        User temp = (User) obj;
+	        if(this.id == temp.id)
+	            return true;
+	    }
+	    return false;
+
+	}
+	
+	@Override
+	public int hashCode() {
+	   	    return (this.id.hashCode());        
+	}
 
 	@Override
 	public String toString() {

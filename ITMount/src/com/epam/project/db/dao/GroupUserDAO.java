@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
-import com.epam.project.db.model.Group;
 import com.epam.project.db.model.GroupUser;
+import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.GroupUserTransformer;
+import com.epam.project.db.transformer.UserTransformer;
 
 public class GroupUserDAO {
 	
@@ -18,7 +18,9 @@ public class GroupUserDAO {
 	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id, is_active) value (?, ?, ?);";
 	
 	private static final String UPDATE_GROUP_USER = "UPDATE group_user SET user_id = ?, group_id = ?, is_active = ? WHERE id = ?;";
-
+	private static final String GET_ALL_USER_BY_GROUP_ID = "select* from user where user.id in (select user_id from group_user where group_id = ?)";
+	private static final String GET_ALL_TEACHER_BY_GROUP_ID = "select* from user where user.id in (select teacher_id from group1 where group1.id = ?)";
+	
 	public static GroupUser getGroupUserById(Integer id, Connection connection) {
 
 		ResultSet rs = null;
@@ -52,7 +54,38 @@ public class GroupUserDAO {
 
 		return list;
 	}
+	
+	public static List<User> getAllUserByGroupId(Connection connection, Integer id) {
 
+		ResultSet rs = null;
+		List<User> list = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_ALL_USER_BY_GROUP_ID);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			list = UserTransformer.getAllUsers(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static User getTeacherByGroupId(Connection connection, Integer id) {
+
+		ResultSet rs = null;
+		User user = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_ALL_TEACHER_BY_GROUP_ID);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			user = UserTransformer.getUser(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 	
 	public static void addNewGroupeUser(GroupUser groupUser, Connection connection) {
 		

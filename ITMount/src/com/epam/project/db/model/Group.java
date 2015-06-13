@@ -102,4 +102,14 @@ public class Group extends Validator implements Serializable {
 		this.dateExam = dateExam;
 	}
 
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", course_id=" + course_id + ", teacher_id="
+				+ teacher_id + ", name=" + name + ", is_active=" + is_active
+				+ ", dateExam=" + dateExam + ", teacher=" + teacher
+				+ ", course=" + course + "]";
+	}
+	
+	
+
 }
