@@ -1,32 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-       <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
  <div class="mainmenu-wrapper">
 	        <div class="container">
 	        	<div class="menuextras">
 					<div class="extras">
 						<ul>
 		
-						
 							<li>
-							 <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle"><t:i18n id="hader.language"/><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                	<c:forEach items="${languageList}" var="lang" >
-                                	<li role="menuitem"><a href="<c:url value="/lenguage?${lang.getLanguage() }" />"><img src="resources/img/flags/${lang.getImage()}" alt="${lang.getName()}">  ${lang.getName()}</a></li>
-                                	
-                                	</c:forEach>
-                                	
-									
-                            </ul>
-                        </div>
-							 </li>
-							 <!--Приклад силки для завантаження файлу  -->
-							<%-- 	<li><a href="<c:url value="/downloadFile?file=photo\1892596744_author.png" />">Download Link</a></li>
- --%>
-							
-							
+								<div class="dropdown choose-country">
+									<a class="#" data-toggle="dropdown" href="#"><img src="resources/img/flags/gb.png" alt="Great Britain"> UK</a>
+									<ul class="dropdown-menu" role="menu">
+										<li role="menuitem"><a href="#"><img src="resources/img/flags/us.png" alt="United States"> US</a></li>
+										<li role="menuitem"><a href="#"><img src="resources/img/flags/de.png" alt="Germany"> DE</a></li>
+										<li role="menuitem"><a href="#"><img src="resources/img/flags/es.png" alt="Spain"> ES</a></li>
+									</ul>
+								</div>
+							</li>
 							<c:if test="${user!=null}">
 							<li class="shopping-cart-items"><a href=""><i class="glyphicon glyphicon-user icon-white"><b> ${user.getName()}</b></i></a> </li>
 							<li class="shopping-cart-items"><a href="<c:url value="/exit" />"><i class="glyphicon glyphicon-log-out icon-white"><b> Exit</b></i></a> </li>
@@ -37,12 +27,8 @@
 			        	
 			        		
 			        	</ul>
-			        	
-			        		
 					</div>
-		
 		        </div>
-		        
 		        <nav id="mainmenu" class="mainmenu">
 					<ul>
 						<li class="logo-wrapper"><a href="index.html"><img src="resources/img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li>

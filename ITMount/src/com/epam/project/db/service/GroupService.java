@@ -49,6 +49,25 @@ public class GroupService {
 		closeConnection(connection);
 		return groups;
 	}
+	
+	public static List<Group> getGroupsUserStudy(Integer id) {
+		List<Group> groups = null;
+		Connection connection = DBConnection.getConnection();
+		groups = GroupDAO.getGroupsUserStudy(connection, id);
+
+		for (Group group : groups) {
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+
+		}
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return groups;
+	}
 
 	public static void newGroup(Group group) {
 

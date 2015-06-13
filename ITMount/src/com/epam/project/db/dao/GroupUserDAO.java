@@ -18,6 +18,8 @@ public class GroupUserDAO {
 	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id, is_active) value (?, ?, ?);";
 	private static final String DELETE_USER_FROM_GROUP = "DELETE FROM group_user WHERE group_id = ? AND user_id = ?;";
 	private static final String UPDATE_GROUP_USER = "UPDATE group_user SET user_id = ?, group_id = ?, is_active = ? WHERE id = ?;";
+	private static final String GET_ALL_USER_BY_GROUP_ID = "select* from user where user.id in (select user_id from group_user where group_id = ?)";
+	private static final String GET_ALL_TEACHER_BY_GROUP_ID = "select* from user where user.id in (select teacher_id from group1 where group1.id = ?)";
 
 	public static GroupUser getGroupUserById(Integer id, Connection connection) {
 
@@ -57,6 +59,24 @@ public class GroupUserDAO {
 		return list;
 	}
 
+	public static List<User> getAllUserByGroupId(Connection connection,
+			Integer id) {
+
+		ResultSet rs = null;
+		List<User> list = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_ALL_USER_BY_GROUP_ID);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			list = UserTransformer.getAllUsers(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	public static void addNewGroupeUser(GroupUser groupUser,
 			Connection connection) {
 
@@ -72,6 +92,23 @@ public class GroupUserDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static User getTeacherByGroupId(Connection connection, Integer id) {
+
+		ResultSet rs = null;
+		User user = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_ALL_TEACHER_BY_GROUP_ID);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			user = UserTransformer.getUser(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	public static void updateGroupUser(GroupUser groupUser,
@@ -101,7 +138,7 @@ public class GroupUserDAO {
 			ps.setInt(1, group_id);
 			ps.setInt(2, user_id);
 			ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
