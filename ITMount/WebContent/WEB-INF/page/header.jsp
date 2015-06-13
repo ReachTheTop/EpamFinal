@@ -22,9 +22,9 @@
                             </ul>
                         </div>
 							 </li>
-							 
-	
-
+							 <!--Приклад силки для завантаження файлу  -->
+							<%-- 	<li><a href="<c:url value="/downloadFile?file=photo\1892596744_author.png" />">Download Link</a></li>
+ --%>
 							
 							
 							<c:if test="${user!=null}">
