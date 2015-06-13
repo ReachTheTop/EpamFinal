@@ -24,7 +24,7 @@ public class UploadFile {
 	private String uploadPath = null;
 	private ServletFileUpload upload;
 
-	public String uploadFile(Part part, ServletContext servletContext)
+	public String uploadFile(Part part, ServletContext servletContext, String path)
 			throws IOException {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(threshold_size);
@@ -37,11 +37,26 @@ public class UploadFile {
 		
 		
 		String fileName = extractFileName(part);
-		if(getExtension(part).contains("image")){
-			patch +="photo";
-		}else{
-			patch +="workpatch";
+		try{
+			if(getExtension(part).contains("image")){
+				patch +="photo";
+			}
+			else{
+				if(path==null){
+					patch +="workpatch";
+				}else{
+					patch +="workpatch"+File.separator+path;
+				}
+				
+			}
+		}catch(Exception e){
+			if(path==null){
+				patch +="workpatch";
+			}else{
+				patch +="workpatch"+File.separator+path;
+			}
 		}
+		
 		uploadPath =servletContext.getRealPath("")+"upload"+File.separator+patch;
 		
 		File directory = new File(uploadPath);
