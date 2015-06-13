@@ -70,7 +70,7 @@ public class Registration extends HttpServlet {
 		String date = request.getParameter("date");
 		
 		
-		
+	
 		if(UserService.getUserWhereEmail(email)!=null){
 			 session.setAttribute("errorRegistration", " This email used!");
 			 session.setAttribute("name", name);
@@ -128,8 +128,7 @@ public class Registration extends HttpServlet {
 				
 				try{
 					if(m.getExtension(file).contains("image")){
-						
-						String fileName = m.uploadFile(file, getServletContext());
+						String fileName = m.uploadFile(file, getServletContext(),null);
 						user.setImage(fileName);
 					}
 				}catch(Exception e){

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +32,7 @@
 				<c:forEach items="${courses }" var="course">
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
-							<img src="${course.icon }" alt="Service Name">
+							<img src="upload/${course.icon }" alt="Service Name" class="img-thumbnail" width="254" height="254">
 							<h3>
 								<c:out value="${course.name }" />
 							</h3>
