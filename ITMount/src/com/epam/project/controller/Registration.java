@@ -72,7 +72,8 @@ public class Registration extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String date = request.getParameter("date");
-		
+		String skype = request.getParameter("skype");
+		String tel = request.getParameter("tel");
 		
 	
 		if(UserService.getUserWhereEmail(email)!=null){
@@ -82,6 +83,8 @@ public class Registration extends HttpServlet {
 				session.setAttribute("surname", surname);
 				session.setAttribute("email", email);
 				session.setAttribute("date", date);
+				session.setAttribute("skype", skype);
+				session.setAttribute("tel", tel);
 			 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 			 return;
 		}
@@ -92,6 +95,8 @@ public class Registration extends HttpServlet {
 			session.setAttribute("surname", surname);
 			session.setAttribute("email", email);
 			session.setAttribute("date", date);
+			session.setAttribute("skype", skype);
+			session.setAttribute("tel", tel);
 			session.setAttribute("errorRegistration", " Incorect data!");
 			 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 			 return;
@@ -102,6 +107,7 @@ public class Registration extends HttpServlet {
 			user.setSurname(surname);
 			user.setEmail(email);
 			user.setRole_id(1);
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
 			try {
 				Date d = sdf.parse(request.getParameter("date"));
@@ -141,6 +147,8 @@ public class Registration extends HttpServlet {
 					session.setAttribute("surname", surname);
 					session.setAttribute("email", email);
 					session.setAttribute("date", date);
+					session.setAttribute("skype", skype);
+					session.setAttribute("tel", tel);
 					session.setAttribute("errorRegistration", "Error format photo");
 					 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 					 return;
@@ -154,6 +162,8 @@ public class Registration extends HttpServlet {
 			
 			UserService.addNewUser(user);
 			Contact contact = new Contact();
+			contact.setPhone(tel);
+			contact.setSkype(skype);
 			contact.setUser_id(UserService.getUserWhereEmail(user.getEmail()).getId());
 			ContactService.addContact(contact);
 			

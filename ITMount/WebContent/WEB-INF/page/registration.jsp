@@ -65,6 +65,19 @@
 									<b>birthday</b></label> <input class="form-control" name="date" value="${date}"
 									id="register-username" type="date" placeholder="" >
 							</div>
+							
+							<div class="form-group">
+								<label for="register-username"><i class="icon-user"></i>
+									<b>Telephone</b></label> <input class="form-control" name="tel" value="${tel}"
+									id="register-username" type="tel" placeholder="" >
+							</div>
+							
+							<div class="form-group">
+								<label for="register-username"><i class="icon-user"></i>
+									<b>Skype</b></label> <input class="form-control" name="skype" value="${skype}"
+									id="register-username" type="text" placeholder="" >
+							</div>
+							
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Photo</b></label> <input class="form-control"
@@ -118,7 +131,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        regexp: /^[a-zA-Z0-9А-Яа-я_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
@@ -134,7 +147,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
@@ -150,7 +163,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
@@ -164,6 +177,24 @@
 										                    notEmpty: {
 										                        message: 'The date is required and cannot be empty'
 										                    },
+										                 
+										                }
+										            },
+										            skype: {
+										                validators: {
+										                	 regexp: {
+											                        regexp: /^[a-z0-9_-]{3,15}$/,
+											                        message: 'Invalid skype name'
+											                    },
+										                 
+										                }
+										            },
+										            tel: {
+										                validators: {
+										                	 regexp: {
+											                        regexp: /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+											                        message: 'Invalid phone number'
+											                    },
 										                 
 										                }
 										            },
