@@ -23,7 +23,8 @@
 			</div>
 		</div>
 	</div>
-
+	
+	 <script src="alert.js"></script>
 
 	<div class="bs-example">
 		<!-- Button HTML (to Trigger Modal) -->
@@ -33,14 +34,15 @@
 		<div id="myModal" class="modal fade bs-example-modal-sm">
 			<div class="modal-dialog modal-sm" >
 				<div class="modal-content">
-					<div class="modal-header">
+					<form action="TaskServlet?action=createTask&id_group=${id_group }" method="post" enctype="multipart/form-data"
+							role="form" role="form">
+										<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Create new Task</h4>
 					</div>
 					<div class="modal-body">
-						<form action="TaskServlet?action=createTask&id_group=${id_group }" method="post" enctype="multipart/form-data"
-							role="form" role="form">
+						
 							
 							<div class="form-group">
 								<label for="login-username"><i class="icon-user"></i> <b>Task
@@ -64,13 +66,14 @@
 								<input name="task_file" class="form-control" id="file" type="file"
 									placeholder="">
 							</div>					
-						</form>
+						
 
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Send</button>
+						<button type="submit" class="btn btn-primary">Add task</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
