@@ -85,7 +85,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		List<User> list = null;
 		try {
-
+//
 			PreparedStatement st = connection
 					.prepareStatement(SQL_GET_ALL_USERS);
 			rs = st.executeQuery();
