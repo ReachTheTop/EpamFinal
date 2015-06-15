@@ -16,31 +16,29 @@ import com.epam.project.db.model.User;
 import com.epam.project.db.service.GroupService;
 import com.epam.project.db.service.GroupUserService;
 
-public class OpenCreateMessage extends HttpServlet {
+public class OpenCreateTask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public OpenCreateMessage() {
+	public OpenCreateTask() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		List<User> listUsers = AllUserSendMessageTo.getAllUserSendMessageTo(request);
-		
-	
-		request.getRequestDispatcher("WEB-INF/page/sendMessage.jsp").forward(
+
+		request.setAttribute("id_group", 11);
+		System.out.println("get");
+		request.getRequestDispatcher("WEB-INF/task/newTask.jsp").forward(
 				request, response);
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		System.out.println("post");
+
 	}
 
 }

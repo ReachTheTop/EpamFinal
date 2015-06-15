@@ -6,7 +6,6 @@
 	        	<div class="menuextras">
 					<div class="extras">
 						<ul>
-		
 							<li>
 								<div class="dropdown choose-country">
 									<a class="#" data-toggle="dropdown" href="#"><img src="resources/img/flags/gb.png" alt="Great Britain"> UK</a>
@@ -65,8 +64,8 @@
 									<div>
 										<h4>Our Work (Portfolio)</h4>
 										<ul>
-											<li><a href="page-portfolio-2-columns-1.html">Portfolio (2 Columns, Option 1)</a></li>
-											<li><a href="page-portfolio-2-columns-2.html">Portfolio (2 Columns, Option 2)</a></li>
+											<li><a href="<c:url value="/openCreateTask"/>">Create Task</a></li>
+																																	<li><a href="page-portfolio-2-columns-2.html">Portfolio (2 Columns, Option 2)</a></li>
 											<li><a href="page-portfolio-3-columns-1.html">Portfolio (3 Columns, Option 1)</a></li>
 											<li><a href="page-portfolio-3-columns-2.html">Portfolio (3 Columns, Option 2)</a></li>
 											<li><a href="page-portfolio-item.html">Portfolio Item (Project) Description</a></li>

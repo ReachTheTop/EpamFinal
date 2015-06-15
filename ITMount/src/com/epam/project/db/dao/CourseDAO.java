@@ -46,8 +46,6 @@ public class CourseDAO {
 		}
 	}
 	
-
-
 	public static Integer addCourse(Course course, Connection connection) {
 		PreparedStatement st = null;
 		Integer course_id = null;
