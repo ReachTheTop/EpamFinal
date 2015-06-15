@@ -33,42 +33,42 @@
 							</div>
 						</c:if>
 
-						<form action="<c:url value="/registration" />" role="form" method="post"
+						<form action="<c:url value="/registration" />" role="form" method="post" id="registarionForm"
 							enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
-									<b>Email</b></label> <input class="form-control" name="email" value="${email}" id="register-username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+									<b>Email</b></label> <input class="form-control" name="email" value="${email}" id="register-username" 
 									type="email" placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="register-password"><i class="icon-lock"></i>
 									<b>Password</b></label> <input class="form-control"
-									id="register-password" name="password" type="password"  pattern=".{6,}" placeholder="">
+									id="register-password" name="password" type="password"   placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Name</b></label> <input class="form-control" name="name" value="${ name}" id="register-username"
-									type="text" placeholder="" pattern="^[^<>/{}]+$">
+									type="text" placeholder="" >
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Midle name</b></label> <input class="form-control" name="midlename" value="${ midlename}"
-									id="register-username" type="text" placeholder="" pattern="^[^<>/{}]+$">
+									id="register-username" type="text" placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Surname</b></label> <input class="form-control" name="surname" value="${ surname}"
-									id="register-username" type="text" placeholder="" pattern="^[^<>/{}]+$">
+									id="register-username" type="text" placeholder="" >
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>birthday</b></label> <input class="form-control" name="date" value="${date}"
-									id="register-username" type="date" placeholder="" pattern="^[^<>/{}]+$">
+									id="register-username" type="date" placeholder="" >
 							</div>
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Photo</b></label> <input class="form-control"
-									id="register-username" type="file" placeholder="" name="photo" pattern="" value="${ photo}" pattern="^[^<>/{}]+$">
+									id="register-username" type="file" placeholder="" name="photo"  value="${ photo}" pattern="^[^<>/{}]+$">
 							</div>
 
 							<div class="form-group">
@@ -88,7 +88,111 @@
 			</div>
 		</div>
 	</div>
+	
+		<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#registarionForm')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													email : {
+														validators : {
+															emailAddress : {
+																message : 'The input is not a valid email address'
+															}
+															
+														}
+													},
+													name: {
+										                message: 'The Name is not valid',
+										                validators: {
+										                    notEmpty: {
+										                        message: 'The Name is required and cannot be empty'
+										                    },
+										                    regexp: {
+										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                    },
+										                    different: {
+										                        field: 'password',
+										                        message: 'The username and password cannot be the same as each other'
+										                    }
+										                }
+										            },
+										            midlename: {
+										                message: 'The Name is not valid',
+										                validators: {
+										                    notEmpty: {
+										                        message: 'The Name is required and cannot be empty'
+										                    },
+										                    regexp: {
+										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                    },
+										                    different: {
+										                        field: 'password',
+										                        message: 'The username and password cannot be the same as each other'
+										                    }
+										                }
+										            },
+										            surname: {
+										                message: 'The Name is not valid',
+										                validators: {
+										                    notEmpty: {
+										                        message: 'The Name is required and cannot be empty'
+										                    },
+										                    regexp: {
+										                        regexp: /^[a-zA-Z0-9_\.]+$/,
+										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                    },
+										                    different: {
+										                        field: 'password',
+										                        message: 'The username and password cannot be the same as each other'
+										                    }
+										                }
+										            },
+										           date: {
+										                validators: {
+										                    notEmpty: {
+										                        message: 'The date is required and cannot be empty'
+										                    },
+										                 
+										                }
+										            },
+										            photo: {
+										                validators: {
+										                    file: {
+										                        extension: 'png,jpg',
+										                        maxSize: 5*1024*1024,
+										                        message: 'Please choose a image file with a size less than 5M.'
+										                    }
+										                }
+										            },
+													password : {
+														validators : {
+															notEmpty : {
+																message : 'The password is required and cannot be empty'
+															},
+															stringLength : {
+																min : 6,
+																max : 20,
+																message : 'The username must be more than 6 and less than 30 characters long'
+															}
+														}
+													}
+												}
+											});
+						});
+	</script>
 	<jsp:include page="footer.jsp" />
-	<jsp:include page="script.jsp" />
+
 </body>
 </html>

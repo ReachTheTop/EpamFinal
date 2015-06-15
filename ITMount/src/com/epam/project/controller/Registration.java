@@ -17,7 +17,11 @@ import javax.servlet.http.Part;
 
 
 
+
+
+import com.epam.project.db.model.Contact;
 import com.epam.project.db.model.User;
+import com.epam.project.db.service.ContactService;
 import com.epam.project.db.service.UserService;
 import com.epam.project.mailer.Mailer;
 import com.epam.project.md5.SaltedMD5;
@@ -149,7 +153,9 @@ public class Registration extends HttpServlet {
 			}
 			
 			UserService.addNewUser(user);
-			
+			Contact contact = new Contact();
+			contact.setUser_id(UserService.getUserWhereEmail(user.getEmail()).getId());
+			ContactService.addContact(contact);
 			
 			request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
 					response);

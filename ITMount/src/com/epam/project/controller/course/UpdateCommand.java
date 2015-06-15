@@ -11,6 +11,7 @@ import javax.servlet.http.Part;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Course;
 import com.epam.project.db.service.CourseService;
+import com.epam.project.util.file.DeleteFile;
 import com.epam.project.util.file.UploadFile;
 
 @MultipartConfig
@@ -27,12 +28,14 @@ public class UpdateCommand implements Action {
 		course.setName(request.getParameter("name"));
 	
 		Part file = request.getPart("icon");
+		
 		UploadFile m = new UploadFile();
 		if (file.getSize()>0) {
 			
 			try{
 				if(m.getExtension(file).contains("image")){
 					String fileName = m.uploadFile(file, request.getServletContext(),null);
+					DeleteFile.deleteFile(course.getIcon(), request.getServletContext());
 					course.setIcon(fileName);
 				}
 			}catch(Exception e){
