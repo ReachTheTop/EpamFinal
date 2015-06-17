@@ -17,7 +17,11 @@ import javax.servlet.http.Part;
 
 
 
+
+
+import com.epam.project.db.model.Contact;
 import com.epam.project.db.model.User;
+import com.epam.project.db.service.ContactService;
 import com.epam.project.db.service.UserService;
 import com.epam.project.mailer.Mailer;
 import com.epam.project.md5.SaltedMD5;
@@ -68,7 +72,8 @@ public class Registration extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String date = request.getParameter("date");
-		
+		String skype = request.getParameter("skype");
+		String tel = request.getParameter("tel");
 		
 	
 		if(UserService.getUserWhereEmail(email)!=null){
@@ -78,6 +83,8 @@ public class Registration extends HttpServlet {
 				session.setAttribute("surname", surname);
 				session.setAttribute("email", email);
 				session.setAttribute("date", date);
+				session.setAttribute("skype", skype);
+				session.setAttribute("tel", tel);
 			 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 			 return;
 		}
@@ -88,6 +95,8 @@ public class Registration extends HttpServlet {
 			session.setAttribute("surname", surname);
 			session.setAttribute("email", email);
 			session.setAttribute("date", date);
+			session.setAttribute("skype", skype);
+			session.setAttribute("tel", tel);
 			session.setAttribute("errorRegistration", " Incorect data!");
 			 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 			 return;
@@ -98,6 +107,7 @@ public class Registration extends HttpServlet {
 			user.setSurname(surname);
 			user.setEmail(email);
 			user.setRole_id(1);
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
 			try {
 				Date d = sdf.parse(request.getParameter("date"));
@@ -137,6 +147,8 @@ public class Registration extends HttpServlet {
 					session.setAttribute("surname", surname);
 					session.setAttribute("email", email);
 					session.setAttribute("date", date);
+					session.setAttribute("skype", skype);
+					session.setAttribute("tel", tel);
 					session.setAttribute("errorRegistration", "Error format photo");
 					 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 					 return;
@@ -149,7 +161,11 @@ public class Registration extends HttpServlet {
 			}
 			
 			UserService.addNewUser(user);
-			
+			Contact contact = new Contact();
+			contact.setPhone(tel);
+			contact.setSkype(skype);
+			contact.setUser_id(UserService.getUserWhereEmail(user.getEmail()).getId());
+			ContactService.addContact(contact);
 			
 			request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
 					response);

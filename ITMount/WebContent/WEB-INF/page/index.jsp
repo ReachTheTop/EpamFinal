@@ -55,7 +55,7 @@
 	</div>
 	<!-- End Homepage Slider -->
 
-	<jsp:include page="footer.jsp" />
-	<jsp:include page="script.jsp" />
+<jsp:include page="footer.jsp"/>
+
 </body>
 </html>

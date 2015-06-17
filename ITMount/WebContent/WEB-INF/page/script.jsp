@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Javascripts -->
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -17,17 +18,3 @@
 
 
 
-<script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
-<!-- block for autokomplite -->
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
-<!-- block for autokomplite -->
-<link rel="stylesheet" type="text/css"
-	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main.css">
-<!-- end block for autokomplite -->

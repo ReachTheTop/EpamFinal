@@ -41,10 +41,18 @@ public class ConfirmEmail extends HttpServlet {
 				user.setIs_confirmed(true);
 				UserService.updateUser(user);
 				session.setAttribute("infoconfirm", "1");
+				request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
+						response);
+			}else{
+				response.sendError(404);
+				return;
 			}
+		}else{
+			response.sendError(404);
+			return;
 		}
-		request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,
-				response);
+		
+		
 	}
 
 

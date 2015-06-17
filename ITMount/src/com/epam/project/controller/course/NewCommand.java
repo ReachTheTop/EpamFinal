@@ -13,6 +13,7 @@ public class NewCommand implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.getRequestDispatcher("/WEB-INF/courses/new.jsp").forward(
 				request, response);
 

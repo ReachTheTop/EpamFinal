@@ -155,6 +155,6 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
-	<jsp:include page="../page/script.jsp" />
+	
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
 <title>Create new course</title>
 <jsp:include page="../page/head.jsp" />
 </head>
@@ -71,7 +71,7 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
-	<jsp:include page="../page/script.jsp" />
+	
 
 </body>
 </html>

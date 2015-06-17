@@ -1,27 +1,28 @@
-package com.epam.project.controller;
+package com.epam.project.controller.homework;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.epam.project.command.Menu;
 
 /**
- * Servlet implementation class Exit
+ * Servlet implementation class Homework
  */
-
-public class Exit extends HttpServlet {
+@WebServlet("/Homework")
+@MultipartConfig
+public class HomeworkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Exit() {
-        super();
-        // TODO Auto-generated constructor stub
+   
+	private Menu menu;
+    public HomeworkServlet() {
+      menu = new Menu(new UpdateHomework(), new ShowHomework(), new DeleteHomework(), new UploadHomework(), new SetRatingHomework());
     }
 
 	/**
@@ -29,10 +30,7 @@ public class Exit extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.invalidate();
-		response.sendRedirect("/ITMount/home");
-		return;
+		menu.execute(request, response);
 	}
 
 	/**
@@ -40,6 +38,7 @@ public class Exit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		menu.execute(request, response);
 	}
 
 }

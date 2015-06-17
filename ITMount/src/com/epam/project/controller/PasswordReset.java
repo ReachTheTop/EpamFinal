@@ -1,6 +1,8 @@
 package com.epam.project.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -52,14 +54,13 @@ public class PasswordReset extends HttpServlet {
 		sesion.removeAttribute("modalreset");
 		User user = UserService.getUserWhereEmail(email);
 		if(user!=null){
-			Integer key = new Random().nextInt(Integer.MAX_VALUE);
-			String password = key.toString();
-			user.setPassword_hash(SaltedMD5.getPassword(password, user.getEmail()));
-			
 			try {
-				Mailer.sendEmail(user.getEmail(), "Reset password", "New password: " +password);
-				UserService.addNewUser(user);
-				sesion.setAttribute("inforeset", "На вашу скриньку відправлено новий пароль");
+				
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(new Date());
+				cal.add(Calendar.MINUTE, 30);
+				Mailer.sendEmail(user.getEmail(), "Reset password", "<a href=\"http://localhost:8080/ITMount/NewPassword?user="+email+"&key="+user.getKey()+"&code="+cal.getTime().getTime()+"\">New pass</a>");
+				sesion.setAttribute("inforeset", "На вашу скриньку відправлено дані для відновлення пароля");
 				sesion.setAttribute("modalreset", "1");
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
