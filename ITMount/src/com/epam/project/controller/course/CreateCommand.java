@@ -17,7 +17,8 @@ public class CreateCommand implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Course course = new Course();
 		course.setName(request.getParameter("name"));
 		course.setDescription(request.getParameter("description"));
@@ -46,9 +47,7 @@ public class CreateCommand implements Action {
 
 		if (course.isValid()) {
 			course.setId(CourseService.addCourse(course));
-			request.getRequestDispatcher(
-					"/CourseServlet?action=show&course_id=" + course.getId())
-					.forward(request, response);
+			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		} else {
 			response.sendRedirect(request.getHeader("Referer"));

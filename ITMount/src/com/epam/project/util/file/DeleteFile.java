@@ -10,8 +10,9 @@ import javax.servlet.ServletContext;
 public class DeleteFile {
 
 	public static void deleteFile(String pathFile, ServletContext servletContext) throws IOException{
-		String filePath = servletContext.getRealPath("") + File.separator + pathFile;
+		String filePath = servletContext.getRealPath("")+"upload" + File.separator + pathFile;
         File file = new File(filePath);
-        file.delete();
+       System.out.println(filePath);
+        System.out.println( file.delete());
 	}
 }

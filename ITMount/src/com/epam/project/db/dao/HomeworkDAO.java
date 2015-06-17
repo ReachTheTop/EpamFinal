@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.model.HomeWork;
+import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.HomeworkTransformer;
 
 
@@ -17,6 +18,8 @@ public class HomeworkDAO {
 	private static final String UPDATE = "UPDATE homework SET data=?, task_id=?, user_id=?, rating=? WHERE id=?";
 	private static final String SELECTALL = "SELECT * FROM homework";
 	private static final String SELECT = "SELECT * FROM homework WHERE id=?";
+	private static final String SELECTALL_WHERE_USER_ID = "SELECT * FROM homework WHERE user_id=?";
+	private static final String SELECT_WHERE_USERID_TASK_ID = "SELECT * FROM homework WHERE user_id=?,task_id=?";
 	
 	public static void addHomework(HomeWork homework, Connection connection){
 		try{
@@ -90,5 +93,34 @@ public class HomeworkDAO {
 		return homework;
 	}
 	
-	
+	public static List<HomeWork> getAllHomeworkWhereUserID(Integer id,Connection connection){
+		ResultSet rs = null;
+		List<HomeWork> list = null;
+		try {
+		
+			PreparedStatement st = connection.prepareStatement(SELECTALL_WHERE_USER_ID);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			list = HomeworkTransformer.getAllHomeWork(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public static HomeWork getHomeworkWhereUserTask(Integer user_id, Integer task_id,Connection connection){
+		ResultSet rs = null;
+		HomeWork homework =null;
+		try {
+			
+			PreparedStatement st = connection.prepareStatement(SELECT_WHERE_USERID_TASK_ID);
+			st.setInt(1, user_id);
+			st.setInt(2, task_id);
+			rs = st.executeQuery();
+			homework= HomeworkTransformer.getHomeWork(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return homework;
+	}
 }

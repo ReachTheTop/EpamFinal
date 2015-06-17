@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FileDownload {
 
-	 private static final int BUFSIZE = 4096;
+	 private static final int BUFSIZE = 32096;
 	 private  String filePath;
 	public void downloadFile(String pathFile, ServletContext servletContext, HttpServletResponse response) throws IOException{
 		filePath = servletContext.getRealPath("") + File.separator+"upload"+File.separator

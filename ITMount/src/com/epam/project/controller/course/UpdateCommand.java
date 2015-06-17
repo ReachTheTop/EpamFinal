@@ -20,7 +20,8 @@ public class UpdateCommand implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Course course = new Course();
 		course.setId(Integer.parseInt(request.getParameter("course_id")));
 		course.setDescription(request.getParameter("description"));

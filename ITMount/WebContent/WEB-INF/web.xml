@@ -36,8 +36,6 @@
     <servlet-name>reset</servlet-name>
     <url-pattern>/reset</url-pattern>
   </servlet-mapping>
- 
-  
   <servlet>
     <servlet-name>lenguage</servlet-name>
     <servlet-class>com.epam.project.controller.Language</servlet-class>
@@ -86,4 +84,27 @@
     <filter-name>languageFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+   <filter>
+    <filter-name>loginuserFilter</filter-name>
+    <filter-class>com.epam.project.filter.LoginUserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginuserFilter</filter-name>
+    <url-pattern>/login</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>loginuserFilter</filter-name>
+    <url-pattern>/registration</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>loginuserFilter</filter-name>
+    <url-pattern>/reset</url-pattern>
+  </filter-mapping>
+ <filter-mapping>
+    <filter-name>loginuserFilter</filter-name>
+    <url-pattern>/confirm</url-pattern>
+  </filter-mapping>
+
+  
 </web-app>

@@ -68,5 +68,27 @@ public class HomeWorkService {
 		}
 		return homeWork;
 	}
+	public static List<HomeWork> getAllHomeworkWhereUserID(Integer id){
+		Connection connection =  DBConnection.getConnection();
+		List<HomeWork> list = HomeworkDAO.getAllHomeworkWhereUserID(id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public static HomeWork getHomeworkWhereUserTask(Integer user_id, Integer task_id){
+		Connection connection =  DBConnection.getConnection();
+		HomeWork homeWork = HomeworkDAO.getHomeworkWhereUserTask(user_id, task_id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return homeWork;
+	}
 	
 }

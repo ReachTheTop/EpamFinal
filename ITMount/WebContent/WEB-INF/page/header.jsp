@@ -50,7 +50,10 @@
 							<a href="<c:url value="/home" />">Home</a>
 						</li>
 						<li>
-							<a href="features.html">Features</a>
+							<a href="<c:url value="/GroupServlet" />">Goup</a>
+						</li>
+							<li>
+							<a href="<c:url value="/CourseServlet" />">Course</a>
 						</li>
 						<li class="has-submenu">
 							<a href="#">Pages +</a>

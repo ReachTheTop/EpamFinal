@@ -81,7 +81,7 @@
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
 									<b>Photo</b></label> <input class="form-control"
-									id="register-username" type="file" placeholder="" name="photo"  value="${ photo}" pattern="^[^<>/{}]+$">
+									id="register-username" type="file" placeholder="" name="photo"  value="${ photo}">
 							</div>
 
 							<div class="form-group">

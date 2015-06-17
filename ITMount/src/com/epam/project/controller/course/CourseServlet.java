@@ -25,7 +25,7 @@ public class CourseServlet extends HttpServlet {
 		super();
 		menu = new Menu(new IndexCommand(), new ShowCommand(),
 				new NewCommand(), new CreateCommand(), new EditCommand(),
-				new UpdateCommand(), new CourseRegistration(), new TrigerCourse());
+				new UpdateCommand(), new CourseRegistration(), new TrigerCourse(), new ReadMoreCourse());
 	}
 
 	/**
@@ -34,6 +34,8 @@ public class CourseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
@@ -43,6 +45,8 @@ public class CourseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 

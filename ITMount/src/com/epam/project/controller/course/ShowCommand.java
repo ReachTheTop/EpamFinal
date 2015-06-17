@@ -15,6 +15,8 @@ public class ShowCommand implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Integer course_id = null;
 		try {
 			if (request.getParameter("course_id") != null) {
