@@ -74,7 +74,7 @@ public class Login extends HttpServlet {
 					
 				}else{
 					session.setAttribute("user", user);	
-					response.sendRedirect("/ITMount/home");
+					response.sendRedirect("/ITMount/UserServlet");
 					return;
 				}
 				

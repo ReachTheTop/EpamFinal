@@ -57,6 +57,8 @@ public class User extends Validator implements Serializable {
 	@Column(value = "email")
 	@Unique
 	private String email;
+	
+	private String role;
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -203,6 +205,13 @@ public class User extends Validator implements Serializable {
 				+ ", email=" + email + "]";
 	}
 
+	public void setRole(String role){
+		this.role = role;
+	}
+	
+	public String getRole(){
+		return role;
+	}
 	
 
 }

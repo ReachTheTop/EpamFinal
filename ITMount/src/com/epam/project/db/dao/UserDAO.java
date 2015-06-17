@@ -17,7 +17,6 @@ public class UserDAO {
 			+ "role_id =?, password_hash=?, curriculum_vitae=?, description=?, is_active=?, is_confirmed=?, key1=?,"
 			+ " image=?, email=? WHERE id=?";
 
-
 	public static final String SQL_ADD_NEW_USER = "Insert into user (name,midle_name,surname,birthday,role_id,password_hash,"
 			+ "curriculum_vitae,description, key1,image,email)"
 			+ "value(?,?,?,?,?,?,?,?,?,?,?)";
@@ -25,7 +24,7 @@ public class UserDAO {
 	public static final String SQL_GET_ALL_USERS = "SELECT * FROM user";
 	public static final String SQL_GET_USER = "SELECT * FROM user WHERE id=?";
 	public static final String SQL_GET_USER_EMAIL = "SELECT * FROM user WHERE email=?";
-
+	public static final String GET_ROLE = "SELECT role FROM role WHERE id = ?;";
 	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";
 
 	public static List<User> getByRole(String role, Connection connection) {
@@ -156,6 +155,37 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static ResultSet getUsersByToken(Connection connection, String token) {
+		ResultSet resultSet = null;
+		PreparedStatement ps = null;
+		try {
+			ps = connection
+					.prepareStatement("SELECT * FROM user WHERE email REGEXP '.*"
+							+ token + ".*' LIMIT 10;");
+			resultSet = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultSet;
+	}
+
+	public static String getRole(Connection connection, Integer role_id) {
+		String role = null;
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(GET_ROLE);
+			ps.setInt(1, role_id);
+			ResultSet res = ps.executeQuery();
+			if (res.next()) {
+				role = res.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return role;
 	}
 
 }

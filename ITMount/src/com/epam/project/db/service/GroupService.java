@@ -5,9 +5,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.GroupCorteg;
 import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.model.Group;
 import com.epam.project.db.model.User;
+import com.epam.project.db.transformer.GroupTransformer;
 
 public class GroupService {
 
@@ -36,12 +38,12 @@ public class GroupService {
 		return group;
 	}
 
-	public static List<Group> getAll() {
-		List<Group> groups = null;
+	public static GroupCorteg getAll(String token, Integer page) {
+		GroupCorteg groups = null;
 		Connection connection = DBConnection.getConnection();
-		groups = GroupDAO.getAll(connection);
+		groups = GroupDAO.getAll(connection, token, page);
 
-		for (Group group : groups) {
+		for (Group group : groups.getGroups()) {
 			group.setTeacher(UserService.getUser(group.getTeacher_id()));
 			group.setCourse(CourseService.getCourse(group.getCourse_id()));
 
@@ -97,5 +99,18 @@ public class GroupService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static List<Group> getByTeacher(Integer id){
+		Connection connection = DBConnection.getConnection();
+		List<Group> groups = null;
+		groups = GroupTransformer.getAllGroups(GroupDAO.getByTeacher(connection, id));
+		for (Group group : groups) {
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+
+		}
+		closeConnection(connection);
+		return groups;
 	}
 }

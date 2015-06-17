@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.dao.GroupUserDAO;
 import com.epam.project.db.model.GroupUser;
 import com.epam.project.db.model.User;
@@ -16,12 +17,7 @@ public class GroupUserService {
 		Connection connection = DBConnection.getConnection();
 		GroupUser groupUser = GroupUserDAO.getGroupUserById(id, connection);
 
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 		return groupUser;
 	}
 
@@ -29,55 +25,36 @@ public class GroupUserService {
 
 		Connection connection = DBConnection.getConnection();
 		List<User> list = GroupUserDAO.getAllGroupUser(connection, group_id);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 		return list;
 
 	}
-	
+
 	public static List<User> getAllUserByGroupId(Integer groupeId) {
 
 		Connection connection = DBConnection.getConnection();
-		List<User> list = GroupUserDAO.getAllUserByGroupId(connection, groupeId);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<User> list = GroupUserDAO
+				.getAllUserByGroupId(connection, groupeId);
+		closeConnection(connection);
 		return list;
 
 	}
-	
+
 	public static User getTeacherByGroupId(Integer groupeId) {
 
 		Connection connection = DBConnection.getConnection();
 		User user = GroupUserDAO.getTeacherByGroupId(connection, groupeId);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		closeConnection(connection);
 		return user;
 
 	}
-	
 
 	public static void newGroupUser(GroupUser groupUser) {
 
 		Connection connection = DBConnection.getConnection();
 		GroupUserDAO.addNewGroupeUser(groupUser, connection);
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		closeConnection(connection);
 
 	}
 
@@ -87,9 +64,9 @@ public class GroupUserService {
 		closeConnection(connection);
 	}
 
-	public static void deleteUser(Integer user_id, Integer group_id) {
+	public static void deleteUsersFromGroup(List<String> users, Integer group_id) {
 		Connection connection = DBConnection.getConnection();
-		GroupUserDAO.deleteUser(connection, user_id, group_id);
+		GroupUserDAO.deleteUsersFromGroup(connection, group_id, users);
 		closeConnection(connection);
 	}
 
@@ -100,6 +77,18 @@ public class GroupUserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void addUsersToGroup(Integer group_id, List<String> users) {
+		Connection connection = DBConnection.getConnection();
+		GroupUserDAO.addUsersToGroup(connection, group_id, users);
+		closeConnection(connection);
+	}
+
+	public static void leaveUsersInGroup(Integer group_id, List<String> users) {
+		Connection connection = DBConnection.getConnection();
+		GroupUserDAO.leaveUsersInGroup(connection, group_id, users);
+		closeConnection(connection);
 	}
 
 }

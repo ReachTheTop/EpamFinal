@@ -20,17 +20,16 @@ public class GroupDAO {
 			+ "VALUE (?,(SELECT  id from group1 where course_id = ? AND confirmed = 0));";
 	private static final String CONFIRM_GROUP = "UPDATE group1 SET confirmed = 1 WHERE id = ?;";
 	private static final String GET_GROUP_BY_ID = "SELECT * FROM group1 WHERE id=?";
-	private static final String GET_ALL_GROUP = "SELECT* FROM group1 WHERE is_active =1;";
+	private static final String GET_ALL_GROUP = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 WHERE is_active =1 AND name REGEXP ? LIMIT ?,?;";
+	private static final String CALC_ROWS = "SELECT found_rows();";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ?, date_exam=? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 
-	
 	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.id in"
 			+ "(select group_id from group_user where group_user.id in"
 			+ " (select group_user.id from group_user where user_id = ?))";
-	
-	
+
 	private Connection con;
 	private PreparedStatement statement;
 
@@ -78,30 +77,52 @@ public class GroupDAO {
 
 	}
 
-	public static List<Group> getAll(Connection connection) {
+	public static GroupCorteg getAll(Connection connection, String token,
+			Integer page) {
 
+		String request = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 AS g "
+				+ "LEFT JOIN course AS c ON c.id = g.course_id "
+				+ "LEFT JOIN user AS u ON u.id = g.teacher_id "
+				+ "WHERE g.is_active = 1 AND ( g.name " + "REGEXP ? OR c.name "
+				+ "REGEXP ? OR u.surname " + "REGEXP ? ) LIMIT ?,?;";
+		String pattern = String.format(".*%s.*", token);
 		ResultSet rs = null;
-		List<Group> list = null;
+		GroupCorteg groups = new GroupCorteg();
+		
 		try {
-
-			PreparedStatement st = connection.prepareStatement(GET_ALL_GROUP);
+			connection.setAutoCommit(false);
+			PreparedStatement st = connection.prepareStatement(request);
+			st.setString(1, pattern);
+			st.setString(2, pattern);
+			st.setString(3, pattern);
+			st.setInt(4, page*10);
+			st.setInt(5, 10);
 			rs = st.executeQuery();
-			list = GroupTransformer.getAllGroups(rs);
+			 groups.setGroups( GroupTransformer.getAllGroups(rs));
+			
+			st = connection.prepareStatement(CALC_ROWS);
+			rs = st.executeQuery();
+			rs.next();
+			
+			groups.setAmount(rs.getInt(1));
+			connection.commit();
+			connection.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return list;
+		return groups;
 	}
-	
-	
-	public static List<Group> getGroupsUserStudy(Connection connection , Integer id) {
+
+	public static List<Group> getGroupsUserStudy(Connection connection,
+			Integer id) {
 
 		ResultSet rs = null;
 		List<Group> list = null;
 		try {
 
-			PreparedStatement st = connection.prepareStatement(GET_GROUPS_USER_STUDY);
+			PreparedStatement st = connection
+					.prepareStatement(GET_GROUPS_USER_STUDY);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			list = GroupTransformer.getAllGroups(rs);
@@ -194,4 +215,18 @@ public class GroupDAO {
 
 	}
 
+	public static ResultSet getByTeacher(Connection connection, Integer id) {
+		PreparedStatement ps = null;
+		ResultSet resultSet = null;
+		try {
+			ps = connection
+					.prepareStatement("SELECT * FROM group1 WHERE teacher_id = ?;");
+			ps.setInt(1, id);
+			resultSet = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return resultSet;
+	}
 }

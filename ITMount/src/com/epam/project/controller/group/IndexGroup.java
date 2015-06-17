@@ -17,7 +17,7 @@ public class IndexGroup implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Group> groups = GroupService.getAll();
+		List<Group> groups = GroupService.getAll("",0).getGroups();
 		request.setAttribute("groups", groups);
 		request.getRequestDispatcher("/WEB-INF/group/index.jsp").forward(
 				request, response);
