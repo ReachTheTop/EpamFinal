@@ -16,9 +16,6 @@
        
          <script type="text/javascript" src="resources/js/jquery-1.10.2.js"></script>  
   <script src="resources/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="resources/css/bootstrapValidator.min.css"/>
-  <script type="text/javascript" src="resources/js/bootstrapValidator.min.js"> </script>
-
 
         <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
         <script src="resources/js/jquery.fitvids.js"></script>
@@ -43,4 +40,9 @@
 	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
 <link rel="stylesheet"
 	href="assets/css/main.css">
+	
+	  <link rel="stylesheet" href="resources/css/bootstrapValidator.min.css"/>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrapValidator.min.js"> </script>
+
+	
   
