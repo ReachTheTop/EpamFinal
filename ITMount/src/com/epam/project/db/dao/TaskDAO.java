@@ -22,6 +22,7 @@ public class TaskDAO {
 	public static final String SQL_ADD_NEW_TASK = "Insert into task (name,description,deadline,available,file,is_active,group_id)  value(?,?,?,?,?,?,?)";
 
 	public static final String SQL_GET_ALL_TASKS = "SELECT * FROM task";
+	public static final String SQL_GET_ALL_TASKS_BY_GROUP_ID = "SELECT * FROM task where group_id =?";
 	public static final String SQL_GET_TASK = "SELECT * FROM task WHERE id=?";
 
 	public static Task getTask(Integer id, Connection connection) {
@@ -49,6 +50,24 @@ public class TaskDAO {
 
 			PreparedStatement st = connection
 					.prepareStatement(SQL_GET_ALL_TASKS);
+			rs = st.executeQuery();
+			list = TaskTransformer.getAllTasks(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	public static List<Task> getAllTasksByGroupId(Connection connection , Integer id ) {
+
+		ResultSet rs = null;
+		List<Task> list = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(SQL_GET_ALL_TASKS_BY_GROUP_ID);
+			st.setInt(1, id);
 			rs = st.executeQuery();
 			list = TaskTransformer.getAllTasks(rs);
 		} catch (SQLException e) {
