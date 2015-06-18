@@ -18,10 +18,10 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
 <!-- block for autokomplite -->
-<link rel="stylesheet" type="text/css"
-	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main.css">
+<!-- <link rel="stylesheet" type="text/css"
+	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" /> -->
+<%-- <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/main.css"> --%>
 <!-- end block for autokomplite -->
 
 <title>${ group.name }</title>
