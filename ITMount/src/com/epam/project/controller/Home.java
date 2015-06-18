@@ -1,19 +1,14 @@
 package com.epam.project.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.project.db.model.Course;
-import com.epam.project.db.model.Group;
-import com.epam.project.db.model.User;
-import com.epam.project.db.service.CourseService;
-import com.epam.project.db.service.GroupService;
+
 
 /**
  * Servlet implementation class Home
