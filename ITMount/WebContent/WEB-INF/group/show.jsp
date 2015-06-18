@@ -36,16 +36,31 @@
 		<c:out value="${group.name }" />
 	</h3>
 
-	<div class="window">
+
+	<div class="row-fluid">
+
+
+
 		<form action="GroupServlet?group_id=${group.id }" method="post">
-			<input id="group" hidden="true" value="${group.id }"> 
-			<input id="myAutocomplete" type="text" name="users" />
-				<button type="submit" name="action" value="remove">Remove Users</button>
-				<button type="submit" name="action"  value="add">Add Users</button>
-				<button type="submit" name="action"  value="leave">Leave Users</button>
-				
+			<input id="group" hidden="true" value="${group.id }">
+			<div class="row-fluid">
+				<input id="myAutocomplete" type="text" name="users" />
+			</div>
+			<button type="submit" name="action" value="remove">Remove
+				Users</button>
+			<button type="submit" name="action" value="add">Add Users</button>
+			<button type="submit" name="action" value="leave">Leave
+				Users</button>
 		</form>
 	</div>
+
+
+
+
+
+
+
+
 
 	<div class="container">
 		<h2>Group Users</h2>
@@ -63,7 +78,8 @@
 						<td>${user.name }${user.surname}</td>
 						<td>${user.email }</td>
 						<td><a
-						href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show homework</a></td>
+							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
+								homework</a></td>
 
 					</tr>
 				</c:forEach>
