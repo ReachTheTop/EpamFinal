@@ -95,8 +95,6 @@
 		</div>
 	</div>
 
-
-
 	<script>
 		var form = $('#form1');
 		form.submit(function() {
@@ -121,10 +119,11 @@
 			return false;
 		});
 	</script>
-	
-		<script>
+
+
+	<script>
 		$(document).ready(function() {
-			$(".model").on("hidden.bs.modal", function() {
+			$("#myModal").on("hidden.bs.modal", function() {
 				document.getElementById("form1").reset();
 				$("#incorectData").hide();
 			});
@@ -191,55 +190,55 @@
 		</div>
 	</div>
 
-<!-- 	<div class="section"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-sm-5"> -->
-<!-- 					<div class="basic-login"> -->
-<%-- 						<form action="TaskServlet?action=createTask&id_group=${id_group }" --%>
-<!-- 							method="post" enctype="multipart/form-data" role="form" -->
-<!-- 							role="form"> -->
+	<!-- 	<div class="section"> -->
+	<!-- 		<div class="container"> -->
+	<!-- 			<div class="row"> -->
+	<!-- 				<div class="col-sm-5"> -->
+	<!-- 					<div class="basic-login"> -->
+	<%-- 						<form action="TaskServlet?action=createTask&id_group=${id_group }" --%>
+	<!-- 							method="post" enctype="multipart/form-data" role="form" -->
+	<!-- 							role="form"> -->
 
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
-<!-- 										Name</b></label> <input name="task_name" class="form-control" -->
-<!-- 									id="login-username" type="text" placeholder=""> -->
-<!-- 							</div> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
-<!-- 										Description</b></label> -->
-<!-- 								<p> -->
-<!-- 									<textarea name="task_description" rows="3" cols="55" -->
-<!-- 										name="text"></textarea> -->
-<!-- 								</p> -->
-<!-- 							</div> -->
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
+	<!-- 										Name</b></label> <input name="task_name" class="form-control" -->
+	<!-- 									id="login-username" type="text" placeholder=""> -->
+	<!-- 							</div> -->
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
+	<!-- 										Description</b></label> -->
+	<!-- 								<p> -->
+	<!-- 									<textarea name="task_description" rows="3" cols="55" -->
+	<!-- 										name="text"></textarea> -->
+	<!-- 								</p> -->
+	<!-- 							</div> -->
 
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label> -->
-<!-- 								<input name="task_deadline" class="form-control" -->
-<!-- 									id="login-username" type="datetime-local"> -->
-<!-- 							</div> -->
-
-
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="login-password"><i class="icon-lock"></i> <b>File</b></label> -->
-<!-- 								<input name="task_file" class="form-control" id="file" -->
-<!-- 									type="file" placeholder=""> -->
-<!-- 							</div> -->
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label> -->
+	<!-- 								<input name="task_deadline" class="form-control" -->
+	<!-- 									id="login-username" type="datetime-local"> -->
+	<!-- 							</div> -->
 
 
-<!-- 							<div class="form-group"> -->
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="login-password"><i class="icon-lock"></i> <b>File</b></label> -->
+	<!-- 								<input name="task_file" class="form-control" id="file" -->
+	<!-- 									type="file" placeholder=""> -->
+	<!-- 							</div> -->
 
-<!-- 								<button type="submit" class="btn pull-right">Add task</button> -->
-<!-- 								<div class="clearfix"></div> -->
-<!-- 							</div> -->
-<!-- 						</form> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
 
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	<!-- 							<div class="form-group"> -->
+
+	<!-- 								<button type="submit" class="btn pull-right">Add task</button> -->
+	<!-- 								<div class="clearfix"></div> -->
+	<!-- 							</div> -->
+	<!-- 						</form> -->
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
 
 
 
