@@ -27,20 +27,18 @@ public class User extends Validator implements Serializable {
 
 	@Column(value = "birthday")
 	private Date birtday;
-	
+
 	@Column(value = "role_id")
 	private Integer role_id;
 
 	@Column(value = "password_hash")
 	private String password_hash;
 
-
 	@Column(value = "curriculum_vitae")
 	private String curriculum_vitae;
 
 	@Column(value = "description")
 	private String description;
-
 
 	@Column(value = "is_active")
 	private Boolean is_active;
@@ -57,7 +55,7 @@ public class User extends Validator implements Serializable {
 	@Column(value = "email")
 	@Unique
 	private String email;
-	
+
 	private String role;
 
 	public User() {
@@ -175,23 +173,22 @@ public class User extends Validator implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-	    // TODO Auto-generated method stub
-	    if(obj instanceof User)
-	    {
-	        User temp = (User) obj;
-	        if(this.id == temp.id)
-	            return true;
-	    }
-	    return false;
+		// TODO Auto-generated method stub
+		if (obj instanceof User) {
+			User temp = (User) obj;
+			if (this.id == temp.id)
+				return true;
+		}
+		return false;
 
 	}
-	
+
 	@Override
 	public int hashCode() {
-	   	    return (this.id.hashCode());        
+		return (this.id.hashCode());
 	}
 
 	@Override
@@ -205,13 +202,22 @@ public class User extends Validator implements Serializable {
 				+ ", email=" + email + "]";
 	}
 
-	public void setRole(String role){
+	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	public String getRole(){
+
+	public String getRole() {
 		return role;
 	}
-	
+
+	private Contact contacts;
+
+	public Contact getContacts() {
+		return contacts;
+	}
+
+	public void setContact(Contact contacts) {
+		this.contacts = contacts;
+	}
 
 }

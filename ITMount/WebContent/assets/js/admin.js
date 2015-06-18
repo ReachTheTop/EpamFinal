@@ -45,7 +45,7 @@ $(function() {
 		var $courses = response.courses;
 
 		$.each($courses, function(index, item) {
-			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item['id']+"'>");;
+			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item['id']+"'>");
 			$body = $("tbody#courses-body"); 
 			$tr = $("<tr class='course-row'>");
 			$td1 = $("<td id='course-name'>");
@@ -144,9 +144,12 @@ $(function() {
 		var $td1;
 		var $td2;
 		var $td3;
-		var $td4;
+		
 		var $td5;
-		var $td6;
+		
+		var $courseLink;
+		var $groupLink;
+		var $teacherLink;
 		
 		
 		
@@ -160,30 +163,51 @@ $(function() {
 		var $groups = response.groups;
 
 		$.each($groups, function(index, item) {
-
+			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item.course['id']+"'>");
+			$groupLink  = $("<a href='/ITMount/GroupServlet?action=show&group_id="+item['id']+"'>");
+			
 			$body = $("tbody#groups-body"); 
 			$tr = $("<tr class='group-row'>");
 			$td1 = $("<td id='course-name'>");
 			$td2 = $("<td id='group-name'>");
-			$td3 = $("<td id='teacher-first-name'>");
-			$td4 = $("<td id='teacher-last-name'>");
+			$td3 = $("<td id='teacher'>");
 			$td5 = $("<td id='is-confirmed'>");
-			$td6 = $("<td id='is-active'>");
 			
+			
+			
+			$courseLink.text(item.course['name']);
+			
+			$td1.append($courseLink);
 			$tr.append($td1);
 			$tr.append($td2);
 			$tr.append($td3);
-			$tr.append($td4);
-			$tr.append($td5);
-			$tr.append($td6);
 			
-			$td1.text(item.course['name']);
-			$td2.text(item['name']);
-			$td3.text(item.teacher['name']);
-			$td4.text(item.teacher['surname']);
-			$td5.text(item['isConfirmed']);
-			$td6.text(item['is_active']);
+			$tr.append($td5);
+			
+			
+			
+			$groupLink.text(item['name']);
+			$td2.append($groupLink);
+			
+			if(item.hasOwnProperty("teacher")){
+				$teacherLink  = $("<a href='/ITMount/UserServlet?action=show&user_id="+item.teacher['id']+"'>");
+				$teacherLink.text(item.teacher['name']+" "+ item.teacher['surname']);
+				
+				$td3.append($teacherLink);
 
+			}
+			
+			
+			if(item['isConfirmed'] === true){
+				$td5.text(item['isConfirmed']);
+			}else{
+				var $confirmation = $("<a id='confirmation' class='btn'>");
+				$confirmation.attr('name', item['id']);
+				$confirmation.text('Confirm');
+				$td5.append($confirmation);
+			}
+			
+			
 			
 			$body.append($tr);
 			
@@ -191,6 +215,22 @@ $(function() {
 		
 
 	}
+	
+	
+	
+	$('body').on(
+			'click',
+			'a#confirmation',
+			function() {
+				var object = $(this);
+				object = object.parent();
+				object.empty();
+				object.text('true');
+				  $.get('AdminServlet?action=confirm&group_id=' +
+				  $(this).attr('name'), function(response) {
+				  });
+			});
+
 	
 	
 	$('#group-page-selection').on("page", function(event, page) {
@@ -227,5 +267,148 @@ $(function() {
 	$("input#search-groups").focus(function() {
 		$(this).val("");
 	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var $userPages;
+	function handleUsers(response) {
+		$("tbody#users-body").empty();
+		
+		var $body;
+		var $tr;
+		var $td1;
+		var $td2;
+		var $td3;
+		var $td4;
+		var $td5;
+		var $td6;
+		var $td7;
+		var $trigerUser;
+		
+		$userPages = response.amount;
+		
+		$('#user-page-selection').bootpag({
+			total : Math.ceil($userPages/10)
+		})
+		
+		var $users = response.users;
+
+		$.each($users, function(index, item) {
+			$body = $("tbody#users-body"); 
+			$tr = $("<tr class='user-row'>");
+			$td1 = $("<td id='user-name'>");
+			$td2 = $("<td id='user-surname'>");
+			$td3 = $("<td id='user-role'>");
+			$td4 = $("<td id='user-email'>");
+			$td5 = $("<td id='user-phone'>");
+			$td6 = $("<td id='user-skype'>");
+			$td7 = $("<td id='user-active'>");
+			$trigerUser = $("<a class='btn btn-danger' id='triger-user'>");
+			$trigerUser.attr("name", item['id']);
+			
+			$tr.append($td1.text(item['name']));
+			$tr.append($td2.text(item['surname']));
+			$tr.append($td3.text(item['role']));
+			$tr.append($td4.text(item['email']));
+			$tr.append($td5);
+			$tr.append($td6);
+			if(item.hasOwnProperty("contacts")){
+				$td5.text(item.contacts['phone']);
+				$td6.text(item.contacts['skype']);
+			}
+			
+			if(item['is_active'] === true){
+				$trigerUser.text("Ban");
+			}else{
+				$trigerUser.text("Activate");
+			}
+			$tr.append($td7.append($trigerUser));
+			$body.append($tr);
+			
+		});
+		
+		
+
+	}
+	
+	$('body').on(
+			'click',
+			'a#triger-user',
+			function() {
+				var object = $(this);
+				  $.get('AdminServlet?action=trigerUser&user_id=' +
+				  $(this).attr('name'), function(response) {
+					  
+					  if(response.is_active === true){
+						  object.text("Ban");
+					  }else{
+						  object.text("Activate");
+					  }
+				  });
+			});
+
+	
+	
+	$('#user-page-selection').on("page", function(event, page) {
+		
+			$.get('AdminServlet?action=users', {
+				search : $("input#search-users").val(),
+				page : (page-1)
+			}, function(response) {
+				handleUsers(response);
+			});
+		
+	});
+	
+
+	$("a.users").click(function() {
+
+		$.get('AdminServlet?action=users', function(response) {
+
+			handleUsers(response);
+
+		});
+	});
+
+	$("input#search-users").keyup(function() {
+		
+			$.get('AdminServlet?action=users', {
+				search : $(this).val()
+			}, function(response) {
+				handleUsers(response);
+			});
+		
+	});
+
+	$("input#search-users").focus(function() {
+		$(this).val("");
+	});
+
+	
+	
 
 });

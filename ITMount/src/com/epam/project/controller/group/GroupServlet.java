@@ -22,9 +22,10 @@ public class GroupServlet extends HttpServlet {
 	public GroupServlet() {
 		super();
 		menu = new Menu(new IndexGroup(), new NewGroup(), new DeleteGroup(),
-				new CreateGroup(), new ShowGroup(), new ConfirmGroup(),
-				new EditGroup(), new UpdateGroup(), new GeoupUsersComand(),
-				new RemoveUsersFromGroup(), new AddUsersToGroup(), new LeavUsersInGroup());
+				new CreateGroup(), new ShowGroup(), new EditGroup(),
+				new UpdateGroup(), new GeoupUsersComand(),
+				new RemoveUsersFromGroup(), new AddUsersToGroup(),
+				new LeavUsersInGroup());
 	}
 
 	/**

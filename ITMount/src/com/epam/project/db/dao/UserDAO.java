@@ -22,7 +22,7 @@ public class UserDAO {
 			+ "curriculum_vitae,description, key1,image,email)"
 			+ "value(?,?,?,?,?,?,?,?,?,?,?)";
 
-	public static final String SQL_GET_ALL_USERS = "SELECT * FROM user";
+	public static final String SQL_GET_ALL_USERS = "SELECT SQL_CALC_FOUND_ROWS * FROM user WHERE surname REGEXP ? OR email REGEXP ? LIMIT ?, ?;";
 	public static final String SQL_GET_USER = "SELECT * FROM user WHERE id=?";
 	public static final String SQL_GET_USER_EMAIL = "SELECT * FROM user WHERE email=?";
 	public static final String GET_ROLE = "SELECT role FROM role WHERE id = ?;";
@@ -85,19 +85,33 @@ public class UserDAO {
 
 	}
 
-	public static List<User> getAllUsers(Connection connection) {
+	public static UserCorteg getAllUsers(Connection connection, String token, Integer page) {
 		ResultSet rs = null;
-		List<User> list = null;
+		String patterm = String.format(".*%s.*", token);
+		UserCorteg users = new UserCorteg();
 		try {
-
+			connection.setAutoCommit(false);
 			PreparedStatement st = connection
 					.prepareStatement(SQL_GET_ALL_USERS);
+			
+			st.setString(1, patterm);
+			st.setString(2, patterm);
+			st.setInt(3, page*10);
+			st.setInt(4, 10);
 			rs = st.executeQuery();
-			list = UserTransformer.getAllUsers(rs);
+			
+			users.setUsers( UserTransformer.getAllUsers(rs));
+			
+			st = connection.prepareStatement("SELECT found_rows();");
+			rs = st.executeQuery();
+			rs.next();
+			users.setAmount(rs.getInt(1));
+			connection.commit();
+			connection.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return users;
 	}
 
 	public static void addNewUser(User user, Connection connection) {

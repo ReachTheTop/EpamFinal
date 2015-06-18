@@ -94,8 +94,8 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" class='groups' data-parent="#accordion"
-									href="#collapse2">Groups</a>
+								<a data-toggle="collapse" class='groups'
+									data-parent="#accordion" href="#collapse2">Groups</a>
 							</h4>
 						</div>
 						<div id="collapse2" class="panel-collapse collapse">
@@ -115,10 +115,8 @@
 										<tr>
 											<th>Course</th>
 											<th>Group Name</th>
-											<th>Teacher First Name</th>
-											<th>Teacher Last Name</th>
+											<th>Teacher</th>
 											<th>Confirmed</th>
-											<th>Active</th>
 										<tr>
 									</thead>
 									<tbody id="groups-body">
@@ -138,12 +136,44 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion"
+								<a data-toggle="collapse" class="users" data-parent="#accordion"
 									href="#collapse3">Users</a>
 							</h4>
 						</div>
 						<div id="collapse3" class="panel-collapse collapse">
-							<div class="panel-body"></div>
+							<div class="panel-body">
+								<div class="row-fluid">
+
+									<div class="form-group">
+
+										<input type="text" id="search-users"
+											placeholder="Group Search" class='form-control'>
+									</div>
+
+
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Surname</th>
+											<th>Role</th>
+											<th>Email</th>
+											<th>Phone</th>
+											<th>Skype</th>
+											<th>Active</th>
+										<tr>
+									</thead>
+									<tbody id="users-body">
+
+									</tbody>
+								</table>
+								<div class="row" align="center">
+
+									<div id="user-page-selection"></div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -155,6 +185,6 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
-	
+
 </body>
 </html>

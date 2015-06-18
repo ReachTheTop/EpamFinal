@@ -24,7 +24,9 @@ public class AdminServlet extends HttpServlet {
 
 	public AdminServlet() {
 		super();
-		menu = new Menu(new CoursesAdministration(), new TrigerCourse(), new GroupAdministration());
+		menu = new Menu(new CoursesAdministration(), new TrigerCourse(),
+				new GroupAdministration(), new ConfirmGroup(),
+				new GetTeachers(), new UserAdministration(), new BanUser());
 	}
 
 	protected void doGet(HttpServletRequest request,

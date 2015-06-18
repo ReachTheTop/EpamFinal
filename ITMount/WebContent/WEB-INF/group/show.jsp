@@ -71,12 +71,6 @@
 		</table>
 	</div>
 
-
-	<c:if test="${not group.isConfirmed  }">
-		<a
-			href="<c:url value="/GroupServlet?action=confirm&group_id=${group.id }" />">Confirm
-			Group </a>
-	</c:if>
 	<jsp:include page="../page/footer.jsp" />
 
 

@@ -1,4 +1,4 @@
-package com.epam.project.controller.group;
+package com.epam.project.command.admin;
 
 import java.io.IOException;
 
@@ -15,12 +15,14 @@ public class ConfirmGroup implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if(request.getParameter("group_id") == null){
+			response.setContentType("text/html");
 			response.sendError(404);
 			return;
 		}else{
+			
 			Integer group_id = Integer.parseInt(request.getParameter("group_id"));
 			GroupService.confirmGroup(group_id);
-			request.getRequestDispatcher("/GroupServlet?action=show&group_id"+ group_id).forward(request, response);
+			response.setContentType("application/json; charset=UTF-8");
 			return;
 		}
 		 

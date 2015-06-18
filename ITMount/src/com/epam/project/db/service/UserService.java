@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.UserCorteg;
 import com.epam.project.db.dao.UserDAO;
 import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.UserTransformer;
@@ -43,14 +44,14 @@ public class UserService {
 
 	}
 
-	public static List<User> getAllUsers() {
+	public static UserCorteg getAllUsers(String token, Integer page) {
 		Connection connection = DBConnection.getConnection();
-		List<User> list = UserDAO.getAllUsers(connection);
-		for (User user : list) {
+		UserCorteg users = UserDAO.getAllUsers(connection, token, page);
+		for (User user : users.getUsers()) {
 			user.setRole(UserDAO.getRole(connection, user.getRole_id()));
 		}
 		closeConnection(connection);
-		return list;
+		return users;
 	}
 
 	public static void updateUser(User user) {
