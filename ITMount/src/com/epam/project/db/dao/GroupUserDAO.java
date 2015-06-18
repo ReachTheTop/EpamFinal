@@ -13,7 +13,7 @@ import com.epam.project.db.transformer.GroupUserTransformer;
 import com.epam.project.db.transformer.UserTransformer;
 
 public class GroupUserDAO {
-
+	private static final String GET_GROUP_USER_BY_USER_AND_GROUP_ID = "SELEct * FROM group_user WHERE user_id = ? AND group_id = ?;";
 	private static final String GET_GROUP_USER_BY_ID = "SELECT * FROM group_user WHERE id=?";
 	private static final String GET_ALL_GROUP_USER = "select * FROM user WHERE  id IN(SELECT user_id FROM group_user WHERE group_id = ?);";
 	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id) value (?, ?);";
@@ -197,8 +197,8 @@ public class GroupUserDAO {
 
 	}
 
-	public static void leaveUsersInGroup(Connection connection,Integer group_id,
-			List<String> users) {
+	public static void leaveUsersInGroup(Connection connection,
+			Integer group_id, List<String> users) {
 		PreparedStatement ps = null;
 		String input = "(";
 		String separator = "";
@@ -210,21 +210,22 @@ public class GroupUserDAO {
 		input += ")";
 		try {
 
-			ps =connection.prepareStatement("select id from user where email in "+input);
+			ps = connection
+					.prepareStatement("select id from user where email in "
+							+ input);
 			List<Integer> users_id = new ArrayList<Integer>();
 			for (int i = 0; i < users.size(); i++) {
-				ps.setString(i+1, users.get(i));
+				ps.setString(i + 1, users.get(i));
 			}
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				users_id.add(rs.getInt(1));
 			}
-			
-			ps = connection
-					.prepareStatement(String
-							.format("delete from group_user "
-									+ "WHERE group_id = ? AND user_id not IN "+input,
-									input));
+
+			ps = connection.prepareStatement(String.format(
+					"delete from group_user "
+							+ "WHERE group_id = ? AND user_id not IN " + input,
+					input));
 			ps.setInt(1, group_id);
 			for (int i = 0; i < users.size(); i++) {
 				ps.setInt(i + 2, users_id.get(i));
@@ -235,5 +236,41 @@ public class GroupUserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static GroupUser getByGroupAndUserId(Connection connection,
+			Integer group_id, Integer user_id) {
+		GroupUser association = null;
+		PreparedStatement ps = null;
+		ResultSet set = null;
+		try {
+			ps = connection
+					.prepareStatement(GET_GROUP_USER_BY_USER_AND_GROUP_ID);
+			ps.setInt(1, user_id);
+			ps.setInt(2, group_id);
+			set = ps.executeQuery();
+
+			association = GroupUserTransformer.getGroupUser(set);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return association;
+	}
+
+	public static void setExamDate(Connection connection, Integer group_id,
+			Integer user_id, Integer exam_id) {
+		PreparedStatement ps = null;
+		try {
+			ps = connection
+					.prepareStatement("UPDATE group_user SET exam_id = ? WHERE group_id = ? AND user_id = ? ;");
+			ps.setInt(1, exam_id);
+			ps.setInt(2, group_id);
+			ps.setInt(3, user_id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

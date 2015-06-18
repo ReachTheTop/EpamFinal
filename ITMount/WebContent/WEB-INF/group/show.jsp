@@ -87,6 +87,129 @@
 		</table>
 	</div>
 
+
+
+	<c:choose>
+		<c:when test="${user.role == 'lecturer' }">
+			<a href="#myModal" class="btn btn-lg btn-primary"
+				style="margin-left: 13px;" data-toggle="modal">New Exam</a>
+
+			<!-- Modal HTML -->
+			<div id="myModal" class="modal fade bs-example-modal-sm">
+
+
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<form name=" form1"
+							action="GroupExamServlet?action=create&group_id=${group.id}"
+							method="post" enctype="multipart/form-data" role="form"
+							role="form" id="form1">
+
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Create new exam</h4>
+							</div>
+							<div class="modal-body">
+
+								<div id="incorectData" style="display: none;"
+									class="alert alert-danger">
+									<strong>Incorect data!</strong>
+								</div>
+
+
+
+								<div class="form-group">
+									<label for="login-username"><i class="icon-user"></i> <b>Exam
+											Description</b></label>
+									<p>
+										<textarea class="form-control" name="description" rows="3"
+											name="text"></textarea>
+									</p>
+								</div>
+
+								<div class="form-group">
+									<label for="login-username"><i class="icon-user"></i> <b>Exam
+											Date</b></label> <input name="exam_date" class="form-control"
+										id="login-username" type="datetime-local">
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Set exam</button>
+								</div>
+
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+			<script>
+				$(document).ready(function() {
+					$(".modal").on("hidden.bs.modal", function() {
+						document.getElementById("form1").reset();
+						$("#incorectData").hide();
+					});
+				});
+			</script>
+
+			<script>
+				var form = $('#form1');
+				form.submit(function() {
+
+					request = $.ajax({
+						type : form.attr('method'),
+						url : form.attr('action'),
+						data : form.serialize(),
+						success : function(text) {
+
+							$("#incorectData").hide();
+							document.getElementById("form1").reset();
+							$('#myModal').modal('hide');
+							alert("Exam was successfully created");
+
+						},
+						error : function() {
+							$("#incorectData").show();
+						}
+					});
+
+					return false;
+				});
+			</script>
+
+		</c:when>
+		<c:when test="${user.role == 'student' || user.role == 'applicant' }">
+			<c:if test="${ not empty association}">
+				<c:choose>
+					<c:when test="${empty association.exam_date}">
+						<form
+							action="GroupUserServlet?action=chousExam&group_id=${group.id }&user_id=${user.id}"
+							method="post">
+							<div class="form-group">
+								
+									<select name="exam_date">
+										<c:forEach items="${exams }" var="exam">
+											<option value="${exam.id }"><c:out value="${exam.exam_date }" /> </option>
+										</c:forEach>
+									</select>
+									<input type="submit" value="Chouse exam date">
+							</div>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<div>
+							<c:out value="${association.exam_date }"></c:out>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+		</c:when>
+	</c:choose>
+
+
 	<jsp:include page="../page/footer.jsp" />
 
 
