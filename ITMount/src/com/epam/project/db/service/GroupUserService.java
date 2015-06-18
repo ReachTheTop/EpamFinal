@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
-import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.dao.GroupUserDAO;
 import com.epam.project.db.model.GroupUser;
 import com.epam.project.db.model.User;

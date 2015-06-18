@@ -6,11 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Random;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -99,7 +102,42 @@ public class UploadFile {
 		
 	}
 
-	
+	public String uploadFileFromNET(String Url, ServletContext servletContext, String path)
+			throws IOException {
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(threshold_size);
+		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+
+		upload = new ServletFileUpload(factory);
+		upload.setFileSizeMax(maxFileSize);
+		upload.setSizeMax(maxMemSize);
+		
+		
+		uploadPath =servletContext.getRealPath("")+"upload/photo"+File.separator;
+		
+		URL url = new URL(Url);
+		String fileName = Url.replaceAll("[/?:a-z.=]", "")+".jpg";
+		try {
+			String fileUrl = fileName;
+
+			File f = new File(uploadPath + File.separator + fileUrl);
+
+			while (f.exists() && !f.isDirectory()) {
+				Random random = new Random();
+				fileUrl =random.nextInt(Integer.MAX_VALUE)+ fileName;
+				f = new File(uploadPath + File.separator + fileUrl);
+			}
+
+			FileUtils.copyURLToFile(url, f);
+			
+			return "photo" + File.separator + fileUrl;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	
 	public  String extractFileName(Part part) {
 		String contentDisp = part.getHeader("content-disposition");

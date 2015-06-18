@@ -65,7 +65,7 @@
 				<div class="col-sm-7 social-login">
 					<p>Or login with your Facebook or Twitter</p>
 					<div class="social-login-buttons">
-						<a href="#" class="btn-facebook-login">Login with Facebook</a> <a
+						<a href="<c:url value="/FbLoginServlet?action=fb" />" class="btn-facebook-login">Login with Facebook</a> <a
 							href="#" class="btn-twitter-login">Login with Twitter</a>
 					</div>
 					<div class="clearfix"></div>
