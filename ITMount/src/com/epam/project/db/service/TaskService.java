@@ -39,6 +39,19 @@ public class TaskService {
 		return list;
 	}
 	
+public static List<Task> getAllTasksByGroupId(Integer idGroup) {
+		
+		Connection connection =  DBConnection.getConnection();
+		List<Task> list = TaskDAO.getAllTasksByGroupId(connection, idGroup);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static void addNewTask(Task task){
 		
 		Connection connection =  DBConnection.getConnection();

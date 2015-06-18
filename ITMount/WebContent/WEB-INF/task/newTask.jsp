@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create new task</title>
+
+
+<link href="responsive.css" rel="stylesheet">
+
+
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
@@ -29,8 +34,8 @@
 
 		<!-- Modal HTML -->
 		<div id="myModal" class="modal fade bs-example-modal-sm">
-			
-			
+
+
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<form name=" form1"
@@ -93,6 +98,93 @@
 	</div>
 
 
+	<div class="container" style="">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel-group" id="accordion" role="tablist"
+					aria-multiselectable="true">
+
+					<c:forEach items="${requestScope.listTask}" var="tasks">
+
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse"
+										data-parent="#accordion" href="#collapse${tasks.id}"
+										aria-expanded="false" aria-controls="collapse${tasks.id}">
+										${tasks.name} </a>
+								</h4>
+							</div>
+							<div id="collapse${tasks.id}" class="panel-collapse collapse"
+								role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">
+									<div class="list-group">
+
+										<table class="table table-bordered">
+											<tr>
+												<td>Task name</td>
+												<td>${tasks.name }</td>
+											</tr>
+											<tr>
+												<td>Task description</td>
+												<td>${tasks.description }</td>
+											</tr>
+											<tr>
+												<td>Task deadline</td>
+												<td>${tasks.deadline }</td>
+											</tr>
+
+										</table>
+
+										<div class="form-group">
+											<input name="task_file" class="form-control" id="file"
+												type="file" placeholder="">
+										</div>
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary">Download file</button>
+												<button type="submit" class="btn btn-primary">Add
+												task</button>
+										</div>
+									</div>
+
+
+
+
+								</div>
+							</div>
+						</div>
+
+					</c:forEach>
+
+
+
+					<!-- 					<div class="panel panel-default"> -->
+					<!-- 						<div class="panel-heading" role="tab" id="headingThree"> -->
+					<!-- 							<h4 class="panel-title"> -->
+					<!-- 								<a class="collapsed" role="button" data-toggle="collapse" -->
+					<!-- 									data-parent="#accordion" href="#collapseThree" -->
+					<!-- 									aria-expanded="false" aria-controls="collapseThree"> Task3 -->
+					<!-- 								</a> -->
+					<!-- 							</h4> -->
+					<!-- 						</div> -->
+					<!-- 						<div id="collapseThree" class="panel-collapse collapse" -->
+					<!-- 							role="tabpanel" aria-labelledby="headingThree"> -->
+					<!-- 							<div class="panel-body">Task3</div> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <script src="js/jquery-1.10.1.min.js"></script> -->
+	<!-- <script src="js/bootstrap.min.js"></script> -->
+
+
+	<script type="text/javascript" src="bootstrap-filestyle.js">
+		
+	</script>
 
 	<script>
 		var form = $('#form1');
@@ -127,6 +219,8 @@
 			});
 		});
 	</script>
+
+
 
 	<div class="section">
 		<div class="container">
