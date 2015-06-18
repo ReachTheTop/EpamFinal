@@ -6,12 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create new task</title>
-
+<jsp:include page="../page/head.jsp" />
 
 <link href="responsive.css" rel="stylesheet">
 
-
-<jsp:include page="../page/head.jsp" />
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -84,7 +82,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
+								<button type="submit" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-primary">Add task</button>
 							</div>
@@ -97,6 +95,41 @@
 		</div>
 	</div>
 
+
+
+	<script>
+		var form = $('#form1');
+		form.submit(function() {
+
+			request = $.ajax({
+				type : form.attr('method'),
+				url : form.attr('action'),
+				data : form.serialize(),
+				success : function(text) {
+
+					$("#incorectData").hide();
+					document.getElementById("form1").reset();
+					$('#myModal').modal('hide');
+					alert("Task was successfully created");
+
+				},
+				error : function() {
+					$("#incorectData").show();
+				}
+			});
+
+			return false;
+		});
+	</script>
+	
+		<script>
+		$(document).ready(function() {
+			$(".model").on("hidden.bs.modal", function() {
+				document.getElementById("form1").reset();
+				$("#incorectData").hide();
+			});
+		});
+	</script>
 
 	<div class="container" style="">
 		<div class="row">
@@ -141,142 +174,77 @@
 												type="file" placeholder="">
 										</div>
 										<div class="form-group">
-											<button type="submit" class="btn btn-primary">Download file</button>
-												<button type="submit" class="btn btn-primary">Add
+											<button type="submit" class="btn btn-primary">Download
+												file</button>
+											<button type="submit" class="btn btn-primary">Add
 												task</button>
 										</div>
 									</div>
-
-
-
-
 								</div>
 							</div>
 						</div>
 
 					</c:forEach>
 
-
-
-					<!-- 					<div class="panel panel-default"> -->
-					<!-- 						<div class="panel-heading" role="tab" id="headingThree"> -->
-					<!-- 							<h4 class="panel-title"> -->
-					<!-- 								<a class="collapsed" role="button" data-toggle="collapse" -->
-					<!-- 									data-parent="#accordion" href="#collapseThree" -->
-					<!-- 									aria-expanded="false" aria-controls="collapseThree"> Task3 -->
-					<!-- 								</a> -->
-					<!-- 							</h4> -->
-					<!-- 						</div> -->
-					<!-- 						<div id="collapseThree" class="panel-collapse collapse" -->
-					<!-- 							role="tabpanel" aria-labelledby="headingThree"> -->
-					<!-- 							<div class="panel-body">Task3</div> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-
-
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- <script src="js/jquery-1.10.1.min.js"></script> -->
-	<!-- <script src="js/bootstrap.min.js"></script> -->
+
+<!-- 	<div class="section"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-sm-5"> -->
+<!-- 					<div class="basic-login"> -->
+<%-- 						<form action="TaskServlet?action=createTask&id_group=${id_group }" --%>
+<!-- 							method="post" enctype="multipart/form-data" role="form" -->
+<!-- 							role="form"> -->
+
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
+<!-- 										Name</b></label> <input name="task_name" class="form-control" -->
+<!-- 									id="login-username" type="text" placeholder=""> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Task -->
+<!-- 										Description</b></label> -->
+<!-- 								<p> -->
+<!-- 									<textarea name="task_description" rows="3" cols="55" -->
+<!-- 										name="text"></textarea> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label> -->
+<!-- 								<input name="task_deadline" class="form-control" -->
+<!-- 									id="login-username" type="datetime-local"> -->
+<!-- 							</div> -->
 
 
-	<script type="text/javascript" src="bootstrap-filestyle.js">
-		
-	</script>
-
-	<script>
-		var form = $('#form1');
-		form.submit(function() {
-
-			request = $.ajax({
-				type : form.attr('method'),
-				url : form.attr('action'),
-				data : form.serialize(),
-				success : function(text) {
-
-					$("#incorectData").hide();
-					document.getElementById("form1").reset();
-					$('#myModal').modal('hide');
-					alert("Task was successfully created");
-
-				},
-				error : function() {
-					$("#incorectData").show();
-				}
-			});
-
-			return false;
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			$(".modal").on("hidden.bs.modal", function() {
-				document.getElementById("form1").reset();
-				$("#incorectData").hide();
-			});
-		});
-	</script>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="login-password"><i class="icon-lock"></i> <b>File</b></label> -->
+<!-- 								<input name="task_file" class="form-control" id="file" -->
+<!-- 									type="file" placeholder=""> -->
+<!-- 							</div> -->
 
 
+<!-- 							<div class="form-group"> -->
 
-	<div class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-5">
-					<div class="basic-login">
-						<form action="TaskServlet?action=createTask&id_group=${id_group }"
-							method="post" enctype="multipart/form-data" role="form"
-							role="form">
+<!-- 								<button type="submit" class="btn pull-right">Add task</button> -->
+<!-- 								<div class="clearfix"></div> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
-							<div class="form-group">
-								<label for="login-username"><i class="icon-user"></i> <b>Task
-										Name</b></label> <input name="task_name" class="form-control"
-									id="login-username" type="text" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="login-username"><i class="icon-user"></i> <b>Task
-										Description</b></label>
-								<p>
-									<textarea name="task_description" rows="3" cols="55"
-										name="text"></textarea>
-								</p>
-							</div>
-
-							<div class="form-group">
-								<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label>
-								<input name="task_deadline" class="form-control"
-									id="login-username" type="datetime-local">
-							</div>
-
-
-							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
-								<input name="task_file" class="form-control" id="file"
-									type="file" placeholder="">
-							</div>
-
-
-							<div class="form-group">
-
-								<button type="submit" class="btn pull-right">Add task</button>
-								<div class="clearfix"></div>
-							</div>
-						</form>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 
 
 
 	<jsp:include page="../page/footer.jsp" />
-	<jsp:include page="../page/script.jsp" />
 
 </body>
 </html>
