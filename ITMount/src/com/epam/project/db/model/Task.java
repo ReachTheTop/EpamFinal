@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.epam.project.db.model.annotation.Column;
+import com.epam.project.db.model.annotation.Format;
 import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
 
@@ -21,7 +22,7 @@ public class Task extends Validator implements Serializable {
 	@Column(value = "description")
 	private String description;
 
-	@Column(value = "deadline")
+	@Format(format = "")
 	private Date deadline;
 
 	@Column(value = "available")

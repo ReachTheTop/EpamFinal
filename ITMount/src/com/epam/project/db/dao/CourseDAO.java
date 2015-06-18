@@ -36,6 +36,7 @@ public class CourseDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public static Integer addCourse(Course course, Connection connection) {
