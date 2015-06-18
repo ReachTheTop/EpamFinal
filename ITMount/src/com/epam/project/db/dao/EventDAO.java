@@ -11,8 +11,8 @@ import com.epam.project.db.model.Event;
 
 public class EventDAO {
 	private static final String NEW_EVENT = ""
-			+ "INSERT INTO itmount (description, date, group_id) "
-			+ "SET (?,?,?);";
+			+ "INSERT INTO event (description, date, group_id) "
+			+ "VALUES (?,?,?);";
 	private static final String GET_ALL = "SELECT * FROM event;";
 
 	private static final String DELETE = "" + "UPDATE event "
