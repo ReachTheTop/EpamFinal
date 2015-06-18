@@ -25,7 +25,9 @@ public class UserService {
 
 		Connection connection = DBConnection.getConnection();
 		User user = UserDAO.getUser(id, connection);
-		user.setRole(UserDAO.getRole(connection, user.getRole_id()));
+		if (user != null) {
+			user.setRole(UserDAO.getRole(connection, user.getRole_id()));
+		}
 		closeConnection(connection);
 		return user;
 	}

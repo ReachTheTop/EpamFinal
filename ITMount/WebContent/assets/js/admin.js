@@ -32,6 +32,7 @@ $(function() {
 		var $td2;
 		var $td3;
 		var $a;
+		var $courseLink;
 		
 		
 
@@ -44,7 +45,7 @@ $(function() {
 		var $courses = response.courses;
 
 		$.each($courses, function(index, item) {
-
+			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item['id']+"'>");;
 			$body = $("tbody#courses-body"); 
 			$tr = $("<tr class='course-row'>");
 			$td1 = $("<td id='course-name'>");
@@ -65,7 +66,8 @@ $(function() {
 				$a.text('Open');
 			}
 
-			$td1.text(item['name']);
+			$courseLink.text(item['name']);
+			$td1.append($courseLink);
 			$td2.text(item['is_active']);
 
 			$td3.append($a);

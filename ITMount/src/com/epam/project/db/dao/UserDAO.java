@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
@@ -50,7 +51,11 @@ public class UserDAO {
 		try {
 
 			PreparedStatement st = connection.prepareStatement(SQL_GET_USER);
-			st.setInt(1, id);
+			if (id == null) {
+				st.setNull(1, Types.INTEGER);
+			} else {
+				st.setInt(1, id);
+			}
 			rs = st.executeQuery();
 			user = UserTransformer.getUser(rs);
 		} catch (SQLException e) {
@@ -177,7 +182,11 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			ps = connection.prepareStatement(GET_ROLE);
-			ps.setInt(1, role_id);
+			if (role_id == null) {
+				ps.setNull(1, Types.INTEGER);
+			} else {
+				ps.setInt(1, role_id);
+			}
 			ResultSet res = ps.executeQuery();
 			if (res.next()) {
 				role = res.getString(1);
