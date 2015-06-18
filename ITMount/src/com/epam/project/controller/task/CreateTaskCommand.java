@@ -1,6 +1,7 @@
 package com.epam.project.controller.task;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,16 +29,19 @@ public class CreateTaskCommand implements Action {
 		task.setDescription(request.getParameter("task_description"));
 
 		String stringDateDeadline = request.getParameter("task_deadline");
+
+		System.out.println("String = " + stringDateDeadline);
 		Date dateDeadline = null;
 		DateFormat deadline = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		try {
 			dateDeadline = deadline.parse(stringDateDeadline);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return;
 		}
 
-		task.setDeadline(dateDeadline);
-
+		
 		task.setAvailable(true);
 
 		String pathFile = request.getParameter("task_file");
@@ -46,34 +50,24 @@ public class CreateTaskCommand implements Action {
 
 		int idGroup = Integer.parseInt(request.getParameter("id_group"));
 		task.setGroupID(idGroup);
-
+		task.setDeadline(dateDeadline);
+		
 		if (task.isValid()) {
 
 			if (task.getDeadline() != null) {
 				if (checkDate(task.getDeadline()) == false) {
-					
-					// validation date
-					System.out.println("incorect data");
-					
-					response.sendRedirect(request.getHeader("Referer"));
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					return;
 				}
-
-			}else{
-				System.out.println("Empty Date");
-				response.sendRedirect(request.getHeader("Referer"));
-				return;
+				TaskService.addNewTask(task);
 			}
-
-			TaskService.addNewTask(task);
-			response.sendRedirect(request.getHeader("Referer"));
-
 			return;
 
 		} else {
-			response.sendRedirect(request.getHeader("Referer"));
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		}
+
 	}
 
 	@Override
