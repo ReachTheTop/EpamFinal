@@ -37,7 +37,7 @@ public class ShowGroup implements Action {
 					return;
 				}
 
-				List<GroupExamModel> exams = GroupExamService.getAll();
+				List<GroupExamModel> exams = GroupExamService.getAll(group_id);
 				GroupUser association = null;
 				if (user.getRole().equals("student")
 						|| user.getRole().equals("applicant")) {

@@ -25,10 +25,10 @@ public class GroupExamService {
 		return exam;
 	}
 
-	public static List<GroupExamModel> getAll() {
+	public static List<GroupExamModel> getAll(Integer group_id) {
 		Connection connection = DBConnection.getConnection();
 		List<GroupExamModel> exams = null;
-		exams = GroupExamDAO.getAll(connection);
+		exams = GroupExamDAO.getAll(connection, group_id);
 		closeConnection(connection);
 		return exams;
 	}

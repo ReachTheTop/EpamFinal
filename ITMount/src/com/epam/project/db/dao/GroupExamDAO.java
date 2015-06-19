@@ -12,7 +12,7 @@ import com.epam.project.db.transformer.GroupExamTransformer;
 public class GroupExamDAO {
 
 	private static String NEW_EXAM = "INSERT group_exam SET description = ?, exam_date = ?, group_id = ? ;";
-	private static String GET_EXAMS = "SELECT * FROM group_exam WHERE exam_date >= now();";
+	private static String GET_EXAMS = "SELECT * FROM group_exam WHERE exam_date >= now() and group_id = ?;";
 	private static String UPDATE_EXAM = "UPDATE group_exam SET description = ?, exam_date = ?;";
 	private static String GET_BY_GROUP_ID = "SELECT * from group_exam WHERE group_id = ?;";
 	private static String GET_BY_ID = "SELECT * FROM group_exam WHERE id = ?;";
@@ -29,11 +29,12 @@ public class GroupExamDAO {
 		}
 	}
 
-	public static List<GroupExamModel> getAll(Connection connection) {
+	public static List<GroupExamModel> getAll(Connection connection, Integer group_id) {
 		PreparedStatement ps = null;
 		List<GroupExamModel> exams = null;
 		try {
 			ps = connection.prepareStatement(GET_EXAMS);
+			ps.setInt(1, group_id);
 			exams = GroupExamTransformer.getExams(ps.executeQuery());
 		} catch (SQLException e) {
 			e.printStackTrace();
