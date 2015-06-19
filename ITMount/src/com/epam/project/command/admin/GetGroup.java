@@ -1,4 +1,4 @@
-package com.epam.project.controller.group;
+package com.epam.project.command.admin;
 
 import java.io.IOException;
 
@@ -9,29 +9,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Group;
 import com.epam.project.db.service.GroupService;
+import com.google.gson.Gson;
 
-public class UpdateGroup implements Action {
+public class GetGroup implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Integer group_id = Integer.parseInt(request.getParameter("group_id"));
 		Group group = GroupService.getById(group_id);
-		group.setName(request.getParameter("name"));
-		group.setTeacher_id(Integer.parseInt(request.getParameter("teacher_id")));
-		GroupService.updateGroup(group);
-		
+		Gson json = new Gson();
 		response.setContentType("application/json");
-		/*request.getRequestDispatcher(
-				"/GroupServlet?action=show&group_id=" + group_id).forward(
-				request, response);
-*/
+		
+		response.getWriter().write(json.toJson(group));
+
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "update";
+		return "getGroup";
 	}
 
 }

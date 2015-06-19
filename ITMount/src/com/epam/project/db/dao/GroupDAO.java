@@ -23,7 +23,7 @@ public class GroupDAO {
 	private static final String GET_ALL_GROUP = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 WHERE is_active =1 AND name REGEXP ? LIMIT ?,?;";
 	private static final String CALC_ROWS = "SELECT found_rows();";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
-	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ?, date_exam=? WHERE id = ?;";
+	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 
 	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.id in"
@@ -158,9 +158,9 @@ public class GroupDAO {
 			st.setInt(2, group.getTeacher_id());
 			st.setString(3, group.getName());
 			st.setBoolean(4, group.getIs_active());
-			st.setTimestamp(5, new Timestamp(group.getDateExam().getTime()));
+			
 
-			st.setInt(6, group.getId());
+			st.setInt(5, group.getId());
 
 			st.executeUpdate();
 		} catch (SQLException e) {
