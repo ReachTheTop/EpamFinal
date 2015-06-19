@@ -11,45 +11,368 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
 <link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+
+
+
+
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
-
 
 
 	<div class="section section-breadcrumbs">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>My Page</h1>
+					<h1>
+						My Page
+						<c:if test="${current_user.id == user.id }">
+							<a data-toggle="modal" href="#editUser"><i
+								class="glyphicon glyphicon-edit"></i></a>
+						</c:if>
+					</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<p>${user }</p>
 
 
-	<c:choose>
-		<c:when test="${user.role != 'admin' }">
-			<c:forEach items="${groups }" var="group">
-				<div>
-					<a
-						href="<c:url
-							value="/GroupServlet?action=show&group_id=${group.id }" />">
-						<label><c:out value="${group.course.name }" /> </label> <label><c:out
-								value="${group.name }" /> </label>
-					</a>
+
+
+
+
+
+	<div id="editUser" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">My settings</h4>
 				</div>
-			</c:forEach>
+				<div class="modal-body">
+					<form action="UserServlet?action=update" method="post"
+						enctype="multipart/form-data" role="form" role="form">
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>First
+									Name</b></label> <input name="name" class="form-control"
+								id="login-username" type="text" placeholder=""
+								value="${user.name }">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Middle
+									Name</b></label> <input name="middle_name" class="form-control"
+								id="login-username" type="text" placeholder=""
+								value="${user.middle_name }">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Surname</b></label>
+							<input name="surname" class="form-control" id="login-username"
+								type="text" placeholder="" value="${user.surname }">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
+							<input name="email" class="form-control" id="login-username"
+								type="text" placeholder="" value="${user.email }">
+						</div>
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>Image</b></label>
+							<input name="image" class="form-control" id="file" type="file"
+								required="required" placeholder="" value="${user.image }">
+						</div>
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
+									Vitae</b></label> <input name="cv" class="form-control" id="file"
+								type="file" required="required" placeholder=""
+								value="${user.curriculum_vitae }">
+						</div>
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>Phone</b></label>
+							<input name="phone" class="form-control" id="login-username"
+								type="text" placeholder="" value="${contact.phone }">
+						</div>
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>Skype</b></label>
+							<input name="skype" class="form-control" id="login-username"
+								type="text" placeholder="" value="${contact.skype }">
+						</div>
+
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>Description</b></label>
+							<textarea name="description" class="form-control" id="comment"
+								placeholder=""><c:out value="${user.description }" /> </textarea>
+						</div>
+
+
+
+
+						<div class="form-group">
+
+							<button type="submit" class="btn pull-right">Update</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-6">
+				<div class="well well-sm">
+					<div class="row">
+						<div class="col-sm-6 col-md-4">
+							<img src="upload/photo/${current_user.image }" alt=""
+								class="img-rounded img-responsive" />
+						</div>
+						<div class="col-sm-6 col-md-8">
+							<h4>
+								<c:out value="${current_user.name }" />
+								<c:out value="${current_user.surname }" />
+							</h4>
+
+							<p>
+								<i class="glyphicon glyphicon-envelope"> <c:out
+										value="${current_user.email }" /></i> <br /> <i
+									class="glyphicon glyphicon-gift"> <c:out
+										value="${current_user.birtday }" /></i><br /> <i
+									class="glyphicon glyphicon-earphone"> <c:out
+										value="${current_contact.phone}" /></i> <br /> <i
+									class="glyphicon glyphicon-phone"> <c:out
+										value="${contact.skype}" /></i>
+
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<c:choose>
+		<c:when test="${current_user.role != 'admin' }">
+
+			<div class="container">
+				<h2>My courses</h2>
+				<div class="section">
+					<div class="container">
+
+						<div class="row">
+							<c:forEach items="${groups }" var="group">
+								<a
+									href="<c:url
+							value="/GroupServlet?action=show&group_id=${group.id }" />">
+
+									<div class="col-md-4 col-sm-6">
+										<img src="upload/${group.course.icon }" class="img-circle"
+											alt="Cinque Terre" width="150" height="150"
+											alt="${group.name }">
+									</div>
+
+								</a>
+
+
+							</c:forEach>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+
+			</div>
 		</c:when>
 
-		<c:otherwise>
-
->
+		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
 			<div class="container">
 				<h2>Admin Panel</h2>
+
+
+				<div id="editCourse" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Course settings</h4>
+							</div>
+							<div class="modal-body">
+								<form action="CourseServlet?action=update" data-async
+									id='edit-course-form' method="post"
+									enctype="multipart/form-data" role="form" role="form">
+									<div class="form-group" hidden="true">
+										<input class="form-control" type="text" name='course_id'
+											id='edit-course-id'>
+									</div>
+									<div class="form-group">
+										<label for="login-username"><i class="icon-user"></i>
+											<b>Name</b></label> <input name="name" class="form-control"
+											id="course-name-edit" type="text" placeholder="">
+									</div>
+
+									<div class="form-group">
+										<label for="login-password"><i class="icon-lock"></i>
+											<b>Image</b></label> <input name="image" class="form-control"
+											id="course-icon-edit" type="file" placeholder="">
+									</div>
+									<div class="form-group">
+										<label for="login-password"><i class="icon-lock"></i>
+											<b>Description</b></label>
+										<textarea name="description" class="form-control"
+											id="course-description-edit" placeholder=""> </textarea>
+									</div>
+									<div class="form-group">
+
+										<button type="submit" id='submit-course-edit'
+											class="btn pull-right">Update</button>
+										<div class="clearfix"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$('form[data-async]').on('submit', function(event) {
+						var $form = $(this);
+						var $target = $($form.attr('data-target'));
+
+						$.ajax({
+							type : $form.attr('method'),
+							url : $form.attr('action'),
+							data : $form.serialize(),
+
+							success : function(data, status) {
+								$target.html(data);
+							}
+						});
+
+						event.preventDefault();
+					});
+				</script>
+
+
+
+
+				<div id="newCourse" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">New course</h4>
+							</div>
+							<div class="modal-body">
+								<form action="CourseServlet?action=create" method="post"
+									enctype="multipart/form-data" role="form" role="form">
+									<div class="form-group">
+										<label for="login-username"><i class="icon-user"></i>
+											<b>Course Name</b></label> <input name="name" class="form-control"
+											id="login-username" type="text" placeholder="">
+									</div>
+									<div class="form-group">
+										<label for="login-password"><i class="icon-lock"></i>
+											<b>Icon</b></label> <input name="icon" class="form-control" id="file"
+											type="file" required="required" placeholder="">
+									</div>
+
+
+									<div class="form-group">
+										<label for="login-password"><i class="icon-lock"></i>
+											<b>Description</b></label>
+										<textarea name="description" class="form-control" id="comment"
+											placeholder=""></textarea>
+									</div>
+
+
+
+
+									<div class="form-group">
+
+										<button type="submit" class="btn pull-right">Create</button>
+										<div class="clearfix"></div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+
+				<a data-toggle="modal" id="groupEditModal" href="#editGroup"><i
+					class='glyphicon glyphicon-edit'></i></a>
+				<div id="editGroup" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Group settings</h4>
+							</div>
+							<div class="modal-body">
+								<form action="GroupServlet?action=update" data-async
+									id='edit-group-form' method="post"
+									enctype="multipart/form-data" role="form" role="form">
+									
+									<div class="form-group" hidden="true">
+											<input name="group_id" class="form-control"
+											id="group-id-edit" type="text" placeholder="">
+									</div>
+									
+									<div class="form-group" hidden="true">
+										<input class="form-control" type="text" name='group_id'
+											id='edit-group-id'>
+									</div>
+									<div class="form-group">
+										<label for="login-username"><i class="icon-user"></i>
+											<b>Name</b></label> <input name="name" class="form-control"
+											id="group-name-edit" type="text" placeholder="">
+									</div>
+
+									<div class="form-group">
+										<label for="login-password"><i class="icon-lock"></i>
+											<b>Teacher</b></label> <select name="teacher_id" class="form-control"
+											id="group-teacher-edit"  ></select>
+									</div>
+									<div class="form-group">
+
+										<button type="submit" id='submit-group-edit'
+											class="btn pull-right">Update</button>
+										<div class="clearfix"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+
+
+
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -57,18 +380,27 @@
 								<a data-toggle="collapse" class="courses"
 									data-parent="#accordion" href="#collapse1">Courses</a>
 							</h4>
+
 						</div>
 						<div id="collapse1" class="panel-collapse collapse">
 							<div class="panel-body" id="courses-body">
 
-								<div class="row-fluid">
+								<div class="row">
+									<div class="col-xs-12 col-md-10">
 
-									<div class="form-group">
+										<div class="form-group">
 
-										<input type="text" id="search-field"
-											placeholder="Course Search" class='form-control'>
+											<input type="text" id="search-field"
+												placeholder="Course Search" class='form-control'>
+
+										</div>
 									</div>
-
+									<div class="col-xs-4 col-sm-2">
+										<a data-toggle="modal" class='btn btn-primary'
+											href="#newCourse">Create New Course</a> <a
+											data-toggle="modal" id="courseEditModal" href="#editCourse"><i
+											class='glyphicon glyphicon-edit'></i></a>
+									</div>
 
 								</div>
 								<table class="table table-striped">
@@ -77,6 +409,7 @@
 											<th>Name</th>
 											<th>Is active</th>
 											<th>Triger course</th>
+											<th>Edit course</th>
 										<tr>
 									</thead>
 									<tbody id="courses-body">
@@ -117,6 +450,7 @@
 											<th>Group Name</th>
 											<th>Teacher</th>
 											<th>Confirmed</th>
+											<th>Edit</th>
 										<tr>
 									</thead>
 									<tbody id="groups-body">
@@ -179,7 +513,7 @@
 				</div>
 			</div>
 
-		</c:otherwise>
+		</c:when>
 	</c:choose>
 
 

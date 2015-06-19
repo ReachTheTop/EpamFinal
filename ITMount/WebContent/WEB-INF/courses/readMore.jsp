@@ -39,9 +39,7 @@
 						<h3>${course.name}</h3>	
 						<ul class="no-list-style">
 							<li><b>Description:</b> ${course.description}</li>
-							<li class="portfolio-visit-btn"><a
-								href="<c:url value="/CourseServlet?action=show&course_id=${course.id }" />"
-								class="btn">Read more</a> <a
+							<li class="portfolio-visit-btn"> <a
 								href="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
 								class="btn">Register On Course</a>
 							

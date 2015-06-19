@@ -26,6 +26,7 @@ $(function() {
 	var $pages;
 	function handleCourses(response) {
 		$("tbody#courses-body").empty();
+		$("a#courseEditModal").first().hide();
 		var $body;  
 		var $tr; 
 		var $td1;
@@ -33,7 +34,8 @@ $(function() {
 		var $td3;
 		var $a;
 		var $courseLink;
-		
+		var $editCourse;
+		var $td4;
 		
 
 		$pages = response.amount;
@@ -45,16 +47,23 @@ $(function() {
 		var $courses = response.courses;
 
 		$.each($courses, function(index, item) {
-			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item['id']+"'>");
+			$courseLink  = $("<a href='/ITMount/CourseServlet?action=readMore&course_id="+item['id']+"'>");
+			$editCourse = $("a#courseEditModal").first().clone(true,true);
+			$editCourse.show();
+			$editCourse.attr('name', item['id']);
 			$body = $("tbody#courses-body"); 
 			$tr = $("<tr class='course-row'>");
 			$td1 = $("<td id='course-name'>");
 			$td2 = $("<td id='course-active'>");
 			$td3 = $("<td id='course-triger'>");
+			$td4 = $("<td id='course-edit'>");
 			
+			
+			$td4.append($editCourse);
 			$tr.append($td1);
 			$tr.append($td2);
 			$tr.append($td3);
+			$tr.append($td4);
 			
 			$a = $("<a class='btn' id='triger' >");
 			$a.attr('name', item['id']);
@@ -74,11 +83,33 @@ $(function() {
 			$body.append($tr);
 			
 		});
-		
-		
-
 	}
 	
+	
+
+	$('body').on(
+			'click',
+			'a#courseEditModal',
+			function() {
+				var object = $(this);
+				$.get('AdminServlet?action=getCourse&course_id='
+						+ $(this).attr('name'), function(response) {
+
+							$("input#course-name-edit").val(response.name);
+							$("textarea#course-description-edit").val(response.description);
+							$("input#edit-course-id").val(object.attr('name'));
+							
+				});
+			});
+
+	
+	
+
+/*
+ * $('button#submit-course-edit').click(function(){
+ * $.post('CourseServlet?action=update&course_id').done(function( data ) {
+ * alert( "Data Loaded: " + data ); }); });
+ */
 	
 	$('#page-selection').on("page", function(event, page) {
 		
@@ -135,10 +166,11 @@ $(function() {
 		$(this).val("");
 	});
 
-	
+	$("a#groupEditModal").hide();
 	var $groupPages;
 	function handleGroups(response){
 		$("tbody#groups-body").empty();
+		
 		var $body;
 		var $tr; 
 		var $td1;
@@ -146,11 +178,11 @@ $(function() {
 		var $td3;
 		
 		var $td5;
-		
+		var $td6;
 		var $courseLink;
 		var $groupLink;
 		var $teacherLink;
-		
+		var $editGroup;
 		
 		
 
@@ -166,13 +198,18 @@ $(function() {
 			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item.course['id']+"'>");
 			$groupLink  = $("<a href='/ITMount/GroupServlet?action=show&group_id="+item['id']+"'>");
 			
+			
 			$body = $("tbody#groups-body"); 
 			$tr = $("<tr class='group-row'>");
 			$td1 = $("<td id='course-name'>");
 			$td2 = $("<td id='group-name'>");
 			$td3 = $("<td id='teacher'>");
 			$td5 = $("<td id='is-confirmed'>");
+			$td6 = $("<td id= 'group-edit-modal'>"); 
+			$editGroup =$("a#groupEditModal").first().clone(true,true).show(); 
 			
+			$editGroup.attr("name", item['id']);
+			$td6.append($editGroup);
 			
 			
 			$courseLink.text(item.course['name']);
@@ -183,14 +220,14 @@ $(function() {
 			$tr.append($td3);
 			
 			$tr.append($td5);
-			
+			$tr.append($td6);
 			
 			
 			$groupLink.text(item['name']);
 			$td2.append($groupLink);
 			
 			if(item.hasOwnProperty("teacher")){
-				$teacherLink  = $("<a href='/ITMount/UserServlet?action=show&user_id="+item.teacher['id']+"'>");
+				$teacherLink  = $("<a href='/ITMount/UserServlet?user_id="+item.teacher['id']+"'>");
 				$teacherLink.text(item.teacher['name']+" "+ item.teacher['surname']);
 				
 				$td3.append($teacherLink);
@@ -216,6 +253,49 @@ $(function() {
 
 	}
 	
+	$('form#edit-group-form').on('submit', function(event) {
+		var $form = $(this);
+		var $target = $($form.attr('data-target'));
+
+		$.ajax({
+			type : $form.attr('method'),
+			url : $form.attr('action'),
+			data : $form.serialize(),
+
+			success : function(data, status) {
+				$target.html(data);
+				
+			}
+		});
+		
+		event.preventDefault();
+	});
+	
+	
+	$.get('AdminServlet?action=teachers', function(response){
+		var $select = $('select#group-teacher-edit');
+		$.each(response, function(index, item){
+			var $option;
+			$option = $("<option id='teacher'>");
+			$option.val(item.id);
+			$option.text((item.name+" "+item.surname));
+			$select.append($option);
+		});
+	});
+
+	$('body').on(
+			'click',
+			'a#groupEditModal',
+			function() {
+				var object = $(this);
+				$.get('AdminServlet?action=getGroup&group_id='
+						+ $(this).attr('name'), function(response) {
+							$('input#group-id-edit').val(response.id)
+							$('input#group-name-edit').val(response.name);
+							$('select#group-teacher-edit').val(response.teacher_id);
+				});
+			});
+
 	
 	
 	$('body').on(
@@ -343,8 +423,10 @@ $(function() {
 			
 			if(item['is_active'] === true){
 				$trigerUser.text("Ban");
+				$trigerUser.attr('class','btn btn-danger');
 			}else{
 				$trigerUser.text("Activate");
+				$trigerUser.attr('class','btn btn-success');
 			}
 			$tr.append($td7.append($trigerUser));
 			$body.append($tr);
@@ -365,8 +447,10 @@ $(function() {
 					  
 					  if(response.is_active === true){
 						  object.text("Ban");
+						  object.attr('class','btn btn-danger');
 					  }else{
 						  object.text("Activate");
+						  object.attr('class','btn btn-success');
 					  }
 				  });
 			});
