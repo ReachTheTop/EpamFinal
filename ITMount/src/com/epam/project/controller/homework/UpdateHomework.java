@@ -28,7 +28,6 @@ public class UpdateHomework implements Action {
 		if (file.getSize()>0) {
 		
 			String fileName = m.uploadFile(file, request.getServletContext(),"homework_id_"+homework_id);
-		
 			HomeWork homework = HomeWorkService.getHomeWork(Integer.parseInt(homework_id));
 			homework.setData(fileName);
 			HomeWorkService.updateHomeWork(homework);

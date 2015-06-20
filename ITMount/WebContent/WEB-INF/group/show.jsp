@@ -17,12 +17,6 @@
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
-<!-- block for autokomplite -->
-<!-- <link rel="stylesheet" type="text/css"
-	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" /> -->
-<%-- <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main.css"> --%>
-<!-- end block for autokomplite -->
 
 <title>${ group.name }</title>
 
@@ -38,6 +32,12 @@
 
 
 	<div class="row-fluid">
+  <a href="<c:url value="/openCreateTask"/>">Create Task</a>
+
+ <h3>
+  <c:out value="${group.name }" />
+ </h3>
+
 
 
 

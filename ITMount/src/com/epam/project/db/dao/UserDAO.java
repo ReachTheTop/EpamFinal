@@ -143,7 +143,7 @@ public class UserDAO {
 			if(user.getIs_confirmed()==null){
 				stmt.setBoolean(12, false);
 			}else{
-				stmt.setBoolean(12, true);
+				stmt.setBoolean(12, user.getIs_confirmed());
 			}
 			
 
