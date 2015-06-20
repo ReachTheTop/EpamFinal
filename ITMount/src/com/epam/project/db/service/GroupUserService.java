@@ -90,4 +90,9 @@ public class GroupUserService {
 		closeConnection(connection);
 	}
 
+	public static void rebaseUsers(Integer old_group_id, Integer new_group_id, List<String> users ) {
+		Connection connection = DBConnection.getConnection();
+		GroupUserDAO.rebaseUsers(connection, old_group_id, new_group_id,users);
+		closeConnection(connection);
+	}
 }

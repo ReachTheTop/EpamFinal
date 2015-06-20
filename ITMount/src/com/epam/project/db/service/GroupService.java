@@ -51,7 +51,7 @@ public class GroupService {
 		closeConnection(connection);
 		return groups;
 	}
-	
+
 	public static List<Group> getGroupsUserStudy(Integer id) {
 		List<Group> groups = null;
 		Connection connection = DBConnection.getConnection();
@@ -71,12 +71,12 @@ public class GroupService {
 		return groups;
 	}
 
-	public static void newGroup(Group group) {
+	public static Integer newGroup(Group group) {
 
 		Connection connection = DBConnection.getConnection();
-		GroupDAO.addNewGroupe(group, connection);
+		Integer group_id = GroupDAO.addNewGroupe(group, connection);
 		closeConnection(connection);
-
+		return group_id;
 	}
 
 	public static void updateGroup(Group group) {
@@ -100,11 +100,12 @@ public class GroupService {
 			e.printStackTrace();
 		}
 	}
-	
-	public static List<Group> getByTeacher(Integer id){
+
+	public static List<Group> getByTeacher(Integer id) {
 		Connection connection = DBConnection.getConnection();
 		List<Group> groups = null;
-		groups = GroupTransformer.getAllGroups(GroupDAO.getByTeacher(connection, id));
+		groups = GroupTransformer.getAllGroups(GroupDAO.getByTeacher(
+				connection, id));
 		for (Group group : groups) {
 			group.setTeacher(UserService.getUser(group.getTeacher_id()));
 			group.setCourse(CourseService.getCourse(group.getCourse_id()));

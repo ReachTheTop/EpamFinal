@@ -154,7 +154,7 @@
 									class="glyphicon glyphicon-gift"> <c:out
 										value="${current_user.birtday }" /></i><br /> <i
 									class="glyphicon glyphicon-earphone"> <c:out
-										value="${current_contact.phone}" /></i> <br /> <i
+										value="${contact.phone}" /></i> <br /> <i
 									class="glyphicon glyphicon-phone"> <c:out
 										value="${contact.skype}" /></i>
 
@@ -270,6 +270,10 @@
 
 						event.preventDefault();
 					});
+
+					$('button#submit-course-edit').click(function() {
+						$('#editCourse').modal('hide');
+					});
 				</script>
 
 
@@ -336,12 +340,12 @@
 								<form action="GroupServlet?action=update" data-async
 									id='edit-group-form' method="post"
 									enctype="multipart/form-data" role="form" role="form">
-									
+
 									<div class="form-group" hidden="true">
-											<input name="group_id" class="form-control"
-											id="group-id-edit" type="text" placeholder="">
+										<input name="group_id" class="form-control" id="group-id-edit"
+											type="text" placeholder="">
 									</div>
-									
+
 									<div class="form-group" hidden="true">
 										<input class="form-control" type="text" name='group_id'
 											id='edit-group-id'>
@@ -355,7 +359,7 @@
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
 											<b>Teacher</b></label> <select name="teacher_id" class="form-control"
-											id="group-teacher-edit"  ></select>
+											id="group-teacher-edit"></select>
 									</div>
 									<div class="form-group">
 
@@ -368,7 +372,11 @@
 						</div>
 					</div>
 				</div>
-				
+				<script type="text/javascript">
+					$('button#submit-group-edit').click(function() {
+						$('#editGroup').modal('hide');
+					});
+				</script>
 
 
 

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
@@ -22,7 +21,7 @@ public class GroupDAO {
 	private static final String GET_GROUP_BY_ID = "SELECT * FROM group1 WHERE id=?";
 	private static final String GET_ALL_GROUP = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 WHERE is_active =1 AND name REGEXP ? LIMIT ?,?;";
 	private static final String CALC_ROWS = "SELECT found_rows();";
-	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name, is_active , date_exam) value (?, ?, ?, ?, ?);";
+	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name) value (?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 
@@ -88,22 +87,22 @@ public class GroupDAO {
 		String pattern = String.format(".*%s.*", token);
 		ResultSet rs = null;
 		GroupCorteg groups = new GroupCorteg();
-		
+
 		try {
 			connection.setAutoCommit(false);
 			PreparedStatement st = connection.prepareStatement(request);
 			st.setString(1, pattern);
 			st.setString(2, pattern);
 			st.setString(3, pattern);
-			st.setInt(4, page*10);
+			st.setInt(4, page * 10);
 			st.setInt(5, 10);
 			rs = st.executeQuery();
-			 groups.setGroups( GroupTransformer.getAllGroups(rs));
-			
+			groups.setGroups(GroupTransformer.getAllGroups(rs));
+
 			st = connection.prepareStatement(CALC_ROWS);
 			rs = st.executeQuery();
 			rs.next();
-			
+
 			groups.setAmount(rs.getInt(1));
 			connection.commit();
 			connection.setAutoCommit(true);
@@ -133,20 +132,28 @@ public class GroupDAO {
 		return list;
 	}
 
-	public static void addNewGroupe(Group group, Connection connection) {
+	public static Integer addNewGroupe(Group group, Connection connection) {
+		Integer group_id = null;
 		try {
-			PreparedStatement st = connection.prepareStatement(NEW_GROUP);
+			PreparedStatement st = connection.prepareStatement(NEW_GROUP,
+					Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, group.getCourse_id());
 			st.setInt(2, group.getTeacher_id());
 			st.setString(3, group.getName());
-			st.setBoolean(4, group.getIs_active());
-			st.setTimestamp(5, new Timestamp(group.getDateExam().getTime()));
-
+			/*
+			 * st.setBoolean(4, group.getIs_active()); st.setTimestamp(5, new
+			 * Timestamp(group.getDateExam().getTime()));
+			 */
 			st.executeUpdate();
+
+			ResultSet resultSet = st.getGeneratedKeys();
+			resultSet.next();
+			group_id = resultSet.getInt(1);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		return group_id;
 	}
 
 	public static void updateGroup(Group group, Connection connection) {
@@ -158,7 +165,6 @@ public class GroupDAO {
 			st.setInt(2, group.getTeacher_id());
 			st.setString(3, group.getName());
 			st.setBoolean(4, group.getIs_active());
-			
 
 			st.setInt(5, group.getId());
 

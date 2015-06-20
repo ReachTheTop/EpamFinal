@@ -197,8 +197,8 @@ public class GroupUserDAO {
 
 	}
 
-	public static void leaveUsersInGroup(Connection connection,Integer group_id,
-			List<String> users) {
+	public static void leaveUsersInGroup(Connection connection,
+			Integer group_id, List<String> users) {
 		PreparedStatement ps = null;
 		String input = "(";
 		String separator = "";
@@ -210,21 +210,22 @@ public class GroupUserDAO {
 		input += ")";
 		try {
 
-			ps =connection.prepareStatement("select id from user where email in "+input);
+			ps = connection
+					.prepareStatement("select id from user where email in "
+							+ input);
 			List<Integer> users_id = new ArrayList<Integer>();
 			for (int i = 0; i < users.size(); i++) {
-				ps.setString(i+1, users.get(i));
+				ps.setString(i + 1, users.get(i));
 			}
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				users_id.add(rs.getInt(1));
 			}
-			
-			ps = connection
-					.prepareStatement(String
-							.format("delete from group_user "
-									+ "WHERE group_id = ? AND user_id not IN "+input,
-									input));
+
+			ps = connection.prepareStatement(String.format(
+					"delete from group_user "
+							+ "WHERE group_id = ? AND user_id not IN " + input,
+					input));
 			ps.setInt(1, group_id);
 			for (int i = 0; i < users.size(); i++) {
 				ps.setInt(i + 2, users_id.get(i));
@@ -235,5 +236,24 @@ public class GroupUserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void rebaseUsers(Connection connection, Integer old_group_id,
+			Integer new_group_id, List<String> users) {
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement("UPDATE group_user SET group_id = ? WHERE group_id = ? AND user_id = (SELECT id  FROM user WHERE email = ?);");
+			for (String email : users) {
+				ps.setInt(1, new_group_id);
+				ps.setInt(2, old_group_id);
+				ps.setString(3, email);
+				ps.execute();	
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
