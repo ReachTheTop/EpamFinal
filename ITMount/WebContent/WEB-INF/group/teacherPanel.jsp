@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container" align="center">
-	<div class="col-md-10 column">
+
 		<div class="panel panel-default">
 			<div class="panel-heading">Teacher Panel</div>
 			<div class="panel-body">
@@ -104,5 +103,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	

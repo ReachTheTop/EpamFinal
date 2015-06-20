@@ -11,10 +11,6 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
 <link rel="stylesheet" href="resources/css/tabPanel.css"></link>
-
-
-
-
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />

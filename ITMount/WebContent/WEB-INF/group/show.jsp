@@ -11,10 +11,11 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 <!-- block for autokomplite -->
-<script
+<!-- <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+-->
 <script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
 
@@ -29,7 +30,7 @@
 	rel="stylesheet">
 <script
 	src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/group.js"></script>
+
 
 
 
@@ -57,62 +58,20 @@
 
 	<a href="<c:url value="/openCreateTask"/>">Create Task</a>
 
-
-
-	<%-- <c:if test="${user.role == 'lecturer' }"> --%>
-		<jsp:include page="teacherPanel.jsp"></jsp:include>
-	<%-- </c:if> --%>
-	<!-- ПАНЕЛЬ ПОДІЙ  -->
-	<div>
-		<div class="col-md-10 column">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<a data-toggle="modal" href="#addEvent"><i
-						class="glyphicon glyphicon-plus"></i></a>Events
-				</div>
-				<div class="panel-body">
-
-					<ul class="list-group">
-						<c:forEach items="${ events}" var="event">
-							<li class="list-group-item"><c:out
-									value="${event.description }" /> <c:out value="${event.date }" /></li>
-						</c:forEach>
-
-					</ul>
-
-				</div>
-
-			</div>
-
-
-
-		</div>
-
-
-	</div>
 	<div class="container">
-		<h2>Group Users</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${users}" var="user">
-					<tr>
-						<td>${user.name }${user.surname}</td>
-						<td>${user.email }</td>
-						<td><a
-							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
-								homework</a></td>
-
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div class="row">
+			<div class="col-md-8">
+				<%-- <c:if test="${user.role == 'lecturer' }"> --%>
+				<jsp:include page="teacherPanel.jsp"></jsp:include>
+				<%-- </c:if> --%>
+				<!-- ПАНЕЛЬ ПОДІЙ  -->
+				<jsp:include page="eventPanel.jsp"></jsp:include>
+				<!-- ПАНЕЛЬ ПОДІЙ  -->
+			</div>
+			<div class="col-md-4">
+				<jsp:include page="userPanel.jsp"></jsp:include>
+			</div>
+		</div>
 	</div>
 
 	<jsp:include page="../page/footer.jsp" />
