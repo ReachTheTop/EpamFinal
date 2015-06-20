@@ -104,12 +104,45 @@
     <filter-name>loginuserFilter</filter-name>
     <url-pattern>/confirm</url-pattern>
   </filter-mapping>
-  	<servlet>
-		<servlet-name>OpenCreateTask</servlet-name>
-		<servlet-class>com.epam.project.controller.OpenCreateTask</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>OpenCreateTask</servlet-name>
-		<url-pattern>/openCreateTask</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <servlet-name>OpenCreateTask</servlet-name>
+    <servlet-class>com.epam.project.controller.OpenCreateTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OpenCreateTask</servlet-name>
+    <url-pattern>/openCreateTask</url-pattern>
+  </servlet-mapping>
+   <filter>
+    <filter-name>endSession</filter-name>
+    <filter-class>com.epam.project.filter.EndSessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/GroupServlet</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/CourseServlet</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/KnowledgeBaseServlet</url-pattern>
+  </filter-mapping>
+   <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/Homework</url-pattern>
+  </filter-mapping>
+     <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/TaskServlet</url-pattern>
+  </filter-mapping>
+ 
+      <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/UserServlet</url-pattern>
+  </filter-mapping>
+ <filter-mapping>
+    <filter-name>endSession</filter-name>
+    <url-pattern>/AdminServlet</url-pattern>
+  </filter-mapping>
 </web-app>

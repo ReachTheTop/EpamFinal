@@ -47,7 +47,7 @@
 								 <a
 								href="<c:url value="/KnowledgeBaseServlet?action=index&course_id=${course.id }" />"
 								class="btn">Knowledgebase</a>
-									<a data-toggle="modal"  class="btn" href="#addKnbase">Add knowledgebase</a>
+									
 							
 						</ul>
 						
@@ -83,41 +83,6 @@
 			
 		</div>
 		
-		<div id="addKnbase" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Add kbase</h4>
-				</div>
-				<div class="modal-body">
-					<form action="KnowledgeBaseServlet?action=new" method="post" enctype="multipart/form-data"
-							role="form" role="form">
-							
-							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
-								<input name="file" class="form-control"  type="file" required="required"
-									placeholder="">
-							</div>
-								
-								<div class="form-group">
-							 <input class="form-control" 
-								name="cours_id" type="hidden" id="cours_id" value="${course.id }" 
-								>
-						</div>
-							<div class="form-group">
-
-								<button type="submit" class="btn pull-right">Add</button>
-								<div class="clearfix"></div>
-							</div>
-						</form>
-				</div>
-
-			</div>
-		</div>
-	
-	</div>
 		<jsp:include page="../page/footer.jsp" />
 </body>
 </html>

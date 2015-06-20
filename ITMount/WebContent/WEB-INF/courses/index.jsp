@@ -35,7 +35,7 @@
 				<div class="col-md-4 col-sm-6">
 						<div class="portfolio-item">
 							<div class="portfolio-image">
-								<a href="<c:url value="/CourseServlet?action=readMore"/>"><img src="upload/${course.icon }"  style="min-widt:250px; max-widt:250px; min-height:230px; max-height:230px" alt="Course"></a>
+								<a href="<c:url value="/CourseServlet?action=readMore&course_id=${course.id }"/>"><img src="upload/${course.icon }"  style="min-widt:250px; max-widt:250px; min-height:230px; max-height:230px" alt="Course"></a>
 							</div>
 							<div class="portfolio-info">
 								<ul>

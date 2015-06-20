@@ -30,28 +30,28 @@
 <div class="container">
 		<h2>knowledge base</h2>
 		
-				<c:forEach items="${base }" var="kbase">
-					
-		        			 <div class="pricing-plan pricing-plan-promote">
-								<h2 class="pricing-plan-title"><script type="text/javascript">
+		
+		
+			<c:forEach items="${base }" var="kbase">
+					<div class="col-md-3 col-sm-6">
+	        			<div class="service-wrapper">
+		        			
+		        			<h3><script type="text/javascript">
 								var Regex =/\d[_].*$/g;
 								var Regex2 =/[^\d^_].*/g;
 								
 								var fileName1 = Regex.exec("${kbase.value.getPath()}");
 								var fileName = Regex2.exec(fileName1);
 								document.write(fileName)
-								</script></h2>
-								<ul class="pricing-plan-features">
-								<li><img src="resources/img/fileicon/${kbase.key }.png" onerror="this.src='resources/img/fileicon/other.png'" class="img-rounded"  width="128" height="128" alt="file"></li>
-									<li><p><a href="<c:url value="/downloadFile?file=${kbase.value.getPath()}"/>" class="btn">Download</a></p></li>
-									<li><p><a href="<c:url value="/KnowledgeBaseServlet?action=delete&deleteFile=${kbase.value.getPath()}&id_kbase=${kbase.value.getId()}"/>" class="btn">Delete</a></p>
-		        			</li>
-								</ul>
-					  
+								</script></h3>
+								<img src="resources/img/fileicon/${kbase.key }.png" onerror="this.src='resources/img/fileicon/other.png'" class="img-rounded"  width="128" height="128" alt="file">
+		        			<p>${home.value.getDescription()}</p>
+		        			<p>Rating: ${home.key.getRating()}</p>
+		        			<p><a href="<c:url value="/downloadFile?file=${kbase.value.getPath()}"/>" class="btn">Download</a></p>
+		        			<p><a href="<c:url value="/KnowledgeBaseServlet?action=delete&deleteFile=${kbase.value.getPath()}&id_kbase=${kbase.value.getId()}"/>" class="btn">Delete</a></p>
+		        			</div>
 	        		</div>
 				</c:forEach>
-		
-		
 	</div>	   
 	    <!-- End Pricing Table -->
 
