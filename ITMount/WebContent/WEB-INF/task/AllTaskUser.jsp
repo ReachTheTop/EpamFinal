@@ -79,25 +79,36 @@
 											<tr>
 												<td>Your work</td>
 												<td><c:choose>
-
-														<c:when test="${tasks.value !=null}">
-															<p>
-																<a data-toggle="modal" href="#updateHomeWork"
-																	data-delete="${tasks.value.getData()}"
-																	data-homework="${tasks.value.getId()}"
-																	class="open-updateHomeWork btn btn-primary btn-sm">Update</a>
-															</p>
+														<c:when test="${tasks.key.getAvailable() == false}">
+															Time out
 														</c:when>
 
 														<c:otherwise>
-															<p>
-																<a data-toggle="modal" href="#uploadHomeWork"
-																	data-task ="${tasks.key.getId()}"
-																	class="open-uploadHomeWork btn btn-primary btn-sm">Add </a>
-															</p>
+															<c:choose>
 
+																<c:when test="${tasks.value !=null}">
+																	<p>
+																		<a data-toggle="modal" href="#updateHomeWork"
+																			data-delete="${tasks.value.getData()}"
+																			data-homework="${tasks.value.getId()}"
+																			class="open-updateHomeWork btn btn-primary btn-sm">Update</a>
+																	</p>
+																</c:when>
+
+																<c:otherwise>
+																	<p>
+																		<a data-toggle="modal" href="#uploadHomeWork"
+																			data-task="${tasks.key.getId()}"
+																			class="open-uploadHomeWork btn btn-primary btn-sm">Add
+																		</a>
+																	</p>
+
+																</c:otherwise>
+															</c:choose>
 														</c:otherwise>
 													</c:choose></td>
+
+<%-- 												<c:if test="${tasks.key.getAvailable() == false}">It's false!</c:if> --%>
 
 											</tr>
 
@@ -203,25 +214,21 @@
 
 	<script>
 		$(document).on("click", ".open-updateHomeWork", function() {
-			
+
 			var filedelete = $(this).data('delete');
 			var homeworkid = $(this).data('homework');
 			$(".form-group #idDelete").val(filedelete);
 			$(".form-group #idHomework").val(homeworkid);
-			
-			
-			
+
 		});
 	</script>
 
 	<script>
 		$(document).on("click", ".open-uploadHomeWork", function() {
-			
+
 			var taskid = $(this).data('task');
 			$(".form-group #idTask").val(taskid);
-			
-			
-			
+
 		});
 	</script>
 
