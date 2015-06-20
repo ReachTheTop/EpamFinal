@@ -24,8 +24,6 @@ public class KnowledgeDelete implements Action {
 
 	}
 
-	
-	
 	@Override
 	public String getName() {
 
