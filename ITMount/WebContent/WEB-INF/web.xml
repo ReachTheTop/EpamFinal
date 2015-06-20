@@ -112,4 +112,14 @@
 		<servlet-name>OpenCreateTask</servlet-name>
 		<url-pattern>/openCreateTask</url-pattern>
 	</servlet-mapping>
+	
+	  	<servlet>
+		<servlet-name>ShowAllTask</servlet-name>
+		<servlet-class>com.epam.project.controller.ShowAllTask</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowAllTask</servlet-name>
+		<url-pattern>/showAllTask</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
