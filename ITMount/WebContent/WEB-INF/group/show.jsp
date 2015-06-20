@@ -56,7 +56,7 @@
 
 
 
-	<a href="<c:url value="/openCreateTask"/>">Create Task</a>
+	<a href="<c:url value="/openCreateTask?group_id=${group.id }"/>">Create Task</a>
 
 	<div class="container">
 		<div class="row">

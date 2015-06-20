@@ -3,22 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<a data-toggle="modal" id="groupEditModal" href="#createEvent"><i
+		<a data-toggle="modal" id="createEventModal" href="#createEvent"><i
 			class='glyphicon glyphicon-plus'></i></a> Events
 	</div>
-	<div class="panel-body">
+	<table class="table">
+		<c:forEach items="${ events}" var="event">
+			<tr >
+				<td><c:out value="${event.date }" /></td>
+				<td><c:out value="${event.description }" /></td>
+				<td><a data-toggle="modal" href="#editEvent"><i
+			class='glyphicon glyphicon-edit'></i></a></td>
+			</tr>
 
-		<ul class="list-group">
-			<c:forEach items="${ events}" var="event">
-				<li class="list-group-item"><c:out
-						value="${event.description }" /> <c:out value="${event.date }" /></li>
-			</c:forEach>
-
-		</ul>
-	</div>
+		</c:forEach>
+	</table>
 </div>
 
 <div id="createEvent" class="modal fade">
@@ -34,8 +34,9 @@
 					id='create-event-form' method="post" role="form" role="form">
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Description</b></label> <input name="description" class="form-control"
-							type="text" placeholder="">
+								Description</b></label>
+						<textarea name="description" class="form-control" type="text"
+							placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
@@ -71,7 +72,7 @@
 			data : $form.serialize(),
 
 			success : function(data, status) {
-				$target.html(data);
+
 			}
 		});
 
