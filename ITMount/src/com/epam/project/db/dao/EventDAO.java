@@ -11,8 +11,8 @@ import com.epam.project.db.model.Event;
 
 public class EventDAO {
 	private static final String NEW_EVENT = ""
-			+ "INSERT INTO itmount (description, date, group_id) "
-			+ "SET (?,?,?);";
+			+ "INSERT INTO event (description, date, group_id) "
+			+ "VALUES (?,?,?);";
 	private static final String GET_ALL = "SELECT * FROM event;";
 
 	private static final String DELETE = "" + "UPDATE event "
@@ -22,6 +22,8 @@ public class EventDAO {
 			+ "WHERE id = ?;";
 
 	private static final String GET_BY_ID = "SELECT * FROM event WHERE id = ?;";
+	
+	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=?;";
 
 	private PreparedStatement statement;
 	private Connection con;
@@ -32,6 +34,18 @@ public class EventDAO {
 		try {
 			statement = con.prepareStatement(GET_BY_ID);
 			statement.setInt(1, id);
+			resultSet = statement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSet;
+	}
+	
+	public ResultSet getByIdGroup(Integer group_id) {
+		con = DBConnection.getConnection();
+		try {
+			statement = con.prepareStatement(GET_BY_ID_GROUP);
+			statement.setInt(1, group_id);
 			resultSet = statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
