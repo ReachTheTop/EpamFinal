@@ -19,7 +19,7 @@ public class HomeworkDAO {
 	private static final String SELECTALL = "SELECT * FROM homework";
 	private static final String SELECT = "SELECT * FROM homework WHERE id=?";
 	private static final String SELECTALL_WHERE_USER_ID = "SELECT * FROM homework WHERE user_id=?";
-	private static final String SELECT_WHERE_USERID_TASK_ID = "SELECT * FROM homework WHERE user_id=?,task_id=?";
+	private static final String SELECT_WHERE_USERID_TASK_ID = "SELECT * FROM homework WHERE user_id=? and task_id=?";
 	
 	public static void addHomework(HomeWork homework, Connection connection){
 		try{
