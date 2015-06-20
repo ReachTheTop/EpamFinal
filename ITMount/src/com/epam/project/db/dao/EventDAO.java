@@ -23,7 +23,7 @@ public class EventDAO {
 
 	private static final String GET_BY_ID = "SELECT * FROM event WHERE id = ?;";
 	
-	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=?;";
+	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=? ORDER BY date DESC;";
 
 	private PreparedStatement statement;
 	private Connection con;

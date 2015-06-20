@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
+import com.epam.project.db.model.Event;
 import com.epam.project.db.model.Group;
 import com.epam.project.db.model.User;
+import com.epam.project.db.service.EventService;
 import com.epam.project.db.service.GroupService;
 import com.epam.project.db.service.GroupUserService;
 
@@ -32,6 +34,10 @@ public class ShowGroup implements Action {
 					response.sendError(404);
 					return;
 				}
+				
+				List<Event> events = EventService.getByIdGroup(group_id);
+				
+				request.setAttribute("events", events);
 				request.setAttribute("users", group_users);
 				request.setAttribute("group", group);
 				request.getRequestDispatcher("/WEB-INF/group/show.jsp")

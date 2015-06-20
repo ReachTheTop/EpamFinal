@@ -28,6 +28,7 @@
 	rel="stylesheet">
 <script
 	src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/group.js"></script>
 
 <title>${ group.name }</title>
 
@@ -93,34 +94,6 @@
 												<script type="text/javascript">
 													$(function() {
 
-														$
-																.get(
-																		"GroupServlet?action=getTeacherGroups&group_id=${group.id}",
-																		function(
-																				response) {
-																			var $option;
-																			$
-																					.each(
-																							response,
-																							function(
-																									index,
-																									item) {
-																								$option = $("<option id='teacher-id'>");
-																								$option
-																										.val(item['id']);
-																								$option
-																										.text(item['name']);
-																								$(
-																										'#group-teacher-edit')
-																										.append(
-																												$option);
-																							});
-																			$(
-																					'#group-teacher-edit')
-																					.val(
-																							'${group.id}');
-																		});
-
 														$('#create-group')
 																.hide();
 
@@ -171,15 +144,6 @@
 										</div>
 									</div>
 								</div>
-								<script type="text/javascript">
-									$('button#submit-group-edit').click(
-											function() {
-												$('#editGroup').modal('hide');
-											});
-								</script>
-
-
-
 							</form>
 						</div>
 
@@ -189,8 +153,35 @@
 			</div>
 		</div>
 	</c:if>
+	<!-- ПАНЕЛЬ ПОДІЙ  -->
+	<div>
+		<div class="col-md-10 column">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a data-toggle="modal" href="#addEvent"><i
+						class="glyphicon glyphicon-plus"></i></a>Events
+				</div>
+				<div class="panel-body">
+
+					<ul class="list-group">
+						<c:forEach items="${ events}" var="event">
+							<li class="list-group-item"><c:out
+									value="${event.description }" /> <c:out value="${event.date }" />
+							</li>
+						</c:forEach>
+
+					</ul>
+
+				</div>
+
+			</div>
 
 
+
+		</div>
+
+		
+	</div>
 	<div class="container">
 		<h2>Group Users</h2>
 		<table class="table">
