@@ -1,6 +1,7 @@
 package com.epam.project.db.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
@@ -58,4 +59,25 @@ public class GroupUser extends Validator implements Serializable {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	private Date exam_date;
+
+	public Date getExam_date() {
+		return exam_date;
+	}
+
+	public void setExam_date(Date exam_date) {
+		this.exam_date = exam_date;
+	}
+	
+	private Integer exam_id;
+
+	public Integer getExam_id() {
+		return exam_id;
+	}
+
+	public void setExam_id(Integer exam_id) {
+		this.exam_id = exam_id;
+	}
+	
 }

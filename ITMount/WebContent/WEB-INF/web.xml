@@ -104,6 +104,7 @@
     <filter-name>loginuserFilter</filter-name>
     <url-pattern>/confirm</url-pattern>
   </filter-mapping>
+
   	<servlet>
 		<servlet-name>OpenCreateTask</servlet-name>
 		<servlet-class>com.epam.project.controller.OpenCreateTask</servlet-class>
@@ -121,5 +122,13 @@
 		<servlet-name>ShowAllTask</servlet-name>
 		<url-pattern>/showAllTask</url-pattern>
 	</servlet-mapping>
-	
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/error/404.jsp</location>
+  </error-page>
+
 </web-app>

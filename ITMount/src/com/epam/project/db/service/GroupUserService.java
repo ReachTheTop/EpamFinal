@@ -2,10 +2,13 @@ package com.epam.project.db.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.GroupExamDAO;
 import com.epam.project.db.dao.GroupUserDAO;
+import com.epam.project.db.model.GroupExamModel;
 import com.epam.project.db.model.GroupUser;
 import com.epam.project.db.model.User;
 
@@ -90,9 +93,30 @@ public class GroupUserService {
 		closeConnection(connection);
 	}
 
+
 	public static void rebaseUsers(Integer old_group_id, Integer new_group_id, List<String> users ) {
 		Connection connection = DBConnection.getConnection();
 		GroupUserDAO.rebaseUsers(connection, old_group_id, new_group_id,users);
 		closeConnection(connection);
 	}
+
+	public static GroupUser getByGroupAndUserId(Integer group_id,
+			Integer user_id) {
+		Connection connection = DBConnection.getConnection();
+		GroupUser association = null;
+		association = GroupUserDAO.getByGroupAndUserId(connection, group_id,
+				user_id);
+
+		GroupExamModel exam = GroupExamDAO.getById(connection,
+				association.getExam_id());
+		if (exam != null) {
+			Date date = exam.getExam_date();
+			association.setExam_date(date);
+		}
+
+		closeConnection(connection);
+		return association;
+	}
+
+
 }

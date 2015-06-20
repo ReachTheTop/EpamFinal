@@ -23,7 +23,7 @@ public class GroupUserTransformer {
 				groupUser.setUserID(rs.getInt(2));
 				groupUser.setGroupID(rs.getInt(3));
 				groupUser.setIsActive(rs.getBoolean(4));
-
+				groupUser.setExam_id(rs.getInt(5));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +47,7 @@ public static List<GroupUser> getAllGroupsUser(ResultSet rs) {
 				groupUser.setUserID(rs.getInt(2));
 				groupUser.setGroupID(rs.getInt(3));
 				groupUser.setIsActive(rs.getBoolean(4));
-				
+				groupUser.setExam_id(rs.getInt(5));
 				list.add(groupUser);
 			}
 		} catch (SQLException e) {

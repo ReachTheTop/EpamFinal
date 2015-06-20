@@ -13,7 +13,7 @@ import com.epam.project.db.transformer.GroupUserTransformer;
 import com.epam.project.db.transformer.UserTransformer;
 
 public class GroupUserDAO {
-
+	private static final String GET_GROUP_USER_BY_USER_AND_GROUP_ID = "SELEct * FROM group_user WHERE user_id = ? AND group_id = ?;";
 	private static final String GET_GROUP_USER_BY_ID = "SELECT * FROM group_user WHERE id=?";
 	private static final String GET_ALL_GROUP_USER = "select * FROM user WHERE  id IN(SELECT user_id FROM group_user WHERE group_id = ?);";
 	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id) value (?, ?);";
@@ -242,15 +242,51 @@ public class GroupUserDAO {
 			Integer new_group_id, List<String> users) {
 		PreparedStatement ps = null;
 		try {
-			ps = connection.prepareStatement("UPDATE group_user SET group_id = ? WHERE group_id = ? AND user_id = (SELECT id  FROM user WHERE email = ?);");
+			ps = connection
+					.prepareStatement("UPDATE group_user SET group_id = ? WHERE group_id = ? AND user_id = (SELECT id  FROM user WHERE email = ?);");
 			for (String email : users) {
 				ps.setInt(1, new_group_id);
 				ps.setInt(2, old_group_id);
 				ps.setString(3, email);
-				ps.execute();	
+				ps.execute();
 			}
-			
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static GroupUser getByGroupAndUserId(Connection connection,
+			Integer group_id, Integer user_id) {
+		GroupUser association = null;
+		PreparedStatement ps = null;
+		ResultSet set = null;
+		try {
+			ps = connection
+					.prepareStatement(GET_GROUP_USER_BY_USER_AND_GROUP_ID);
+			ps.setInt(1, user_id);
+			ps.setInt(2, group_id);
+			set = ps.executeQuery();
+
+			association = GroupUserTransformer.getGroupUser(set);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return association;
+	}
+
+	public static void setExamDate(Connection connection, Integer group_id,
+			Integer user_id, Integer exam_id) {
+		PreparedStatement ps = null;
+		try {
+			ps = connection
+					.prepareStatement("UPDATE group_user SET exam_id = ? WHERE group_id = ? AND user_id = ? ;");
+			ps.setInt(1, exam_id);
+			ps.setInt(2, group_id);
+			ps.setInt(3, user_id);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
