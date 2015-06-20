@@ -16,6 +16,17 @@ public class EventService {
 
 		eventBridge.close();
 	}
+	
+	public static List<Event> getByIdGroup(Integer group_id) {
+		EventDAO eventBridge = new EventDAO();
+		List<Event> result = new ArrayList<>();
+
+		result = EventTransformer.getAllEvents(eventBridge.getByIdGroup(group_id));
+
+		eventBridge.close();
+		return result;
+	}
+	
 
 	public static void update(Event event) {
 		EventDAO eventBridge = new EventDAO();
@@ -24,10 +35,10 @@ public class EventService {
 		eventBridge.close();
 	}
 
-	public static void delete(Event event) {
+	public static void delete(Integer event_id) {
 		EventDAO eventBrodge = new EventDAO();
 
-		eventBrodge.update(event);
+		eventBrodge.delete(event_id);
 		eventBrodge.close();
 
 	}

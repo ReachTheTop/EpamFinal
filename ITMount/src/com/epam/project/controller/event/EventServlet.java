@@ -22,7 +22,7 @@ public class EventServlet extends HttpServlet {
 	public EventServlet() {
 		super();
 		menu = new Menu(new IndexEvent(), new NewEvent(), new CreateEvent(), new ShowEvent(),
-			   new EditEvent(), new UpdateEvent());
+			   new EditEvent(), new UpdateEvent(), new DeleteEvent());
 	}
 
 	/**

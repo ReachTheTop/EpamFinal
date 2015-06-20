@@ -51,8 +51,8 @@
 								<label for="login-password"><i class="icon-lock"></i> <b>Date</b></label>
 								<input name="date" class="form-control" value="${event.date }"
 									id="login-username" type="datetime-local" placeholder="" >
-							</div>
-							
+							</div>							
+													
 							<div class="form-group">
 								<label for="login-username"><i class="icon-user"></i> <b>Group ID</b></label> <input name="group_id" class="form-control"
 									id="login-username" value="${event.group_id }" type="text" placeholder="">

@@ -41,12 +41,10 @@
 							<a
 								href="<c:url value="/EventServlet?action=show&event_id=${event.id }" />"
 								class="btn">Read more</a> 
-							<!-- <a
-								href="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
-								class="btn">Register On Course</a> 
+							
 							<a
-								href="<c:url value="/CourseServlet?action=triger&course_id=${course.id }" />"
-								class="btn">Close Course  </a> -->
+								href="<c:url value="/EventServlet?action=delete&event_id=${event.id }" />"
+								class="btn">Delete Event  </a> 
 							
 								
 
