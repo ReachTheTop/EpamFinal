@@ -33,6 +33,7 @@ public class DownloadFile extends HttpServlet {
 		FileDownload download = new FileDownload();
 		download.downloadFile(file, getServletContext(), response);
 		response.sendRedirect(request.getHeader("Referer"));
+		return;
 		
 	}
 

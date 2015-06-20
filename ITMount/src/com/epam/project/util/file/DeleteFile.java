@@ -12,7 +12,6 @@ public class DeleteFile {
 	public static void deleteFile(String pathFile, ServletContext servletContext) throws IOException{
 		String filePath = servletContext.getRealPath("")+"upload" + File.separator + pathFile;
         File file = new File(filePath);
-       System.out.println(filePath);
-        System.out.println( file.delete());
+
 	}
 }

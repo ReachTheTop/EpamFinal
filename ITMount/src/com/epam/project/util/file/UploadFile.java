@@ -41,7 +41,7 @@ public class UploadFile {
 		
 		String fileName = extractFileName(part);
 		try{
-			if(getExtension(part).contains("image")){
+			if(getExtension(part).contains("image")&&path==null){
 				patch +="photo";
 			}
 			else{
