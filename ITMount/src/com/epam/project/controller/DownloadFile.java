@@ -29,11 +29,9 @@ public class DownloadFile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String file = request.getParameter("file");
-		System.out.println(file);
 		FileDownload download = new FileDownload();
 		download.downloadFile(file, getServletContext(), response);
-		response.sendRedirect(request.getHeader("Referer"));
-		return;
+		
 		
 	}
 
