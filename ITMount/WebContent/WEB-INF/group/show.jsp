@@ -43,7 +43,7 @@
 
 
 	<div class="row-fluid">
-		<form action="GroupServlet?group_id=${group.id }" method="post">
+		<form action="GroupServlet?group_id=${group.id }" id ='rebase-group' method="post">
 			<input id="group" hidden="true" value="${group.id }">
 			<div class="row-fluid">
 				<input id="myAutocomplete" type="text" name="users" />
@@ -60,7 +60,6 @@
 					href="#editGroup">Rebase Users</a>
 			</div>
 
-
 			<div id="editGroup" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -75,24 +74,40 @@
 									type="text" placeholder="">
 							</div>
 
-							<input id="toggle-event" checked name="marker" type="checkbox" data-toggle="toggle">
+							<input id="toggle-event" checked name="marker" type="checkbox"
+								data-toggle="toggle">
 							<div id="console-event"></div>
 							<script type="text/javascript">
 								$(function() {
-									
-									$.get("GroupServlet?action=getTeacherGroups&group_id=${group.id}", function(response){
-										var $option ;
-										$.each(response, function(index,item){
-											$option = $("<option id='teacher-id'>");
-											$option.val(item['id']);
-											$option.text(item['name']);
-											$('#group-teacher-edit').append($option);		
-										});
-										$('#group-teacher-edit').val('${group.id}');
-									});
-									
+
+									$
+											.get(
+													"GroupServlet?action=getTeacherGroups&group_id=${group.id}",
+													function(response) {
+														var $option;
+														$
+																.each(
+																		response,
+																		function(
+																				index,
+																				item) {
+																			$option = $("<option id='teacher-id'>");
+																			$option
+																					.val(item['id']);
+																			$option
+																					.text(item['name']);
+																			$(
+																					'#group-teacher-edit')
+																					.append(
+																							$option);
+																		});
+														$('#group-teacher-edit')
+																.val(
+																		'${group.id}');
+													});
+
 									$('#create-group').hide();
-									
+
 									$('#toggle-event').change(function() {
 										if ($(this).prop('checked')) {
 											$('#create-group').hide();
@@ -136,18 +151,6 @@
 
 		</form>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<div class="container">

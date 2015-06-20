@@ -52,8 +52,9 @@
 					<h4 class="modal-title">My settings</h4>
 				</div>
 				<div class="modal-body">
-					<form action="UserServlet?action=update" method="post"
-						enctype="multipart/form-data" role="form" role="form">
+					<form action="UserServlet?action=update" id='editUserForm'
+						method="post" enctype="multipart/form-data" role="form"
+						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
 									Name</b></label> <input name="name" class="form-control"
@@ -80,13 +81,13 @@
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Image</b></label>
 							<input name="image" class="form-control" id="file" type="file"
-								required="required" placeholder="" value="${user.image }">
+								placeholder="" value="${user.image }">
 						</div>
 
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
 									Vitae</b></label> <input name="cv" class="form-control" id="file"
-								type="file" required="required" placeholder=""
+								type="file" placeholder=""
 								value="${user.curriculum_vitae }">
 						</div>
 						<div class="form-group">
@@ -288,7 +289,7 @@
 								<h4 class="modal-title">New course</h4>
 							</div>
 							<div class="modal-body">
-								<form action="CourseServlet?action=create" method="post"
+								<form action="CourseServlet?action=create" id='create-new-course' method="post"
 									enctype="multipart/form-data" role="form" role="form">
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
@@ -523,6 +524,175 @@
 
 		</c:when>
 	</c:choose>
+
+
+
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('form#edit-group-form')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													name : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+																min : 5,
+																max : 30,
+																message : 'The username must be more than 5 and less than 30 characters long'
+															}
+
+														}
+													},
+													teacher_id: {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty'
+																
+															}
+
+														}
+													}
+												}
+											});
+						});
+	</script>
+
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('form#edit-course-form, form#create-new-course')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													name : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+																min : 2,
+																max : 30,
+																message : 'The username must be more than 2 and less than 30 characters long'
+															}
+
+														}
+													},
+										            image: {
+										                validators: {
+										                    file: {
+										                        extension: 'png,jpg',
+										                        maxSize: 5*1024*1024,
+										                        message: 'Please choose a image file with a size less than 5M.'
+										                    }
+										                }
+										            },
+										            description: {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+																min : 100,
+																max : 2000,
+																message : 'The username must be more than 100 and less than 2000 characters long'
+															}
+
+														}
+													}
+												}
+											});
+						});
+	</script>
+	
+	
+		<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#editUserForm')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													surname : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+																min : 2,
+																max : 30,
+																message : 'The username must be more than 2 and less than 30 characters long'
+															}
+
+														}
+													},
+													email : {
+														validators : {
+															emailAddress : {
+																message : 'The input is not a valid email address'
+															}
+														}
+													},
+										            skype: {
+										                validators: {
+										                	 regexp: {
+											                        regexp: /^[a-z0-9_-]{3,15}$/,
+											                        message: 'Invalid skype name'
+											                    },
+										                 
+										                }
+										            },
+										            phone: {
+										                validators: {
+										                	 regexp: {
+											                        regexp: /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+											                        message: 'Invalid phone number'
+											                    },
+										                 
+										                }
+										            },
+										            image: {
+										                validators: {
+										                    file: {
+										                        extension: 'png,jpg',
+										                        maxSize: 5*1024*1024,
+										                        message: 'Please choose a image file with a size less than 5M.'
+										                    }
+										                }
+										            },
+										            cv: {
+										                validators: {
+										                    file: {
+										                        extension: 'pdf,doc,docx',
+										                        maxSize: 5*1024*1024,
+										                        message: 'Please choose a image file with a size less than 5M.'
+										                    }
+										                }
+										            }
+												}
+											});
+						});
+	</script>
+
+
 
 
 
