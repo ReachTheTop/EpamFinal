@@ -10,14 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Event;
-import com.epam.project.db.service.CourseService;
 import com.epam.project.db.service.EventService;
 public class UpdateEvent implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("I'm in UpdateServlet");
 
 		Event event = new Event();
 		
