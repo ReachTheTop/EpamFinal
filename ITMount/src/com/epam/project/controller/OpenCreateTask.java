@@ -21,12 +21,15 @@ public class OpenCreateTask extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		request.setAttribute("id_group", 11);
-	
-		List<Task> listTask = TaskService.getAllTasksByGroupId(11);
 		
-		request.setAttribute("listTask",listTask );
+		request.setCharacterEncoding("utf-8");
+		  response.setCharacterEncoding("utf-8");
+
+		int idGroup = Integer.parseInt(request.getParameter("group_id"));
+		List<Task> listTask = TaskService.getAllTasksByGroupId(idGroup);
+		
+		request.setAttribute("listTask", listTask);
+		request.setAttribute("group_id", idGroup);
 		
 		request.getRequestDispatcher("WEB-INF/task/newTask.jsp").forward(
 				request, response);
@@ -35,10 +38,9 @@ public class OpenCreateTask extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		System.out.println("post");
 
 	}
 
 }
-

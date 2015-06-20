@@ -11,16 +11,21 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Task;
 import com.epam.project.db.service.TaskService;
+import com.epam.project.util.file.UploadFile;
 
 public class CreateTaskCommand implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 
 		Task task = new Task();
 		boolean correctDate = true;
@@ -41,17 +46,19 @@ public class CreateTaskCommand implements Action {
 			return;
 		}
 
-		
 		task.setAvailable(true);
 
 		String pathFile = request.getParameter("task_file");
 		task.setFile(pathFile);
 		task.setIs_active(true);
 
-		int idGroup = Integer.parseInt(request.getParameter("id_group"));
+		int idGroup = Integer.parseInt(request.getParameter("group_id"));
 		task.setGroupID(idGroup);
 		task.setDeadline(dateDeadline);
-		
+
+		Part file = request.getPart("file");
+		UploadFile m = new UploadFile();
+
 		if (task.isValid()) {
 
 			if (task.getDeadline() != null) {
@@ -59,6 +66,15 @@ public class CreateTaskCommand implements Action {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					return;
 				}
+
+				if (file.getSize() == 0) {
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					return;
+				}
+
+				String fileName = m.uploadFile(file, request.getServletContext(),"group_id_"+idGroup);
+				task.setFile(fileName);
+				System.out.println(fileName);
 				TaskService.addNewTask(task);
 			}
 			return;

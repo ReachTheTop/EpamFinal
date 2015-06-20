@@ -67,3 +67,5 @@
 	src="${pageContext.request.contextPath}/resources/js/bootstrapValidator.min.js">
 	
 </script>
+
+
