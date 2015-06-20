@@ -35,11 +35,13 @@
 		        			 <div class="pricing-plan pricing-plan-promote">
 								<h2 class="pricing-plan-title"><script type="text/javascript">
 								var Regex =/\d[_].*$/g;
-								var Regex2 =/[^\\s]{1}\s.*/g;
+
+								var Regex2 =/[^\d^_].*/g;
 								
 								var fileName1 = Regex.exec("${kbase.value.getPath()}");
 								var fileName = Regex2.exec(fileName1);
-								document.write(fileName1)
+								document.write(fileName)
+
 								</script></h2>
 								<ul class="pricing-plan-features">
 								<li><img src="resources/img/fileicon/${kbase.key }.png" onerror="this.src='resources/img/fileicon/other.png'" class="img-rounded"  width="128" height="128" alt="file"></li>

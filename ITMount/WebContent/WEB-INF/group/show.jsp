@@ -15,9 +15,10 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 -->
 <script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
+
 
 <!-- block for autokomplite -->
 <!-- <link rel="stylesheet" type="text/css"
@@ -41,14 +42,12 @@
 	<jsp:include page="../page/header.jsp" />
 
 	<div class="section section-breadcrumbs">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>
-						<c:out value="${group.name }" />
-					</h1>
+		<div class="row">
+			<div class="col-md-12">
+				<h1>
+					<c:out value="${group.name }" />
+				</h1>
 
-				</div>
 			</div>
 		</div>
 	</div>
@@ -56,7 +55,9 @@
 
 
 
-	<a href="<c:url value="/openCreateTask?group_id=${group.id }"/>">Create Task</a>
+
+	<a href="<c:url value="/openCreateTask?group_id=${group.id }"/>">Create
+		Task</a>
 
 	<div class="container">
 		<div class="row">
