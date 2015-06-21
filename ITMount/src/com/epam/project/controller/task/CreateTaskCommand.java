@@ -26,7 +26,6 @@ public class CreateTaskCommand implements Action {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		System.out.println(request.getParameter("group_id")+"dssd");
 		Task task = new Task();
 		boolean correctDate = true;
 
@@ -73,7 +72,7 @@ public class CreateTaskCommand implements Action {
 
 				String fileName = m.uploadFile(file, request.getServletContext(),"group_id_"+idGroup);
 				task.setFile(fileName);
-				System.out.println(fileName);
+				
 				TaskService.addNewTask(task);
 			}
 			return;
