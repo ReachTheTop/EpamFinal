@@ -256,7 +256,8 @@ $(function() {
 	$('form#edit-group-form').on('submit', function(event) {
 		var $form = $(this);
 		var $target = $($form.attr('data-target'));
-
+		event.preventDefault();
+		event.stopImmediatePropagation();
 		$.ajax({
 			type : $form.attr('method'),
 			url : $form.attr('action'),
@@ -268,7 +269,7 @@ $(function() {
 			}
 		});
 		
-		event.preventDefault();
+		
 	});
 	
 	

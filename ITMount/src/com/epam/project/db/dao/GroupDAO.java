@@ -25,7 +25,7 @@ public class GroupDAO {
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ? WHERE id = ?;";
 	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
 
-	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.id in"
+	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.is_active = 1 AND  group1.id in"
 			+ "(select group_id from group_user where group_user.id in"
 			+ " (select group_user.id from group_user where user_id = ?))";
 
@@ -226,7 +226,7 @@ public class GroupDAO {
 		ResultSet resultSet = null;
 		try {
 			ps = connection
-					.prepareStatement("SELECT * FROM group1 WHERE teacher_id = ?;");
+					.prepareStatement("SELECT * FROM group1 WHERE teacher_id = ? AND is_active = 1 ;");
 			ps.setInt(1, id);
 			resultSet = ps.executeQuery();
 		} catch (SQLException e) {
@@ -235,4 +235,6 @@ public class GroupDAO {
 
 		return resultSet;
 	}
+
+
 }

@@ -292,4 +292,17 @@ public class GroupUserDAO {
 		}
 
 	}
+
+	public static void leaveGroup(Connection connection, Integer group_id,
+			Integer user_id) {
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement("DELETE FROM group_user WHERE group_id = ? AND user_id = ?;");
+			statement.setInt(1, group_id);
+			statement.setInt(2, group_id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -118,5 +118,10 @@ public class GroupUserService {
 		return association;
 	}
 
+	public static void leaveGroup(Integer group_id, Integer user_id){
+		Connection connection = DBConnection.getConnection();
+		GroupUserDAO.leaveGroup(connection, group_id, user_id);
+		closeConnection(connection);
+	}
 
 }

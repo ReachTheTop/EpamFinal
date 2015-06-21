@@ -30,5 +30,22 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="panel-footer">
+			<c:choose>
+				<c:when
+					test="${user.role == 'lecturer' && group.teacher_id == user.id}">
+					<a
+						href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />">Disband
+						group</a>
+				</c:when>
+				<c:when
+					test="${user.role == 'student' || user.role == 'applicant' }">
+					<a
+						href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />">Leave
+						group</a>
+
+				</c:when>
+			</c:choose>
+		</div>
 	</div>
 </div>

@@ -254,7 +254,8 @@
 					$('form[data-async]').on('submit', function(event) {
 						var $form = $(this);
 						var $target = $($form.attr('data-target'));
-
+						event.preventDefault();
+						event.stopImmediatePropagation();
 						$.ajax({
 							type : $form.attr('method'),
 							url : $form.attr('action'),
@@ -265,7 +266,7 @@
 							}
 						});
 
-						event.preventDefault();
+						
 					});
 
 					$('button#submit-course-edit').click(function() {
@@ -371,6 +372,7 @@
 				</div>
 				<script type="text/javascript">
 					$('button#submit-group-edit').click(function() {
+						
 						$('#editGroup').modal('hide');
 					});
 				</script>

@@ -1,4 +1,4 @@
-package com.epam.project.controller.group;
+package com.epam.project.controller.group.user;
 
 import java.io.IOException;
 
@@ -7,25 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
-import com.epam.project.db.service.GroupService;
+import com.epam.project.db.service.GroupUserService;
 
-public class DeleteGroup implements Action {
+public class LeaveGroup implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		Integer id = Integer.parseInt(request.getParameter("group_id"));
-		GroupService.deleteGroup(id);
+		Integer user_id = Integer.parseInt( request.getParameter("user_id"));
+		Integer group_id = Integer.parseInt(request.getParameter("group_id"));
+		GroupUserService.leaveGroup(group_id, user_id);
 		response.sendRedirect("/ITMount/UserServlet");
-		return;
-
 	}
 
 	@Override
 	public String getName() {
-
-		return "delete";
+		// TODO Auto-generated method stub
+		return "leaveGroup";
 	}
 
 }

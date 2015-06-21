@@ -21,7 +21,7 @@ public class GroupUserServlet extends HttpServlet {
 
 	public GroupUserServlet() {
 		super();
-		menu = new Menu(new ChouseExamDate());
+		menu = new Menu(new ChouseExamDate(), new LeaveGroup());
 	}
 
 	/**
