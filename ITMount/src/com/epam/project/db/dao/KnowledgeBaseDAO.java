@@ -17,6 +17,7 @@ public class KnowledgeBaseDAO {
 	private static final String SELECTALL = "SELECT * FROM knowlegdebase";
 	private static final String SELECT = "SELECT * FROM knowlegdebase WHERE id=?";
 	private static final String SELECT_WHERE_COURSE_ID = "SELECT * FROM knowlegdebase WHERE course_id=?";
+	private static final String SELECT_WHERE_COURSE_ID_BY_AVAILABLE = "SELECT * FROM knowlegdebase WHERE course_id=? and available=?";
 	
 	public static void addKnowledgeBase(KnowledgeBase kBase, Connection connection){
 		try{
@@ -90,6 +91,7 @@ public class KnowledgeBaseDAO {
 			
 			PreparedStatement st = connection.prepareStatement(SELECT);
 			st.setInt(1, id);
+			
 			rs = st.executeQuery();
 			kBase= KnowledgeBaseTransfomer.getKnowledgeBase(rs);
 		} catch (SQLException e) {
@@ -106,6 +108,22 @@ public class KnowledgeBaseDAO {
 		
 			PreparedStatement st = connection.prepareStatement(SELECT_WHERE_COURSE_ID);
 			st.setInt(1, course_id);
+			rs = st.executeQuery();
+			list =KnowledgeBaseTransfomer.getAllKnowledgeBase(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<KnowledgeBase> getAllKnowledgeBaseForCourseByActive(Integer course_id,Connection connection){
+		ResultSet rs = null;
+		List<KnowledgeBase> list = null;
+		try {
+		
+			PreparedStatement st = connection.prepareStatement(SELECT_WHERE_COURSE_ID_BY_AVAILABLE);
+			st.setInt(1, course_id);
+			st.setBoolean(2, true);
 			rs = st.executeQuery();
 			list =KnowledgeBaseTransfomer.getAllKnowledgeBase(rs);
 		} catch (SQLException e) {

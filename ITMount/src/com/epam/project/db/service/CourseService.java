@@ -97,4 +97,10 @@ public class CourseService {
 			e.printStackTrace();
 		}
 	}
+	public static Course getCourseWhereUserToBe(Integer course_id, Integer user_id) {
+		Connection connection = DBConnection.getConnection();
+		Course course = CourseDAO.getCourseWhereUserToBe(course_id, user_id, connection);
+		closeConnection(connection);
+		return course;
+	}
 }

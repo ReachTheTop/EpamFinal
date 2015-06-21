@@ -25,6 +25,7 @@ public class CourseDAO {
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 
 	private static final String TRIGER = "UPDATE course set is_active = !is_active  WHERE id = ?";
+	private static final String GET_COURSE_WHERE_USER = "SELECT * FROM course c WHERE c.id =? and c.id IN (SELECT g.course_id FROM group1 g WHERE g.is_active=? AND g.confirmed=? AND  g.teacher_id =? OR g.id =(SELECT gu.group_id FROM group_user gu WHERE g.id=gu.group_id and gu.user_id=? AND gu.is_active=?));";
 
 	public static void trigerCourse(Course course, Connection connection) {
 		PreparedStatement st = null;
@@ -161,6 +162,30 @@ public class CourseDAO {
 		}
 
 		return courses;
+
+	}
+
+	public static Course getCourseWhereUserToBe(Integer course_id,
+			Integer user_id, Connection connection) {
+		ResultSet rs = null;
+		Course course = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_COURSE_WHERE_USER);
+			st.setInt(1, course_id);
+			st.setBoolean(2, true);
+			st.setBoolean(3, true);
+			st.setInt(4, user_id);
+			st.setInt(5, user_id);
+			st.setBoolean(6, true);
+			rs = st.executeQuery();
+			course = CourseTransformer.getCourse(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return course;
 
 	}
 

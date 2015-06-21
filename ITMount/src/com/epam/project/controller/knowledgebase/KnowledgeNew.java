@@ -32,6 +32,8 @@ public class KnowledgeNew implements Action{
 			
 			String fileName = m.uploadFile(file, request.getServletContext(),"knowledgeBase_course_id_"+course_id);
 			kb.setPath(fileName);
+			kb.setAvailable(true);
+			kb.setIs_active(true);
 			KnowledgeBaseService.addKnowledgeBase(kb);
 			
 		}

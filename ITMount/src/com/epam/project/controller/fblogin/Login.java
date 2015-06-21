@@ -64,19 +64,19 @@ public class Login implements Action {
 			usr.setSurname(fbProfileData.get("last_name"));
 			usr.setRole_id(1);
 			usr.setPassword_hash(SaltedMD5.getPassword(((Integer)new Random().nextInt(Integer.MAX_VALUE)).toString(), email));
-			UploadFile upload = new UploadFile();
-			String fileName = upload.uploadFileFromNET(fbProfileData.get("photo"), request.getServletContext(), null);
-			System.out.println(fileName);
-			usr.setImage(fileName);
+			
 			usr.setIs_confirmed(true);
 			UserService.addNewUser(usr);
-			usr.setId(UserService.getUserWhereEmail(usr.getEmail()).getId());
+			usr = UserService.getUserWhereEmail(email);
+			UploadFile upload = new UploadFile();
+			String fileName = upload.uploadFileFromNET(fbProfileData.get("photo"), request.getServletContext(), "user_id"+usr.getId());
+			usr.setImage(fileName);
+			UserService.updateUser(usr);
 			Contact contact = new Contact();
 			contact.setUser_id(usr.getId());
 			ContactService.addContact(contact);
-			System.out.println(usr);
 			session.setAttribute("user", usr);
-			response.sendRedirect("/ITMount/home");
+			response.sendRedirect("/ITMount/UserServlet");
 			return;
 		}
 	}

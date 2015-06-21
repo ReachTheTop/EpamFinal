@@ -32,7 +32,6 @@ public class FBGraph {
 				b.append(inputLine + "\n");
 			in.close();
 			graph = b.toString();
-			System.out.println(graph);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in getting FB graph data. " + e);

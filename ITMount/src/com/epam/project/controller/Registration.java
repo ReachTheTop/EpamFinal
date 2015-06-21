@@ -131,24 +131,18 @@ public class Registration extends HttpServlet {
 			session.setAttribute("userkey", key);
 			session.setAttribute("useremail", email);
 			user.setPassword_hash(SaltedMD5.getPassword(password, email));
-			
+			UserService.addNewUser(user);
+			user =UserService.getUserWhereEmail(user.getEmail());
 			Part file = request.getPart("photo");
 			UploadFile m = new UploadFile();
 			if (file.getSize()>0) {
 				
 				try{
 					if(m.getExtension(file).contains("image")){
-						String fileName = m.uploadFile(file, getServletContext(),null);
+						String fileName = m.uploadFile(file, getServletContext(),"user_id"+user.getId());
 						user.setImage(fileName);
 					}
 				}catch(Exception e){
-					session.setAttribute("name", name);
-					session.setAttribute("midlename", midlename);
-					session.setAttribute("surname", surname);
-					session.setAttribute("email", email);
-					session.setAttribute("date", date);
-					session.setAttribute("skype", skype);
-					session.setAttribute("tel", tel);
 					session.setAttribute("errorRegistration", "Error format photo");
 					 request.getRequestDispatcher("WEB-INF/page/registration.jsp").forward(request, response);
 					 return;
@@ -160,11 +154,11 @@ public class Registration extends HttpServlet {
 				user.setImage("1.jpg");
 			}
 			
-			UserService.addNewUser(user);
+			UserService.updateUser(user);
 			Contact contact = new Contact();
 			contact.setPhone(tel);
 			contact.setSkype(skype);
-			contact.setUser_id(UserService.getUserWhereEmail(user.getEmail()).getId());
+			contact.setUser_id(user.getId());
 			ContactService.addContact(contact);
 			
 			request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(request,

@@ -166,7 +166,11 @@ public class UserDAO {
 			stmt.setString(1, user.getName());
 			stmt.setString(2, user.getMiddle_name());
 			stmt.setString(3, user.getSurname());
-			stmt.setDate(4, new Date(user.getBirtday().getTime()));
+			if(user.getBirtday()!=null){
+				stmt.setDate(4, new Date(user.getBirtday().getTime()));
+				}else{
+					stmt.setDate(4, null);	
+				}
 			stmt.setInt(5, user.getRole_id());
 			stmt.setString(6, user.getPassword_hash());
 			stmt.setString(7, user.getCurriculum_vitae());

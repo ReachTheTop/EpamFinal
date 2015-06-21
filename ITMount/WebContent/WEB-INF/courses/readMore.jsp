@@ -42,9 +42,12 @@
 							<li class="portfolio-visit-btn"> <a
 								href="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
 								class="btn">Register On Course</a>
+								<c:if test="${user!=null && knowladeTrue==true}">
 								 <a
 								href="<c:url value="/KnowledgeBaseServlet?action=index&course_id=${course.id }" />"
 								class="btn">Knowledgebase</a>
+								</c:if>
+								
 									
 							
 						</ul>

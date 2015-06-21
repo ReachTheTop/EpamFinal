@@ -131,7 +131,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-Z0-9А-Яа-я_\.]+$/,
+										                        regexp: /^[a-zA-Z0-9А-Яіа-я_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
@@ -183,7 +183,7 @@
 										            skype: {
 										                validators: {
 										                	 regexp: {
-											                        regexp: /^[a-z0-9_-]{3,15}$/,
+											                        regexp: /^[a-zА-Яа-я0-9_-]{3,15}$/,
 											                        message: 'Invalid skype name'
 											                    },
 										                 

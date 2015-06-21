@@ -114,4 +114,17 @@ public class GroupService {
 		closeConnection(connection);
 		return groups;
 	}
+	
+	public static Group getGroupByTeacherAndCourse(Integer teacher,Integer course) {
+		Connection connection = DBConnection.getConnection();
+		Group group = null;
+		group = GroupDAO.getGroupByTeacherAndCourse(teacher, course, connection);
+		if(group!=null){
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+		}
+		
+		closeConnection(connection);
+		return group;
+	}
 }

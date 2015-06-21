@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Course;
+import com.epam.project.db.model.User;
 import com.epam.project.db.service.CourseService;
 
 public class ReadMoreCourse implements Action{
@@ -23,6 +25,14 @@ public class ReadMoreCourse implements Action{
 		request.setAttribute("course",CourseService.getCourse(course_id));
 		List<Course> list = CourseService.getAllActiveCourses();
 		List<Course> listc = new LinkedList<Course>();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user!=null){
+		Course cours = CourseService.getCourseWhereUserToBe(course_id, user.getId());
+		 if(cours!=null&& cours.getId()==course_id){
+			 request.setAttribute("knowladeTrue", true);
+		 }
+		}
 		boolean permit=false;
 		for (int i = 0; i < list.size()+1; i++) {
 			if(i==(list.size())){
