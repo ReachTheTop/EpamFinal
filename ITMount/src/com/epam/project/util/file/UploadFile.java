@@ -113,8 +113,17 @@ public class UploadFile {
 		upload.setSizeMax(maxMemSize);
 		
 		
-		uploadPath =servletContext.getRealPath("")+"upload/photo"+File.separator;
 		
+		if(path==null){
+			patch ="workpatch";
+		}else{
+			patch ="workpatch"+File.separator+path;
+		}
+		uploadPath =servletContext.getRealPath("")+"upload"+File.separator+patch;
+		File directory = new File(uploadPath);
+		if(!directory.exists()){
+			directory.mkdir();
+		}
 		URL url = new URL(Url);
 		String fileName = Url.replaceAll("[/?:a-z.=]", "")+".jpg";
 		try {
@@ -130,7 +139,7 @@ public class UploadFile {
 
 			FileUtils.copyURLToFile(url, f);
 			
-			return "photo" + File.separator + fileUrl;
+			return patch + File.separator + fileUrl;
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Courses</title>
 <jsp:include page="../page/head.jsp" />
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
@@ -136,7 +136,7 @@
 				<div class="well well-sm">
 					<div class="row">
 						<div class="col-sm-6 col-md-4">
-							<img src="upload/photo/${current_user.image }" alt=""
+							<img src="upload/${current_user.image }" alt=""
 								class="img-rounded img-responsive" />
 						</div>
 						<div class="col-sm-6 col-md-8">
@@ -650,7 +650,7 @@
 										            skype: {
 										                validators: {
 										                	 regexp: {
-											                        regexp: /^[a-z0-9_-]{3,15}$/,
+											                        regexp: /^[a-zА-Яа-я0-9_-]{3,15}$/,
 											                        message: 'Invalid skype name'
 											                    },
 										                 
