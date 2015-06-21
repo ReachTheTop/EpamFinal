@@ -81,4 +81,17 @@ public class KnowledgeBaseService{
 		return list;
 	
 	}
+	
+	public static List<KnowledgeBase> getAllKnowledgeBaseForCourseByActive(Integer course_id){
+		Connection connection =  DBConnection.getConnection();
+		List<KnowledgeBase> list = KnowledgeBaseDAO.getAllKnowledgeBaseForCourseByActive(course_id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	
+	}
 }

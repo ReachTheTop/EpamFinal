@@ -28,7 +28,7 @@ public class GroupDAO {
 	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.id in"
 			+ "(select group_id from group_user where group_user.id in"
 			+ " (select group_user.id from group_user where user_id = ?))";
-
+	private static final String GET_GROUP_BY_TEACHER_COURSE = "SELECT * FROM group1 WHERE teacher_id = ? and course_id = ? ";
 	private Connection con;
 	private PreparedStatement statement;
 
@@ -234,5 +234,24 @@ public class GroupDAO {
 		}
 
 		return resultSet;
+	}
+	
+	public static Group getGroupByTeacherAndCourse(Integer teacher,Integer course, Connection connection) {
+
+		ResultSet rs = null;
+		Group group = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_GROUP_BY_TEACHER_COURSE);
+			st.setInt(1, teacher);
+			st.setInt(2, course);
+			rs = st.executeQuery();
+			group = GroupTransformer.getGroup(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return group;
+
 	}
 }

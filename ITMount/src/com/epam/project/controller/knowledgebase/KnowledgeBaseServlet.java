@@ -23,7 +23,7 @@ public class KnowledgeBaseServlet extends HttpServlet {
 
 	public KnowledgeBaseServlet() {
 		super();
-		menu = new Menu(new KnowledgeIndex(), new KnowledgeNew(), new KnowledgeDelete());
+		menu = new Menu(new KnowledgeIndex(), new KnowledgeNew(), new KnowledgeDelete(), new KnonwledgeActive());
 	}
 
 	/**
@@ -32,6 +32,8 @@ public class KnowledgeBaseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
@@ -41,6 +43,8 @@ public class KnowledgeBaseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
