@@ -60,14 +60,14 @@ public class GroupUser extends Validator implements Serializable {
 		this.isActive = isActive;
 	}
 	
-	private Date exam_date;
+	private GroupExamModel exam;
 
-	public Date getExam_date() {
-		return exam_date;
+	public GroupExamModel getExam() {
+		return exam;
 	}
 
-	public void setExam_date(Date exam_date) {
-		this.exam_date = exam_date;
+	public void setExam(GroupExamModel exam) {
+		this.exam = exam;
 	}
 	
 	private Integer exam_id;

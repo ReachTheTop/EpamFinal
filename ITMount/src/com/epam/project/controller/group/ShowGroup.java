@@ -50,7 +50,14 @@ public class ShowGroup implements Action {
 				if (user.getRole().equals("student")
 						|| user.getRole().equals("applicant")) {
 					association = GroupUserService.getByGroupAndUserId(user.getId(), group_id);
+					
+					if(association==null){
+						response.sendError(404);
+						return;
+					}
 				}
+				
+				
 				request.setAttribute("exams", exams);
 				request.setAttribute("association", association);
 

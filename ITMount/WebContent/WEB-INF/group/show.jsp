@@ -60,19 +60,25 @@
 		Task</a>
 
 	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<%-- <c:if test="${user.role == 'lecturer' }"> --%>
-				<jsp:include page="teacherPanel.jsp"></jsp:include>
-				<%-- </c:if> --%>
-				<!-- ПАНЕЛЬ ПОДІЙ  -->
-				<jsp:include page="eventPanel.jsp"></jsp:include>
-				<!-- ПАНЕЛЬ ПОДІЙ  -->
-			</div>
-			<div class="col-md-4">
-				<jsp:include page="userPanel.jsp"></jsp:include>
-			</div>
-		</div>
+		<c:if test="${user.role =='student' }">
+			<c:choose>
+				<c:when test="${ empty association.exam}">
+					<c:choose>
+						<c:when test="${ empty exams }">
+							<jsp:include page="emptyExam.jsp"></jsp:include>
+						</c:when>
+						<c:otherwise>
+							<jsp:include page="chouseExam.jsp"></jsp:include>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:when test="${ association.isActive == false }">
+					<jsp:include page="examination.jsp" />
+				</c:when>
+			</c:choose>
+		</c:if>
+
+		<jsp:include page="groupContent.jsp"></jsp:include>
 	</div>
 
 	<jsp:include page="../page/footer.jsp" />

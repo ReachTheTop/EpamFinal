@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 import com.epam.project.db.connection.DBConnection;
@@ -13,17 +14,17 @@ public class EventDAO {
 	private static final String NEW_EVENT = ""
 			+ "INSERT INTO event (description, date, group_id) "
 			+ "VALUES (?,?,?);";
-	private static final String GET_ALL = "SELECT * FROM event;";
+	private static final String GET_ALL = "SELECT * FROM event where is_active =1;";
 
 	private static final String DELETE = "" + "UPDATE event "
 			+ "SET is_active = 0 " + "WHERE id = ?";
 	private static final String UPDATE = "" + "UPDATE event "
-			+ "SET description =? , date = ?, group_id = ?, is_active = ? "
+			+ "SET description =? , date = ?"
 			+ "WHERE id = ?;";
 
 	private static final String GET_BY_ID = "SELECT * FROM event WHERE id = ?;";
 	
-	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=? ORDER BY date DESC;";
+	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=? AND is_active =1 ORDER BY date DESC;";
 
 	private PreparedStatement statement;
 	private Connection con;
@@ -58,10 +59,8 @@ public class EventDAO {
 		try {
 			statement = con.prepareStatement(UPDATE);
 			statement.setString(1, event.getDescription());
-			statement.setTimestamp(2, new Timestamp(event.getDate().getTime()));
-			statement.setInt(3, event.getGroup_id());
-			statement.setBoolean(4, event.getIs_active());
-			statement.setInt(5, event.getId());
+			statement.setTimestamp(2, new Timestamp(event.getDate().getTime()));			
+			statement.setInt(3, event.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,19 +90,28 @@ public class EventDAO {
 		return resultSet;
 	}
 
-	public void newEvent(Event event) {
+	public Integer newEvent(Event event) {
 		con = DBConnection.getConnection();
+		Integer event_id = null;
 		try {
-			statement = con.prepareStatement(NEW_EVENT);
+			statement = con.prepareStatement(NEW_EVENT,
+					Statement.RETURN_GENERATED_KEYS );
 			statement.setString(1, event.getDescription());
 			statement.setTimestamp(2, new Timestamp(event.getDate().getTime()));
 			statement.setInt(3, event.getGroup_id());
+			
 			statement.executeUpdate();
+			ResultSet resultSet = statement.getGeneratedKeys();
+			resultSet.next();
+			event_id = resultSet.getInt(1);
+			
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return event_id;
 
 	}
 

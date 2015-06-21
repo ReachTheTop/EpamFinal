@@ -20,7 +20,7 @@ public class GroupExamServlet extends HttpServlet {
     private Menu menu;
     public GroupExamServlet() {
         super();
-        menu = new Menu(new CreateExam());
+        menu = new Menu(new CreateExam(), new ShowExam(), new UpdateExam(), new CSVList());
     }
 
 	/**

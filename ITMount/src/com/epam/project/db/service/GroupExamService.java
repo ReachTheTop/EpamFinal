@@ -17,7 +17,7 @@ public class GroupExamService {
 		closeConnection(connection);
 	}
 
-	public static GroupExamModel getById(Integer exam_id) {
+	public static GroupExamModel getByGroupId(Integer exam_id) {
 		GroupExamModel exam = null;
 		Connection connection = DBConnection.getConnection();
 		exam = GroupExamDAO.getByGroupId(connection, exam_id);
@@ -45,5 +45,18 @@ public class GroupExamService {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static void updateExam(GroupExamModel exam){
+		Connection connection = DBConnection.getConnection();
+		GroupExamDAO.updateExam(connection, exam);
+		closeConnection(connection);
+	}
+	
+	public static GroupExamModel getById(Integer exam_id){
+		Connection connection = DBConnection.getConnection();
+		GroupExamModel exam = GroupExamDAO.getById(connection, exam_id);
+		closeConnection(connection);
+		return exam;
 	}
 }
