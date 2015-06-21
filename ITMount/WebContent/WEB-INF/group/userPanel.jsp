@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 <div class="col-md-10 column">
 	<div class="panel panel-default">
 		<div class="panel-heading"><p>Teacher Panel</p><a href="#myModal" class="btn btn-sm btn-primary"
@@ -191,8 +191,9 @@
 
 	<script>
 		var form = $('#form1');
-		form.submit(function() {
-
+		form.submit(function(e) {
+			e.preventDefault();
+		    e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form.attr('method'),
 				url : form.attr('action'),
