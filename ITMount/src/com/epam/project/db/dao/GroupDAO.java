@@ -29,6 +29,8 @@ public class GroupDAO {
 			+ "(select group_id from group_user where group_user.id in"
 			+ " (select group_user.id from group_user where user_id = ?))";
 	private static final String GET_GROUP_BY_TEACHER_COURSE = "SELECT * FROM group1 WHERE teacher_id = ? and course_id = ? ";
+	private static final String GET_GROUP_BY_USER_REGISTER_ON_COURSE = "SELECT *FROM group1 g  JOIN group_user gu ON g.id=gu.group_id  WHERE g.course_id=? AND gu.user_id =? AND gu.is_active ='1' AND g.is_active='1'";
+	private static final String GET_GROUP_BY_ACCESS_TO_KNOWLADGE_BASE ="SELECT * FROM group1 g WHERE  g.course_id =? AND g.is_active='1'  AND g.confirmed='1' AND ( g.id in (SELECT gu.group_id FROM group_user gu WHERE gu.user_id=? AND gu.group_id=g.id AND gu.is_active='1' ) OR g.teacher_id=?) LIMIT 1";
 	private Connection con;
 	private PreparedStatement statement;
 
@@ -247,6 +249,47 @@ public class GroupDAO {
 					.prepareStatement(GET_GROUP_BY_TEACHER_COURSE);
 			st.setInt(1, teacher);
 			st.setInt(2, course);
+			rs = st.executeQuery();
+			group = GroupTransformer.getGroup(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return group;
+
+	}
+	public static Group getGroupByUserRegisterOnCourse(Integer user_id,
+			Integer course, Connection connection) {
+
+		ResultSet rs = null;
+		Group group = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_GROUP_BY_USER_REGISTER_ON_COURSE);
+			st.setInt(1, course);
+			st.setInt(2, user_id);
+			rs = st.executeQuery();
+			group = GroupTransformer.getGroup(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return group;
+
+	}
+	public static Group getGroupByUserAcsessKnowladgeBase(Integer user_id,
+			Integer course, Connection connection) {
+
+		ResultSet rs = null;
+		Group group = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_GROUP_BY_ACCESS_TO_KNOWLADGE_BASE);
+			st.setInt(1, course);
+			st.setInt(2, user_id);
+			st.setInt(3, user_id);
 			rs = st.executeQuery();
 			group = GroupTransformer.getGroup(rs);
 		} catch (SQLException e) {

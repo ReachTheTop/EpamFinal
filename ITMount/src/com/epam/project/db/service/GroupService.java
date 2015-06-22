@@ -127,4 +127,30 @@ public class GroupService {
 		closeConnection(connection);
 		return group;
 	}
+	public static Group getGroupByUserRegisterOnCourse(Integer user_id,
+			Integer course) {
+		Connection connection = DBConnection.getConnection();
+		Group group = null;
+		group = GroupDAO.getGroupByUserRegisterOnCourse(user_id, course, connection);
+		if(group!=null){
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+		}
+		
+		closeConnection(connection);
+		return group;
+	}
+	public static Group getGroupByUserAcsessKnowladgeBase(Integer user_id,
+			Integer course) {
+		Connection connection = DBConnection.getConnection();
+		Group group = null;
+		group = GroupDAO.getGroupByUserAcsessKnowladgeBase(user_id, course, connection);
+		if(group!=null){
+			group.setTeacher(UserService.getUser(group.getTeacher_id()));
+			group.setCourse(CourseService.getCourse(group.getCourse_id()));
+		}
+		
+		closeConnection(connection);
+		return group;
+	}
 }

@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../page/head.jsp" />
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -39,9 +40,16 @@
 						<h3>${course.name}</h3>	
 						<ul class="no-list-style">
 							<li><b>Description:</b> ${course.description}</li>
-							<li class="portfolio-visit-btn"> <a
-								href="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
-								class="btn">Register On Course</a>
+							<li class="portfolio-visit-btn"> 
+							<c:if test="${user!=null && registationOFF==true}">
+							<form action="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />" 
+							method="get"
+							id="form1" role="form">
+						
+								<button id="registration" type="submit" class="btn btn-primary">Register On Course</button>
+							
+							</form>
+							</c:if>
 								<c:if test="${user!=null && knowladeTrue==true}">
 								 <a
 								href="<c:url value="/KnowledgeBaseServlet?action=index&course_id=${course.id }" />"
@@ -83,6 +91,98 @@
 					
 			
 		</div>
+		
+		
+			<script src="resources/js/toastr.js"></script>
+
+
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": false,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+
+<script>
+  var form = $('#form1');
+  form.submit(function(e) {
+   e.preventDefault();
+      e.stopImmediatePropagation();
+   request = $.ajax({
+    type : form.attr('method'),
+    url : form.attr('action'),
+
+    success : function() {
+     $("#incorectData").hide();
+   $("#registration").hide();
+     document.getElementById("form1").reset();
+     showToaast('You register in course',1);
+      },
+    error : function() {
+     $("#incorectData").show();
+     showToaast('<a href="<c:url value="/UserServlet?action=index&showEdit=true" />"_blank">Please upload your cv</a>' , 0);
+    }
+   });
+
+   return false;
+  });
+ </script>
 		
 		<jsp:include page="../page/footer.jsp" />
 </body>

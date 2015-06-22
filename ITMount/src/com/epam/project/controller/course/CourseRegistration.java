@@ -16,23 +16,20 @@ public class CourseRegistration implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// User user = (User) request.getSession().getAttribute("user");
+		
 		User user = null;
 
 		user = (User) request.getSession().getAttribute("user");
 
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
+System.out.println(user.getCurriculum_vitae());
 		
-
-		if (user.getCurriculum_vitae() != null) {
+		if (user!=null&&!user.getCurriculum_vitae().isEmpty()) {
 			GroupService.addUserToGroup(user, course_id);
-			request.setAttribute("message",
-					"You have been registered on cource");
-			request.getRequestDispatcher("/WEB-INF/courses/registration.jsp")
-					.forward(request, response);
 			return;
 		} else {
-			// REDIRECT TO USER EDIT
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return;
 		}
 	}
 

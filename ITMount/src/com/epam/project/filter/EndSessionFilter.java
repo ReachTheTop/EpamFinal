@@ -24,7 +24,7 @@ import com.epam.project.db.model.User;
 @WebFilter("/EndSessionFilter")
 public class EndSessionFilter implements Filter {
 
-	private static String sessionId;
+	
     /**
      * Default constructor. 
      */
