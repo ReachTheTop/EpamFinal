@@ -8,7 +8,7 @@
 <title>Create new task</title>
 
 <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
 
 
 <jsp:include page="../page/head.jsp" />
@@ -177,6 +177,7 @@
 	</script>
 
 	<script>
+	
 		var form = $('#form1');
 		form.submit(function() {
 
@@ -191,8 +192,6 @@
 				//data : form.serialize(),
 				success : function(text) {
 
-					$("#incorectData").hide();
-					document.getElementById("form1").reset();
 					$('#myModal').modal('hide');
 					showToaast("Task was  successfully created", 1);
 

@@ -189,36 +189,37 @@
 		}
 	</script>
 
-	<script>
-		var form = $('#form1');
-		form.submit(function() {
+<script>
+  var form = $('#form1');
+  form.submit(function(e) {
+   e.preventDefault();
+      e.stopImmediatePropagation();
+   request = $.ajax({
+    type : form.attr('method'),
+    url : form.attr('action'),
 
-			request = $.ajax({
-				type : form.attr('method'),
-				url : form.attr('action'),
+    data : new FormData(this),
+    processData : false,
+    contentType : false,
 
-				data : new FormData(this),
-				processData : false,
-				contentType : false,
+    //data : form.serialize(),
+    success : function(text) {
 
-				//data : form.serialize(),
-				success : function(text) {
+     $("#incorectData").hide();
+     document.getElementById("form1").reset();
+     $('#myModal').modal('hide');
+     showToaast("Task was  successfully created", 1);
 
-					$("#incorectData").hide();
-					document.getElementById("form1").reset();
-					$('#myModal').modal('hide');
-					showToaast("Task was  successfully created", 1);
+    },
+    error : function() {
+     $("#incorectData").show();
+     showToaast("Task was not  created", 0);
+    }
+   });
 
-				},
-				error : function() {
-					$("#incorectData").show();
-					showToaast("Task was not  created", 0);
-				}
-			});
-
-			return false;
-		});
-	</script>
+   return false;
+  });
+ </script>
 
 	<script>
 		$(document).ready(function() {

@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Course;
+import com.epam.project.db.model.Group;
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.CourseService;
+import com.epam.project.db.service.GroupService;
 
 public class ReadMoreCourse implements Action{
 
@@ -28,8 +30,13 @@ public class ReadMoreCourse implements Action{
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user!=null){
-		Course cours = CourseService.getCourseWhereUserToBe(course_id, user.getId());
-		 if(cours!=null&& cours.getId()==course_id){
+		Group groupK = GroupService.getGroupByUserAcsessKnowladgeBase(user.getId(), course_id);
+		Group groupR = GroupService.getGroupByUserRegisterOnCourse(user.getId(), course_id);
+		
+		if(groupR==null && user.getRole().equals("student")){
+			request.setAttribute("registationOFF", true);
+		}
+		 if(groupK!=null){
 			 request.setAttribute("knowladeTrue", true);
 		 }
 		}

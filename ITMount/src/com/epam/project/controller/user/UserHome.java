@@ -47,6 +47,11 @@ public class UserHome implements Action {
 		Contact contacts = ContactService.getByUserId(current_user.getId());
 		request.setAttribute("current_user", current_user);
 		request.setAttribute("contact", contacts);
+		
+		if(request.getParameter("showEdit")!=null){
+			request.setAttribute("showEditModal", true);
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/user/home.jsp").forward(request,
 				response);
 

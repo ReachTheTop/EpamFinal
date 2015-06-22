@@ -32,7 +32,7 @@
 <script
 	src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
-
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 
 <title>${ group.name }</title>

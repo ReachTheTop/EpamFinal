@@ -16,7 +16,6 @@ public class CourseRegistration implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// User user = (User) request.getSession().getAttribute("user");
 		User user = null;
 
 		user = (User) request.getSession().getAttribute("user");
@@ -24,16 +23,19 @@ public class CourseRegistration implements Action {
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
 
 		Integer group_id = null;
-		if (user.getCurriculum_vitae() != null) {
-			group_id =  GroupService.addUserToGroup(user, course_id);
-			request.setAttribute("message",
-					"You have been registered on cource");
+
+		System.out.println(user.getCurriculum_vitae());
+
+		if (user != null && !user.getCurriculum_vitae().isEmpty()) {
+			group_id = GroupService.addUserToGroup(user, course_id);
 			request.getRequestDispatcher(
 					"/GroupServlet?action=show&group_id=" + group_id).forward(
 					request, response);
 			return;
 		} else {
-			response.sendRedirect("/ITMount/UserServlet");
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return;
+
 		}
 	}
 
