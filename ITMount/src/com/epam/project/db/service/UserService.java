@@ -98,4 +98,9 @@ public class UserService {
 		}
 	}
 
+	public static void changeRole(Integer user_id, Integer role_id){
+		Connection connection = DBConnection.getConnection();
+		UserDAO.changeRole(connection, user_id, role_id);
+		closeConnection(connection);
+	}
 }

@@ -371,7 +371,8 @@ $(function() {
 	
 	
 	
-	
+
+
 	
 	
 	
@@ -388,16 +389,19 @@ $(function() {
 		var $td5;
 		var $td6;
 		var $td7;
+		var $td8;
 		var $trigerUser;
-		
+		//var $select = handleRoles();
 		$userPages = response.amount;
+		
+		
 		
 		$('#user-page-selection').bootpag({
 			total : Math.ceil($userPages/10)
 		})
 		
 		var $users = response.users;
-
+		
 		$.each($users, function(index, item) {
 			$body = $("tbody#users-body"); 
 			$tr = $("<tr class='user-row'>");
@@ -408,15 +412,21 @@ $(function() {
 			$td5 = $("<td id='user-phone'>");
 			$td6 = $("<td id='user-skype'>");
 			$td7 = $("<td id='user-active'>");
+			$td8 = $("<td id='user-role'>");
 			$trigerUser = $("<a class='btn btn-danger' id='triger-user'>");
 			$trigerUser.attr("name", item['id']);
 			
+			
+			
 			$tr.append($td1.text(item['name']));
 			$tr.append($td2.text(item['surname']));
-			$tr.append($td3.text(item['role']));
+			$td3.attr('name', item['id']);
+			$tr.append($td3.append( $("select#userRoles").last().clone(true,true).val(item['role_id'])));
 			$tr.append($td4.text(item['email']));
 			$tr.append($td5);
 			$tr.append($td6);
+			
+			
 			if(item.hasOwnProperty("contacts")){
 				$td5.text(item.contacts['phone']);
 				$td6.text(item.contacts['skype']);
@@ -430,12 +440,11 @@ $(function() {
 				$trigerUser.attr('class','btn btn-success');
 			}
 			$tr.append($td7.append($trigerUser));
+			
+			
 			$body.append($tr);
 			
 		});
-		
-		
-
 	}
 	
 	$('body').on(
@@ -493,7 +502,14 @@ $(function() {
 		$(this).val("");
 	});
 
-	
-	
+	$("#userRoles").change(function(){
+		var user_id =  $(this).parent().attr('name');
+		var role_id = $(this).val();
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		$.post("AdminServlet?action=changeRole",{user_id: user_id, role_id: role_id}, function(){
+			
+		});
+	});
 
 });

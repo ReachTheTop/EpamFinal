@@ -85,7 +85,8 @@ public class UserDAO {
 
 	}
 
-	public static UserCorteg getAllUsers(Connection connection, String token, Integer page) {
+	public static UserCorteg getAllUsers(Connection connection, String token,
+			Integer page) {
 		ResultSet rs = null;
 		String patterm = String.format(".*%s.*", token);
 		UserCorteg users = new UserCorteg();
@@ -93,15 +94,15 @@ public class UserDAO {
 			connection.setAutoCommit(false);
 			PreparedStatement st = connection
 					.prepareStatement(SQL_GET_ALL_USERS);
-			
+
 			st.setString(1, patterm);
 			st.setString(2, patterm);
-			st.setInt(3, page*10);
+			st.setInt(3, page * 10);
 			st.setInt(4, 10);
 			rs = st.executeQuery();
-			
-			users.setUsers( UserTransformer.getAllUsers(rs));
-			
+
+			users.setUsers(UserTransformer.getAllUsers(rs));
+
 			st = connection.prepareStatement("SELECT found_rows();");
 			rs = st.executeQuery();
 			rs.next();
@@ -126,26 +127,25 @@ public class UserDAO {
 			stmt.setString(1, user.getName());
 			stmt.setString(2, user.getMiddle_name());
 			stmt.setString(3, user.getSurname());
-			if(user.getBirtday()!=null){
-			stmt.setDate(4, new Date(user.getBirtday().getTime()));
-			}else{
-				stmt.setDate(4, null);	
+			if (user.getBirtday() != null) {
+				stmt.setDate(4, new Date(user.getBirtday().getTime()));
+			} else {
+				stmt.setDate(4, null);
 			}
 			stmt.setInt(5, user.getRole_id());
 			stmt.setString(6, user.getPassword_hash());
 			stmt.setString(7, user.getCurriculum_vitae());
 			stmt.setString(8, user.getDescription());
 			// stmt.setBoolean(9, user.getIs_active());
-			
+
 			stmt.setString(9, user.getKey());
 			stmt.setString(10, user.getImage());
 			stmt.setString(11, user.getEmail());
-			if(user.getIs_confirmed()==null){
+			if (user.getIs_confirmed() == null) {
 				stmt.setBoolean(12, false);
-			}else{
+			} else {
 				stmt.setBoolean(12, user.getIs_confirmed());
 			}
-			
 
 			stmt.executeUpdate();
 
@@ -166,11 +166,11 @@ public class UserDAO {
 			stmt.setString(1, user.getName());
 			stmt.setString(2, user.getMiddle_name());
 			stmt.setString(3, user.getSurname());
-			if(user.getBirtday()!=null){
+			if (user.getBirtday() != null) {
 				stmt.setDate(4, new Date(user.getBirtday().getTime()));
-				}else{
-					stmt.setDate(4, null);	
-				}
+			} else {
+				stmt.setDate(4, null);
+			}
 			stmt.setInt(5, user.getRole_id());
 			stmt.setString(6, user.getPassword_hash());
 			stmt.setString(7, user.getCurriculum_vitae());
@@ -225,4 +225,17 @@ public class UserDAO {
 		return role;
 	}
 
+	public static void changeRole(Connection connection, Integer user_id,
+			Integer role_id) {
+		PreparedStatement statement = null;
+		try {
+			statement = connection
+					.prepareStatement("UPDATE user SET role_id = ? WHERE id = ?;");
+			statement.setInt(1, role_id);
+			statement.setInt(2, user_id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

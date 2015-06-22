@@ -509,6 +509,7 @@
 											<th>Phone</th>
 											<th>Skype</th>
 											<th>Active</th>
+											
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -529,8 +530,13 @@
 		</c:when>
 	</c:choose>
 
-
-
+<div hidden="true" >
+	<select class='form-control' id='userRoles' name='role'>
+		<option value="2">student</option>
+		<option value="3">lecturer</option>
+		<option value="4">admin</option>
+	</select>
+</div>
 
 	<script type="text/javascript">
 		$(document)
