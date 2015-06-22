@@ -10,7 +10,10 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
-<link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<script src="resources/js/toastr.js"></script>
+<script src="assets/js/tos.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -83,8 +86,7 @@
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
 									Vitae</b></label> <input name="cv" class="form-control" id="file"
-								type="file" placeholder=""
-								value="${user.curriculum_vitae }">
+								type="file" placeholder="" value="${user.curriculum_vitae }">
 						</div>
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Phone</b></label>
@@ -266,11 +268,11 @@
 							}
 						});
 
-						
 					});
 
 					$('button#submit-course-edit').click(function() {
 						$('#editCourse').modal('hide');
+						showToast("Course successfully updated", 1);
 					});
 				</script>
 
@@ -286,7 +288,8 @@
 								<h4 class="modal-title">New course</h4>
 							</div>
 							<div class="modal-body">
-								<form action="CourseServlet?action=create" id='create-new-course' method="post"
+								<form action="CourseServlet?action=create"
+									id='create-new-course' method="post"
 									enctype="multipart/form-data" role="form" role="form">
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
@@ -372,8 +375,8 @@
 				</div>
 				<script type="text/javascript">
 					$('button#submit-group-edit').click(function() {
-						
 						$('#editGroup').modal('hide');
+						showToast("Group successfully updated", 1);
 					});
 				</script>
 
@@ -551,11 +554,11 @@
 
 														}
 													},
-													teacher_id: {
+													teacher_id : {
 														validators : {
 															notEmpty : {
 																message : 'The field is required and cannot be empty'
-																
+
 															}
 
 														}
@@ -591,16 +594,16 @@
 
 														}
 													},
-										            image: {
-										                validators: {
-										                    file: {
-										                        extension: 'png,jpg',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            },
-										            description: {
+													image : {
+														validators : {
+															file : {
+																extension : 'png,jpg',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													},
+													description : {
 														validators : {
 															notEmpty : {
 																message : 'The field is required and cannot be empty',
@@ -615,9 +618,9 @@
 											});
 						});
 	</script>
-	
-	
-		<script type="text/javascript">
+
+
+	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
@@ -649,48 +652,117 @@
 															}
 														}
 													},
-										            skype: {
-										                validators: {
-										                	 regexp: {
-											                        regexp: /^[a-zА-Яа-я0-9_-]{3,15}$/,
-											                        message: 'Invalid skype name'
-											                    },
-										                 
-										                }
-										            },
-										            phone: {
-										                validators: {
-										                	 regexp: {
-											                        regexp: /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
-											                        message: 'Invalid phone number'
-											                    },
-										                 
-										                }
-										            },
-										            image: {
-										                validators: {
-										                    file: {
-										                        extension: 'png,jpg',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            },
-										            cv: {
-										                validators: {
-										                    file: {
-										                        extension: 'pdf,doc,docx',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            }
+													skype : {
+														validators : {
+															regexp : {
+																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
+																message : 'Invalid skype name'
+															},
+
+														}
+													},
+													phone : {
+														validators : {
+															regexp : {
+																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+																message : 'Invalid phone number'
+															},
+
+														}
+													},
+													image : {
+														validators : {
+															file : {
+																extension : 'png,jpg',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													},
+													cv : {
+														validators : {
+															file : {
+																extension : 'pdf,doc,docx',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													}
 												}
 											});
 						});
 	</script>
 
 
+
+	<script type="text/javascript">
+		function showToast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event
+			// handler to a button
+			// in the toast, if it
+			// exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
 
 
 
