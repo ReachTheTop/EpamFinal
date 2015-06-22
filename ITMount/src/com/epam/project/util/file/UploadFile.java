@@ -64,7 +64,7 @@ public class UploadFile {
 		
 		File directory = new File(uploadPath);
 		if(!directory.exists()){
-			directory.mkdir();
+			directory.mkdirs();
 		}
 		
 		
