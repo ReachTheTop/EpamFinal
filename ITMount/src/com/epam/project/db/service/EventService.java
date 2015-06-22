@@ -9,12 +9,13 @@ import com.epam.project.db.transformer.EventTransformer;
 
 public class EventService {
 
-	public static void newEvent(Event event) {
+	public static Integer newEvent(Event event) {
 		EventDAO eventBridge = new EventDAO();
-
-		eventBridge.newEvent(event);
+		Integer event_id = null;
+		event_id = eventBridge.newEvent(event);
 
 		eventBridge.close();
+		return event_id;
 	}
 	
 	public static List<Event> getByIdGroup(Integer group_id) {

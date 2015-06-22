@@ -31,16 +31,16 @@ public class CreateEvent implements Action {
 		}
 		event.setGroup_id(Integer.parseInt(request.getParameter("group_id")));
 
-		List<Event> events = EventService.getByIdGroup(Integer.parseInt(request
-				.getParameter("group_id")));
+		
 		Gson json = new Gson();
 		
 
-			EventService.newEvent(event);
-			
+		event = EventService.getById(EventService.newEvent(event));
+			/*
 			response.setContentType("application/json");
-			response.getWriter().write(json.toJson(events));
-		
+			response.getWriter().write(json.toJson(event));
+		*/
+		response.sendRedirect(request.getHeader("Referer"));
 
 	}
 

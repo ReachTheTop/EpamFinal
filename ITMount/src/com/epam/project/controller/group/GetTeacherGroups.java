@@ -21,6 +21,13 @@ public class GetTeacherGroups implements Action {
 		User teacher = GroupService.getById(
 				Integer.parseInt(request.getParameter("group_id")))
 				.getTeacher();
+		
+		
+			if (teacher == null ) {
+				response.sendError(404);
+				return;
+			}
+		
 		List<Group> groups = GroupService.getByTeacher(teacher.getId());
 		Gson json = new Gson();
 		response.setContentType("application/json");

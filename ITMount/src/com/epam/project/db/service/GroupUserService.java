@@ -93,10 +93,10 @@ public class GroupUserService {
 		closeConnection(connection);
 	}
 
-
-	public static void rebaseUsers(Integer old_group_id, Integer new_group_id, List<String> users ) {
+	public static void rebaseUsers(Integer old_group_id, Integer new_group_id,
+			List<String> users) {
 		Connection connection = DBConnection.getConnection();
-		GroupUserDAO.rebaseUsers(connection, old_group_id, new_group_id,users);
+		GroupUserDAO.rebaseUsers(connection, old_group_id, new_group_id, users);
 		closeConnection(connection);
 	}
 
@@ -106,22 +106,22 @@ public class GroupUserService {
 		GroupUser association = null;
 		association = GroupUserDAO.getByGroupAndUserId(connection, group_id,
 				user_id);
-
-		GroupExamModel exam = GroupExamDAO.getById(connection,
-				association.getExam_id());
+		GroupExamModel exam = null;
+		if (association != null) {
+			exam = GroupExamDAO.getById(connection, association.getExam_id());
+		}
 		if (exam != null) {
 			Date date = exam.getExam_date();
-			association.setExam_date(date);
+			association.setExam(exam);
 		}
 
 		closeConnection(connection);
 		return association;
 	}
 
-	public static void leaveGroup(Integer group_id, Integer user_id){
+	public static void leaveGroup(Integer group_id, Integer user_id) {
 		Connection connection = DBConnection.getConnection();
 		GroupUserDAO.leaveGroup(connection, group_id, user_id);
 		closeConnection(connection);
 	}
-
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Event;
 import com.epam.project.db.service.EventService;
+import com.google.gson.Gson;
 
 public class ShowEvent implements Action {
 
@@ -29,9 +30,11 @@ public class ShowEvent implements Action {
 					return;
 				}
 				request.setAttribute("event", event);
-				System.out.println(event);
-				request.getRequestDispatcher("/WEB-INF/event/show.jsp")
-						.forward(request, response);
+				
+				Gson json = new Gson();
+				response.setContentType("application/json");
+				response.getWriter().write(json.toJson(event));
+				
 				return;
 			}
 		} catch (NumberFormatException e) {

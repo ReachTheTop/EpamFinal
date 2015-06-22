@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Event;
 import com.epam.project.db.service.EventService;
+
 public class UpdateEvent implements Action {
 
 	@Override
@@ -18,29 +19,29 @@ public class UpdateEvent implements Action {
 			throws ServletException, IOException {
 
 		Event event = new Event();
-		
+
 		event.setId(Integer.parseInt(request.getParameter("event_id")));
 		event.setDescription(request.getParameter("description"));
 		try {
-			event.setDate(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.getParameter("date")));
+			event.setDate(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
+					.parse(request.getParameter("date")));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		event.setGroup_id(Integer.parseInt(request.getParameter("group_id")));
-		event.setIs_active(Boolean.parseBoolean(request.getParameter("is_active")));
 		
+		event.setIs_active(Boolean.parseBoolean(request
+				.getParameter("is_active")));
+
 		Integer event_id = event.getId();
 
 		if (event.isValid()) {
 
 			EventService.update(event);
-			request.getRequestDispatcher(
-					"/EventServlet?action=show&event_id=" + event.getId())
-					.forward(request, response);
+			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		} else {
-			response.sendRedirect(request.getHeader("Referer"));
+			response.sendError(404);;
 			return;
 		}
 	}

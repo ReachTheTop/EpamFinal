@@ -13,9 +13,10 @@ public class GroupExamDAO {
 
 	private static String NEW_EXAM = "INSERT group_exam SET description = ?, exam_date = ?, group_id = ? ;";
 	private static String GET_EXAMS = "SELECT * FROM group_exam WHERE exam_date >= now() and group_id = ?;";
-	private static String UPDATE_EXAM = "UPDATE group_exam SET description = ?, exam_date = ?;";
+	private static String UPDATE_EXAM = "UPDATE group_exam SET description = ?, exam_date = ? WHERE id = ?;";
 	private static String GET_BY_GROUP_ID = "SELECT * from group_exam WHERE group_id = ?;";
 	private static String GET_BY_ID = "SELECT * FROM group_exam WHERE id = ?;";
+
 	public static void createExam(Connection connection, GroupExamModel exam) {
 		PreparedStatement ps = null;
 		try {
@@ -29,7 +30,8 @@ public class GroupExamDAO {
 		}
 	}
 
-	public static List<GroupExamModel> getAll(Connection connection, Integer group_id) {
+	public static List<GroupExamModel> getAll(Connection connection,
+			Integer group_id) {
 		PreparedStatement ps = null;
 		List<GroupExamModel> exams = null;
 		try {
@@ -42,7 +44,7 @@ public class GroupExamDAO {
 		return exams;
 
 	}
-	
+
 	public static GroupExamModel getByGroupId(Connection connection, Integer id) {
 		PreparedStatement ps = null;
 		GroupExamModel exam = null;
@@ -56,7 +58,7 @@ public class GroupExamDAO {
 		return exam;
 
 	}
-	
+
 	public static GroupExamModel getById(Connection connection, Integer id) {
 		PreparedStatement ps = null;
 		GroupExamModel exam = null;
@@ -70,6 +72,18 @@ public class GroupExamDAO {
 		return exam;
 
 	}
-	
-	
+
+	public static void updateExam(Connection connection, GroupExamModel exam) {
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(UPDATE_EXAM);
+			ps.setString(1, exam.getDescription());
+			ps.setTimestamp(2, new Timestamp(exam.getExam_date().getTime()));
+			ps.setInt(3, exam.getId());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

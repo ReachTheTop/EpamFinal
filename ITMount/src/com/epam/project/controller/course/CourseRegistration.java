@@ -22,17 +22,18 @@ public class CourseRegistration implements Action {
 		user = (User) request.getSession().getAttribute("user");
 
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
-		
 
+		Integer group_id = null;
 		if (user.getCurriculum_vitae() != null) {
-			GroupService.addUserToGroup(user, course_id);
+			group_id =  GroupService.addUserToGroup(user, course_id);
 			request.setAttribute("message",
 					"You have been registered on cource");
-			request.getRequestDispatcher("/WEB-INF/courses/registration.jsp")
-					.forward(request, response);
+			request.getRequestDispatcher(
+					"/GroupServlet?action=show&group_id=" + group_id).forward(
+					request, response);
 			return;
 		} else {
-			// REDIRECT TO USER EDIT
+			response.sendRedirect("/ITMount/UserServlet");
 		}
 	}
 

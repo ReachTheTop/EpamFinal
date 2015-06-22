@@ -15,8 +15,7 @@ import com.epam.project.db.transformer.GroupTransformer;
 public class GroupDAO {
 	private static final String GET_COURSE_ID = "SELECT course_id FROM group1 WHERE id = ?;";
 	private static final String NEW_BASE_GROUP = "INSERT INTO group1 SET name = 'Base', confirmed =?, course_id = ?;";
-	private static final String ADD_USER = "INSERT INTO group_user(user_id, group_id) "
-			+ "VALUE (?,(SELECT  id from group1 where course_id = ? AND confirmed = 0));";
+	private static final String ADD_USER = "INSERT INTO group_user(user_id, group_id) VALUE (?,?);";
 	private static final String CONFIRM_GROUP = "UPDATE group1 SET confirmed = 1 WHERE id = ?;";
 	private static final String GET_GROUP_BY_ID = "SELECT * FROM group1 WHERE id=?";
 	private static final String GET_ALL_GROUP = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 WHERE is_active =1 AND name REGEXP ? LIMIT ?,?;";
@@ -44,18 +43,25 @@ public class GroupDAO {
 		}
 	}
 
-	public static void addUser(Connection connection, User user, Integer id) {
-
+	public static Integer addUser(Connection connection, User user, Integer id) {
+		Integer group_id = null;
 		PreparedStatement statement = null;
+		ResultSet result = null;
 		try {
+			statement = connection.prepareStatement("SELECT  id from group1 where course_id = ? AND confirmed = 0;");
+			statement.setInt(1,  id);
+			result = statement.executeQuery();
+			result.next();
+			group_id = result.getInt(1);
 			statement = connection.prepareStatement(ADD_USER);
 
 			statement.setInt(1, user.getId());
-			statement.setInt(2, id);
+			statement.setInt(2, group_id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return group_id;
 	}
 
 	public static Group getGroupById(Integer id, Connection connection) {
