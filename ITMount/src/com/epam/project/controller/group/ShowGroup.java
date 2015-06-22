@@ -39,17 +39,16 @@ public class ShowGroup implements Action {
 					return;
 				}
 
-				
 				List<Event> events = EventService.getByIdGroup(group_id);
-				
-				request.setAttribute("events", events);
 
+				request.setAttribute("events", events);
 
 				List<GroupExamModel> exams = GroupExamService.getAll(group_id);
 				GroupUser association = null;
 				if (user.getRole().equals("student")
 						|| user.getRole().equals("applicant")) {
-					association = GroupUserService.getByGroupAndUserId(user.getId(), group_id);
+					association = GroupUserService.getByGroupAndUserId(
+							group_id, user.getId());
 				}
 				request.setAttribute("exams", exams);
 				request.setAttribute("association", association);

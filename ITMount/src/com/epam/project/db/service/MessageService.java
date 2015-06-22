@@ -48,21 +48,51 @@ public class MessageService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	public static void updateMessage(Message message){
-		
+
+	public static void updateMessage(Message message) {
+
 		Connection connection = DBConnection.getConnection();
 		MessageDAO.updateMessage(message, connection);
-		
+
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	public static List<Message> getUserGroupNotification(Integer user_id) {
+		Connection connection = DBConnection.getConnection();
+		List<Message> messages = null;
+		messages = MessageDAO.getUserGroupNotification(connection, user_id);
+		closeConnection(connection);
+		return messages;
+	}
+
+	private static void closeConnection(Connection connection) {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void sendMessageToUsers(Message message, List<Integer> users_id){
+		Connection connection = DBConnection.getConnection();
+		Integer message_id =  MessageDAO.addNewMessage(message, connection);
+		MessageDAO.sendMessageToUsers(connection, message_id, users_id);
+		closeConnection(connection);
+	}
+	
+	public static void sendMessageToRest(Message message, Integer group_id , List<Integer> users_id){
+		Connection connection = DBConnection.getConnection();
+		Integer message_id = MessageDAO.addNewMessage(message, connection);
+		MessageDAO.sendMessageToRest(connection, message_id, group_id, users_id);
+		closeConnection(connection);
 	}
 
 }

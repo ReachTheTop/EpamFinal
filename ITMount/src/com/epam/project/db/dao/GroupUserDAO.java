@@ -199,6 +199,10 @@ public class GroupUserDAO {
 
 	public static void leaveUsersInGroup(Connection connection,
 			Integer group_id, List<String> users) {
+		if (users.isEmpty()) {
+			return;
+		}
+
 		PreparedStatement ps = null;
 		String input = "(";
 		String separator = "";
@@ -232,6 +236,14 @@ public class GroupUserDAO {
 			}
 
 			ps.executeUpdate();
+
+			ps = connection
+					.prepareStatement("UPDATE group_user SET is_active = 1 WHERE group_id = ? AND user_id = ?;");
+			for (Integer id : users_id) {
+				ps.setInt(1, group_id);
+				ps.setInt(2, id);
+				ps.executeUpdate();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -297,7 +309,8 @@ public class GroupUserDAO {
 			Integer user_id) {
 		PreparedStatement statement = null;
 		try {
-			statement = connection.prepareStatement("DELETE FROM group_user WHERE group_id = ? AND user_id = ?;");
+			statement = connection
+					.prepareStatement("DELETE FROM group_user WHERE group_id = ? AND user_id = ?;");
 			statement.setInt(1, group_id);
 			statement.setInt(2, group_id);
 			statement.executeUpdate();

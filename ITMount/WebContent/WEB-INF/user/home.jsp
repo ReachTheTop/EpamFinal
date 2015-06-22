@@ -17,8 +17,11 @@
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
-
-
+	<c:if test="${ current_user.id == user.id }">
+		<c:if test="${not empty messages }">
+			<jsp:include page="groupNotification.jsp" />
+		</c:if>
+	</c:if>
 	<div class="section section-breadcrumbs">
 		<div class="container">
 			<div class="row">

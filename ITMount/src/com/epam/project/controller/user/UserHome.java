@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Contact;
 import com.epam.project.db.model.Group;
+import com.epam.project.db.model.Message;
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.ContactService;
 import com.epam.project.db.service.GroupService;
+import com.epam.project.db.service.MessageService;
 import com.epam.project.db.service.UserService;
 
 public class UserHome implements Action {
@@ -25,16 +27,17 @@ public class UserHome implements Action {
 		if (request.getParameter("user_id") != null) {
 			user_id = Integer.parseInt(request.getParameter("user_id"));
 			current_user = UserService.getUser(user_id);
-		}else{
+		} else {
 			current_user = (User) request.getSession().getAttribute("user");
 		}
 
-		
 		List<Group> groups = null;
 		if (current_user.getRole().equals("applicant")
 				|| current_user.getRole().equals("student")) {
 			groups = GroupService.getGroupsUserStudy(current_user.getId());
-
+			List<Message> notifications = MessageService
+					.getUserGroupNotification(current_user.getId());
+			request.setAttribute("messages", notifications);
 			request.setAttribute("groups", groups);
 		} else if (current_user.getRole().equals("lecturer")) {
 			groups = GroupService.getByTeacher(current_user.getId());
