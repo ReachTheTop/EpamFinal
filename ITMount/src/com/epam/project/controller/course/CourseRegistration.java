@@ -23,7 +23,7 @@ public class CourseRegistration implements Action {
 
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
 		
-
+		System.out.println(user);
 		if (user.getCurriculum_vitae() != null) {
 			GroupService.addUserToGroup(user, course_id);
 			request.setAttribute("message",

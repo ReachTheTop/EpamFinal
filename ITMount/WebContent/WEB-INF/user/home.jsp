@@ -11,6 +11,16 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
 <link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
+<style type="text/css">
+.panel-default>.panel-heading-custom {
+	background: #FFFF43;
+}
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -31,11 +41,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
 
 
 
@@ -83,8 +88,7 @@
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
 									Vitae</b></label> <input name="cv" class="form-control" id="file"
-								type="file" placeholder=""
-								value="${user.curriculum_vitae }">
+								type="file" placeholder="" value="${user.curriculum_vitae }">
 						</div>
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Phone</b></label>
@@ -105,9 +109,6 @@
 								placeholder=""><c:out value="${user.description }" /> </textarea>
 						</div>
 
-
-
-
 						<div class="form-group">
 
 							<button type="submit" class="btn pull-right">Update</button>
@@ -115,91 +116,238 @@
 						</div>
 					</form>
 				</div>
-
-			</div>
-		</div>
-
-	</div>
-
-
-
-
-
-
-
-
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-6">
-				<div class="well well-sm">
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<img src="upload/${current_user.image }" alt=""
-								class="img-rounded img-responsive" />
-						</div>
-						<div class="col-sm-6 col-md-8">
-							<h4>
-								<c:out value="${current_user.name }" />
-								<c:out value="${current_user.surname }" />
-							</h4>
-
-							<p>
-								<i class="glyphicon glyphicon-envelope"> <c:out
-										value="${current_user.email }" /></i> <br /> <i
-									class="glyphicon glyphicon-gift"> <c:out
-										value="${current_user.birtday }" /></i><br /> <i
-									class="glyphicon glyphicon-earphone"> <c:out
-										value="${contact.phone}" /></i> <br /> <i
-									class="glyphicon glyphicon-phone"> <c:out
-										value="${contact.skype}" /></i>
-
-							</p>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		var form = $('#editUserForm');
+		
+		form.submit(function() {
+				alert("dvdv");
+			request = $.ajax({
+				type : form.attr('method'),
+				url : form.attr('action'),
+
+				data : new FormData(this),
+				processData : false,
+				contentType : false,
+
+				success : function(text) {
+
+					$('#editUser').modal('hide');
+					showToaast("Task was  successfully created", 1);
+					
+
+				},
+				error : function() {
+	
+					showToaast("Task was not  created", 0);
+					
+				}
+			});
+
+			return false;
+		});
+	</script>
+	
+	
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+
+
 	<c:choose>
-		<c:when test="${current_user.role != 'admin' }">
-
+		<c:when test="${user.id == current_user.id && user.role !='admin' }">
 			<div class="container">
-				<h2>My courses</h2>
-				<div class="section">
-					<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel panel-default">
+							<div class="panel-heading  panel-heading-custom">
+								<h3 class="panel-title">${current_user.name }
+									${current_user.surname }
 
-						<div class="row">
-							<c:forEach items="${groups }" var="group">
-								<a
-									href="<c:url
-							value="/GroupServlet?action=show&group_id=${group.id }" />">
+									<c:if test="${current_user.id == user.id }">
+										<a data-toggle="modal" href="#editUser"><i
+											class="glyphicon glyphicon-edit"></i></a>
+									</c:if>
 
-									<div class="col-md-4 col-sm-6">
-										<img src="upload/${group.course.icon }" class="img-circle"
-											alt="Cinque Terre" width="150" height="150"
-											alt="${group.name }">
+								</h3>
+
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-3 col-lg-3 " align="center">
+										<img src="upload/${current_user.image }" alt=""
+											class="img-rounded img-responsive" />
+
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#editUser" style="margin-top: 10px">
+											Update foto</button>
 									</div>
 
-								</a>
+
+									<div class=" col-md-9 col-lg-9 ">
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td>First Name</td>
+													<td>${current_user.name }</td>
+												</tr>
+												<tr>
+													<td>Middle Name</td>
+													<td>${current_user.middle_name }</td>
+												</tr>
+												<tr>
+													<td>Surname</td>
+													<td>${current_user.surname }</td>
+												</tr>
+
+												<tr>
+												<tr>
+													<td>Birthday</td>
+													<td>${current_user.birtday}</td>
+												</tr>
+												<tr>
+													<td>Email</td>
+													<td>${current_user.email}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>${contact.phone}</td>
+												</tr>
+												<tr>
+													<td>Skype</td>
+													<td>${contact.skype}</td>
+												</tr>
+												<tr>
+													<td>CV</td>
+													<td><c:choose>
+															<c:when test="${current_user.curriculum_vitae == null}">
+																<button type="submit"
+																	class="btn btn-default btn-xs dropdown-toggle"
+																	data-toggle="modal" href="#editUser">Add CV</button>
+															</c:when>
+
+															<c:otherwise>
+																<p>
+																	<a
+																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																		class="btn btn-default btn-xs dropdown-toggle">Download
+																		CV</a>
+																</p>
+
+															</c:otherwise>
+
+														</c:choose></td>
+												</tr>
+												<tr>
+													<td>Description</td>
+													<td>${current_user.description}</td>
+												</tr>
 
 
-							</c:forEach>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 
 					</div>
+
+					<div class="col-md-4">
+						<h2>My courses</h2>
+						<div class="section">
+							<c:forEach items="${groups }" var="group">
+								<div class="col-sm-6" style="margin-top: 5px">
+									<a
+										href="<c:url
+							value="/GroupServlet?action=show&group_id=${group.id }" />">
+
+
+										<img src="upload/${group.course.icon }" class="img-circle"
+										alt="Cinque Terre" width="150" height="150"
+										alt="${group.name }">
+
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+
 				</div>
-
-
-
-
-
-
-
 			</div>
 		</c:when>
+	</c:choose>
 
+
+
+	<c:choose>
 		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
 			<div class="container">
@@ -266,7 +414,6 @@
 							}
 						});
 
-						
 					});
 
 					$('button#submit-course-edit').click(function() {
@@ -286,7 +433,8 @@
 								<h4 class="modal-title">New course</h4>
 							</div>
 							<div class="modal-body">
-								<form action="CourseServlet?action=create" id='create-new-course' method="post"
+								<form action="CourseServlet?action=create"
+									id='create-new-course' method="post"
 									enctype="multipart/form-data" role="form" role="form">
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
@@ -372,7 +520,7 @@
 				</div>
 				<script type="text/javascript">
 					$('button#submit-group-edit').click(function() {
-						
+
 						$('#editGroup').modal('hide');
 					});
 				</script>
@@ -381,6 +529,106 @@
 
 
 				<div class="panel-group" id="accordion">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" class="courses"
+									data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">${current_user.name }
+									${current_user.surname }</a> <a data-toggle="modal"
+									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
+							</h4>
+
+						</div>
+
+						<div id="collapse0" class="panel-collapse collapse collapse in">
+
+
+							<div class="panel-body" id="profile-body">
+								<div class="row">
+									<div class="col-md-3 col-lg-3 " align="center">
+										<img src="upload/${current_user.image }" alt=""
+											class="img-rounded img-responsive" />
+
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#editUser" style="margin-top: 10px">
+											Update foto</button>
+									</div>
+
+
+									<div class=" col-md-9 col-lg-9 ">
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td>First Name</td>
+													<td>${current_user.name }</td>
+												</tr>
+												<tr>
+													<td>Middle Name</td>
+													<td>${current_user.middle_name }</td>
+												</tr>
+												<tr>
+													<td>Surname</td>
+													<td>${current_user.surname }</td>
+												</tr>
+
+												<tr>
+												<tr>
+													<td>Birthday</td>
+													<td>${current_user.birtday}</td>
+												</tr>
+												<tr>
+													<td>Email</td>
+													<td>${current_user.email}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>${contact.phone}</td>
+												</tr>
+												<tr>
+													<td>Skype</td>
+													<td>${contact.skype}</td>
+												</tr>
+												<tr>
+													<td>CV</td>
+													<td><c:choose>
+															<c:when test="${current_user.curriculum_vitae == null}">
+																<button type="submit"
+																	class="btn btn-default btn-xs dropdown-toggle"
+																	data-toggle="modal" href="#editUser">Add CV</button>
+															</c:when>
+
+															<c:otherwise>
+																<p>
+																	<a
+																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																		class="btn btn-default btn-xs dropdown-toggle">Download
+																		CV</a>
+																</p>
+
+															</c:otherwise>
+
+														</c:choose></td>
+												</tr>
+												<tr>
+													<td>Description</td>
+													<td>${current_user.description}</td>
+												</tr>
+
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -517,6 +765,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -551,11 +800,11 @@
 
 														}
 													},
-													teacher_id: {
+													teacher_id : {
 														validators : {
 															notEmpty : {
 																message : 'The field is required and cannot be empty'
-																
+
 															}
 
 														}
@@ -591,16 +840,16 @@
 
 														}
 													},
-										            image: {
-										                validators: {
-										                    file: {
-										                        extension: 'png,jpg',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            },
-										            description: {
+													image : {
+														validators : {
+															file : {
+																extension : 'png,jpg',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													},
+													description : {
 														validators : {
 															notEmpty : {
 																message : 'The field is required and cannot be empty',
@@ -615,9 +864,9 @@
 											});
 						});
 	</script>
-	
-	
-		<script type="text/javascript">
+
+
+	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
@@ -649,42 +898,42 @@
 															}
 														}
 													},
-										            skype: {
-										                validators: {
-										                	 regexp: {
-											                        regexp: /^[a-zА-Яа-я0-9_-]{3,15}$/,
-											                        message: 'Invalid skype name'
-											                    },
-										                 
-										                }
-										            },
-										            phone: {
-										                validators: {
-										                	 regexp: {
-											                        regexp: /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
-											                        message: 'Invalid phone number'
-											                    },
-										                 
-										                }
-										            },
-										            image: {
-										                validators: {
-										                    file: {
-										                        extension: 'png,jpg',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            },
-										            cv: {
-										                validators: {
-										                    file: {
-										                        extension: 'pdf,doc,docx',
-										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
-										                    }
-										                }
-										            }
+													skype : {
+														validators : {
+															regexp : {
+																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
+																message : 'Invalid skype name'
+															},
+
+														}
+													},
+													phone : {
+														validators : {
+															regexp : {
+																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+																message : 'Invalid phone number'
+															},
+
+														}
+													},
+													image : {
+														validators : {
+															file : {
+																extension : 'png,jpg',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													},
+													cv : {
+														validators : {
+															file : {
+																extension : 'pdf,doc,docx',
+																maxSize : 5 * 1024 * 1024,
+																message : 'Please choose a image file with a size less than 5M.'
+															}
+														}
+													}
 												}
 											});
 						});
@@ -695,6 +944,7 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
+
 
 </body>
 </html>

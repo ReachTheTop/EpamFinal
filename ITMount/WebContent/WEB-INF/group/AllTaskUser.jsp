@@ -11,29 +11,23 @@
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 
-<jsp:include page="../page/head.jsp" />
+<%-- <jsp:include page="../page/head.jsp" /> --%>
 <link href="responsive.css" rel="stylesheet">
 
 </head>
 <body>
-	<jsp:include page="../page/header.jsp" />
 
-	<!-- Page Title -->
-	<div class="section section-breadcrumbs">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>All Tasks</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<div class="container" style="">
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel-group" id="accordion" role="tablist"
 					aria-multiselectable="true">
+					
+					<c:if test="${empty listtasks}"> <h3>No Tasks</h3>  </c:if>
+					<c:if test="${not empty listtasks}"> <h3>All Tasks</h3>  </c:if>
+					
 
 					<c:forEach items="${requestScope.listtasks}" var="tasks">
 
@@ -78,7 +72,8 @@
 											</tr>
 											<tr>
 												<td>Your work</td>
-												<td><c:choose>
+												<td>
+														<c:choose>
 														<c:when test="${tasks.key.getAvailable() == false}">
 															Time out
 														</c:when>
@@ -124,7 +119,7 @@
 
 				</div>
 
-				<button type="submit" class="btn btn-primary">Back</button>
+				
 			</div>
 		</div>
 	</div>
@@ -146,6 +141,8 @@
 							<input class="form-control" id="idTask" name="task_id"
 								type="hidden" value="">
 						</div>
+						
+						<input type="hidden" name="user_id" value="${user.id}" />
 
 
 						<div class="form-group">
@@ -232,8 +229,6 @@
 		});
 	</script>
 
-
-	<jsp:include page="../page/footer.jsp" />
 
 </body>
 </html>

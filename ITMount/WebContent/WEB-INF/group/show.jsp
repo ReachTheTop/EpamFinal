@@ -56,14 +56,19 @@
 
 
 
-	<a href="<c:url value="/openCreateTask?group_id=${group.id }"/>">Create
-		Task</a>
+<%-- 	<a href="<c:url value="/openCreateTask?group_id=${group.id }"/>">Create --%>
+<!-- 		Task</a> -->
+		
+		
+
 
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
 				<%-- <c:if test="${user.role == 'lecturer' }"> --%>
 				<jsp:include page="teacherPanel.jsp"></jsp:include>
+				
+				<jsp:include page="AllTaskUser.jsp"></jsp:include>
 				<%-- </c:if> --%>
 				<!-- ПАНЕЛЬ ПОДІЙ  -->
 				<jsp:include page="eventPanel.jsp"></jsp:include>

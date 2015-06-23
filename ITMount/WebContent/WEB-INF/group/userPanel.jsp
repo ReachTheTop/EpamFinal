@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
+
 <div class="col-md-10 column">
 	<div class="panel panel-default">
 		<div class="panel-heading"><p>Teacher Panel</p><a href="#myModal" class="btn btn-sm btn-primary"
@@ -52,6 +54,12 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
 
 <div id="myModal" class="modal fade bs-example-modal-sm">
 
@@ -103,7 +111,7 @@
 
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
-									<b>File</b></label> <input class="form-control" id="register-username"
+									<b>File</b></label> <input class="form-control" id="task_file"
 									type="file" placeholder="" name="file">
 							</div>
 
@@ -214,6 +222,7 @@
 				error : function() {
 					$("#incorectData").show();
 					showToaast("Task was not  created", 0);
+					showToaast('<div><input class="input-small" value="textbox"/>&nbsp;<a href="http://johnpapa.net" target="_blank">This is a hyperlink</a></div>', 1);
 				}
 			});
 

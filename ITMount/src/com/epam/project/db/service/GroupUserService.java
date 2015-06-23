@@ -106,7 +106,7 @@ public class GroupUserService {
 		GroupUser association = null;
 		association = GroupUserDAO.getByGroupAndUserId(connection, group_id,
 				user_id);
-
+		
 		GroupExamModel exam = GroupExamDAO.getById(connection,
 				association.getExam_id());
 		if (exam != null) {
