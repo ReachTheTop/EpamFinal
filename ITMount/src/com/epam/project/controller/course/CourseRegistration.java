@@ -1,6 +1,8 @@
 package com.epam.project.controller.course;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.project.command.Action;
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.GroupService;
+import com.google.gson.Gson;
 
 public class CourseRegistration implements Action {
 
@@ -24,14 +27,16 @@ public class CourseRegistration implements Action {
 
 		Integer group_id = null;
 
-		System.out.println(user.getCurriculum_vitae());
 
-		if (user != null && !user.getCurriculum_vitae().isEmpty()) {
+		if (user != null && user.getCurriculum_vitae()!=null) {
 			group_id = GroupService.addUserToGroup(user, course_id);
-			request.getRequestDispatcher(
-					"/GroupServlet?action=show&group_id=" + group_id).forward(
-					request, response);
+			Gson g = new Gson();
+			Map<String, Integer> map = new HashMap<>();
+			map.put("key", group_id);
+			response.setContentType("application/json");
+			response.getWriter().write(g.toJson(map));;
 			return;
+			
 		} else {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;

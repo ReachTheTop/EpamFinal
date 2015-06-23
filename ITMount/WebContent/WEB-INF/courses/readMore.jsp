@@ -161,6 +161,7 @@
 
 <script>
   var form = $('#form1');
+ 
   form.submit(function(e) {
    e.preventDefault();
       e.stopImmediatePropagation();
@@ -168,21 +169,31 @@
     type : form.attr('method'),
     url : form.attr('action'),
 
-    success : function() {
+    success : function(data) {
+    	
      $("#incorectData").hide();
    $("#registration").hide();
      document.getElementById("form1").reset();
-     showToaast('You register in course',1);
+     window.location.href = '/ITMount/GroupServlet?action=show&group_id='+""+data.key;
+     
       },
     error : function() {
      $("#incorectData").show();
-     showToaast('<a href="<c:url value="/UserServlet?action=index&showEdit=true" />"_blank">Please upload your cv</a>' , 0);
+     showToaast('<form name="myform" method="post" action="<c:url value="/UserServlet?action=index" />" role="form"><input type="hidden" name="showEdit" value="true"><a href="javascript: submitform()">Please upload your cv</a></form>' , 0);
+  	
     }
    });
 
    return false;
   });
  </script>
+		
+<script type="text/javascript">
+function submitform()
+{
+  document.myform.submit();
+}
+</script>
 		
 		<jsp:include page="../page/footer.jsp" />
 </body>
