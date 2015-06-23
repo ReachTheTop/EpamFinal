@@ -18,26 +18,36 @@ import com.epam.project.command.Menu;
 @MultipartConfig
 public class HomeworkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
 	private Menu menu;
-    public HomeworkServlet() {
-      menu = new Menu(new UpdateHomework(), new ShowHomework(), new DeleteHomework(), new UploadHomework(), new SetRatingHomework());
-    }
+
+	public HomeworkServlet() {
+		menu = new Menu(new UpdateHomework(), new ShowHomework(),
+				new DeleteHomework(), new UploadHomework(),
+				new SetRatingHomework());
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 

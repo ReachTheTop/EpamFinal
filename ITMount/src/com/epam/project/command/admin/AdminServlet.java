@@ -27,11 +27,14 @@ public class AdminServlet extends HttpServlet {
 		menu = new Menu(new CoursesAdministration(), new TrigerCourse(),
 				new GroupAdministration(), new ConfirmGroup(),
 				new GetTeachers(), new UserAdministration(), new BanUser(),
-				new GetCourse(), new GetGroup(), new GetRoles(), new ChangeRole());
+				new GetCourse(), new GetGroup(), new GetRoles(),
+				new ChangeRole());
 	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
@@ -41,6 +44,8 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
