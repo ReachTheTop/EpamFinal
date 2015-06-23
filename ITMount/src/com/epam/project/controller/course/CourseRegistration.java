@@ -31,7 +31,7 @@ public class CourseRegistration implements Action {
 		if (user != null && user.getCurriculum_vitae()!=null) {
 			group_id = GroupService.addUserToGroup(user, course_id);
 			Gson g = new Gson();
-			Map map = new HashMap();
+			Map<String, Integer> map = new HashMap<>();
 			map.put("key", group_id);
 			response.setContentType("application/json");
 			response.getWriter().write(g.toJson(map));;
