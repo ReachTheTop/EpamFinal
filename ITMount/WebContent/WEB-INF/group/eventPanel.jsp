@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+<link rel="stylesheet" href="resources/css/styleEvent.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/font-awesome.css"
+	type="text/css">
+
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<c:if
@@ -34,6 +40,68 @@
 	</table>
 </div>
 
+<div class="ibox float-e-margins">
+	<div class="ibox-title  panel panel-default">
+		<h5>
+			<c:if
+				test="${not empty group.teacher_id && user.id == group.teacher_id}">
+				<a data-toggle="modal" id="createEventModal" href="#createEvent"><i
+					class='glyphicon glyphicon-plus'></i></a>
+			</c:if>
+			Events
+
+		</h5>
+		<div class="ibox-tools">
+			<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+			</a>
+		</div>
+
+	</div>
+
+	<div class="ibox-content inspinia-timeline">
+		<c:forEach items="${ events}" var="event" varStatus="loop">
+			<div class="timeline-item">
+				<div class="row">
+					<div class="col-xs-3 date">
+						<i class="${event.typeEvent }"></i> ${event.date } <br /> <small
+							class="text-navy">2 hour ago</small>
+					</div>
+					<div class="col-xs-7 content no-top-border">
+						<p class="m-b-xs">
+							<strong>${event.nameEvent }</strong>
+						</p>
+
+						<p>${event.description }</p>
+
+
+					</div>
+					<div class="col-xs-2 content no-top-border">
+						<p class="m-b-xs">
+							<strong>Options</strong>
+						</p>
+
+						<c:if
+							test="${not empty group.teacher_id && user.id == group.teacher_id}">
+							<td><a data-toggle="modal" class='editEvent'
+								id='${event.id }' href="#editEvent"><i
+									class='glyphicon glyphicon-edit'></i></a></td>
+							<td><a class='editEvent'
+								href="<c:url value='EventServlet?action=delete&event_id=${event.id }' />"><i
+									class='glyphicon glyphicon-minus'></i></a></td>
+						</c:if>
+
+
+					</div>
+
+				</div>
+			</div>
+		</c:forEach>
+
+	</div>
+</div>
+
+
+
 <div id="createEvent" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -45,6 +113,28 @@
 			<div class="modal-body">
 				<form action="EventServlet?action=create" id='create-event-form'
 					method="post" role="form" role="form">
+					
+					<div class="form-group">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event Name</b></label>
+						<input name="eventName" class="form-control" id="eventName"
+							type="text" required="required" placeholder="">
+					</div>
+					
+					<div class="form-group">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event Type</b></label> <select class="form-control " name = "typeEvent" id="sel1">
+							<option value="fa fa-calendar">other</option>
+							<option  value ="fa fa-birthday-cake"> birthday</option>
+							<option  value ="fa fa-beer">beer</option>
+							<option value="fa fa-futbol-o">sport</option>
+							<option value="fa fa-coffee">coffee</option>
+							<option value="fa fa-camera">foto</option>
+							<option value="fa fa-tree">holiday</option>
+							<option value="fa fa-usd">money</option>
+								
+						</select>
+					</div>
+					
+					
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b>Event
 								Description</b></label>
@@ -66,7 +156,7 @@
 					<div class="form-group">
 
 						<button type="submit" id='submit-event-create'
-							class="btn pull-right">Update</button>
+							class="btn pull-right">Add</button>
 						<div class="clearfix"></div>
 					</div>
 				</form>
@@ -116,11 +206,32 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">New event</h4>
+				<h4 class="modal-title">Update Event</h4>
 			</div>
 			<div class="modal-body">
 				<form action="EventServlet?action=update" id='create-event-form'
 					method="post" role="form" role="form">
+					
+					<div class="form-group">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event Name</b></label>
+						<input name="eventName" class="form-control" id="eventName1"
+							type="text" required="required" placeholder="">
+					</div>
+					
+					<div class="form-group">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event Type</b></label> <select class="form-control " name = "typeEvent" id="eventType">
+							<option value="fa fa-calendar">other</option>
+							<option  value ="fa fa-birthday-cake"> birthday</option>
+							<option  value ="fa fa-beer">beer</option>
+							<option value="fa fa-futbol-o">sport</option>
+							<option value="fa fa-coffee">coffee</option>
+							<option value="fa fa-camera">foto</option>
+							<option value="fa fa-tree">holiday</option>
+							<option value="fa fa-usd">money</option>
+								
+						</select>
+					</div>
+					
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b>Event
 								Description</b></label>
@@ -161,10 +272,16 @@
 		$("#event_id").val(index);
 		$.get('EventServlet?action=show&event_id=' + index, function(response) {
 			$('#eventDescription').val(response.description);
-
-			$("#eventDate").val(response.date);
+		
+			var df = moment(response.date).format('dd.MM.YYYY HH:mm');
+			alert(moment("20111031", "YYYYMMDD").fromNow());
+			$("#eventDate").val(df);
+			$('#eventName1').val(response.nameEvent);
+			$('#eventType').val(response.typeEvent);
 		});
 	});
 </script>
+
+
 
 

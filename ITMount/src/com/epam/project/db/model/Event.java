@@ -14,6 +14,11 @@ public class Event extends Validator implements Serializable {
 
 	@Column(value = "id")
 	private Integer id;
+	
+	@Column(value = "name")
+	private String nameEvent;
+	
+	private String typeEvent;
 
 	@Column(value = "description")
 	private String description;
@@ -37,6 +42,22 @@ public class Event extends Validator implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getNameEvent() {
+		return nameEvent;
+	}
+
+	public void setNameEvent(String nameEvent) {
+		this.nameEvent = nameEvent;
+	}
+
+	public String getTypeEvent() {
+		return typeEvent;
+	}
+
+	public void setTypeEvent(String typeEvent) {
+		this.typeEvent = typeEvent;
 	}
 
 	public String getDescription() {
@@ -73,11 +94,12 @@ public class Event extends Validator implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", description=" + description + ", date="
-				+ date + ", group_id=" + group_id + ", is_active=" + is_active
-				+ "]";
+		return "Event [id=" + id + ", nameEvent=" + nameEvent + ", typeEvent="
+				+ typeEvent + ", description=" + description + ", date=" + date
+				+ ", group_id=" + group_id + ", is_active=" + is_active + "]";
 	}
-	
+
+
 	
 
 }

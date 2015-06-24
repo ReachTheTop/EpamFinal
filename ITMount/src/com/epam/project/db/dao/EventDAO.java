@@ -11,16 +11,25 @@ import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.model.Event;
 
 public class EventDAO {
+	
+	
 	private static final String NEW_EVENT = ""
-			+ "INSERT INTO event (description, date, group_id) "
-			+ "VALUES (?,?,?);";
+			+ "INSERT INTO event (name,type,description, date, group_id) "
+			+ "VALUES (?,?,?,?,?);";
+	
+	private static final String UPDATE = "" + "UPDATE event "
+			+ "SET description =? , date = ?"
+			+ "WHERE id = ?;";
+	
+	
+	
+	
+	
 	private static final String GET_ALL = "SELECT * FROM event where is_active =1;";
 
 	private static final String DELETE = "" + "UPDATE event "
 			+ "SET is_active = 0 " + "WHERE id = ?";
-	private static final String UPDATE = "" + "UPDATE event "
-			+ "SET description =? , date = ?"
-			+ "WHERE id = ?;";
+	
 
 	private static final String GET_BY_ID = "SELECT * FROM event WHERE id = ?;";
 	
@@ -96,17 +105,17 @@ public class EventDAO {
 		try {
 			statement = con.prepareStatement(NEW_EVENT,
 					Statement.RETURN_GENERATED_KEYS );
-			statement.setString(1, event.getDescription());
-			statement.setTimestamp(2, new Timestamp(event.getDate().getTime()));
-			statement.setInt(3, event.getGroup_id());
+			statement.setString(1, event.getNameEvent());
+			statement.setString(2, event.getTypeEvent());
+			statement.setString(3, event.getDescription());
+			statement.setTimestamp(4, new Timestamp(event.getDate().getTime()));
+			statement.setInt(5, event.getGroup_id());
 			
 			statement.executeUpdate();
 			ResultSet resultSet = statement.getGeneratedKeys();
 			resultSet.next();
 			event_id = resultSet.getInt(1);
 			
-			
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

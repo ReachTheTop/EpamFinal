@@ -26,6 +26,8 @@ public class EventTransformer {
 
 	private static void parse(Event event, ResultSet data) {
 		try {
+			event.setNameEvent(data.getString("name"));
+			event.setTypeEvent(data.getString("type"));
 			event.setDate(data.getTimestamp("date"));
 			event.setDescription(data.getString("description"));
 			event.setGroup_id(data.getInt("group_id"));

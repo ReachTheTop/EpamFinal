@@ -24,6 +24,8 @@
 
 <script src="resources/js/jquery.bxslider.js"></script>
 
+
+
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
@@ -69,3 +71,7 @@
 </script>
 
 
+<script src="resources/js/jquery.metisMenu.js"></script>
+<script src="resources/js/inspinia.js"></script>
+<script src="resources/js/bootstrap-select.js"></script>
+<script src="resources/js/moment.js"></script>
