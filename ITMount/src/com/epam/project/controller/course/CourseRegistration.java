@@ -25,6 +25,7 @@ public class CourseRegistration implements Action {
 
 		Integer course_id = Integer.parseInt(request.getParameter("course_id"));
 
+
 		Integer group_id = null;
 
 

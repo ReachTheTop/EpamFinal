@@ -11,6 +11,9 @@
 		<jsp:include page="eventPanel.jsp"></jsp:include>
 		<!-- ПАНЕЛЬ ПОДІЙ  -->
 	</div>
+
+
+
 	<div class="col-md-4">
 		<jsp:include page="userPanel.jsp"></jsp:include>
 	</div>
@@ -20,4 +23,9 @@
 			<jsp:include page="examPanel.jsp"></jsp:include>
 		</div>
 	</c:if>
+	
+	<div class="col-md-8">
+		<jsp:include page="AllTaskUser.jsp"></jsp:include>
+	</div>
+	
 </div>

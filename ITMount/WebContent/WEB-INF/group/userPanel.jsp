@@ -2,6 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
 
 <div class="col-md-10 column">
 	<div class="panel panel-default">
@@ -53,6 +55,12 @@
 	</div>
 </div>
 
+
+
+
+
+
+
 <div id="myModal" class="modal fade bs-example-modal-sm">
 
 
@@ -103,7 +111,7 @@
 
 							<div class="form-group">
 								<label for="register-username"><i class="icon-user"></i>
-									<b>File</b></label> <input class="form-control" id="register-username"
+									<b>File</b></label> <input class="form-control" id="task_file"
 									type="file" placeholder="" name="file">
 							</div>
 
@@ -189,37 +197,40 @@
 		}
 	</script>
 
-<script>
-  var form = $('#form1');
-  form.submit(function(e) {
-   e.preventDefault();
-      e.stopImmediatePropagation();
-   request = $.ajax({
-    type : form.attr('method'),
-    url : form.attr('action'),
 
-    data : new FormData(this),
-    processData : false,
-    contentType : false,
+	<script>
+		var form = $('#form1');
+		form.submit(function(e) {
+			e.preventDefault();
+		    e.stopImmediatePropagation();
+			request = $.ajax({
+				type : form.attr('method'),
+				url : form.attr('action'),
 
-    //data : form.serialize(),
-    success : function(text) {
+				data : new FormData(this),
+				processData : false,
+				contentType : false,
 
-     $("#incorectData").hide();
-     document.getElementById("form1").reset();
-     $('#myModal').modal('hide');
-     showToaast("Task was  successfully created", 1);
+				//data : form.serialize(),
+				success : function(text) {
 
-    },
-    error : function() {
-     $("#incorectData").show();
-     showToaast("Task was not  created", 0);
-    }
-   });
+					$("#incorectData").hide();
+					document.getElementById("form1").reset();
+					$('#myModal').modal('hide');
+					showToaast("Task was  successfully created", 1);
 
-   return false;
-  });
- </script>
+				},
+				error : function() {
+					$("#incorectData").show();
+					showToaast("Task was not  created", 0);
+					showToaast('<div><input class="input-small" value="textbox"/>&nbsp;<a href="http://johnpapa.net" target="_blank">This is a hyperlink</a></div>', 1);
+				}
+			});
+
+			return false;
+		});
+	</script>
+
 
 	<script>
 		$(document).ready(function() {

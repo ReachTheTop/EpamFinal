@@ -61,7 +61,7 @@ public class UploadFile {
 		}
 		
 		uploadPath =servletContext.getRealPath("")+"upload"+File.separator+patch;
-		
+		System.out.println("uploadPath = "+uploadPath);
 		File directory = new File(uploadPath);
 		if(!directory.exists()){
 			directory.mkdirs();

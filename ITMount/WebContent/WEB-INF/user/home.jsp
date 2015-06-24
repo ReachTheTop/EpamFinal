@@ -11,9 +11,22 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
+
 <script src="resources/js/toastr.js"></script>
 
+
+
+<link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+
+<style type="text/css">
+.panel-default>.panel-heading-custom {
+	background: #FFFF43;
+}
+}
+</style>
 
 
 </head>
@@ -42,11 +55,6 @@
 
 
 
-
-
-
-
-
 	<div id="editUser" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -61,19 +69,19 @@
 						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" class="form-control"
+									Name</b></label> <input name="name" id = "userNameModal" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Middle
 									Name</b></label> <input name="middle_name" class="form-control"
-								id="login-username" type="text" placeholder=""
+								id="middleNameModal" type="text" placeholder=""
 								value="${user.middle_name }">
 						</div>
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Surname</b></label>
-							<input name="surname" class="form-control" id="login-username"
+							<input name="surname" class="form-control" id="userSurNameModal"
 								type="text" placeholder="" value="${user.surname }">
 						</div>
 						<div class="form-group">
@@ -112,9 +120,6 @@
 								placeholder=""><c:out value="${user.description }" /> </textarea>
 						</div>
 
-
-
-
 						<div class="form-group">
 
 							<button type="submit" class="btn pull-right">Update</button>
@@ -122,91 +127,325 @@
 						</div>
 					</form>
 				</div>
-
-			</div>
-		</div>
-
-	</div>
-
-
-
-
-
-
-
-
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-6">
-				<div class="well well-sm">
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<img src="upload/${current_user.image }" alt=""
-								class="img-rounded img-responsive" />
-						</div>
-						<div class="col-sm-6 col-md-8">
-							<h4>
-								<c:out value="${current_user.name }" />
-								<c:out value="${current_user.surname }" />
-							</h4>
-
-							<p>
-								<i class="glyphicon glyphicon-envelope"> <c:out
-										value="${current_user.email }" /></i> <br /> <i
-									class="glyphicon glyphicon-gift"> <c:out
-										value="${current_user.birtday }" /></i><br /> <i
-									class="glyphicon glyphicon-earphone"> <c:out
-										value="${contact.phone}" /></i> <br /> <i
-									class="glyphicon glyphicon-phone"> <c:out
-										value="${contact.skype}" /></i>
-
-							</p>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script src="resources/js/toastr.js"></script>
+	
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+	
+	
+	<script>
+		var form = $('#editUserForm');
+		form.submit(function(e) {
+			e.preventDefault();
+		    e.stopImmediatePropagation();
+			request = $.ajax({
+				type : form.attr('method'),
+				url : form.attr('action'),
+
+				data : new FormData(this),
+				processData : false,
+				contentType : false,
+				dataType: "json",
+
+				success : function(data) {
+					
+					var nameUser = data.name;
+					$( "#userName" ).html(nameUser);
+					$( "#userNameModal" ).html(nameUser);
+					var surNameUser = data.surname;
+					$( "#userSurNameModal" ).html(surNameUser);
+					$( "#userSurName" ).html(surNameUser);
+					
+					var userNameSurname = nameUser.concat("  ").concat(surNameUser);
+					$( "#userNameSurname" ).html(userNameSurname);
+					
+ 					var userMiddleName = data.middle_name;
+					$("#middleNameModal").html(userMiddleName);
+ 					$("#userMiddleName").html(userMiddleName);
+					
+					var userBirtday = data.birtday;
+					$("userBirtday").html(userBirtday);
+					
+					
+					
+					$('#editUser').modal('hide');
+					showToaast("Profile was successfully edited", 1);
+
+				},
+				error : function() {
+			
+					showToaast("Profile was not edited", 0);
+				}
+			});
+
+			return false;
+		});
+	</script>
+	
+	
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+
+
 	<c:choose>
-		<c:when test="${current_user.role != 'admin' }">
-
+		<c:when test="${user.id == current_user.id && user.role !='admin' }">
 			<div class="container">
-				<h2>My courses</h2>
-				<div class="section">
-					<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel panel-default">
+							<div class="panel-heading  panel-heading-custom">
+								<h3 class="panel-title" id = "userNameSurname" > ${current_user.name }
+									${current_user.surname }
 
-						<div class="row">
-							<c:forEach items="${groups }" var="group">
-								<a
-									href="<c:url
-							value="/GroupServlet?action=show&group_id=${group.id }" />">
+<%-- 									<c:if test="${current_user.id == user.id }"> --%>
+<!-- 										<a data-toggle="modal" href="#editUser"><i -->
+<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
+<%-- 									</c:if> --%>
 
-									<div class="col-md-4 col-sm-6">
-										<img src="upload/${group.course.icon }" class="img-circle"
-											alt="Cinque Terre" width="150" height="150"
-											alt="${group.name }">
+								</h3>
+
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-3 col-lg-3 " align="center">
+										<img src="upload/${current_user.image }" alt=""
+											class="img-rounded img-responsive" />
+
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#editUser" style="margin-top: 10px">
+											Update foto</button>
 									</div>
 
-								</a>
+
+									<div class=" col-md-9 col-lg-9 ">
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td>First Name</td>
+													<td id = "userName"><p > ${current_user.name } </p></td>
+												</tr>
+												<tr>
+													<td>Middle Name</td>
+													<td id = "userMiddleName">${current_user.middle_name }</td>
+												</tr>
+												<tr>
+													<td>Surname</td>
+													<td id = "userSurName"><p>${current_user.surname }</p></td>
+												</tr>
+
+												<tr>
+												<tr>
+													<td>Birthday</td>
+													<td id="userBirtday">${current_user.birtday}</td>
+												</tr>
+												<tr>
+													<td>Email</td>
+													<td>${current_user.email}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>${contact.phone}</td>
+												</tr>
+												<tr>
+													<td>Skype</td>
+													<td>${contact.skype}</td>
+												</tr>
+												<tr>
+													<td>CV</td>
+													<td><c:choose>
+															<c:when test="${current_user.curriculum_vitae == null}">
+																<button type="submit"
+																	class="btn btn-default btn-xs dropdown-toggle"
+																	data-toggle="modal" href="#editUser">Add CV</button>
+															</c:when>
+
+															<c:otherwise>
+																<p>
+																	<a
+																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																		class="btn btn-default btn-xs dropdown-toggle">Download
+																		CV</a>
+																</p>
+
+															</c:otherwise>
+
+														</c:choose></td>
+												</tr>
+												<tr>
+													<td>Description</td>
+													<td>${current_user.description}</td>
+												</tr>
 
 
-							</c:forEach>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 
 					</div>
+
+					<div class="col-md-4">
+						<h2>My courses</h2>
+						<div class="section">
+							<c:forEach items="${groups }" var="group">
+								<div class="col-sm-6" style="margin-top: 5px">
+									<a
+										href="<c:url
+							value="/GroupServlet?action=show&group_id=${group.id }" />">
+
+
+										<img src="upload/${group.course.icon }" class="img-circle"
+										alt="Cinque Terre" width="150" height="150"
+										alt="${group.name }">
+
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+
 				</div>
-
-
-
-
-
-
-
 			</div>
 		</c:when>
+	</c:choose>
 
+
+
+	<c:choose>
 		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
 			<div class="container">
@@ -380,6 +619,7 @@
 				</div>
 				<script type="text/javascript">
 					$('button#submit-group-edit').click(function() {
+
 						$('#editGroup').modal('hide');
 						showToast("Group successfully updated", 1);
 					});
@@ -389,6 +629,106 @@
 
 
 				<div class="panel-group" id="accordion">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" class="courses"
+									data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">${current_user.name }
+									${current_user.surname }</a> <a data-toggle="modal"
+									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
+							</h4>
+
+						</div>
+
+						<div id="collapse0" class="panel-collapse collapse collapse in">
+
+
+							<div class="panel-body" id="profile-body">
+								<div class="row">
+									<div class="col-md-3 col-lg-3 " align="center">
+										<img src="upload/${current_user.image }" alt=""
+											class="img-rounded img-responsive" />
+
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#editUser" style="margin-top: 10px">
+											Update foto</button>
+									</div>
+
+
+									<div class=" col-md-9 col-lg-9 ">
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td>First Name</td>
+													<td id = "userName">${current_user.name }</td>
+												</tr>
+												<tr>
+													<td>Middle Name</td>
+													<td>${current_user.middle_name }</td>
+												</tr>
+												<tr>
+													<td>Surname</td>
+													<td>${current_user.surname }</td>
+												</tr>
+
+												<tr>
+												<tr>
+													<td>Birthday</td>
+													<td>${current_user.birtday}</td>
+												</tr>
+												<tr>
+													<td>Email</td>
+													<td>${current_user.email}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>${contact.phone}</td>
+												</tr>
+												<tr>
+													<td>Skype</td>
+													<td>${contact.skype}</td>
+												</tr>
+												<tr>
+													<td>CV</td>
+													<td><c:choose>
+															<c:when test="${current_user.curriculum_vitae == null}">
+																<button type="submit"
+																	class="btn btn-default btn-xs dropdown-toggle"
+																	data-toggle="modal" href="#editUser">Add CV</button>
+															</c:when>
+
+															<c:otherwise>
+																<p>
+																	<a
+																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																		class="btn btn-default btn-xs dropdown-toggle">Download
+																		CV</a>
+																</p>
+
+															</c:otherwise>
+
+														</c:choose></td>
+												</tr>
+												<tr>
+													<td>Description</td>
+													<td>${current_user.description}</td>
+												</tr>
+
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -526,6 +866,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -789,6 +1130,7 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
+
 
 </body>
 </html>
