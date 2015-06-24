@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Courses</title>
+<title>User page</title>
 <jsp:include page="../page/head.jsp" />
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script
@@ -29,7 +30,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						My Page
+						<t:i18n id="home.MyPage"/>
 						<c:if test="${current_user.id == user.id }">
 							<a data-toggle="modal" href="#editUser"><i
 								class="glyphicon glyphicon-edit"></i></a>
@@ -53,27 +54,27 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">My settings</h4>
+					<h4 class="modal-title"><t:i18n id="home.MySettings"/></h4>
 				</div>
 				<div class="modal-body">
 					<form action="UserServlet?action=update" id='editUserForm'
 						method="post" enctype="multipart/form-data" role="form"
 						role="form">
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" class="form-control"
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.FirstName"/>
+							</b></label> <input name="name" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Middle
-									Name</b></label> <input name="middle_name" class="form-control"
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.MiddleName"/>
+							</b></label> <input name="middle_name" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.middle_name }">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Surname</b></label>
-							<input name="surname" class="form-control" id="login-username"
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.Surname"/>
+							</b></label><input name="surname" class="form-control" id="login-username"
 								type="text" placeholder="" value="${user.surname }">
 						</div>
 						<div class="form-group">
@@ -83,19 +84,19 @@
 						</div>
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>Image</b></label>
-							<input name="image" class="form-control" id="file" type="file"
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.photo"/>
+							</b></label><input name="image" class="form-control" id="file" type="file"
 								placeholder="" value="${user.image }">
 						</div>
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
-									Vitae</b></label> <input name="cv" class="form-control" id="file"
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.CurriculumVitae"/>
+							</b></label> <input name="cv" class="form-control" id="file"
 								type="file" placeholder="" value="${user.curriculum_vitae }">
 						</div>
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>Phone</b></label>
-							<input name="phone" class="form-control" id="login-username"
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.Phone"/>
+							</b></label><input name="phone" class="form-control" id="login-username"
 								type="text" placeholder="" value="${contact.phone }">
 						</div>
 
@@ -107,8 +108,8 @@
 
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>Description</b></label>
-							<textarea name="description" class="form-control" id="comment"
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.AboutMyself"/>
+							</b></label><textarea name="description" class="form-control" id="comment"
 								placeholder=""><c:out value="${user.description }" /> </textarea>
 						</div>
 
@@ -117,7 +118,7 @@
 
 						<div class="form-group">
 
-							<button type="submit" class="btn pull-right">Update</button>
+							<button type="submit" class="btn pull-right"><t:i18n id="home.Update"/></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>

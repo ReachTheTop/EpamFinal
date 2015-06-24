@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Log in page</title>
 
 
 <jsp:include page="head.jsp" />
@@ -18,7 +19,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Login</h1>
+					<h1><t:i18n id="login.login"/></h1>
 				</div>
 			</div>
 		</div>
@@ -37,15 +38,15 @@
 						<form action="<c:url value="/login" />" id="loginForm"
 							method="post" role="form">
 							<div class="form-group">
-								<label for="login-username"><i class="icon-user"></i> <b>Username
-										or Email</b></label> <input class="form-control" id="login-username"
+								<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="login.UsernameOrEmail"/> 
+								</b></label> <input class="form-control" id="login-username"
 									name="emaill" type="email" value="${emaill}" placeholder="">
 
 							</div>
 
 							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>Password</b></label>
-								<input class="form-control" id="login-password" name="password"
+								<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="login.password"/>
+								</b></label><input class="form-control" id="login-password" name="password"
 									type="password">
 							</div>
 							<div class="form-group">
@@ -54,25 +55,23 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<a href="<c:url value="/reset" />" class="forgot-password">Forgot
-									password?</a>
-								<button type="submit" class="btn pull-right">Login</button>
+								<a href="<c:url value="/reset" />" class="forgot-password"><t:i18n id="login.ForgotPassword"/>
+								</a><button type="submit" class="btn pull-right"><t:i18n id="login.login"/></button>
 								<div class="clearfix"></div>
 							</div>
 						</form>
 					</div>
 				</div>
 				<div class="col-sm-7 social-login">
-					<p>Or login with your Facebook or Twitter</p>
+					<p><t:i18n id="login.OrLoginWithYourFacebook"/></p>
 					<div class="social-login-buttons">
-						<a href="<c:url value="/FbLoginServlet?action=fb" />" class="btn-facebook-login">Login with Facebook</a> <a
-							href="#" class="btn-twitter-login">Login with Twitter</a>
+						<a href="<c:url value="/FbLoginServlet?action=fb" />" class="btn-facebook-login">Login with Facebook</a>
+
 					</div>
 					<div class="clearfix"></div>
 					<div class="not-member">
-						<p>
-							Not a member? <a href="<c:url value="/registration" />">Register
-								here</a>
+						<p><t:i18n id="login.NotAMember"/><a href="<c:url value="/registration" />">
+						<t:i18n id="login.RegisterHere"/></a>
 						</p>
 					</div>
 				</div>
@@ -87,18 +86,17 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Confirmation</h4>
+					<h4 class="modal-title"><t:i18n id="login.Confirmation"/></h4>
 				</div>
 				<div class="modal-body">
-					<p>Підтвердіть свій email ітд</p>
+					<p><t:i18n id="login.ConfirmYourEmail"/></p>
 					<p class="text-warning">
-						<small>Щоб відправити силку для підтвредження ще раз
-							нажміть на конпу сенд</small>
+						<small><t:i18n id="login.ToSendALinkToConfirmAgainClickOnTheButtonSend"/></small>
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="<c:url value="/sendconfirm" />" class="btn btn-primary">Send</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><t:i18n id="login.Close"/></button>
+					<a href="<c:url value="/sendconfirm" />" class="btn btn-primary"><t:i18n id="login.Send"/></a>
 
 				</div>
 			</div>
@@ -112,14 +110,14 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Successful</h4>
+					<h4 class="modal-title"><t:i18n id="login.Congratulations"/></h4>
 				</div>
 				<div class="modal-body">
-					<p>Ви успішно підтвердили свій емейл!</p>
+					<p><t:i18n id="login.YouHaveSuccessfullyVerifiedYourEmail"/></p>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><t:i18n id="login.Close"/></button>
 
 
 				</div>
