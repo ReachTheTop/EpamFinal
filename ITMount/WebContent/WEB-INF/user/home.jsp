@@ -58,19 +58,19 @@
 						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" class="form-control"
+									Name</b></label> <input name="name" id = "userNameModal" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Middle
 									Name</b></label> <input name="middle_name" class="form-control"
-								id="login-username" type="text" placeholder=""
+								id="middleNameModal" type="text" placeholder=""
 								value="${user.middle_name }">
 						</div>
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Surname</b></label>
-							<input name="surname" class="form-control" id="login-username"
+							<input name="surname" class="form-control" id="userSurNameModal"
 								type="text" placeholder="" value="${user.surname }">
 						</div>
 						<div class="form-group">
@@ -120,11 +120,80 @@
 		</div>
 	</div>
 	
+	<script src="resources/js/toastr.js"></script>
+	
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+	
+	
 	<script>
 		var form = $('#editUserForm');
-		
-		form.submit(function() {
-				alert("dvdv");
+		form.submit(function(e) {
+			e.preventDefault();
+		    e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form.attr('method'),
 				url : form.attr('action'),
@@ -132,18 +201,36 @@
 				data : new FormData(this),
 				processData : false,
 				contentType : false,
+				dataType: "json",
 
-				success : function(text) {
-
-					$('#editUser').modal('hide');
-					showToaast("Task was  successfully created", 1);
+				success : function(data) {
 					
+					var nameUser = data.name;
+					$( "#userName" ).html(nameUser);
+					$( "#userNameModal" ).html(nameUser);
+					var surNameUser = data.surname;
+					$( "#userSurNameModal" ).html(surNameUser);
+					$( "#userSurName" ).html(surNameUser);
+					
+					var userNameSurname = nameUser.concat("  ").concat(surNameUser);
+					$( "#userNameSurname" ).html(userNameSurname);
+					
+ 					var userMiddleName = data.middle_name;
+					$("#middleNameModal").html(userMiddleName);
+ 					$("#userMiddleName").html(userMiddleName);
+					
+					var userBirtday = data.birtday;
+					$("userBirtday").html(userBirtday);
+					
+					
+					
+					$('#editUser').modal('hide');
+					showToaast("Profile was successfully edited", 1);
 
 				},
 				error : function() {
-	
-					showToaast("Task was not  created", 0);
-					
+			
+					showToaast("Profile was not edited", 0);
 				}
 			});
 
@@ -226,13 +313,13 @@
 					<div class="col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
-								<h3 class="panel-title">${current_user.name }
+								<h3 class="panel-title" id = "userNameSurname" > ${current_user.name }
 									${current_user.surname }
 
-									<c:if test="${current_user.id == user.id }">
-										<a data-toggle="modal" href="#editUser"><i
-											class="glyphicon glyphicon-edit"></i></a>
-									</c:if>
+<%-- 									<c:if test="${current_user.id == user.id }"> --%>
+<!-- 										<a data-toggle="modal" href="#editUser"><i -->
+<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
+<%-- 									</c:if> --%>
 
 								</h3>
 
@@ -255,21 +342,21 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td>${current_user.name }</td>
+													<td id = "userName"><p > ${current_user.name } </p></td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
-													<td>${current_user.middle_name }</td>
+													<td id = "userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
 													<td>Surname</td>
-													<td>${current_user.surname }</td>
+													<td id = "userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
 												<tr>
 													<td>Birthday</td>
-													<td>${current_user.birtday}</td>
+													<td id="userBirtday">${current_user.birtday}</td>
 												</tr>
 												<tr>
 													<td>Email</td>
@@ -562,7 +649,7 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td>${current_user.name }</td>
+													<td id = "userName">${current_user.name }</td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
