@@ -314,7 +314,7 @@
 											<b>Description</b></label>
 										<textarea name="description" class="form-control" id="comment"
 											placeholder=""></textarea>
-									</div>
+									</div> 
 
 
 

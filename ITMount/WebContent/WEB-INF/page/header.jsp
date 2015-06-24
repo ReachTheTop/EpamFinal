@@ -32,7 +32,7 @@
 							<c:if test="${user==null }">
 								<li class="shopping-cart-items"><a href="<c:url value="/login" />"><i class="glyphicon glyphicon-lock icon-white"><b><t:i18n id="header.login"/></b></i></a></li>
 								<li class="shopping-cart-items"><a href="<c:url value="/registration" />"><i class="glyphicon glyphicon-user-add icon-white"><b><t:i18n id="header.SignUp"/></b></i></a></li>
-							</c:if>
+							</c:if> 
 			        	
 			        		
 			        	</ul>

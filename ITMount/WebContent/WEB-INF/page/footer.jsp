@@ -44,7 +44,7 @@
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-12">
-		    			<div class="footer-copyright">&copy; 2015 ITMount. <t:i18n id="footer.AllRightsReserved"/></div>
+		    			<div class="footer-copyright">&copy; 2015 ITMount. <t:i18n id="footer.AllRightsReserved"/></div> 
 		    		</div>
 		    	</div>
 		    </div>

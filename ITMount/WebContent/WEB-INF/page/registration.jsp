@@ -13,7 +13,7 @@
 	<jsp:include page="header.jsp" />
 
 	<!-- Page Title -->
-	<div class="section section-breadcrumbs">
+	<div class="section section-breadcrumbs"> 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
