@@ -28,7 +28,9 @@ public class UserHome implements Action {
 			user_id = Integer.parseInt(request.getParameter("user_id"));
 			current_user = UserService.getUser(user_id);
 		} else {
+			
 			current_user = (User) request.getSession().getAttribute("user");
+			
 		}
 
 		List<Group> groups = null;
@@ -52,6 +54,7 @@ public class UserHome implements Action {
 			request.setAttribute("showEditModal", true);
 		}
 		
+		System.out.println(current_user);
 		request.getRequestDispatcher("/WEB-INF/user/home.jsp").forward(request,
 				response);
 

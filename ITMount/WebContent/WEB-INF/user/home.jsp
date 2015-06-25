@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -11,14 +12,9 @@
 <script
 	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
 
-
-
 <script src="resources/js/toastr.js"></script>
 
-
-
 <link rel="stylesheet" href="resources/css/tabPanel.css"></link>
-
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 <style type="text/css">
@@ -53,8 +49,6 @@
 		</div>
 	</div>
 
-
-
 	<div id="editUser" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -69,7 +63,7 @@
 						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" id = "userNameModal" class="form-control"
+									Name</b></label> <input name="name" id="userNameModal" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
@@ -84,16 +78,22 @@
 							<input name="surname" class="form-control" id="userSurNameModal"
 								type="text" placeholder="" value="${user.surname }">
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="display: none">
 							<label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
 							<input name="email" class="form-control" id="login-username"
 								type="text" placeholder="" value="${user.email }">
 						</div>
 
 						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Birthday</b></label>
+							<input name="userBirthday" class="form-control"
+								id="userBirthday1" type="date">
+						</div>
+
+						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Image</b></label>
-							<input name="image" class="form-control" id="file" type="file"
-								placeholder="" value="${user.image }">
+							<input name="image" class="form-control" id="fileImage"
+								type="file" placeholder="" value="${user.image }">
 						</div>
 
 						<div class="form-group">
@@ -130,9 +130,9 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="resources/js/toastr.js"></script>
-	
+
 	<script type="text/javascript">
 		function showToaast(message, issucces) {
 			var i = -1;
@@ -198,13 +198,13 @@
 
 		}
 	</script>
-	
-	
+
+
 	<script>
 		var form = $('#editUserForm');
 		form.submit(function(e) {
 			e.preventDefault();
-		    e.stopImmediatePropagation();
+			e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form.attr('method'),
 				url : form.attr('action'),
@@ -212,35 +212,47 @@
 				data : new FormData(this),
 				processData : false,
 				contentType : false,
-				dataType: "json",
+				dataType : "json",
 
 				success : function(data) {
-					
+
 					var nameUser = data.name;
-					$( "#userName" ).html(nameUser);
-					$( "#userNameModal" ).html(nameUser);
+					$("#userName").html(nameUser);
+					$("#userNameModal").html(nameUser);
 					var surNameUser = data.surname;
-					$( "#userSurNameModal" ).html(surNameUser);
-					$( "#userSurName" ).html(surNameUser);
-					
-					var userNameSurname = nameUser.concat("  ").concat(surNameUser);
-					$( "#userNameSurname" ).html(userNameSurname);
-					
- 					var userMiddleName = data.middle_name;
+					$("#userSurNameModal").html(surNameUser);
+					$("#userSurName").html(surNameUser);
+
+					var userNameSurname = nameUser.concat("  ").concat(
+							surNameUser);
+					$("#userNameSurname").html(userNameSurname);
+
+					var userMiddleName = data.middle_name;
 					$("#middleNameModal").html(userMiddleName);
- 					$("#userMiddleName").html(userMiddleName);
+					$("#userMiddleName").html(userMiddleName);
+
+					var imageFile = data.image;
+					$("#fileImage1").attr("src", "upload/" + imageFile);
+
+					var cvFile = data.curriculum_vitae;
+					$("#cvFile1").attr("href",
+							"/ITMount/downloadFile?file=" + cvFile);
+
+					var phone = data.contacts.phone;
+					$("#userPhone").html(phone);
 					
-					var userBirtday = data.birtday;
-					$("userBirtday").html(userBirtday);
+					var skype = data.contacts.skype;
+					$("#userSkype").html(skype);
 					
-					
-					
+					var description = data.description;
+					$("#userDescription").html(description);
+
 					$('#editUser').modal('hide');
 					showToaast("Profile was successfully edited", 1);
 
 				},
 				error : function() {
-			
+
 					showToaast("Profile was not edited", 0);
 				}
 			});
@@ -248,73 +260,11 @@
 			return false;
 		});
 	</script>
-	
-	
-	<script type="text/javascript">
-		function showToaast(message, issucces) {
-			var i = -1;
-			var toastCount = 0;
-			var $toastlast;
 
-			var shortCutFunction;
-			if (issucces == 1) {
-				shortCutFunction = "success";
-			}
 
-			if (issucces == 0) {
-				shortCutFunction = "error";
-			}
 
-			var msg = $('#message').val();
-			var title = $('#title').val() || '';
-			var $showDuration = $('#showDuration');
-			var $hideDuration = $('#hideDuration');
-			var $timeOut = $('#timeOut');
-			var $extendedTimeOut = $('#extendedTimeOut');
-			var $showEasing = $('#showEasing');
-			var $hideEasing = $('#hideEasing');
-			var $showMethod = $('#showMethod');
-			var $hideMethod = $('#hideMethod');
-			var toastIndex = toastCount++;
 
-			toastr.options = {
 
-				closeButton : true,
-				debug : true,
-				newestOnTop : false,
-				progressBar : false,
-				positionClass : "toast-top-right",
-				preventDuplicates : false,
-				onclick : null,
-				timeOut : 10000,
-				showDuration : 300,
-				hideDuration : 1000,
-				extendedTimeOut : 1000,
-
-				showEasing : "swing",
-				hideEasing : "linear",
-				showMethod : "fadeIn",
-				hideMethod : "fadeOut"
-
-			};
-
-			msg = message;
-
-			$('#toastrOptions').text(
-					'Command: toastr["' + shortCutFunction + '"]("' + msg
-							+ (title ? '", "' + title : '')
-							+ '")\n\ntoastr.options = '
-							+ JSON.stringify(toastr.options, null, 2));
-
-			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
-			$toastlast = $toast;
-
-			if (typeof $toast === 'undefined') {
-				return;
-			}
-
-		}
-	</script>
 
 
 	<c:choose>
@@ -324,13 +274,13 @@
 					<div class="col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
-								<h3 class="panel-title" id = "userNameSurname" > ${current_user.name }
-									${current_user.surname }
+								<h3 class="panel-title" id="userNameSurname">
+									${current_user.name } ${current_user.surname }
 
-<%-- 									<c:if test="${current_user.id == user.id }"> --%>
-<!-- 										<a data-toggle="modal" href="#editUser"><i -->
-<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
-<%-- 									</c:if> --%>
+									<%-- 									<c:if test="${current_user.id == user.id }"> --%>
+									<!-- 										<a data-toggle="modal" href="#editUser"><i -->
+									<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
+									<%-- 									</c:if> --%>
 
 								</h3>
 
@@ -338,8 +288,8 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3 col-lg-3 " align="center">
-										<img src="upload/${current_user.image }" alt=""
-											class="img-rounded img-responsive" />
+										<img id="fileImage1" src="upload/${current_user.image }"
+											alt="" class="img-rounded img-responsive" />
 
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
@@ -353,21 +303,24 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName"><p > ${current_user.name } </p></td>
+													<td id="userName"><p>${current_user.name }</p></td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
-													<td id = "userMiddleName">${current_user.middle_name }</td>
+													<td id="userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
 													<td>Surname</td>
-													<td id = "userSurName"><p>${current_user.surname }</p></td>
+													<td id="userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
 												<tr>
 													<td>Birthday</td>
-													<td id="userBirtday">${current_user.birtday}</td>
+													<td id="userBirtday"><fmt:formatDate
+															pattern="yyyy-MM-dd" value="${current_user.birtday }" />
+
+													</td>
 												</tr>
 												<tr>
 													<td>Email</td>
@@ -375,11 +328,12 @@
 												</tr>
 												<tr>
 													<td>Phone</td>
-													<td>${contact.phone}</td>
+													<td id="userPhone"><p>${contact.phone}</p></td>
 												</tr>
 												<tr>
 													<td>Skype</td>
-													<td>${contact.skype}</td>
+													<td id="userSkype"><p>${contact.skype}</p></td>
+												
 												</tr>
 												<tr>
 													<td>CV</td>
@@ -392,8 +346,8 @@
 
 															<c:otherwise>
 																<p>
-																	<a
-																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																	<a id="cvFile1"
+																		href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
 																		class="btn btn-default btn-xs dropdown-toggle">Download
 																		CV</a>
 																</p>
@@ -404,7 +358,8 @@
 												</tr>
 												<tr>
 													<td>Description</td>
-													<td>${current_user.description}</td>
+													<td id="userDescription"><p>${current_user.description}</p></td>
+												
 												</tr>
 
 
@@ -443,6 +398,38 @@
 		</c:when>
 	</c:choose>
 
+
+	<div class="form-group" style="display: none">
+
+		<input name="birsday" class="form-control" id="birsday1111"
+			type="text" placeholder="" value="${current_user.birtday }">
+	</div>
+
+
+
+	<script>
+// 			var dateString = $("#birsday1111").val();
+// 			alert(dateString);
+
+// 			//var dateStringTest = "1996-12-19T16:39";
+
+// 			var date = new Date(Date.parse(dateString));
+// 			alert(date);
+// 			var year = date.getFullYear().toString();
+// 			var month = addZero(date.getMonth() + 1).toString();
+// 			var day = addZero(date.getDate()).toString();
+
+// 			var correctDate = year.concat("-", month, "-", day);
+
+			$("#userBirthday1").val("10-15-2015");
+
+			function addZero(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+	</script>
 
 
 	<c:choose>
@@ -634,7 +621,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="courses"
-									data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">${current_user.name }
+									data-parent="#accordion" href="#collapse0" aria-expanded="true"
+									aria-controls="collapse0">${current_user.name }
 									${current_user.surname }</a> <a data-toggle="modal"
 									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
 							</h4>
@@ -662,7 +650,7 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName">${current_user.name }</td>
+													<td id="userName">${current_user.name }</td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
@@ -851,7 +839,6 @@
 											<th>Phone</th>
 											<th>Skype</th>
 											<th>Active</th>
-											
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -873,13 +860,13 @@
 		</c:when>
 	</c:choose>
 
-<div hidden="true" >
-	<select class='form-control' id='userRoles' name='role'>
-		<option value="2">student</option>
-		<option value="3">lecturer</option>
-		<option value="4">admin</option>
-	</select>
-</div>
+	<div hidden="true">
+		<select class='form-control' id='userRoles' name='role'>
+			<option value="2">student</option>
+			<option value="3">lecturer</option>
+			<option value="4">admin</option>
+		</select>
+	</div>
 
 	<script type="text/javascript">
 		$(document)
@@ -1045,17 +1032,19 @@
 						});
 	</script>
 
-	<c:if test ="${showEditModal!=null }">
+	<c:if test="${showEditModal!=null }">
 	${showEditModal=null }
 	<script type="text/javascript">
-			$(document).ready(function() {
-				$("#editUser").modal('show');
-			});
-		</script>
+		$(document).ready(function() {
+
+			$("#editUser").modal('show');
+
+		});
+	</script>
 	</c:if>
-		
-		
-	
+
+
+
 
 
 	<script type="text/javascript">

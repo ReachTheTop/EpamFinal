@@ -9,38 +9,6 @@
 <link rel="stylesheet" href="resources/css/font-awesome.css"
 	type="text/css">
 
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<c:if
-			test="${not empty group.teacher_id && user.id == group.teacher_id}">
-			<a data-toggle="modal" id="createEventModal" href="#createEvent"><i
-				class='glyphicon glyphicon-plus'></i></a>
-		</c:if>
-		Events
-
-	</div>
-	<table class="table">
-		<c:forEach items="${ events}" var="event" varStatus="loop">
-			<tr>
-				<td><c:out value="${event.date }" /></td>
-				<td><c:out value="${event.description }" /></td>
-
-				<c:if
-					test="${not empty group.teacher_id && user.id == group.teacher_id}">
-					<td><a data-toggle="modal" class='editEvent' id='${event.id }'
-						href="#editEvent"><i class='glyphicon glyphicon-edit'></i></a></td>
-					<td><a class='editEvent'
-						href="<c:url value='EventServlet?action=delete&event_id=${event.id }' />"><i
-							class='glyphicon glyphicon-minus'></i></a></td>
-				</c:if>
-
-			</tr>
-
-		</c:forEach>
-	</table>
-</div>
-
 <div class="ibox float-e-margins">
 	<div class="ibox-title  panel panel-default">
 		<h5>

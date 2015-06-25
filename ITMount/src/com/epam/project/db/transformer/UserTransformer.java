@@ -20,7 +20,7 @@ public class UserTransformer {
 				user.setName(rs.getString(2));
 				user.setMiddle_name(rs.getString(3));
 				user.setSurname(rs.getString(4));
-
+			
 				user.setBirtday(rs.getDate(5));
 				user.setRole_id(rs.getInt(6));
 				user.setPassword_hash(rs.getString(7));

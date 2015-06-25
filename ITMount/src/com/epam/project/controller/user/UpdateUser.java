@@ -1,6 +1,10 @@
 package com.epam.project.controller.user;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +33,27 @@ public class UpdateUser implements Action {
 
 		request.setCharacterEncoding("utf-8");
 		User current_user = (User) request.getSession().getAttribute("user");
+	
 		Contact contacts = ContactService.getByUserId(current_user.getId());
 		current_user.setName(request.getParameter("name"));
 		current_user.setMiddle_name(request.getParameter("middle_name"));
 		current_user.setSurname(request.getParameter("surname"));
 		current_user.setDescription(request.getParameter("description"));
 		current_user.setEmail(request.getParameter("email"));
-
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			Date d = sdf.parse(request.getParameter("userBirthday"));
+			current_user.setBirtday(d);
+			System.out.println(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return;
+		}
+		
 		Part image = request.getPart("image");
 		UploadFile m = new UploadFile();
 		if (image.getSize() > 0) {
@@ -66,6 +84,7 @@ public class UpdateUser implements Action {
 		session.setAttribute("user", current_user);
 		// response.sendRedirect(request.getHeader("Referer"));
 
+		current_user.setContact(contacts);
 		String json = new Gson().toJson(current_user);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
