@@ -19,7 +19,7 @@
 
 <style type="text/css">
 .panel-default>.panel-heading-custom {
-	background: #FFFF43;
+	background: #4FEAD0;
 }
 }
 </style>
@@ -95,12 +95,16 @@
 							<input name="image" class="form-control" id="fileImage"
 								type="file" placeholder="" value="${user.image }">
 						</div>
-
+						
+						
+						<c:if test="${user.id == current_user.id && user.role !='admin' }">
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
 									Vitae</b></label> <input name="cv" class="form-control" id="file"
 								type="file" placeholder="" value="${user.curriculum_vitae }">
 						</div>
+						
+						</c:if>
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b>Phone</b></label>
 							<input name="phone" class="form-control" id="login-username"
@@ -133,71 +137,6 @@
 
 	<script src="resources/js/toastr.js"></script>
 
-	<script type="text/javascript">
-		function showToaast(message, issucces) {
-			var i = -1;
-			var toastCount = 0;
-			var $toastlast;
-
-			var shortCutFunction;
-			if (issucces == 1) {
-				shortCutFunction = "success";
-			}
-
-			if (issucces == 0) {
-				shortCutFunction = "error";
-			}
-
-			var msg = $('#message').val();
-			var title = $('#title').val() || '';
-			var $showDuration = $('#showDuration');
-			var $hideDuration = $('#hideDuration');
-			var $timeOut = $('#timeOut');
-			var $extendedTimeOut = $('#extendedTimeOut');
-			var $showEasing = $('#showEasing');
-			var $hideEasing = $('#hideEasing');
-			var $showMethod = $('#showMethod');
-			var $hideMethod = $('#hideMethod');
-			var toastIndex = toastCount++;
-
-			toastr.options = {
-
-				closeButton : true,
-				debug : true,
-				newestOnTop : false,
-				progressBar : false,
-				positionClass : "toast-top-right",
-				preventDuplicates : false,
-				onclick : null,
-				timeOut : 10000,
-				showDuration : 300,
-				hideDuration : 1000,
-				extendedTimeOut : 1000,
-
-				showEasing : "swing",
-				hideEasing : "linear",
-				showMethod : "fadeIn",
-				hideMethod : "fadeOut"
-
-			};
-
-			msg = message;
-
-			$('#toastrOptions').text(
-					'Command: toastr["' + shortCutFunction + '"]("' + msg
-							+ (title ? '", "' + title : '')
-							+ '")\n\ntoastr.options = '
-							+ JSON.stringify(toastr.options, null, 2));
-
-			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
-			$toastlast = $toast;
-
-			if (typeof $toast === 'undefined') {
-				return;
-			}
-
-		}
-	</script>
 
 
 	<script>
@@ -219,6 +158,7 @@
 					var nameUser = data.name;
 					$("#userName").html(nameUser);
 					$("#userNameModal").html(nameUser);
+					$("#userNameHeader").html(nameUser);
 					var surNameUser = data.surname;
 					$("#userSurNameModal").html(surNameUser);
 					$("#userSurName").html(surNameUser);
@@ -230,7 +170,11 @@
 					var userMiddleName = data.middle_name;
 					$("#middleNameModal").html(userMiddleName);
 					$("#userMiddleName").html(userMiddleName);
-
+					
+					
+					var dateString = data.birthdayString;
+					$("#userBirthday2").html(dateString);
+			
 					var imageFile = data.image;
 					$("#fileImage1").attr("src", "upload/" + imageFile);
 
@@ -240,10 +184,10 @@
 
 					var phone = data.contacts.phone;
 					$("#userPhone").html(phone);
-					
+
 					var skype = data.contacts.skype;
 					$("#userSkype").html(skype);
-					
+
 					var description = data.description;
 					$("#userDescription").html(description);
 
@@ -260,11 +204,6 @@
 			return false;
 		});
 	</script>
-
-
-
-
-
 
 
 	<c:choose>
@@ -317,7 +256,7 @@
 												<tr>
 												<tr>
 													<td>Birthday</td>
-													<td id="userBirtday"><fmt:formatDate
+													<td><fmt:formatDate
 															pattern="yyyy-MM-dd" value="${current_user.birtday }" />
 
 													</td>
@@ -333,7 +272,7 @@
 												<tr>
 													<td>Skype</td>
 													<td id="userSkype"><p>${contact.skype}</p></td>
-												
+
 												</tr>
 												<tr>
 													<td>CV</td>
@@ -359,7 +298,7 @@
 												<tr>
 													<td>Description</td>
 													<td id="userDescription"><p>${current_user.description}</p></td>
-												
+
 												</tr>
 
 
@@ -402,33 +341,12 @@
 	<div class="form-group" style="display: none">
 
 		<input name="birsday" class="form-control" id="birsday1111"
-			type="text" placeholder="" value="${current_user.birtday }">
+			type="text" placeholder="" value="${userBirthdayString }">
 	</div>
 
-
-
 	<script>
-// 			var dateString = $("#birsday1111").val();
-// 			alert(dateString);
-
-// 			//var dateStringTest = "1996-12-19T16:39";
-
-// 			var date = new Date(Date.parse(dateString));
-// 			alert(date);
-// 			var year = date.getFullYear().toString();
-// 			var month = addZero(date.getMonth() + 1).toString();
-// 			var day = addZero(date.getDate()).toString();
-
-// 			var correctDate = year.concat("-", month, "-", day);
-
-			$("#userBirthday1").val("10-15-2015");
-
-			function addZero(i) {
-				if (i < 10) {
-					i = "0" + i;
-				}
-				return i;
-			}
+		var dateString = $("#birsday1111").val();
+		$("#userBirthday1").val(dateString);	
 	</script>
 
 
@@ -619,8 +537,8 @@
 
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" class="courses"
+							<h4 class="panel-title" >
+								<a id="userNameSurname" data-toggle="collapse" class="courses"
 									data-parent="#accordion" href="#collapse0" aria-expanded="true"
 									aria-controls="collapse0">${current_user.name }
 									${current_user.surname }</a> <a data-toggle="modal"
@@ -628,15 +546,17 @@
 							</h4>
 
 						</div>
+						
+					
 
 						<div id="collapse0" class="panel-collapse collapse collapse in">
 
 
-							<div class="panel-body" id="profile-body">
+							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3 col-lg-3 " align="center">
-										<img src="upload/${current_user.image }" alt=""
-											class="img-rounded img-responsive" />
+										<img id="fileImage1" src="upload/${current_user.image }"
+											alt="" class="img-rounded img-responsive" />
 
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
@@ -650,21 +570,21 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id="userName">${current_user.name }</td>
+													<td id="userName"><p>${current_user.name }</p></td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
-													<td>${current_user.middle_name }</td>
+													<td id="userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
 													<td>Surname</td>
-													<td>${current_user.surname }</td>
+													<td id="userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
 												<tr>
 													<td>Birthday</td>
-													<td>${current_user.birtday}</td>
+													<td id="userBirthday2"><p>${userBirthdayString }</p></td>
 												</tr>
 												<tr>
 													<td>Email</td>
@@ -672,36 +592,38 @@
 												</tr>
 												<tr>
 													<td>Phone</td>
-													<td>${contact.phone}</td>
+													<td id="userPhone"><p>${contact.phone}</p></td>
 												</tr>
 												<tr>
 													<td>Skype</td>
-													<td>${contact.skype}</td>
+													<td id="userSkype"><p>${contact.skype}</p></td>
+
 												</tr>
-												<tr>
-													<td>CV</td>
-													<td><c:choose>
-															<c:when test="${current_user.curriculum_vitae == null}">
-																<button type="submit"
-																	class="btn btn-default btn-xs dropdown-toggle"
-																	data-toggle="modal" href="#editUser">Add CV</button>
-															</c:when>
+<!-- 												<tr> -->
+<!-- 													<td>CV</td> -->
+<%-- 													<td><c:choose> --%>
+<%-- 															<c:when test="${current_user.curriculum_vitae == null}"> --%>
+<!-- 																<button type="submit" -->
+<!-- 																	class="btn btn-default btn-xs dropdown-toggle" -->
+<!-- 																	data-toggle="modal" href="#editUser">Add CV</button> -->
+<%-- 															</c:when> --%>
 
-															<c:otherwise>
-																<p>
-																	<a
-																		href="<c:url value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
-																		class="btn btn-default btn-xs dropdown-toggle">Download
-																		CV</a>
-																</p>
+<%-- 															<c:otherwise> --%>
+<!-- 																<p> -->
+<!-- 																	<a id="cvFile1" -->
+<%-- 																		href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>" --%>
+<!-- 																		class="btn btn-default btn-xs dropdown-toggle">Download -->
+<!-- 																		CV</a> -->
+<!-- 																</p> -->
 
-															</c:otherwise>
+<%-- 															</c:otherwise> --%>
 
-														</c:choose></td>
-												</tr>
+<%-- 														</c:choose></td> --%>
+<!-- 												</tr> -->
 												<tr>
 													<td>Description</td>
-													<td>${current_user.description}</td>
+													<td id="userDescription"><p>${current_user.description}</p></td>
+
 												</tr>
 
 
@@ -710,8 +632,6 @@
 										</table>
 									</div>
 								</div>
-
-
 							</div>
 						</div>
 					</div>
@@ -1048,7 +968,7 @@
 
 
 	<script type="text/javascript">
-		function showToast(message, issucces) {
+		function showToaast(message, issucces) {
 			var i = -1;
 			var toastCount = 0;
 			var $toastlast;
@@ -1103,10 +1023,7 @@
 							+ '")\n\ntoastr.options = '
 							+ JSON.stringify(toastr.options, null, 2));
 
-			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event
-			// handler to a button
-			// in the toast, if it
-			// exists
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
 			$toastlast = $toast;
 
 			if (typeof $toast === 'undefined') {
@@ -1115,6 +1032,7 @@
 
 		}
 	</script>
+
 
 
 

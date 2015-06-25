@@ -1,6 +1,9 @@
 package com.epam.project.controller.user;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -54,7 +57,12 @@ public class UserHome implements Action {
 			request.setAttribute("showEditModal", true);
 		}
 		
-		System.out.println(current_user);
+		Date birthday = current_user.getBirtday();
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String s = formatter.format(birthday);
+		System.out.println(s);
+		request.setAttribute("userBirthdayString", s);
+		
 		request.getRequestDispatcher("/WEB-INF/user/home.jsp").forward(request,
 				response);
 

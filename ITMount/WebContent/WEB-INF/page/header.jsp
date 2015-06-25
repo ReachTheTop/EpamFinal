@@ -26,7 +26,7 @@
 							
 							
 							<c:if test="${user!=null}">
-							<li class="shopping-cart-items"><a href="<c:url value="/UserServlet" />"><i class="glyphicon glyphicon-user icon-white"><b> ${user.getName()}</b></i></a> </li>
+							<li class="shopping-cart-items"><a href="<c:url value="/UserServlet" />"><i class="glyphicon glyphicon-user icon-white"><b id ="userNameHeader">  ${user.getName()}</b></i></a> </li>
 							<li class="shopping-cart-items"><a href="<c:url value="/exit" />"><i class="glyphicon glyphicon-log-out icon-white"><b> Exit</b></i></a> </li>
 							</c:if>
 							<c:if test="${user==null }">

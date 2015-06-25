@@ -27,6 +27,9 @@ public class User extends Validator implements Serializable {
 
 	@Column(value = "birthday")
 	private Date birtday;
+	
+	
+	private String birthdayString;
 
 	@Column(value = "role_id")
 	private Integer role_id;
@@ -172,6 +175,16 @@ public class User extends Validator implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	
+
+	public String getBirtdayString() {
+		return birthdayString;
+	}
+
+	public void setBirtdayString(String birtdayString) {
+		this.birthdayString = birtdayString;
 	}
 
 	@Override
