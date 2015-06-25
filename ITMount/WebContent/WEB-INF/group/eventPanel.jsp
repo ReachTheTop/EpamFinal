@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <link rel="stylesheet" href="resources/css/styleEvent.css"
@@ -63,8 +64,13 @@
 			<div class="timeline-item">
 				<div class="row">
 					<div class="col-xs-3 date">
-						<i class="${event.typeEvent }"></i> ${event.date } <br /> <small
-							class="text-navy">2 hour ago</small>
+						<i class="${event.typeEvent }"></i> 
+						<fmt:formatDate pattern="yyyy-MM-dd" value="${event.date }" />
+						<fmt:formatDate pattern="hh:mm" value="${event.date }" />
+						 <br /> <small
+							class="text-navy">${event.message }</small>
+
+						
 					</div>
 					<div class="col-xs-7 content no-top-border">
 						<p class="m-b-xs">
@@ -113,28 +119,29 @@
 			<div class="modal-body">
 				<form action="EventServlet?action=create" id='create-event-form'
 					method="post" role="form" role="form">
-					
+
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event Name</b></label>
-						<input name="eventName" class="form-control" id="eventName"
+						<label for="login-password"><i class="icon-lock"></i> <b>Event
+								Name</b></label> <input name="eventName" class="form-control" id="eventName"
 							type="text" required="required" placeholder="">
 					</div>
-					
+
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event Type</b></label> <select class="form-control " name = "typeEvent" id="sel1">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event
+								Type</b></label> <select class="form-control " name="typeEvent" id="sel1">
 							<option value="fa fa-calendar">other</option>
-							<option  value ="fa fa-birthday-cake"> birthday</option>
-							<option  value ="fa fa-beer">beer</option>
+							<option value="fa fa-birthday-cake">birthday</option>
+							<option value="fa fa-beer">beer</option>
 							<option value="fa fa-futbol-o">sport</option>
 							<option value="fa fa-coffee">coffee</option>
 							<option value="fa fa-camera">foto</option>
 							<option value="fa fa-tree">holiday</option>
 							<option value="fa fa-usd">money</option>
-								
+
 						</select>
 					</div>
-					
-					
+
+
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b>Event
 								Description</b></label>
@@ -211,27 +218,29 @@
 			<div class="modal-body">
 				<form action="EventServlet?action=update" id='create-event-form'
 					method="post" role="form" role="form">
-					
+
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event Name</b></label>
-						<input name="eventName" class="form-control" id="eventName1"
-							type="text" required="required" placeholder="">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event
+								Name</b></label> <input name="eventName" class="form-control"
+							id="eventName1" type="text" required="required" placeholder="">
 					</div>
-					
+
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event Type</b></label> <select class="form-control " name = "typeEvent" id="eventType">
+						<label for="login-password"><i class="icon-lock"></i> <b>Event
+								Type</b></label> <select class="form-control " name="typeEvent"
+							id="eventType">
 							<option value="fa fa-calendar">other</option>
-							<option  value ="fa fa-birthday-cake"> birthday</option>
-							<option  value ="fa fa-beer">beer</option>
+							<option value="fa fa-birthday-cake">birthday</option>
+							<option value="fa fa-beer">beer</option>
 							<option value="fa fa-futbol-o">sport</option>
 							<option value="fa fa-coffee">coffee</option>
 							<option value="fa fa-camera">foto</option>
 							<option value="fa fa-tree">holiday</option>
 							<option value="fa fa-usd">money</option>
-								
+
 						</select>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b>Event
 								Description</b></label>
@@ -267,19 +276,42 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$('a.editEvent').click(function() {
-		var index = $(this).attr('id');
-		$("#event_id").val(index);
-		$.get('EventServlet?action=show&event_id=' + index, function(response) {
-			$('#eventDescription').val(response.description);
-		
-			var df = moment(response.date).format('dd.MM.YYYY HH:mm');
-			alert(moment("20111031", "YYYYMMDD").fromNow());
-			$("#eventDate").val(df);
-			$('#eventName1').val(response.nameEvent);
-			$('#eventType').val(response.typeEvent);
-		});
-	});
+	$('a.editEvent').click(
+			function() {
+				var index = $(this).attr('id');
+				$("#event_id").val(index);
+				$.get('EventServlet?action=show&event_id=' + index, function(
+						response) {
+
+					$('#eventDescription').val(response.description);
+
+					var dateString = response.date;
+					// 			var dateStringTest = "1996-12-19T16:39";
+
+					var date = new Date(Date.parse(dateString));
+
+					var year = date.getFullYear().toString();
+					var month = addZero(date.getMonth() + 1).toString();
+					var day = addZero(date.getDate()).toString();
+					var hours = addZero(date.getHours()).toString();
+					var minutes = addZero(date.getMinutes()).toString();
+
+					var correctDate = year.concat("-", month, "-", day, "T",
+							hours, ":", minutes);
+
+					$("#eventDate").val(correctDate);
+
+					$('#eventName1').val(response.nameEvent);
+					$('#eventType').val(response.typeEvent);
+				});
+			});
+
+	function addZero(i) {
+		if (i < 10) {
+			i = "0" + i;
+		}
+		return i;
+	}
 </script>
 
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
+import com.epam.project.controller.EventMessage;
 import com.epam.project.controller.task.ValideDate;
 import com.epam.project.db.model.Event;
 import com.epam.project.db.model.Group;
@@ -50,6 +51,10 @@ public class ShowGroup implements Action {
 				}
 
 				List<Event> events = EventService.getByIdGroup(group_id);
+				for(Event event :events){
+					EventMessage.updateEventMessage(event);
+				}
+				Collections.sort(events);
 
 				request.setAttribute("events", events);
 

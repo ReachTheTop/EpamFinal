@@ -18,7 +18,7 @@ public class EventDAO {
 			+ "VALUES (?,?,?,?,?);";
 	
 	private static final String UPDATE = "" + "UPDATE event "
-			+ "SET description =? , date = ?"
+			+ "SET  name=?, type=?, description =? , date = ?"
 			+ "WHERE id = ?;";
 	
 	
@@ -67,9 +67,11 @@ public class EventDAO {
 		con = DBConnection.getConnection();
 		try {
 			statement = con.prepareStatement(UPDATE);
-			statement.setString(1, event.getDescription());
-			statement.setTimestamp(2, new Timestamp(event.getDate().getTime()));			
-			statement.setInt(3, event.getId());
+			statement.setString(1, event.getNameEvent());
+			statement.setString(2, event.getTypeEvent());
+			statement.setString(3, event.getDescription());
+			statement.setTimestamp(4, new Timestamp(event.getDate().getTime()));			
+			statement.setInt(5, event.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
