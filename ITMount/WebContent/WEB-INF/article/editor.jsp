@@ -24,14 +24,14 @@
 			$("#article-course").val($("#article-course option:first").val());
 		</script>
 
-		<div id="editor"></div>
+
 
 		<div id="alerts"></div>
 		<div class="btn-toolbar" data-role="editor-toolbar"
 			data-target="#editor">
 			<div class="btn-group">
-				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="Font"><i
-					class="icon-font"></i><b class="caret"></b></a>
+				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+					title="Font"><i class="icon-font"></i><b class="caret"></b></a>
 				<ul class="dropdown-menu">
 				</ul>
 			</div>
@@ -46,19 +46,21 @@
 				</ul>
 			</div>
 			<div class="btn-group">
-				<a class="btn btn-primary" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i
-					class="icon-bold"></i></a> <a class="btn btn-primary" data-edit="italic"
+				<a class="btn btn-primary" data-edit="bold"
+					title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a> <a
+					class="btn btn-primary" data-edit="italic"
 					title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a> <a
-					class="btn btn-primary" data-edit="strikethrough" title="Strikethrough"><i
-					class="icon-strikethrough"></i></a> <a class="btn btn-primary"
-					data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i
-					class="icon-underline"></i></a>
+					class="btn btn-primary" data-edit="strikethrough"
+					title="Strikethrough"><i class="icon-strikethrough"></i></a> <a
+					class="btn btn-primary" data-edit="underline"
+					title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
 			</div>
 			<div class="btn-group">
-				<a class="btn btn-primary" data-edit="insertunorderedlist" title="Bullet list"><i
-					class="icon-list-ul"></i></a> <a class="btn btn-primary"
-					data-edit="insertorderedlist" title="Number list"><i
-					class="icon-list-ol"></i></a> <a class="btn btn-primary" data-edit="outdent"
+				<a class="btn btn-primary" data-edit="insertunorderedlist"
+					title="Bullet list"><i class="icon-list-ul"></i></a> <a
+					class="btn btn-primary" data-edit="insertorderedlist"
+					title="Number list"><i class="icon-list-ol"></i></a> <a
+					class="btn btn-primary" data-edit="outdent"
 					title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
 				<a class="btn btn-primary" data-edit="indent" title="Indent (Tab)"><i
 					class="icon-indent-right"></i></a>
@@ -66,34 +68,34 @@
 			<div class="btn-group">
 				<a class="btn btn-primary" data-edit="justifyleft"
 					title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-				<a class="btn btn-primary" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i
-					class="icon-align-center"></i></a> <a class="btn btn-primary"
-					data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i
-					class="icon-align-right"></i></a> <a class="btn btn-primary"
-					data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i
-					class="icon-align-justify"></i></a>
+				<a class="btn btn-primary" data-edit="justifycenter"
+					title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a> <a
+					class="btn btn-primary" data-edit="justifyright"
+					title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+				<a class="btn btn-primary" data-edit="justifyfull"
+					title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
 			</div>
 			<div class="btn-group">
 				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
 					title="Hyperlink"><i class="icon-link"></i></a>
 				<div class="dropdown-menu input-append">
-				
+
 					<input class="form-control" placeholder="URL" type="text"
 						data-edit="createLink" />
 					<button class="btn btn-primary" type="button">Add</button>
 				</div>
-				<a class="btn btn-primary" data-edit="unlink" title="Remove Hyperlink"><i
-					class="icon-cut"></i></a>
+				<a class="btn btn-primary" data-edit="unlink"
+					title="Remove Hyperlink"><i class="icon-cut"></i></a>
 
 			</div>
 
 
 			<div class="btn-group">
-				<a class="btn btn-primary" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i
-					class="icon-undo"></i></a> <a class="btn btn-primary" data-edit="redo"
-					title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a> <a
-					class="btn btn-primary" data-edit="formatBlock pre" title="Code"><i
-					class="icon-cog"></i></a>
+				<a class="btn btn-primary" data-edit="undo"
+					title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a> <a
+					class="btn btn-primary" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i
+					class="icon-repeat"></i></a> <a class="btn btn-primary"
+					data-edit="formatBlock pre" title="Code"><i class="icon-cog"></i></a>
 			</div>
 			<div class="btn-group pull-right">
 				<a class="btn btn-primary" id="create-article">Create</a>
@@ -101,20 +103,25 @@
 			<input type="text" data-edit="inserttext" id="voiceBtn"
 				x-webkit-speech="">
 		</div>
+		<div id="editor"></div>
 
 
 	</div>
 
 
 </div>
+
+
+
 <script type="text/javascript">
 	$("a#create-article")
 			.click(
 					function() {
-
-						$
-								.post(
-										"ArticleServlet?action=create",
+						if(!$('#art-header').val()){
+							showToaast("Header must not be empty", 0);
+						}else{
+						if($('div#editor').html().length <= 88000){
+						$.post("ArticleServlet?action=create",
 										{
 											article : $("div#editor").html(),
 											header : $("input#art-header")
@@ -127,15 +134,19 @@
 											$('div#asd').append(response);
 											window.location.href = '/ITMount/ArticleServlet?action=show&article_id='
 													+ response.id;
-										});
+						});
+						}else{
+							showToaast("Article is too long", 0);
+						}
+					}
 					});
 </script>
 
 <script>
 	$(function() {
 		function initToolbarBootstrapBindings() {
-			var fonts = [ 'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-					'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact',
+			var fonts = [ 'Serif', 'Arial', 'Arial Black', 'Courier',
+					'Courier New', 'Comic Sans MS', 
 					'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
 					'Times New Roman', 'Verdana' ], fontTarget = $(
 					'[title=Font]').siblings('.dropdown-menu');
@@ -202,4 +213,71 @@
 		window.prettyPrint && prettyPrint();
 	});
 </script>
+
+
+<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
 

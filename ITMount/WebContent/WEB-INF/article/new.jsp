@@ -34,6 +34,9 @@
 
 <link href="assets/editor/index.css" rel="stylesheet">
 <script src="assets/editor/bootstrap-wysiwyg.js"></script>
+<script src="resources/js/toastr.js"></script>
+
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 </head>
 <body>
@@ -61,7 +64,7 @@
 	</div>
 
 
-
+<br><br><br><br>
 
 	<jsp:include page="../page/footer.jsp" />
 
