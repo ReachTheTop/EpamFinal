@@ -37,6 +37,8 @@ public class UserHome implements Action {
 			groups = GroupService.getGroupsUserStudy(current_user.getId());
 			List<Message> notifications = MessageService
 					.getUserGroupNotification(current_user.getId());
+			List<Message> history = MessageService.getNotificationHistory(current_user.getId());
+			request.setAttribute("history", history);
 			request.setAttribute("messages", notifications);
 			request.setAttribute("groups", groups);
 		} else if (current_user.getRole().equals("lecturer")) {

@@ -240,4 +240,19 @@ public class MessageDAO {
 		}
 		return comment_id;
 	}
+
+	public static List<Message> getNotificationHistory(Connection connection, Integer user_id) {
+		List<Message> messages = null;
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM message WHERE id IN(SELECT message_id FROM user_message WHERE receiver_id = ?);");
+			statement.setInt(1, user_id);
+			set = statement.executeQuery();
+			messages = MessageTransformer.getAllMessages(set);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return messages;
+	}
 }

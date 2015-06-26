@@ -117,5 +117,13 @@ public class MessageService {
 		MessageDAO.addArticleComment(connection, comment_id, article_id);
 		closeConnection(connection);
 	}
+	
+	public static List<Message> getNotificationHistory(Integer receiver_id){
+		List<Message> messages = null;
+		Connection connection = DBConnection.getConnection();
+		messages = MessageDAO.getNotificationHistory(connection, receiver_id);
+		closeConnection(connection);
+		return messages;
+	}
 
 }

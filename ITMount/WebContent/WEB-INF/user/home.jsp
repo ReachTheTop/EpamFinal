@@ -69,7 +69,7 @@
 						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" id = "userNameModal" class="form-control"
+									Name</b></label> <input name="name" id="userNameModal" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
@@ -130,9 +130,9 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="resources/js/toastr.js"></script>
-	
+
 	<script type="text/javascript">
 		function showToaast(message, issucces) {
 			var i = -1;
@@ -198,13 +198,13 @@
 
 		}
 	</script>
-	
-	
+
+
 	<script>
 		var form = $('#editUserForm');
 		form.submit(function(e) {
 			e.preventDefault();
-		    e.stopImmediatePropagation();
+			e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form.attr('method'),
 				url : form.attr('action'),
@@ -212,35 +212,34 @@
 				data : new FormData(this),
 				processData : false,
 				contentType : false,
-				dataType: "json",
+				dataType : "json",
 
 				success : function(data) {
-					
+
 					var nameUser = data.name;
-					$( "#userName" ).html(nameUser);
-					$( "#userNameModal" ).html(nameUser);
+					$("#userName").html(nameUser);
+					$("#userNameModal").html(nameUser);
 					var surNameUser = data.surname;
-					$( "#userSurNameModal" ).html(surNameUser);
-					$( "#userSurName" ).html(surNameUser);
-					
-					var userNameSurname = nameUser.concat("  ").concat(surNameUser);
-					$( "#userNameSurname" ).html(userNameSurname);
-					
- 					var userMiddleName = data.middle_name;
+					$("#userSurNameModal").html(surNameUser);
+					$("#userSurName").html(surNameUser);
+
+					var userNameSurname = nameUser.concat("  ").concat(
+							surNameUser);
+					$("#userNameSurname").html(userNameSurname);
+
+					var userMiddleName = data.middle_name;
 					$("#middleNameModal").html(userMiddleName);
- 					$("#userMiddleName").html(userMiddleName);
-					
+					$("#userMiddleName").html(userMiddleName);
+
 					var userBirtday = data.birtday;
 					$("userBirtday").html(userBirtday);
-					
-					
-					
+
 					$('#editUser').modal('hide');
 					showToaast("Profile was successfully edited", 1);
 
 				},
 				error : function() {
-			
+
 					showToaast("Profile was not edited", 0);
 				}
 			});
@@ -248,8 +247,8 @@
 			return false;
 		});
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
 		function showToaast(message, issucces) {
 			var i = -1;
@@ -324,13 +323,13 @@
 					<div class="col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
-								<h3 class="panel-title" id = "userNameSurname" > ${current_user.name }
-									${current_user.surname }
+								<h3 class="panel-title" id="userNameSurname">
+									${current_user.name } ${current_user.surname }
 
-<%-- 									<c:if test="${current_user.id == user.id }"> --%>
-<!-- 										<a data-toggle="modal" href="#editUser"><i -->
-<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
-<%-- 									</c:if> --%>
+									<%-- 									<c:if test="${current_user.id == user.id }"> --%>
+									<!-- 										<a data-toggle="modal" href="#editUser"><i -->
+									<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
+									<%-- 									</c:if> --%>
 
 								</h3>
 
@@ -353,15 +352,15 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName"><p > ${current_user.name } </p></td>
+													<td id="userName"><p>${current_user.name }</p></td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
-													<td id = "userMiddleName">${current_user.middle_name }</td>
+													<td id="userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
 													<td>Surname</td>
-													<td id = "userSurName"><p>${current_user.surname }</p></td>
+													<td id="userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
@@ -418,8 +417,15 @@
 
 					</div>
 
+					<jsp:include page="notificationHistory.jsp" />
 					<div class="col-md-4">
-						<h2>My courses</h2>
+						<h2>
+							My courses
+							<c:if test="${current_user.id == user.id && not empty history }">
+								<a data-toggle="modal" href="#notificationHistory"><i
+									class="glyphicon glyphicon-th-list"></i> </a>
+							</c:if>
+						</h2>
 						<div class="section">
 							<c:forEach items="${groups }" var="group">
 								<div class="col-sm-6" style="margin-top: 5px">
@@ -634,7 +640,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="courses"
-									data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">${current_user.name }
+									data-parent="#accordion" href="#collapse0" aria-expanded="true"
+									aria-controls="collapse0">${current_user.name }
 									${current_user.surname }</a> <a data-toggle="modal"
 									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
 							</h4>
@@ -662,7 +669,7 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName">${current_user.name }</td>
+													<td id="userName">${current_user.name }</td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
@@ -851,7 +858,6 @@
 											<th>Phone</th>
 											<th>Skype</th>
 											<th>Active</th>
-											
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -873,13 +879,13 @@
 		</c:when>
 	</c:choose>
 
-<div hidden="true" >
-	<select class='form-control' id='userRoles' name='role'>
-		<option value="2">student</option>
-		<option value="3">lecturer</option>
-		<option value="4">admin</option>
-	</select>
-</div>
+	<div hidden="true">
+		<select class='form-control' id='userRoles' name='role'>
+			<option value="2">student</option>
+			<option value="3">lecturer</option>
+			<option value="4">admin</option>
+		</select>
+	</div>
 
 	<script type="text/javascript">
 		$(document)
@@ -1045,17 +1051,17 @@
 						});
 	</script>
 
-	<c:if test ="${showEditModal!=null }">
+	<c:if test="${showEditModal!=null }">
 	${showEditModal=null }
 	<script type="text/javascript">
-			$(document).ready(function() {
-				$("#editUser").modal('show');
-			});
-		</script>
+		$(document).ready(function() {
+			$("#editUser").modal('show');
+		});
+	</script>
 	</c:if>
-		
-		
-	
+
+
+
 
 
 	<script type="text/javascript">
