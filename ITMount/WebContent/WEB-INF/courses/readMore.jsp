@@ -41,7 +41,7 @@
 						<ul class="no-list-style">
 							<li><b>Description:</b> ${course.description}</li>
 							<li class="portfolio-visit-btn"> 
-							<c:if test="${user!=null && registationOFF==true}">
+							<c:if test="${user == null || registationOFF==true}">
 							<form action="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />" 
 							method="get"
 							id="form1" role="form">
