@@ -8,7 +8,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Add user to group</h4>
+				<h4 class="modal-title">Add users to group</h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-group" hidden="true">
@@ -18,14 +18,14 @@
 
 				<div class="form-group" id='message-subject'>
 					<label for="login-username"><i class="icon-user"></i> <b>Message
-							subject</b></label> <input name="subject" class="form-control"
+							subject</b></label> <input name="add_subject" class="form-control"
 						id="group-name-edit" type="text" placeholder="">
 				</div>
 
 				<div class="form-group" id='passed'>
 					<label for="login-username"><i class="icon-user"></i> <b>
 							Message</b></label>
-					<textarea name="message" class="form-control" id="group-name-edit"
+					<textarea name="add_message" class="form-control" id="group-name-edit"
 						placeholder=""></textarea>
 				</div>
 

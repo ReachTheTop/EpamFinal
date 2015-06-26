@@ -16,7 +16,7 @@ public class GroupUserDAO {
 	private static final String GET_GROUP_USER_BY_USER_AND_GROUP_ID = "SELEct * FROM group_user WHERE user_id = ? AND group_id = ?;";
 	private static final String GET_GROUP_USER_BY_ID = "SELECT * FROM group_user WHERE id=?";
 	private static final String GET_ALL_GROUP_USER = "select * FROM user WHERE  id IN(SELECT user_id FROM group_user WHERE group_id = ?);";
-	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id) value (?, ?);";
+	private static final String NEW_GROUP_USER = "INSERT INTO group_user (user_id, group_id, is_active) value (?, ?, 1);";
 	private static final String DELETE_USER_FROM_GROUP = "DELETE FROM group_user WHERE group_id = ? AND user_id = ?;";
 	private static final String UPDATE_GROUP_USER = "UPDATE group_user SET user_id = ?, group_id = ?, is_active = ? WHERE id = ?;";
 	private static final String GET_ALL_USER_BY_GROUP_ID = "select* from user where user.id in (select user_id from group_user where group_id = ?)";
@@ -177,7 +177,7 @@ public class GroupUserDAO {
 		try {
 			connection.setAutoCommit(false);
 			ps = connection
-					.prepareStatement("INSERT INTO group_user SET group_id = ?, user_id = (SELECT id  FROM user WHERE email = ?);");
+					.prepareStatement("INSERT INTO group_user SET is_active = 1, group_id = ?, user_id = (SELECT id  FROM user WHERE email = ?);");
 
 			for (String string : users) {
 
@@ -312,7 +312,7 @@ public class GroupUserDAO {
 			statement = connection
 					.prepareStatement("DELETE FROM group_user WHERE group_id = ? AND user_id = ?;");
 			statement.setInt(1, group_id);
-			statement.setInt(2, group_id);
+			statement.setInt(2, user_id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

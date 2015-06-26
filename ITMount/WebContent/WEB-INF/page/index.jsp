@@ -54,6 +54,15 @@
 		</div>
 	</div>
 	<!-- End Homepage Slider -->
+	 
+      
+      
+        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+        <script src="resources/js/jquery.fitvids.js"></script>
+        <script src="resources/js/jquery.sequence-min.js"></script>
+        <script src="resources/js/jquery.bxslider.js"></script>
+        <script src="resources/js/main-menu.js"></script>
+        <script src="resources/js/template.js"></script>
 
 <jsp:include page="footer.jsp"/>
 

@@ -557,13 +557,14 @@ a:hover {
   position: absolute;
   padding: 5px;
   left: 10px;
-  top: 10px;
+  top: 5px;
   -webkit-border-radius: 5px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 5px;
   -moz-background-clip: padding;
   border-radius: 5px;
   background-clip: padding-box;
+  
 }
 .blog-post .post-comments-count {
   text-align: center;
@@ -586,6 +587,7 @@ a:hover {
   border-bottom: 1px dotted #828282;
   margin: 0 20px;
   padding-top: 10px;
+  left: 10px;
 }
 .post-title h3 a {
   color: #535b60;

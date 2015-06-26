@@ -31,7 +31,7 @@ public class Exit extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("/ITMount/home");
+		response.sendRedirect("/ITMount/login");
 		return;
 	}
 

@@ -31,8 +31,8 @@ public class AddUsersToGroup implements Action {
 		User user = (User) request.getSession().getAttribute("user");
 		GroupUserService.addUsersToGroup(group_id, users);
 		Message message = new Message();
-		message.setSubject(request.getParameter("subject"));
-		message.setContent(request.getParameter("message"));
+		message.setSubject(request.getParameter("add_subject"));
+		message.setContent(request.getParameter("add_message"));
 		message.setSender_id(user.getId());
 		
 		List<Integer> users_id = new ArrayList<Integer>();

@@ -80,5 +80,14 @@ public class Message extends Validator implements Serializable {
 	}
 	
 	
+	private User sender;
 
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+	
 }

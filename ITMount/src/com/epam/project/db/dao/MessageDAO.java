@@ -14,11 +14,11 @@ import com.mysql.jdbc.Statement;
 
 public class MessageDAO {
 
-	public static final String SQL_GET_MESSAGE = "SELECT* FROM message WHERE id=?";
-	public static final String SQL_GET_ALL_MESSAGE = "SELECT* FROM message";
+	public static final String SQL_GET_MESSAGE = "SELECT * FROM message WHERE id=?";
+	public static final String SQL_GET_ALL_MESSAGE = "SELECT * FROM message";
 	public static final String SQL_ADD_NEW_MESSAGE = "Insert into message (subject,content,sender_id)  value(?,?,?)";
 	public static final String SQL_UPDATE_MESSAGE = "Update message set subject=?, content=?, sender_id=? where id=?";
-
+	public static final String SQL_ADD_NEW_COMMENT = "INSERT INTO  message (content, sender_id) VALUE (?,?);";
 	public static final String SQL_UPDATE_TASK = "Update task SET name=?, description=?, deadline=?, available=?,"
 			+ " file=?, is_active =?, group_id = ? WHERE id=?";
 
@@ -110,13 +110,13 @@ public class MessageDAO {
 			connection.setAutoCommit(false);
 			statement = connection
 					.prepareStatement("SELECT * FROM message WHERE id IN "
-							+ "(SELECT message_id FROM user_message WHERE is_readed = 0 AND receiver_id = ?);");
+							+ "(SELECT message_id FROM user_message WHERE is_readed = 0 AND type='user' AND receiver_id = ?);");
 			statement.setInt(1, user_id);
 			data = statement.executeQuery();
 			messages = MessageTransformer.getAllMessages(data);
 
 			statement = connection
-					.prepareStatement("UPDATE user_message SET is_readed = 1 WHERE message_id = ?");
+					.prepareStatement("UPDATE user_message SET is_readed = 1 WHERE type = 'user' AND message_id = ?");
 			for (Message message : messages) {
 				statement.setInt(1, message.getId());
 				statement.executeUpdate();
@@ -184,5 +184,60 @@ public class MessageDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static List<Message> getArticleComments(Connection connection,
+			Integer article_id) {
+		List<Message> comments = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			statement = connection
+					.prepareStatement("SELECT * FROM message "
+							+ "WHERE id IN (SELECT message_id FROM user_message WHERE type='article' AND receiver_id = ?);");
+			statement.setInt(1, article_id);
+			rs = statement.executeQuery();
+			comments = MessageTransformer.getAllMessages(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return comments;
+	}
+
+	public static void addArticleComment(Connection connection,
+			Integer comment_id, Integer article_id) {
+		PreparedStatement statement = null;
+
+		try {
+			statement = connection
+					.prepareStatement("INSERT INTO user_message "
+							+ "(message_id, receiver_id, is_readed, type) VALUE (?,?, 1, 'article');");
+			statement.setInt(1, comment_id);
+			statement.setInt(2, article_id);
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static Integer newComment(Connection connection, Message comment) {
+		Integer comment_id = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			statement = connection.prepareStatement(SQL_ADD_NEW_COMMENT,
+					Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, comment.getContent());
+			statement.setInt(2, comment.getSender_id());
+			statement.executeUpdate();
+			rs = statement.getGeneratedKeys();
+			rs.next();
+			comment_id = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return comment_id;
 	}
 }

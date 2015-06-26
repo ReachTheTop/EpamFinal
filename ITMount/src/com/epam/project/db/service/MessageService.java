@@ -7,6 +7,7 @@ import java.util.List;
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.MessageDAO;
 import com.epam.project.db.dao.TaskDAO;
+import com.epam.project.db.dao.UserDAO;
 import com.epam.project.db.model.Message;
 import com.epam.project.db.model.Task;
 
@@ -80,18 +81,40 @@ public class MessageService {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void sendMessageToUsers(Message message, List<Integer> users_id){
+
+	public static void sendMessageToUsers(Message message,
+			List<Integer> users_id) {
 		Connection connection = DBConnection.getConnection();
-		Integer message_id =  MessageDAO.addNewMessage(message, connection);
+		Integer message_id = MessageDAO.addNewMessage(message, connection);
 		MessageDAO.sendMessageToUsers(connection, message_id, users_id);
 		closeConnection(connection);
 	}
-	
-	public static void sendMessageToRest(Message message, Integer group_id , List<Integer> users_id){
+
+	public static void sendMessageToRest(Message message, Integer group_id,
+			List<Integer> users_id) {
 		Connection connection = DBConnection.getConnection();
 		Integer message_id = MessageDAO.addNewMessage(message, connection);
-		MessageDAO.sendMessageToRest(connection, message_id, group_id, users_id);
+		MessageDAO
+				.sendMessageToRest(connection, message_id, group_id, users_id);
+		closeConnection(connection);
+	}
+
+	public static List<Message> getArticleComments(Integer article_id) {
+		List<Message> comments = null;
+		Connection connection = DBConnection.getConnection();
+		comments = MessageDAO.getArticleComments(connection, article_id);
+		for (Message message : comments) {
+			message.setSender(UserDAO.getUser(message.getSender_id(),
+					connection));
+		}
+		closeConnection(connection);
+		return comments;
+	}
+
+	public static void leaveArticleComment(Integer article_id, Message comment) {
+		Connection connection = DBConnection.getConnection();
+		Integer comment_id = MessageDAO.newComment(connection, comment);
+		MessageDAO.addArticleComment(connection, comment_id, article_id);
 		closeConnection(connection);
 	}
 

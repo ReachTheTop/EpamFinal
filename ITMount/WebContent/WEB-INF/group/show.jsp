@@ -61,7 +61,7 @@
 	<div class="container">
 		<c:if test="${user.role =='student' || user.role =='applicant' }">
 			<c:choose>
-				<c:when test="${ empty association.exam}">
+				<c:when test="${ empty association.exam && association.isActive == false}">
 					<c:choose>
 						<c:when test="${ empty exams }">
 							<jsp:include page="emptyExam.jsp"></jsp:include>

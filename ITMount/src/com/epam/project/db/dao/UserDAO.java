@@ -195,7 +195,7 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			ps = connection
-					.prepareStatement("SELECT * FROM user WHERE email REGEXP '.*"
+					.prepareStatement("SELECT * FROM user WHERE role_id = 2 AND email REGEXP '.*"
 							+ token + ".*' LIMIT 10;");
 			resultSet = ps.executeQuery();
 		} catch (SQLException e) {

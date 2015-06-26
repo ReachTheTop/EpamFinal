@@ -21,6 +21,7 @@ public class MessageTransformer {
 				message.setSubject(rs.getString(2));
 				message.setContent(rs.getString(3));
 				message.setSender_id(rs.getInt(4));
+				message.setSendDate(rs.getTimestamp("send_date"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -42,7 +43,7 @@ public class MessageTransformer {
 				message.setSubject(rs.getString(2));
 				message.setContent(rs.getString(3));
 				message.setSender_id(rs.getInt(4));
-			
+				message.setSendDate(rs.getTimestamp("send_date"));
 				list.add(message);
 			}
 		} catch (SQLException e) {

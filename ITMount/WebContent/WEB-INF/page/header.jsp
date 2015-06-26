@@ -50,6 +50,9 @@
 							<li>
 							<a href="<c:url value="/CourseServlet" />">Course</a>
 						</li>
+							<li>
+							<a href="<c:url value="/ArticleServlet" />">Article</a>
+						</li>
 						<li class="has-submenu">
 							<a href="#">Pages +</a>
 							<div class="mainmenu-submenu">
