@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import com.epam.project.db.model.User;
 import com.epam.project.db.service.GroupUserService;
 import com.epam.project.db.service.MessageService;
 import com.epam.project.db.service.UserService;
+import com.epam.project.mailer.Mailer;
 
 public class LeavUsersInGroup implements Action {
 
@@ -40,10 +43,17 @@ public class LeavUsersInGroup implements Action {
 		failed.setContent(request.getParameter("messageFailed"));
 		
 		List<Integer> users_id = new ArrayList<Integer>();
-
+		
+		sendMail(users, passed);
+		
 		for (String email : users) {
 			users_id.add(UserService.getUserWhereEmail(email).getId());
 		}
+		
+		List<String> failedUsersEmail = UserService.getEmailNotIn(group_id, users_id);
+		
+		sendMail(failedUsersEmail, failed);
+		
 		MessageService.sendMessageToUsers(passed, users_id);
 		MessageService.sendMessageToRest(failed, group_id, users_id);
 		
@@ -60,6 +70,32 @@ public class LeavUsersInGroup implements Action {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return "leave";
+	}
+	
+	private void sendMail(final List<String> users, final Message message) {
+		
+		final String content = message.getContent()+"\n<a href='http://localhost:8080/ITMount/UserServlet'>My Page</a>";
+		
+		Thread mailer = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (String email : users) {
+					try {
+						Mailer.sendEmail(email, message.getSubject(),
+								content);
+					} catch (AddressException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		});
+		mailer.start();
 	}
 
 }

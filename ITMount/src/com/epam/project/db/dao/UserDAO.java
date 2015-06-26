@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
@@ -237,5 +238,41 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static List<String> getEmailNotIn(Connection connection,
+			Integer group_id, List<Integer> users) {
+		List<String> emails = new ArrayList<String>();
+		String users_id = "( ";
+		String separator = "";
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		
+		if(users.isEmpty()){
+			return emails;
+		}
+		
+		try {
+			for (Integer user_id : users) {
+				users_id += separator;
+				users_id += user_id;
+				separator = ", ";
+			}
+			users_id += " )";
+			String query = String
+					.format("SELECT email FROM user WHERE id IN "
+							+ "( SELECT user_id FROM group_user WHERE group_id = ? AND user_id NOT IN %s )",
+							users_id);
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, group_id);
+			result = statement.executeQuery();
+			
+			while(result.next()){
+				emails.add(result.getString("email"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return emails;
 	}
 }

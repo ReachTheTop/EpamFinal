@@ -103,4 +103,12 @@ public class UserService {
 		UserDAO.changeRole(connection, user_id, role_id);
 		closeConnection(connection);
 	}
+	
+	public static List<String> getEmailNotIn(Integer group_id, List<Integer> users){
+		List<String> emails = null;
+		Connection connection = DBConnection.getConnection();
+		emails = UserDAO.getEmailNotIn(connection, group_id, users);
+		closeConnection(connection);
+		return emails;
+	}
 }

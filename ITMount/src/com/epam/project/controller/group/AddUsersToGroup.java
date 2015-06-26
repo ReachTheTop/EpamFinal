@@ -1,15 +1,16 @@
 package com.epam.project.controller.group;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.tribes.membership.McastService;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Message;
@@ -17,6 +18,7 @@ import com.epam.project.db.model.User;
 import com.epam.project.db.service.GroupUserService;
 import com.epam.project.db.service.MessageService;
 import com.epam.project.db.service.UserService;
+import com.epam.project.mailer.Mailer;
 
 public class AddUsersToGroup implements Action {
 
@@ -34,11 +36,13 @@ public class AddUsersToGroup implements Action {
 		message.setSubject(request.getParameter("add_subject"));
 		message.setContent(request.getParameter("add_message"));
 		message.setSender_id(user.getId());
-		
+
 		List<Integer> users_id = new ArrayList<Integer>();
-		
+
+		sendMail(users, message);
+
 		for (String email : users) {
-			users_id.add( UserService.getUserWhereEmail(email).getId());
+			users_id.add(UserService.getUserWhereEmail(email).getId());
 		}
 		MessageService.sendMessageToUsers(message, users_id);
 
@@ -54,4 +58,29 @@ public class AddUsersToGroup implements Action {
 		return "add";
 	}
 
+	private void sendMail(final List<String> users, final Message message) {
+		
+		final String content = message.getContent()+"\n<a href='http://localhost:8080/ITMount/UserServlet'>My Page</a>";
+		
+		Thread mailer = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (String email : users) {
+					try {
+						Mailer.sendEmail(email, message.getSubject(),
+								content);
+					} catch (AddressException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		});
+		mailer.start();
+	}
 }

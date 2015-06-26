@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -11,7 +11,11 @@
 	<table class="table">
 		<c:forEach items="${ exams}" var="exam">
 			<tr>
-				<td><c:out value="${exam.exam_date }" /></td>
+
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${exam.exam_date }" /> <fmt:formatDate pattern="hh:mm"
+						value="${exam.exam_date }" /></td>
+				<td></td>
 				<td><c:out value="${exam.description }" /></td>
 				<td><a data-toggle="modal" id="${exam.id }" class="updateExam"
 					href="#updateExam"><i class='glyphicon glyphicon-edit'></i></a></td>

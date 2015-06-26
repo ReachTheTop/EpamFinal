@@ -60,6 +60,10 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css">
 
+<script src="resources/js/jquery.metisMenu.js"></script>
+<script src="resources/js/inspinia.js"></script>
+<script src="resources/js/bootstrap-select.js"></script>
+<script src="resources/js/moment.js"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -71,7 +75,4 @@
 </script>
 
 
-<script src="resources/js/jquery.metisMenu.js"></script>
-<script src="resources/js/inspinia.js"></script>
-<script src="resources/js/bootstrap-select.js"></script>
-<script src="resources/js/moment.js"></script>
+

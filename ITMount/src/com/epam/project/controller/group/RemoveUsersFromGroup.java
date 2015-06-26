@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import com.epam.project.db.model.User;
 import com.epam.project.db.service.GroupUserService;
 import com.epam.project.db.service.MessageService;
 import com.epam.project.db.service.UserService;
+import com.epam.project.mailer.Mailer;
 
 public class RemoveUsersFromGroup implements Action {
 
@@ -37,6 +40,8 @@ public class RemoveUsersFromGroup implements Action {
 
 		List<Integer> users_id = new ArrayList<Integer>();
 
+		
+		sendMail(users, message);
 		for (String email : users) {
 			users_id.add(UserService.getUserWhereEmail(email).getId());
 		}
@@ -55,6 +60,32 @@ public class RemoveUsersFromGroup implements Action {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return "remove";
+	}
+	
+	private void sendMail(final List<String> users, final Message message) {
+		
+		final String content = message.getContent()+"\n<a href='http://localhost:8080/ITMount/UserServlet'>My Page</a>";
+		Thread mailer = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				for (String email : users) {
+					try {
+						Mailer.sendEmail(email, message.getSubject(),
+								content);
+					} catch (AddressException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		});
+		mailer.start();
 	}
 
 }
