@@ -17,7 +17,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1>Portfolio Item Description</h1>
+						<h1><a href="<c:url value="CourseServlet" />">Courses</a></h1>
+						
 					</div>
 				</div>
 			</div>
