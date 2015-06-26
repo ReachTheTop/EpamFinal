@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
-import com.epam.project.command.article.Article;
-import com.epam.project.command.article.ArticleService;
+import com.epam.project.db.model.Article;
 import com.epam.project.db.model.User;
+import com.epam.project.db.service.ArticleService;
 
 public class UserArticles implements Action {
 

@@ -1,6 +1,8 @@
-package com.epam.project.command.article;
+package com.epam.project.db.dao;
 
 import java.util.List;
+
+import com.epam.project.db.model.Article;
 
 public class ArticleCorteg {
 

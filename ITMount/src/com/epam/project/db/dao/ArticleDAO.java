@@ -1,4 +1,4 @@
-package com.epam.project.command.article;
+package com.epam.project.db.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.epam.project.db.model.Article;
+import com.epam.project.db.transformer.ArticleTransformer;
 import com.mysql.jdbc.Statement;
 
 public class ArticleDAO {

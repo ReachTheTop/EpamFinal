@@ -1,8 +1,6 @@
-package com.epam.project.command.article;
+package com.epam.project.db.model;
 
 import java.util.Date;
-
-import com.epam.project.db.model.User;
 
 public class Article {
 

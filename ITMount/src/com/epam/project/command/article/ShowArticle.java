@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
+import com.epam.project.db.model.Article;
 import com.epam.project.db.model.Message;
+import com.epam.project.db.service.ArticleService;
 import com.epam.project.db.service.MessageService;
 
 public class ShowArticle implements Action {

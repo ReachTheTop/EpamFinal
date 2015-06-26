@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.epam.project.command.Action;
+import com.epam.project.db.model.Article;
+import com.epam.project.db.service.ArticleService;
 
 public class UpdateArticle implements Action {
 
