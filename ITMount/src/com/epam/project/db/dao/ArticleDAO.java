@@ -42,6 +42,8 @@ public class ArticleDAO {
 	public static ArticleCorteg getAll(Connection connection, String token,
 			Integer page) {
 		String pattern = String.format("%s.*", token);
+		String coursePattern = String.format("^(%s)$", token);
+		String authorPattern = String.format("^(%s)$", token);
 		ArticleCorteg cortage = new ArticleCorteg();
 
 		PreparedStatement statement = null;
@@ -55,8 +57,8 @@ public class ArticleDAO {
 							+ "course_id IN (SELECT id FROM course WHERE name REGEXP ?) "
 							+ "OR user_id IN (SELECT id FROM user WHERE surname REGEXP ?)) LIMIT ?,?;");
 			statement.setString(1, pattern);
-			statement.setString(2, pattern);
-			statement.setString(3, pattern);
+			statement.setString(2, coursePattern);
+			statement.setString(3, authorPattern);
 			statement.setInt(4, page * 5);
 			statement.setInt(5, 5);
 			rs = statement.executeQuery();
