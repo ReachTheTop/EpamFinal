@@ -9,7 +9,7 @@
 						<ul>
 							<li>
 							 <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle"><t:i18n id="hader.language"/><span class="caret"></span></button>
+                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle"><t:i18n id="header.language"/><span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 	<c:forEach items="${languageList}" var="lang" >
                                 	<li role="menuitem"><a href="<c:url value="/lenguage?${lang.getLanguage() }" />"><img src="resources/img/flags/${lang.getImage()}" alt="${lang.getName()}">  ${lang.getName()}</a></li>
@@ -26,12 +26,15 @@
 							
 							
 							<c:if test="${user!=null}">
-							<li class="shopping-cart-items"><a href="<c:url value="/UserServlet" />"><i class="glyphicon glyphicon-user icon-white"><b id ="userNameHeader">  ${user.getName()}</b></i></a> </li>
-							<li class="shopping-cart-items"><a href="<c:url value="/exit" />"><i class="glyphicon glyphicon-log-out icon-white"><b> Exit</b></i></a> </li>
+
+							<li class="shopping-cart-items"><a href="<c:url value="/UserServlet" />"><i class="glyphicon glyphicon-user icon-white"><b> ${user.getName()}</b></i></a> </li>
+							<li class="shopping-cart-items"><a href="<c:url value="/exit" />"><i class="glyphicon glyphicon-log-out icon-white"><b><t:i18n id="header.exit"/></b></i></a> </li>
+
 							</c:if>
 							<c:if test="${user==null }">
-								<li class="shopping-cart-items"><a href="<c:url value="/login" />"><i class="glyphicon glyphicon-lock icon-white"> <b>Login</b></i></a></li>
-							</c:if>
+								<li class="shopping-cart-items"><a href="<c:url value="/login" />"><i class="glyphicon glyphicon-lock icon-white"><b><t:i18n id="header.login"/></b></i></a></li>
+								<li class="shopping-cart-items"><a href="<c:url value="/registration" />"><i class="glyphicon glyphicon-user-add icon-white"><b><t:i18n id="header.SignUp"/></b></i></a></li>
+							</c:if> 
 			        	
 			        		
 			        	</ul>
@@ -45,10 +48,10 @@
 					<ul>
 						<li class="logo-wrapper"><a href="<c:url value="home" />"><img src="resources/img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li>
 						<li class="active">
-							<a href="<c:url value="/home" />">Home</a>
+							<a href="<c:url value="/home" />"><t:i18n id="header.home"/></a>
 						</li>
 							<li>
-							<a href="<c:url value="/CourseServlet" />">Course</a>
+							<a href="<c:url value="/CourseServlet" />"><t:i18n id="header.courses"/></a>
 						</li>
 							<li>
 							<a href="<c:url value="/ArticleServlet" />">Article</a>

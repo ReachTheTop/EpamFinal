@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 	    <div class="footer">
 	    	<div class="container">
 		    	<div class="row">
@@ -43,7 +44,7 @@
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-12">
-		    			<div class="footer-copyright">&copy; 2013 mPurpose. All rights reserved.</div>
+		    			<div class="footer-copyright">&copy; 2015 ITMount. <t:i18n id="footer.AllRightsReserved"/></div> 
 		    		</div>
 		    	</div>
 		    </div>
