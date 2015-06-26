@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
@@ -69,7 +69,7 @@
 						role="form">
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>First
-									Name</b></label> <input name="name" id = "userNameModal" class="form-control"
+									Name</b></label> <input name="name" id="userNameModal" class="form-control"
 								id="login-username" type="text" placeholder=""
 								value="${user.name }">
 						</div>
@@ -130,9 +130,9 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="resources/js/toastr.js"></script>
-	
+
 	<script type="text/javascript">
 		function showToaast(message, issucces) {
 			var i = -1;
@@ -198,13 +198,13 @@
 
 		}
 	</script>
-	
-	
+
+
 	<script>
 		var form = $('#editUserForm');
 		form.submit(function(e) {
 			e.preventDefault();
-		    e.stopImmediatePropagation();
+			e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form.attr('method'),
 				url : form.attr('action'),
@@ -212,35 +212,34 @@
 				data : new FormData(this),
 				processData : false,
 				contentType : false,
-				dataType: "json",
+				dataType : "json",
 
 				success : function(data) {
-					
+
 					var nameUser = data.name;
-					$( "#userName" ).html(nameUser);
-					$( "#userNameModal" ).html(nameUser);
+					$("#userName").html(nameUser);
+					$("#userNameModal").html(nameUser);
 					var surNameUser = data.surname;
-					$( "#userSurNameModal" ).html(surNameUser);
-					$( "#userSurName" ).html(surNameUser);
-					
-					var userNameSurname = nameUser.concat("  ").concat(surNameUser);
-					$( "#userNameSurname" ).html(userNameSurname);
-					
- 					var userMiddleName = data.middle_name;
+					$("#userSurNameModal").html(surNameUser);
+					$("#userSurName").html(surNameUser);
+
+					var userNameSurname = nameUser.concat("  ").concat(
+							surNameUser);
+					$("#userNameSurname").html(userNameSurname);
+
+					var userMiddleName = data.middle_name;
 					$("#middleNameModal").html(userMiddleName);
- 					$("#userMiddleName").html(userMiddleName);
-					
+					$("#userMiddleName").html(userMiddleName);
+
 					var userBirtday = data.birtday;
 					$("userBirtday").html(userBirtday);
-					
-					
-					
+
 					$('#editUser').modal('hide');
 					showToaast("Profile was successfully edited", 1);
 
 				},
 				error : function() {
-			
+
 					showToaast("Profile was not edited", 0);
 				}
 			});
@@ -248,8 +247,8 @@
 			return false;
 		});
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
 		function showToaast(message, issucces) {
 			var i = -1;
@@ -324,13 +323,13 @@
 					<div class="col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
-								<h3 class="panel-title" id = "userNameSurname" > ${current_user.name }
-									${current_user.surname }
+								<h3 class="panel-title" id="userNameSurname">
+									${current_user.name } ${current_user.surname }
 
-<%-- 									<c:if test="${current_user.id == user.id }"> --%>
-<!-- 										<a data-toggle="modal" href="#editUser"><i -->
-<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
-<%-- 									</c:if> --%>
+									<%-- 									<c:if test="${current_user.id == user.id }"> --%>
+									<!-- 										<a data-toggle="modal" href="#editUser"><i -->
+									<!-- 											class="glyphicon glyphicon-edit"></i></a> -->
+									<%-- 									</c:if> --%>
 
 								</h3>
 
@@ -353,15 +352,15 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName"><p > ${current_user.name } </p></td>
+													<td id="userName"><p>${current_user.name }</p></td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
-													<td id = "userMiddleName">${current_user.middle_name }</td>
+													<td id="userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
 													<td>Surname</td>
-													<td id = "userSurName"><p>${current_user.surname }</p></td>
+													<td id="userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
@@ -634,7 +633,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="courses"
-									data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">${current_user.name }
+									data-parent="#accordion" href="#collapse0" aria-expanded="true"
+									aria-controls="collapse0">${current_user.name }
 									${current_user.surname }</a> <a data-toggle="modal"
 									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
 							</h4>
@@ -662,7 +662,7 @@
 											<tbody>
 												<tr>
 													<td>First Name</td>
-													<td id = "userName">${current_user.name }</td>
+													<td id="userName">${current_user.name }</td>
 												</tr>
 												<tr>
 													<td>Middle Name</td>
@@ -851,7 +851,6 @@
 											<th>Phone</th>
 											<th>Skype</th>
 											<th>Active</th>
-											
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -867,19 +866,192 @@
 						</div>
 					</div>
 
+
+
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" class='language'
+									data-parent="#accordion" href="#collapse5">Language</a>
+							</h4>
+						</div>
+						<div id="collapse5" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="row-fluid">
+
+									<div class="form-group">
+										<a href="<c:url value="/downloadFile?file=WEB-INF\\classes\\i18n.properties"/>"
+											class="btn btn-default btn-xs dropdown-toggle">Downaload
+											pattern</a>
+												<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#updatePatternLanguage">Update pattern</button>
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#addLanguage">Add Language</button>
+											
+											<a
+											data-toggle="modal" id="languageEditModal" href="#languageEdit"><i
+											class='btn glyphicon glyphicon-edit'></i></a>
+											
+									</div>
+
+
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>№</th>
+											<th>Name</th>
+											<th>Language</th>
+											<th>Country</th>
+											<th>Image</th>
+											
+											<th>Active</th>
+											<th>Action</th>
+										<tr>
+									</thead>
+									<tbody id="language-body">
+
+									</tbody>
+								</table>
+								<div class="row" align="center">
+
+									<div id="group-page-selection"></div>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-
 		</c:when>
 	</c:choose>
+	<div id="addLanguage" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">New Language</h4>
+				</div>
+				<div class="modal-body">
+					<form action="<c:url value="/LanguageUploadServlet?action=upload" />" data-async
+						id='add-language-form' method="post" enctype="multipart/form-data"
+						role="form">
 
-<div hidden="true" >
-	<select class='form-control' id='userRoles' name='role'>
-		<option value="2">student</option>
-		<option value="3">lecturer</option>
-		<option value="4">admin</option>
-	</select>
-</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<input name="name" class="form-control" id="new-name" type="text"
+								placeholder="">
+						</div>
+
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Language</b></label>
+							<input name="language" class="form-control" id="new-language"
+								type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Country</b></label>
+							<input name="country" class="form-control" id="new-language"
+								type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" id="new-file"
+								type="file" placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="updatePatternLanguage" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Update Pattern</h4>
+				</div>
+				<div class="modal-body">
+					<form action="<c:url value="/LanguageUploadServlet?action=updateP" />" data-async
+						id='update-pattern-language-form' method="post" enctype="multipart/form-data"
+						role="form">
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" 
+								type="file" placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="languageEdit" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Update Language</h4>
+				</div>
+				<div class="modal-body">
+					<form action="<c:url value="/LanguageUploadServlet?action=update" />" data-async
+						id='update-language-form' method="post" enctype="multipart/form-data"
+						role="form">
+
+							<div class="form-group" hidden="true">
+										<input name="language_id" class="form-control" id="language-id-edit"
+											type="text" placeholder="">
+									</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<input name="name" class="form-control" id="language-name-edit" type="text"
+								placeholder="">
+						</div>
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" 
+								type="file" placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div hidden="true">
+		<select class='form-control' id='userRoles' name='role'>
+			<option value="2">student</option>
+			<option value="3">lecturer</option>
+			<option value="4">admin</option>
+		</select>
+	</div>
 
 	<script type="text/javascript">
 		$(document)
@@ -1045,17 +1217,17 @@
 						});
 	</script>
 
-	<c:if test ="${showEditModal!=null }">
+	<c:if test="${showEditModal!=null }">
 	${showEditModal=null }
 	<script type="text/javascript">
-			$(document).ready(function() {
-				$("#editUser").modal('show');
-			});
-		</script>
+		$(document).ready(function() {
+			$("#editUser").modal('show');
+		});
+	</script>
 	</c:if>
-		
-		
-	
+
+
+
 
 
 	<script type="text/javascript">
@@ -1127,8 +1299,89 @@
 		}
 	</script>
 
+	<script>
+	
+	</script>
+<script type="text/javascript">
+		$(document)
+				.ready(function() {
+							$('form#add-language-form')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													name : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+																},
+											
+												stringLength : {
+													min : 1,
+													max : 15,
+													message : 'The language name must be more than 2 and less than 10 characters long'
+														
+												}
+											
 
+														}
+													},
+													language : {
+														validators : {
+															
+															stringLength : {
+																min : 1,
+																max : 2,
+																message : 'The language  must be 2 characters long'
+															},
+															
+															regexp : {
+																regexp : /[a-z]*/,
+																message : 'Must be lowercase'
+															}
 
+														}
+													},
+													country : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+		
+															},
+															stringLength : {
+																min : 1,
+																max : 2,
+																message : 'The language  must be 2 characters long'
+															},
+															regexp : {
+																regexp : /[A-Z]*/,
+																message : 'Must be uppercase'
+															}
+
+														}
+													},
+													bandle : {
+														validators : {
+															notEmpty : {
+																message : 'The file is required and cannot be empty'
+															},
+															file : {
+																extension : 'properties',
+												
+																message : 'Please choose a properties file.'
+															}
+														}
+													}
+												
+												}
+											});
+						});
+	</script>
 	<jsp:include page="../page/footer.jsp" />
 
 

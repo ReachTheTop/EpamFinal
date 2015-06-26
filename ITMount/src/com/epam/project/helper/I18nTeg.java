@@ -17,7 +17,7 @@ public class I18nTeg extends SimpleTagSupport {
 	private String id;
 	private Locale loc = new Locale("en", "US");
 	private ResourceBundle res = ResourceBundle.getBundle("i18n",
-			loc);
+			loc, new UTF8Control());
 
 	public String getId() {
 		return id;
@@ -46,18 +46,17 @@ public class I18nTeg extends SimpleTagSupport {
 				} else if (cookie2.getName().equals("localCountry")) {
 					country = cookie2.getValue();
 					loc = new Locale(language, country);
-					res = ResourceBundle.getBundle("i18n", loc);
+					res = ResourceBundle.getBundle("i18n", loc,new UTF8Control());
+					
 					break;
 				}
 
 			}
-			
 
 		}
 		}
 		JspWriter js = getJspContext().getOut();
-		js.print(new String(res.getString(getId()).getBytes("ISO-8859-1"),
-				"UTF-8"));
+		js.print(new String(res.getString(getId())));
 	}
 	
 }

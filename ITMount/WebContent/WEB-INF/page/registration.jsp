@@ -120,8 +120,10 @@
 														validators : {
 															emailAddress : {
 																message : 'The input is not a valid email address'
-															}
-															
+															},
+												 notEmpty: {
+								                        message: 'The email is required and cannot be empty'
+								                    }
 														}
 													},
 													name: {

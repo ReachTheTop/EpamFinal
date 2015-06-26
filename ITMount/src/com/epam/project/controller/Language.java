@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.epam.project.helper.UTF8Control;
+
 /**
  * Servlet implementation class Language
  */
@@ -43,7 +45,7 @@ HttpSession session = request.getSession();
 		response.addCookie(cookieCountry);
 		Locale loc = new Locale(languge, country);
 		ResourceBundle res = ResourceBundle
-				.getBundle("i18n", loc);
+				.getBundle("i18n", loc, new UTF8Control());
 		session.setAttribute("bundle", res);
 		response.sendRedirect(request.getHeader("Referer"));
 		

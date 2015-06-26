@@ -12,7 +12,7 @@
                             <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle"><t:i18n id="hader.language"/><span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 	<c:forEach items="${languageList}" var="lang" >
-                                	<li role="menuitem"><a href="<c:url value="/lenguage?${lang.getLanguage() }" />"><img src="resources/img/flags/${lang.getImage()}" alt="${lang.getName()}">  ${lang.getName()}</a></li>
+                                	<li role="menuitem"><a href="<c:url value="/lenguage?language=${lang.getLanguage() }&country=${lang.getCountry()}" />"><img src="resources/img/flags/${lang.getImage()}"  onerror="this.src='resources/img/flags/up.png'" alt="${lang.getName()}">  ${lang.getName()}</a></li>
                                 	
                                 	</c:forEach>
                                 	

@@ -55,5 +55,38 @@ public class LanguageService {
 			e.printStackTrace();
 		}
 	}
+	
+	public static Language getLanguage(String lang, String country) {
+		Connection connection =  DBConnection.getConnection();
+		Language language = LanguageDAO.getLanguage(lang,country, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return language;
+	}
+	public static void delLanguage(Integer id) {
+		Connection connection =  DBConnection.getConnection();
+		LanguageDAO.delLanguage(id, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static List<Language> getAllLanguagesByAmin(){
+		Connection connection =  DBConnection.getConnection();
+		List<Language> list = LanguageDAO.getAllLanguagesByAmin(connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 }

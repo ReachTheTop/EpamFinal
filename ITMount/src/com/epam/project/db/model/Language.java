@@ -19,6 +19,9 @@ public class Language extends Validator implements Serializable {
 
 	@Column(value = "language")
 	private String language;
+	
+	@Column(value = "country")
+	private String country;
 
 	@Column(value = "file")
 	private String file;
@@ -26,6 +29,8 @@ public class Language extends Validator implements Serializable {
 	@Column(value = "img")
 	private String image;
 
+	@Column(value = "active")
+	private Boolean active;
 	public Language() {
 		super();
 	}
@@ -70,10 +75,34 @@ public class Language extends Validator implements Serializable {
 		this.image = image;
 	}
 
+	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Boolean isActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Language [id=" + id + ", name=" + name + ", language="
-				+ language + ", file=" + file + ", image=" + image + "]";
+				+ language + ", country=" + country + ", file=" + file
+				+ ", image=" + image + ", active=" + active + "]";
 	}
+
+	
 
 }
