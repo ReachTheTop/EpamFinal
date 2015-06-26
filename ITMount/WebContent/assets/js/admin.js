@@ -349,33 +349,7 @@ $(function() {
 		$(this).val("");
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-
-	
-	
-	
 	var $userPages;
 	function handleUsers(response) {
 		$("tbody#users-body").empty();
@@ -512,4 +486,223 @@ $(function() {
 		});
 	});
 
+	$('body').on(
+			'click',
+			'a#languageEditModal',
+			function() {
+				var object = $(this);
+				$.get('LanguageUploadServlet?action=get&language_id='
+						+ $(this).attr('name'), function(response) {
+							$('input#language-id-edit').val(response.id)
+							$('input#language-name-edit').val(response.name);
+						
+				});
+			});
+	
+	$("a.language").click(function() {
+
+		$.get('LanguageUploadServlet?action=show', function(response) {
+
+			handleLanguage(response);
+
+		});
+	});
+	
+	$('body').on(
+			'click',
+			'a#active-language',
+			function() {
+				var object = $(this);
+				  $.get('LanguageUploadServlet?action=active&language_id=' +
+				  $(this).attr('name'), function(response) {
+					  
+					  if(response.active === true){
+						 
+						  object.attr('class','btn btn-danger glyphicon glyphicon-remove');
+					  }else{
+						  
+						  object.attr('class','btn btn-success glyphicon glyphicon-ok');
+					  }
+					  object.parent().prev().text(response['active']);
+				  });
+			});
+
+	$('body').on(
+			'click',
+			'a#delete-language',
+			function() {
+				var object = $(this);
+				 $.get('LanguageUploadServlet?action=delete&language_id=' +
+				  $(this).attr('name'),
+				  function(response) {
+                         if (response.success) {
+                        	object.parent().parent().remove();
+                        	 showToaast(response.success, 1);
+                         } else {                     
+                        	 showToaast(response.fail, 0);
+
+                         }
+				  });
+				
+			});
+	
+	
+	function handleLanguage(response){
+		$("tbody#language-body").empty();
+		$("a#languageEditModal").first().hide();
+		var $body;
+		var $tr; 
+		var $td1;
+		var $td2;
+		var $td3;
+		var $td4;
+		var $td5;
+		var $td6;
+		var $td7;
+		var $td8;
+			
+
+		$.each(response, function(index, item) {
+		var	$editLanguage = $("a#languageEditModal").first().clone(true,true);
+			$editLanguage.show();
+			$editLanguage.attr('name', item['id']);
+				$body = $("tbody#language-body"); 
+			$tr = $("<tr class='language-row'>");
+			$td1 = $("<td id='language-id'>");
+			$td2 = $("<td id='language-name'>");
+			$td3 = $("<td id='language-language'>");
+			$td5 = $("<td id='language-country'>");
+			$td6 = $("<td id= 'language-image'>"); 
+			$td7 = $("<td id= 'language-active'>"); 
+			$td8 = $("<td id='language-action'>");
+
+			$tr.append($td1);
+			$tr.append($td2);
+			$tr.append($td3);
+			$tr.append($td4);
+			$tr.append($td5);
+			$tr.append($td6);
+			$tr.append($td7);
+			$tr.append($td8);
+			
+			$td1.text(index+1);
+			$td2.text(item['name']);
+			$td3.text(item['language']);
+			$td5.text(item['country']);
+			
+			$td6.html("<img src='resources/img/flags/"+item['image']+"' onerror=\"this.src='resources/img/flags/up.png'\" >");
+			$td7.text(item['active']);
+			
+			
+
+			$a = $("<a class='btn' id='active-language' >");
+			$a.attr('name', item['id']);
+			if (item['active'] === true) {
+				
+				$a.attr('class','btn btn-danger glyphicon glyphicon-remove');
+
+			} else {
+
+				
+				$a.attr('class','btn btn-success glyphicon glyphicon-ok');
+			}
+			
+			
+			$ad = $("<a class='btn btn-danger glyphicon glyphicon-trash' id='delete-language' >");
+			$ad.attr('name', item['id']);
+			
+			
+			$adw = $("<a class='btn btn-warning glyphicon glyphicon-download-alt' id='downaload-bundle-language'" +
+					"href='downloadFile?file=WEB-INF\\classes\\i18n_"+  item['language']+'_'+  item['country']+".properties' >");
+			$adw.attr('lang', item['language']);
+			$adw.attr('country', item['country']);
+			
+			$td8.append($a);
+			$td8.append($ad );
+			$td8.append($editLanguage);
+			$td8.append($adw );
+			$body.append($tr);
+			
+		});
+		
+
+	}
+	
+	var form1 = $('#add-language-form');
+	 
+	  form1.submit(function(e) {
+	   e.preventDefault();
+	      e.stopImmediatePropagation();
+	   request = $.ajax({
+	    type : form1.attr('method'),
+	    url : form1.attr('action'),
+	    data : new FormData(this),
+		processData : false,
+		contentType : false,
+				success : function(data) {
+					if (data.success) {
+						$('#addLanguage').modal('hide');
+						
+						showToaast(data.success, 1);
+					
+					} else {
+						$('#addLanguage').modal('hide');
+						showToaast(data.fail, 0);
+
+					}
+				}
+			});
+		});
+	  
+	  var form2 = $('#update-language-form');
+		 
+	  form2.submit(function(e) {
+	   e.preventDefault();
+	      e.stopImmediatePropagation();
+	   request = $.ajax({
+	    type : form2.attr('method'),
+	    url : form2.attr('action'),
+	    data : new FormData(this),
+		processData : false,
+		contentType : false,
+				success : function(data) {
+					if (data.success) {
+						$('#languageEdit').modal('hide');
+						
+						showToaast(data.success, 1);
+					
+					} else {
+						$('#languageEdit').modal('hide');
+						showToaast(data.fail, 0);
+
+					}
+				}
+			});
+		});
+	  
+	  var form3 = $('#update-pattern-language-form');
+		 
+	  form3.submit(function(e) {
+	   e.preventDefault();
+	      e.stopImmediatePropagation();
+	   request = $.ajax({
+	    type : form3.attr('method'),
+	    url : form3.attr('action'),
+	    data : new FormData(this),
+		processData : false,
+		contentType : false,
+				success : function(data) {
+					if (data.success) {
+						$('#updatePatternLanguage').modal('hide');
+						
+						showToaast(data.success, 1);
+					
+					} else {
+						$('#updatePatternLanguage').modal('hide');
+						showToaast(data.fail, 0);
+
+					}
+				}
+			});
+		});
 });

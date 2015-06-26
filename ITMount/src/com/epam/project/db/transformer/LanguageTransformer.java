@@ -18,8 +18,10 @@ public class LanguageTransformer {
 				language.setId(rs.getInt(1));
 				language.setName(rs.getString(2));
 				language.setLanguage(rs.getString(3));
-				language.setFile(rs.getString(4));
-				language.setImage(rs.getString(5));
+				language.setCountry(rs.getString(4));
+				language.setFile(rs.getString(5));
+				language.setImage(rs.getString(6));
+				language.setActive(rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -39,8 +41,10 @@ public class LanguageTransformer {
 				language.setId(rs.getInt(1));
 				language.setName(rs.getString(2));
 				language.setLanguage(rs.getString(3));
-				language.setFile(rs.getString(4));
-				language.setImage(rs.getString(5));
+				language.setCountry(rs.getString(4));
+				language.setFile(rs.getString(5));
+				language.setImage(rs.getString(6));
+				language.setActive(rs.getBoolean(7));
 			
 				list.add(language);
 			}

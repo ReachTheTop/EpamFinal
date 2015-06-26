@@ -1,10 +1,7 @@
 package com.epam.project.filter;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.servlet.Filter;
@@ -18,19 +15,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.epam.project.db.model.Language;
-import com.epam.project.db.service.LanguageService;
-
 /**
- * Servlet Filter implementation class MapLanguage
+ * Servlet Filter implementation class GetBandleFilter
  */
-
-public class LanguageFilter implements Filter {
+@WebFilter("/GetBandleFilter")
+public class GetBandleFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LanguageFilter() {
+    public GetBandleFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -45,10 +39,26 @@ public class LanguageFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		session.setAttribute("languageList", getLanguage());
-		
+		Cookie[] cookies = ((HttpServletRequest) request).getCookies();
+		if (cookies != null) {
+			String language = null;
+			String country = null;
+
+			for (Cookie cookie2 : cookies) {
+				if (cookie2.getName().equals("localLengeuge")) {
+					language = cookie2.getValue();
+				} else if (cookie2.getName().equals("localCountry")) {
+					country = cookie2.getValue();
+				 Locale	loc = new Locale(language, country);
+				
+					ResourceBundle res = ResourceBundle.getBundle("i18n", loc);
+					session.setAttribute("bundle", res);
+					break;
+				}
+
+			}
+			}
 		chain.doFilter(request, response);
 	}
 
@@ -59,10 +69,4 @@ public class LanguageFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	private List<Language> getLanguage(){
-	
-		List<Language> language= LanguageService.getAllLanguages();
-	
-		return language;
-	}
 }

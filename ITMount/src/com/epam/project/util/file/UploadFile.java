@@ -1,11 +1,15 @@
 package com.epam.project.util.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Random;
@@ -61,7 +65,7 @@ public class UploadFile {
 		}
 		
 		uploadPath =servletContext.getRealPath("")+"upload"+File.separator+patch;
-		System.out.println("uploadPath = "+uploadPath);
+		
 		File directory = new File(uploadPath);
 		if(!directory.exists()){
 			directory.mkdirs();
@@ -145,6 +149,63 @@ public class UploadFile {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public String uploadBundle(Part part, ServletContext servletContext, String name)
+			throws IOException {
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(threshold_size);
+		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+
+		upload = new ServletFileUpload(factory);
+		upload.setFileSizeMax(maxFileSize);
+		upload.setSizeMax(maxMemSize);
+
+		uploadPath =servletContext.getRealPath("")+"WEB-INF\\classes\\";
+		
+		File directory = new File(uploadPath);
+		if(!directory.exists()){
+			directory.mkdirs();
+		}
+		
+		
+		
+		Writer out = null;
+		BufferedReader  input = null;
+		try {
+
+			File f = new File(uploadPath + File.separator + name);
+
+			out =new OutputStreamWriter(
+		            new FileOutputStream(f), "UTF-8");
+		         
+			input = new BufferedReader(new InputStreamReader(
+		             part.getInputStream()));
+			
+
+			int read = 0;
+			//byte[] bytes = new byte[1024];
+
+			
+			while ((read = input.read())!= -1) {
+				
+				out.write(read);
+			}
+		
+			return uploadPath+File.separator+name;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				input.close();
+				out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
 	}
 
 	

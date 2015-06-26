@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -42,7 +42,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<t:i18n id="home.MyPage"/>
+						<t:i18n id="home.MyPage" />
 						<c:if test="${current_user.id == user.id }">
 							<a data-toggle="modal" href="#editUser"><i
 								class="glyphicon glyphicon-edit"></i></a>
@@ -59,31 +59,32 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="home.MySettings"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="home.MySettings" />
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form action="UserServlet?action=update" id='editUserForm'
 						method="post" enctype="multipart/form-data" role="form"
 						role="form">
 						<div class="form-group">
-
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.FirstName"/>
-							</b></label> <input name="name" class="form-control"
-
-								id="userNameModal" type="text" placeholder=""
-								value="${user.name }">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="home.FirstName" /> </b></label> <input name="name"
+								class="form-control" id="userNameModal" type="text"
+								placeholder="" value="${user.name }">
 						</div>
 						<div class="form-group">
 
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.MiddleName"/>
-							</b></label> <input name="middle_name" class="form-control"
-								id="middleNameModal" type="text" placeholder=""
-								value="${user.middle_name }">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="home.MiddleName" /> </b></label> <input name="middle_name"
+								class="form-control" id="middleNameModal" type="text"
+								placeholder="" value="${user.middle_name }">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="home.Surname"/>
-							</b></label><input name="surname" class="form-control" id="userSurNameModal"
-								type="text" placeholder="" value="${user.surname }">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="home.Surname" /> </b></label><input name="surname"
+								class="form-control" id="userSurNameModal" type="text"
+								placeholder="" value="${user.surname }">
 						</div>
 						<div class="form-group" style="display: none">
 							<label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
@@ -98,16 +99,17 @@
 						</div>
 
 						<div class="form-group">
-							
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.photo"/>
-							</b></label><input name="image" class="form-control" id="fileImage" type="file"
-								placeholder="" value="${user.image }">
+
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="home.photo" /> </b></label><input name="image" class="form-control"
+								id="fileImage" type="file" placeholder="" value="${user.image }">
 						</div>
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.CurriculumVitae"/>
-							</b></label> <input name="cv" class="form-control" id="file"
-								type="file" placeholder="" value="${user.curriculum_vitae }">
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="home.CurriculumVitae" /> </b></label> <input name="cv"
+								class="form-control" id="file" type="file" placeholder=""
+								value="${user.curriculum_vitae }">
 						</div>
 
 
@@ -120,9 +122,10 @@
 
 						</c:if>
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.Phone"/>
-							</b></label><input name="phone" class="form-control" id="login-username"
-								type="text" placeholder="" value="${contact.phone }">
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="home.Phone" /> </b></label><input name="phone" class="form-control"
+								id="login-username" type="text" placeholder=""
+								value="${contact.phone }">
 						</div>
 
 						<div class="form-group">
@@ -133,14 +136,17 @@
 
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="home.AboutMyself"/>
-							</b></label><textarea name="description" class="form-control" id="comment"
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="home.AboutMyself" /> </b></label>
+							<textarea name="description" class="form-control" id="comment"
 								placeholder=""><c:out value="${user.description }" /> </textarea>
 						</div>
 
 						<div class="form-group">
 
-							<button type="submit" class="btn pull-right"><t:i18n id="home.Update"/></button>
+							<button type="submit" class="btn pull-right">
+								<t:i18n id="home.Update" />
+							</button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -148,6 +154,76 @@
 			</div>
 		</div>
 	</div>
+
+	<script src="resources/js/toastr.js"></script>
+
+	<script type="text/javascript">
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
+	</script>
+
+
 
 	<script>
 		var form = $('#editUserForm');
@@ -161,6 +237,7 @@
 				processData : false,
 				contentType : false,
 				dataType : "json",
+
 				success : function(data) {
 					var nameUser = data.name;
 					$("#userName").html(nameUser);
@@ -175,11 +252,10 @@
 					var userMiddleName = data.middle_name;
 					$("#middleNameModal").html(userMiddleName);
 					$("#userMiddleName").html(userMiddleName);
-					
-					
+
 					var dateString = data.birthdayString;
 					$("#userBirthday2").html(dateString);
-			
+
 					var imageFile = data.image;
 					$("#fileImage1").attr("src", "upload/" + imageFile);
 					var cvFile = data.curriculum_vitae;
@@ -191,10 +267,12 @@
 					$("#userSkype").html(skype);
 					var description = data.description;
 					$("#userDescription").html(description);
+
 					$('#editUser').modal('hide');
 					showToaast("Profile was successfully edited", 1);
 				},
 				error : function() {
+
 					showToaast("Profile was not edited", 0);
 				}
 			});
@@ -204,7 +282,10 @@
 
 
 
-	
+
+
+
+
 
 
 	<c:choose>
@@ -352,7 +433,7 @@
 
 	<script>
 		var dateString = $("#birsday1111").val();
-		$("#userBirthday1").val(dateString);	
+		$("#userBirthday1").val(dateString);
 	</script>
 
 
@@ -463,7 +544,7 @@
 											<b>Description</b></label>
 										<textarea name="description" class="form-control" id="comment"
 											placeholder=""></textarea>
-									</div> 
+									</div>
 
 
 
@@ -546,10 +627,14 @@
 
 							<h4 class="panel-title">
 
+
 								<a id="userNameSurname" data-toggle="collapse" class="courses"
+									
+
 									data-parent="#accordion" href="#collapse0" aria-expanded="true"
 									aria-controls="collapse0">${current_user.name }
-									${current_user.surname }</a> <a data-toggle="modal"
+									${current_user.surname }</a>
+									<a data-toggle="modal"
 									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
 							</h4>
 						</div>
@@ -578,7 +663,7 @@
 												<tr>
 													<td>First Name</td>
 
-													<td id="userName"><p>${current_user.name }</p></td>
+													<td id="userName">${current_user.name }</td>
 
 												</tr>
 												<tr>
@@ -783,11 +868,190 @@
 						</div>
 					</div>
 
+
+
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" class='language'
+									data-parent="#accordion" href="#collapse5">Language</a>
+							</h4>
+						</div>
+						<div id="collapse5" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="row-fluid">
+
+									<div class="form-group">
+										<a
+											href="<c:url value="/downloadFile?file=WEB-INF\\classes\\i18n.properties"/>"
+											class="btn btn-default btn-xs dropdown-toggle">Downaload
+											pattern</a>
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#updatePatternLanguage">Update
+											pattern</button>
+										<button type="submit"
+											class="btn btn-default btn-xs dropdown-toggle"
+											data-toggle="modal" href="#addLanguage">Add Language</button>
+
+										<a data-toggle="modal" id="languageEditModal"
+											href="#languageEdit"><i
+											class='btn glyphicon glyphicon-edit'></i></a>
+
+									</div>
+
+
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>№</th>
+											<th>Name</th>
+											<th>Language</th>
+											<th>Country</th>
+											<th>Image</th>
+
+											<th>Active</th>
+											<th>Action</th>
+										<tr>
+									</thead>
+									<tbody id="language-body">
+
+									</tbody>
+								</table>
+								<div class="row" align="center">
+
+									<div id="group-page-selection"></div>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-
 		</c:when>
 	</c:choose>
+	<div id="addLanguage" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">New Language</h4>
+				</div>
+				<div class="modal-body">
+					<form
+						action="<c:url value="/LanguageUploadServlet?action=upload" />"
+						data-async id='add-language-form' method="post"
+						enctype="multipart/form-data" role="form">
+
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<input name="name" class="form-control" id="new-name" type="text"
+								placeholder="">
+						</div>
+
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Language</b></label>
+							<input name="language" class="form-control" id="new-language"
+								type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Country</b></label>
+							<input name="country" class="form-control" id="new-language"
+								type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" id="new-file"
+								type="file" placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="updatePatternLanguage" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Update Pattern</h4>
+				</div>
+				<div class="modal-body">
+					<form
+						action="<c:url value="/LanguageUploadServlet?action=updateP" />"
+						data-async id='update-pattern-language-form' method="post"
+						enctype="multipart/form-data" role="form">
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" type="file"
+								placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="languageEdit" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Update Language</h4>
+				</div>
+				<div class="modal-body">
+					<form
+						action="<c:url value="/LanguageUploadServlet?action=update" />"
+						data-async id='update-language-form' method="post"
+						enctype="multipart/form-data" role="form">
+
+						<div class="form-group" hidden="true">
+							<input name="language_id" class="form-control"
+								id="language-id-edit" type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<input name="name" class="form-control" id="language-name-edit"
+								type="text" placeholder="">
+						</div>
+
+						<div class="form-group">
+							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<input name="bandle" class="form-control" type="file"
+								placeholder="">
+						</div>
+						<div class="form-group">
+
+							<button type="submit" id='submit-upload-language'
+								class="btn pull-right">Create</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div hidden="true">
 		<select class='form-control' id='userRoles' name='role'>
@@ -968,7 +1232,6 @@
 
 			$("#editUser").modal('show');
 
-
 		});
 	</script>
 	</c:if>
@@ -1044,7 +1307,85 @@
 	</script>
 
 
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('form#add-language-form')
+									.bootstrapValidator(
+											{
+												message : 'This value is not valid',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												fields : {
+													name : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+															},
 
+															stringLength : {
+																min : 1,
+																max : 15,
+																message : 'The language name must be more than 2 and less than 10 characters long'
+
+															}
+
+														}
+													},
+													language : {
+														validators : {
+
+															stringLength : {
+																min : 1,
+																max : 2,
+																message : 'The language  must be 2 characters long'
+															},
+
+															regexp : {
+																regexp : /[a-z]*/,
+																message : 'Must be lowercase'
+															}
+
+														}
+													},
+													country : {
+														validators : {
+															notEmpty : {
+																message : 'The field is required and cannot be empty',
+
+															},
+															stringLength : {
+																min : 1,
+																max : 2,
+																message : 'The language  must be 2 characters long'
+															},
+															regexp : {
+																regexp : /[A-Z]*/,
+																message : 'Must be uppercase'
+															}
+														}
+													},
+													bandle : {
+														validators : {
+															notEmpty : {
+																message : 'The file is required and cannot be empty'
+															},
+															file : {
+																extension : 'properties',
+
+																message : 'Please choose a properties file.'
+															}
+														}
+													}
+
+												}
+											});
+						});
+	</script>
 
 	<jsp:include page="../page/footer.jsp" />
 
