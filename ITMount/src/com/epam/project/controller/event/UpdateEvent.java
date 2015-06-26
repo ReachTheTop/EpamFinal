@@ -22,6 +22,10 @@ public class UpdateEvent implements Action {
 
 		event.setId(Integer.parseInt(request.getParameter("event_id")));
 		event.setDescription(request.getParameter("description"));
+		event.setNameEvent(request.getParameter("eventName"));
+		event.setTypeEvent(request.getParameter("typeEvent"));
+		
+
 		try {
 			event.setDate(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
 					.parse(request.getParameter("date")));

@@ -108,7 +108,7 @@ public class Registration extends HttpServlet {
 			user.setEmail(email);
 			user.setRole_id(2);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			try {
 				Date d = sdf.parse(request.getParameter("date"));
 				user.setBirtday(d);

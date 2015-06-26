@@ -1,6 +1,9 @@
 package com.epam.project.controller.user;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,7 +31,9 @@ public class UserHome implements Action {
 			user_id = Integer.parseInt(request.getParameter("user_id"));
 			current_user = UserService.getUser(user_id);
 		} else {
+			
 			current_user = (User) request.getSession().getAttribute("user");
+			
 		}
 
 		List<Group> groups = null;
@@ -53,6 +58,12 @@ public class UserHome implements Action {
 		if(request.getParameter("showEdit")!=null){
 			request.setAttribute("showEditModal", true);
 		}
+		
+		Date birthday = current_user.getBirtday();
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String s = formatter.format(birthday);
+		System.out.println(s);
+		request.setAttribute("userBirthdayString", s);
 		
 		request.getRequestDispatcher("/WEB-INF/user/home.jsp").forward(request,
 				response);

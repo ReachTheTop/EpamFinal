@@ -22,6 +22,9 @@ public class CreateEvent implements Action {
 
 		Event event = new Event();
 		event.setDescription(request.getParameter("description"));
+		event.setNameEvent(request.getParameter("eventName"));
+		event.setTypeEvent(request.getParameter("typeEvent"));
+		
 		try {
 			event.setDate(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
 					.parse(request.getParameter("date")));

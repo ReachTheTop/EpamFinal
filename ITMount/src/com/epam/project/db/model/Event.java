@@ -8,12 +8,17 @@ import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
 
 @Table(name = "event")
-public class Event extends Validator implements Serializable {
+public class Event extends Validator implements Serializable, Comparable<Event> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Column(value = "id")
 	private Integer id;
+	
+	@Column(value = "name")
+	private String nameEvent;
+	
+	private String typeEvent;
 
 	@Column(value = "description")
 	private String description;
@@ -26,6 +31,8 @@ public class Event extends Validator implements Serializable {
 
 	@Column(value = "is_active")
 	private Boolean is_active;
+	
+	private String message;
 
 	public Event() {
 		// TODO Auto-generated constructor stub
@@ -37,6 +44,22 @@ public class Event extends Validator implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getNameEvent() {
+		return nameEvent;
+	}
+
+	public void setNameEvent(String nameEvent) {
+		this.nameEvent = nameEvent;
+	}
+
+	public String getTypeEvent() {
+		return typeEvent;
+	}
+
+	public void setTypeEvent(String typeEvent) {
+		this.typeEvent = typeEvent;
 	}
 
 	public String getDescription() {
@@ -70,14 +93,37 @@ public class Event extends Validator implements Serializable {
 	public void setIs_active(Boolean is_active) {
 		this.is_active = is_active;
 	}
+	
+	
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
+	@Override
+	public int compareTo(Event o) {
+		
+		Event event1 = o;
+		
+		return date.compareTo(event1.date);
+	}
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", description=" + description + ", date="
-				+ date + ", group_id=" + group_id + ", is_active=" + is_active
-				+ "]";
+		return "Event [id=" + id + ", nameEvent=" + nameEvent + ", typeEvent="
+				+ typeEvent + ", description=" + description + ", date=" + date
+				+ ", group_id=" + group_id + ", is_active=" + is_active
+				+ ", message=" + message + "]";
 	}
-	
+
+
+
+
 	
 
 }
