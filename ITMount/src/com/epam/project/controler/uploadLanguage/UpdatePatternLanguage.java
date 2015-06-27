@@ -103,6 +103,7 @@ public class UpdatePatternLanguage implements Action {
 				count++;
 				
 				line= line.replaceAll("#.*", "");
+				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 
 				try {
@@ -116,6 +117,7 @@ public class UpdatePatternLanguage implements Action {
 				map.put(mass[0], null);
 				if (mass[0].isEmpty()) {
 					throw new IOException();
+				}
 				}
 			}
 		} catch (IOException | ArrayIndexOutOfBoundsException e) {
@@ -137,12 +139,13 @@ public class UpdatePatternLanguage implements Action {
 		BufferedReader input = null;
 		try {
 			 input = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file)));
+					new FileInputStream(file),"UTF-8"));
 
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
-
+				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString(), null);
+				}
 			}
 		} catch (IOException e) {
 
