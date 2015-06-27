@@ -107,7 +107,7 @@ public class UpdateLanguage implements Action{
 
 			while ((line = input.readLine()) != null) {
 				count++;
-				
+				line= line.replaceAll("#.*", "");
 				
 				String[] mass = line.split("=");
 				
@@ -139,7 +139,7 @@ public class UpdateLanguage implements Action{
 					new FileInputStream(file),"UTF-8"));
 
 			while ((line = input.readLine()) != null) {
-				
+				line= line.replaceAll("#.*", "");
 
 				map.put(line.replaceAll("=", "").toString(), null);
 			}

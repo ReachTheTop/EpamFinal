@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Random;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
 
 
 
@@ -122,15 +124,10 @@ public class Registration extends HttpServlet {
 			}
 			String key = SaltedMD5.getPassword(((Integer)new Random().nextInt(Integer.MAX_VALUE)).toString(), email) ;
 			user.setKey(key);
-			try {
-				Mailer.sendEmail(email, "Confirm email", "<a href=\"http://localhost:8080/ITMount/confirm?email="+email+"&key="+key+"\">Verificate</a>");
-			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			
 			
+			sendMail(user);
 			session.setAttribute("confirmemail", 1);
 			session.setAttribute("userkey", key);
 			session.setAttribute("useremail", email);
@@ -155,7 +152,7 @@ public class Registration extends HttpServlet {
 				
 
 			}else {
-				user.setImage("1.jpg");
+				user.setImage("photo\\1.jpg");
 			}
 			
 			UserService.updateUser(user);
@@ -176,5 +173,29 @@ public class Registration extends HttpServlet {
 		
 	}
 	
+private void sendMail(final User user) {
+		
+		
+		
+		Thread mailer = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+					try {
+						Mailer.sendEmail(user.getEmail(), "Confirm email", "<a href=\"http://localhost:8080/ITMount/confirm?email="+user.getEmail()+"&key="+user.getKey()+"\">Verificate</a>");
+					} catch (AddressException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			
+		});
+		mailer.start();
+	}
 
 }

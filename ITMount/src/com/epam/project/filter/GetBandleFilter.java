@@ -15,6 +15,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.epam.project.helper.UTF8Control;
+
 /**
  * Servlet Filter implementation class GetBandleFilter
  */
@@ -40,6 +42,9 @@ public class GetBandleFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpSession session = ((HttpServletRequest) request).getSession();
+		ResourceBundle res =(ResourceBundle) session.getAttribute("bundle");
+		
+		
 		Cookie[] cookies = ((HttpServletRequest) request).getCookies();
 		if (cookies != null) {
 			String language = null;
@@ -52,13 +57,21 @@ public class GetBandleFilter implements Filter {
 					country = cookie2.getValue();
 				 Locale	loc = new Locale(language, country);
 				
-					ResourceBundle res = ResourceBundle.getBundle("i18n", loc);
+					 res = ResourceBundle.getBundle("i18n", loc, new UTF8Control());
 					session.setAttribute("bundle", res);
+					
 					break;
 				}
 
 			}
 			}
+		if(res==null){
+			Locale loc = new Locale("en", "US");
+			 res = ResourceBundle.getBundle("i18n",
+					loc, new UTF8Control());
+			 session.setAttribute("bundle", res);
+			
+		}
 		chain.doFilter(request, response);
 	}
 

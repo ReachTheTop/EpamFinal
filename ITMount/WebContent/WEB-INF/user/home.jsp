@@ -113,14 +113,7 @@
 						</div>
 
 
-						<c:if test="${user.id == current_user.id && user.role !='admin' }">
-							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b>Curriculum
-										Vitae</b></label> <input name="cv" class="form-control" id="file"
-									type="file" placeholder="" value="${user.curriculum_vitae }">
-							</div>
-
-						</c:if>
+						
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
 										id="home.Phone" /> </b></label><input name="phone" class="form-control"

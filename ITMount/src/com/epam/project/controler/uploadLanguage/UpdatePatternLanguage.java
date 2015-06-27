@@ -102,6 +102,7 @@ public class UpdatePatternLanguage implements Action {
 			while ((line = input.readLine()) != null) {
 				count++;
 				
+				line= line.replaceAll("#.*", "");
 				String[] mass = line.split("=");
 
 				try {
@@ -139,7 +140,7 @@ public class UpdatePatternLanguage implements Action {
 					new FileInputStream(file)));
 
 			while ((line = input.readLine()) != null) {
-				
+				line= line.replaceAll("#.*", "");
 
 				map.put(line.replaceAll("=", "").toString(), null);
 			}

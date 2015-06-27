@@ -45,9 +45,10 @@ public class UpdateUser implements Action {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
+			if(!request.getParameter("userBirthday").isEmpty()){
 			Date d = sdf.parse(request.getParameter("userBirthday"));
 			current_user.setBirtday(d);
-			System.out.println(d);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -88,10 +89,11 @@ public class UpdateUser implements Action {
 		// response.sendRedirect(request.getHeader("Referer"));
 		
 		Date birthday = current_user.getBirtday();
+		if(birthday!=null){
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String s = formatter.format(birthday);
 		current_user.setBirtdayString(s);
-		
+		}
 
 		current_user.setContact(contacts);
 		String json = new Gson().toJson(current_user);

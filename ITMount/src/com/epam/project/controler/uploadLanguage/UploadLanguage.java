@@ -56,7 +56,8 @@ public class UploadLanguage implements Action {
 		
 		testBandle = getTestMap(fileTestBanble);
 		newBandle = getMap(fileNewBandle);
-		
+		System.out.println(testBandle);
+		System.out.println(newBandle);
 		if(testBandle.size()<=newBandle.size()&&equalsMap(newBandle, testBandle)){
 			message = "Create language";
 			Language newLanguage = new Language();
@@ -104,12 +105,14 @@ public class UploadLanguage implements Action {
 			while ((line = input.readLine()) != null) {
 				count++;
 				
+				line= line.replaceAll("#.*", "");
+				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 
 				map.put(mass[0], mass[1]);
 				if (mass[0].isEmpty() || mass[1].isEmpty()) {
 					throw new IOException();
-				}
+				}}
 			}
 		} catch (IOException | ArrayIndexOutOfBoundsException e) {
 			status = "fail";
@@ -135,9 +138,10 @@ public class UploadLanguage implements Action {
 					new FileInputStream(file), "UTF-8"));
 
 			while ((line = input.readLine()) != null) {
-				
-
+				line= line.replaceAll("#.*", "");
+				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString(), null);
+				}
 			}
 		} catch (IOException e) {
 
