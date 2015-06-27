@@ -13,8 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -107,14 +105,16 @@ public class UpdateLanguage implements Action{
 
 			while ((line = input.readLine()) != null) {
 				count++;
-				line= line.replaceAll("#.*", "");
 				
+				line= line.replaceAll("#.*", "");
+				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 				
 				map.put(mass[0], mass[1]);
 				
 				if (mass[0].isEmpty() || mass[1].isEmpty()) {
 					throw new Exception();
+				}
 				}
 			}
 		} catch (Exception e) {
@@ -140,8 +140,9 @@ public class UpdateLanguage implements Action{
 
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
-
+				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString(), null);
+				}
 			}
 		} catch (IOException e) {
 
