@@ -39,7 +39,7 @@ public class ShowAllTask extends HttpServlet {
 
 		List<Task> listTask = ValideDate.getTasksAfterValideDate(group_id);
 
-		for (Task task : TaskService.getAllTasksByGroupId(group_id)) {
+		for (Task task : listTask) {
 			HomeWork homeWork;
 			homeWork = HomeWorkService.getHomeworkWhereUserTask(
 					Integer.parseInt(user_id), task.getId());

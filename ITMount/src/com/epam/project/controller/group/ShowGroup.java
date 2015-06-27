@@ -1,22 +1,31 @@
 package com.epam.project.controller.group;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
+import com.epam.project.controller.task.ValideDate;
 import com.epam.project.db.model.Event;
 import com.epam.project.db.model.Group;
 import com.epam.project.db.model.GroupExamModel;
 import com.epam.project.db.model.GroupUser;
+import com.epam.project.db.model.HomeWork;
+import com.epam.project.db.model.Task;
 import com.epam.project.db.model.User;
 import com.epam.project.db.service.EventService;
 import com.epam.project.db.service.GroupExamService;
 import com.epam.project.db.service.GroupService;
 import com.epam.project.db.service.GroupUserService;
+import com.epam.project.db.service.HomeWorkService;
+import com.epam.project.db.service.TaskService;
 
 public class ShowGroup implements Action {
 
@@ -24,6 +33,7 @@ public class ShowGroup implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
+
 		Integer group_id = null;
 		try {
 			if (request.getParameter("group_id") != null) {
@@ -48,6 +58,7 @@ public class ShowGroup implements Action {
 				if (user.getRole().equals("student")
 						|| user.getRole().equals("applicant")) {
 
+
 					association = GroupUserService.getByGroupAndUserId(
 							group_id, user.getId());
 
@@ -57,6 +68,29 @@ public class ShowGroup implements Action {
 					}
 
 				}
+
+
+				/*
+				 * All task for user
+				 */
+				Map<Task, HomeWork> tasks = new LinkedHashMap<Task, HomeWork>();
+
+				List<Task> listTask = ValideDate
+						.getTasksAfterValideDate(group_id);
+
+				Collections.sort(listTask);
+
+				for (int i = listTask.size() - 1; i >= 0; i--) {
+					HomeWork homeWork;
+					homeWork = HomeWorkService.getHomeworkWhereUserTask(
+							user.getId(), listTask.get(i).getId());
+
+					tasks.put(listTask.get(i), homeWork);
+				}
+
+				request.setAttribute("listtasks", tasks);
+				request.setAttribute("user_id", user);
+
 
 				request.setAttribute("exams", exams);
 				request.setAttribute("association", association);

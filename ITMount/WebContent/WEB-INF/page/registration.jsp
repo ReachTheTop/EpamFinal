@@ -30,7 +30,7 @@
 					<div class="basic-login">
 						<c:if test="${errorRegistration!=null}">
 							<div class="alert alert-danger">
-								<strong>Error!</strong>${errorRegistration}
+								<strong><t:i18n id="registration.error"/></strong>${errorRegistration}
 							</div>
 						</c:if>
 
@@ -97,7 +97,13 @@
 					<div class="social-login-buttons">
 						<a href="<c:url value="/FbLoginServlet?action=fb" />" class="btn-facebook-login">Use Facebook</a>
 					</div>
-				</div>
+					<div class="clearfix"></div>
+					<div class="not-member">
+						<p><t:i18n id="registration.AlreadyHaveAnAccount"/><a href="<c:url value="/login" />">
+						<t:i18n id="registration.LogIn"/></a>
+						</p>
+					</div>
+				</div>						
 			</div>
 		</div>
 	</div>
@@ -109,7 +115,7 @@
 							$('#registarionForm')
 									.bootstrapValidator(
 											{
-												message : 'This value is not valid',
+												message : '<t:i18n id="bootstrap.ThisValueIsNotValid"/>',
 												feedbackIcons : {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
@@ -119,72 +125,71 @@
 													email : {
 														validators : {
 															emailAddress : {
-																message : 'The input is not a valid email address'
+																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 															}
 															
 														}
 													},
 													name: {
-										                message: 'The Name is not valid',
+										                message: '<t:i18n id="bootstrap.TheNameIsNotValid"/>',
 										                validators: {
 										                    notEmpty: {
-										                        message: 'The Name is required and cannot be empty'
+										                        message: '<t:i18n id="bootstrap.TheNameIsRequiredAndCannotBeEmpty"/>'
 										                    },
 										                    regexp: {
 										                        regexp: /^[a-zA-Z0-9А-Яіа-я_\.]+$/,
-										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                        message: '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
 										                    },
 										                    different: {
 										                        field: 'password',
-										                        message: 'The username and password cannot be the same as each other'
+										                        message: '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
 										                    }
 										                }
 										            },
 										            midlename: {
-										                message: 'The Name is not valid',
+										                message: '<t:i18n id="bootstrap.TheMiddleNameIsNotValid"/>',
 										                validators: {
 										                    notEmpty: {
-										                        message: 'The Name is required and cannot be empty'
+										                        message: '<t:i18n id="bootstrap.TheMiddleNameIsRequiredAndCannotBeEmpty"/>'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
-										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                        regexp: /^[a-zA-ZА-Яіа-я0-9_\.]+$/,
+										                        message: '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
 										                    },
 										                    different: {
 										                        field: 'password',
-										                        message: 'The username and password cannot be the same as each other'
+										                        message: '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
 										                    }
 										                }
 										            },
 										            surname: {
-										                message: 'The Name is not valid',
+										                message: '<t:i18n id="bootstrap.TheSurnameIsNotValid"/>',
 										                validators: {
 										                    notEmpty: {
-										                        message: 'The Name is required and cannot be empty'
+										                        message: '<t:i18n id="bootstrap.TheSurnameIsRequiredAndCannotBeEmpty"/>'
 										                    },
 										                    regexp: {
 										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
-										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+										                        message: '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
 										                    },
 										                    different: {
 										                        field: 'password',
-										                        message: 'The username and password cannot be the same as each other'
+										                        message: '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
 										                    }
 										                }
 										            },
 										           date: {
-										                validators: {
+										                validators: {										                	
 										                    notEmpty: {
-										                        message: 'The date is required and cannot be empty'
-										                    },
-										                 
+										                        message: '<t:i18n id="bootstrap.TheDateIsRequiredAndCannotBeEmpty"/>'
+										                    }										                 
 										                }
 										            },
 										            skype: {
 										                validators: {
 										                	 regexp: {
 											                        regexp: /^[a-zА-Яа-я0-9_-]{3,15}$/,
-											                        message: 'Invalid skype name'
+											                        message: '<t:i18n id="bootstrap.InvalidSkypeName"/>'
 											                    },
 										                 
 										                }
@@ -193,7 +198,7 @@
 										                validators: {
 										                	 regexp: {
 											                        regexp: /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
-											                        message: 'Invalid phone number'
+											                        message: '<t:i18n id="bootstrap.InvalidPhoneNumber"/>'
 											                    },
 										                 
 										                }
@@ -203,19 +208,19 @@
 										                    file: {
 										                        extension: 'png,jpg',
 										                        maxSize: 5*1024*1024,
-										                        message: 'Please choose a image file with a size less than 5M.'
+										                        message: '<t:i18n id="bootstrap.PleaseChooseAImageFileWithASizeLess"/>'
 										                    }
 										                }
 										            },
 													password : {
 														validators : {
 															notEmpty : {
-																message : 'The password is required and cannot be empty'
+																message : '<t:i18n id="bootstrap.ThePasswordIsRequiredAndCannotBeEmpty"/>'
 															},
 															stringLength : {
 																min : 6,
-																max : 20,
-																message : 'The username must be more than 6 and less than 30 characters long'
+																max : 30,
+																message : '<t:i18n id="bootstrap.ThePasswordMustBeMoreThanAndLessThanCharactersLong"/>'
 															}
 														}
 													}

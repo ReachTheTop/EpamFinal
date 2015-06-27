@@ -32,7 +32,7 @@
 					<div class="basic-login">
 						<c:if test="${errorLogin!=null}">
 							<div class="alert alert-danger">
-								<strong>Error!</strong>${errorLogin}
+								<strong><t:i18n id="login.error"/></strong>${errorLogin}
 							</div>
 						</c:if>
 						<form action="<c:url value="/login" />" id="loginForm"
@@ -91,7 +91,12 @@
 				<div class="modal-body">
 					<p><t:i18n id="login.ConfirmYourEmail"/></p>
 					<p class="text-warning">
-						<small><t:i18n id="login.ToSendALinkToConfirmAgainClickOnTheButtonSend"/></small>
+						<small>
+							<t:i18n id="login.ThankYouForRegisteringOnOurSite"/>
+							<t:i18n id="login.AConfirmationMessageHasBeenSentToYourEmailAaddress"/>
+							<t:i18n id="login.PleaseClickTheLinkToActivateYourAccount"/> <br><br>
+							<t:i18n id="login.ToSendALinkToConfirmAgainClickOnTheButtonSend"/>
+						</small>
 					</p>
 				</div>
 				<div class="modal-footer">
@@ -151,17 +156,17 @@
 							$('#loginForm')
 									.bootstrapValidator(
 											{
-												message : 'This value is not valid',
+												message : '<t:i18n id="bootstrap.ThisValueIsNotValid"/>',
 												feedbackIcons : {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
 													validating : 'glyphicon glyphicon-refresh'
 												},
 												fields : {
-													email : {
+													emaill : {
 														validators : {
 															emailAddress : {
-																message : 'The input is not a valid email address'
+																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 															}
 															
 														}
@@ -169,12 +174,12 @@
 													password : {
 														validators : {
 															notEmpty : {
-																message : 'The password is required and cannot be empty'
+																message : '<t:i18n id="bootstrap.ThePasswordIsRequiredAndCannotBeEmpty"/>'
 															},
 															stringLength : {
 																min : 6,
 																max : 30,
-																message : 'The username must be more than 6 and less than 30 characters long'
+																message : '<t:i18n id="bootstrap.ThePasswordMustBeMoreThanAndLessThanCharactersLong"/>'
 															}
 														}
 													}

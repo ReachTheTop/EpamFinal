@@ -62,7 +62,7 @@ public class Login implements Action {
 			usr.setKey(key);
 			usr.setName(fbProfileData.get("first_name"));
 			usr.setSurname(fbProfileData.get("last_name"));
-			usr.setRole_id(1);
+			usr.setRole_id(2);
 			usr.setPassword_hash(SaltedMD5.getPassword(((Integer)new Random().nextInt(Integer.MAX_VALUE)).toString(), email));
 			
 			usr.setIs_confirmed(true);

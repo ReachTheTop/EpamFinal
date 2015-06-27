@@ -16,24 +16,34 @@ import com.epam.project.command.Menu;
 @WebServlet("/GroupExamServlet")
 public class GroupExamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    private Menu menu;
-    public GroupExamServlet() {
-        super();
-        menu = new Menu(new CreateExam(), new ShowExam(), new UpdateExam(), new CSVList());
-    }
+
+	private Menu menu;
+
+	public GroupExamServlet() {
+		super();
+		menu = new Menu(new CreateExam(), new ShowExam(), new UpdateExam(),
+				new CSVList());
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		menu.execute(request, response);
 	}
 

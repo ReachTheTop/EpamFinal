@@ -136,7 +136,7 @@
 										            file: {
 										                validators: {
 										                    file: {
-										                        extension: 'png,jpg,pmp,mp3,doc,docx,zip,rar,7z,pdf,doc,docx,ppt,pptx,odp,xml,js,jar,сss,exl,exlx,sql',
+										                        extension: 'jpeg,png,jpg,pmp,mp3,doc,docx,zip,rar,7z,pdf,doc,docx,ppt,pptx,odp,xml,js,jar,сss,exl,exlx,sql',
 										                
 										                        message: 'Please choose corect file'
 										                    }

@@ -76,9 +76,12 @@
 				</c:when>
 			</c:choose>
 		</c:if>
-
-		<jsp:include page="groupContent.jsp"></jsp:include>
 	</div>
+	<jsp:include page="groupContent.jsp"></jsp:include>
+
+
+
+
 
 	<jsp:include page="../page/footer.jsp" />
 </body>

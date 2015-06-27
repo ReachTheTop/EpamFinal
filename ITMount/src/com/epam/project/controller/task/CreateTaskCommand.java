@@ -47,7 +47,8 @@ public class CreateTaskCommand implements Action {
 		task.setAvailable(true);
 
 		String pathFile = request.getParameter("task_file");
-		task.setFile(pathFile);
+		System.out.println(pathFile);
+		
 		task.setIs_active(true);
 
 		int idGroup = Integer.parseInt(request.getParameter("group_id"));

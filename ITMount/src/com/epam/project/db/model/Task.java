@@ -9,7 +9,7 @@ import com.epam.project.db.model.annotation.Table;
 import com.epam.project.db.model.validator.Validator;
 
 @Table(name = "task")
-public class Task extends Validator implements Serializable {
+public class Task extends Validator implements Serializable, Comparable<Task> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -100,6 +100,15 @@ public class Task extends Validator implements Serializable {
 	public void setIs_active(Boolean is_active) {
 		this.is_active = is_active;
 	}
+	
+	
+	@Override
+	public int compareTo(Task o) {
+		
+		Task task1 = o;
+		
+		return deadline.compareTo(task1.deadline);
+	}
 
 	@Override
 	public String toString() {
@@ -108,6 +117,8 @@ public class Task extends Validator implements Serializable {
 				+ available + ", file=" + file + ", is_active=" + is_active
 				+ ", groupID=" + groupID + "]";
 	}
+
+
 	
 	
 }

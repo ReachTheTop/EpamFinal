@@ -17,7 +17,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1>Portfolio Item Description</h1>
+						<h1><a href="<c:url value="CourseServlet" />">Courses</a></h1>
+						
 					</div>
 				</div>
 			</div>
@@ -41,7 +42,7 @@
 						<ul class="no-list-style">
 							<li><b>Description:</b> ${course.description}</li>
 							<li class="portfolio-visit-btn"> 
-							<c:if test="${user!=null && registationOFF==true}">
+							<c:if test="${user == null || registationOFF==true}">
 							<form action="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />" 
 							method="get"
 							id="form1" role="form">
@@ -161,6 +162,7 @@
 
 <script>
   var form = $('#form1');
+ 
   form.submit(function(e) {
    e.preventDefault();
       e.stopImmediatePropagation();
@@ -168,21 +170,31 @@
     type : form.attr('method'),
     url : form.attr('action'),
 
-    success : function() {
+    success : function(data) {
+    	
      $("#incorectData").hide();
    $("#registration").hide();
      document.getElementById("form1").reset();
-     showToaast('You register in course',1);
+     window.location.href = '/ITMount/GroupServlet?action=show&group_id='+""+data.key;
+     
       },
     error : function() {
      $("#incorectData").show();
-     showToaast('<a href="<c:url value="/UserServlet?action=index&showEdit=true" />"_blank">Please upload your cv</a>' , 0);
+     showToaast('<form name="myform" method="post" action="<c:url value="/UserServlet?action=index" />" role="form"><input type="hidden" name="showEdit" value="true"><a href="javascript: submitform()">Please upload your cv</a></form>' , 0);
+  	
     }
    });
 
    return false;
   });
  </script>
+		
+<script type="text/javascript">
+function submitform()
+{
+  document.myform.submit();
+}
+</script>
 		
 		<jsp:include page="../page/footer.jsp" />
 </body>

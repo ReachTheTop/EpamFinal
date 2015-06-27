@@ -194,11 +194,13 @@
 
 					$('#myModal').modal('hide');
 					showToaast("Task was  successfully created", 1);
+					
 
 				},
 				error : function() {
 					$("#incorectData").show();
 					showToaast("Task was not  created", 0);
+					
 				}
 			});
 
