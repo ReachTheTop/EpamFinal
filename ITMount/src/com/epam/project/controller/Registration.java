@@ -47,6 +47,8 @@ public class Registration extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		session.removeAttribute("errorRegistration");
 		session.removeAttribute("name");
@@ -63,6 +65,8 @@ public class Registration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
 		request.setCharacterEncoding("utf-8");
@@ -108,7 +112,7 @@ public class Registration extends HttpServlet {
 			user.setEmail(email);
 			user.setRole_id(2);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				Date d = sdf.parse(request.getParameter("date"));
 				user.setBirtday(d);

@@ -34,6 +34,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.setAttribute("errorLogin", null);
@@ -48,7 +51,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		String email = request.getParameter("emaill");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();

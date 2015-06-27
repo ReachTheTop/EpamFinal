@@ -29,6 +29,8 @@ public class SendConfirm extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		try {
 			

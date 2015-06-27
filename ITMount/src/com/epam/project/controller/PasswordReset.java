@@ -37,6 +37,8 @@ public class PasswordReset extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		HttpSession sesion = request.getSession();
 		sesion.removeAttribute("inforeset");
 		sesion.removeAttribute("modalreset");
@@ -47,6 +49,8 @@ public class PasswordReset extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		HttpSession sesion = request.getSession();
 		String email = request.getParameter("resetemail");
 		
@@ -60,7 +64,7 @@ public class PasswordReset extends HttpServlet {
 				cal.setTime(new Date());
 				cal.add(Calendar.MINUTE, 30);
 				Mailer.sendEmail(user.getEmail(), "Reset password", "<a href=\"http://localhost:8080/ITMount/NewPassword?user="+email+"&key="+user.getKey()+"&code="+cal.getTime().getTime()+"\">New pass</a>");
-				sesion.setAttribute("inforeset", "На вашу скриньку відправлено дані для відновлення пароля");
+				sesion.setAttribute("inforeset", "пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 				sesion.setAttribute("modalreset", "1");
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
@@ -68,7 +72,7 @@ public class PasswordReset extends HttpServlet {
 			}
 			
 		}else{
-			sesion.setAttribute("inforeset", "Error! "+email+" не існує");
+			sesion.setAttribute("inforeset", "Error! "+email+" пїЅпїЅ пїЅпїЅпїЅпїЅ");
 			sesion.setAttribute("modalreset", "1");
 		}
 		

@@ -149,7 +149,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
+										                        regexp: /^[a-zA-ZА-Яіа-я0-9_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
@@ -165,7 +165,7 @@
 										                        message: 'The Name is required and cannot be empty'
 										                    },
 										                    regexp: {
-										                        regexp: /^[a-zA-ZА-Яа-я0-9_\.]+$/,
+										                        regexp: /^[a-zA-ZА-Яіа-я0-9_\.]+$/,
 										                        message: 'The username can only consist of alphabetical, number, dot and underscore'
 										                    },
 										                    different: {
