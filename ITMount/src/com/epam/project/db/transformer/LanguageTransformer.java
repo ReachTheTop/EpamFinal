@@ -15,13 +15,13 @@ public class LanguageTransformer {
 		try {
 			while (rs.next()) {
 				language = new Language();
-				language.setId(rs.getInt(1));
-				language.setName(rs.getString(2));
-				language.setLanguage(rs.getString(3));
-				language.setCountry(rs.getString(4));
-				language.setFile(rs.getString(5));
-				language.setImage(rs.getString(6));
-				language.setActive(rs.getBoolean(7));
+				language.setId(rs.getInt("id"));
+				language.setName(rs.getString("name"));
+				language.setLanguage(rs.getString("language"));
+				language.setCountry(rs.getString("country"));
+				language.setFile(rs.getString("file"));
+				language.setImage(rs.getString("img"));
+				language.setActive(rs.getBoolean("active"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -39,12 +39,13 @@ public class LanguageTransformer {
 			while (rs.next()) {
 				language = new Language();
 				language.setId(rs.getInt(1));
-				language.setName(rs.getString(2));
-				language.setLanguage(rs.getString(3));
-				language.setCountry(rs.getString(4));
-				language.setFile(rs.getString(5));
-				language.setImage(rs.getString(6));
-				language.setActive(rs.getBoolean(7));
+				language.setId(rs.getInt("id"));
+				language.setName(rs.getString("name"));
+				language.setLanguage(rs.getString("language"));
+				language.setCountry(rs.getString("country"));
+				language.setFile(rs.getString("file"));
+				language.setImage(rs.getString("img"));
+				language.setActive(rs.getBoolean("active"));
 			
 				list.add(language);
 			}
