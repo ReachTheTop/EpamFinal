@@ -29,7 +29,7 @@ import com.epam.project.db.service.GroupUserService;
 import com.epam.project.db.service.HomeWorkService;
 import com.epam.project.db.service.TaskService;
 
-public class ShowGroup implements Action {
+public class ShowTasks implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
@@ -44,25 +44,15 @@ public class ShowGroup implements Action {
 
 				Group group = GroupService.getById(group_id);
 
-				List<User> group_users = GroupUserService
-						.getAllGroupUser(group_id);
-				for(int i=0;i<group_users.size();i++){
-					group_users.get(i).setContact(ContactService.getByUserId(group_users.get(i).getId()));
-				}
+		
 				if (group == null) {
 					response.sendError(404);
 					return;
 				}
 
-				List<Event> events = EventService.getByIdGroup(group_id);
-				for(Event event :events){
-					EventMessage.updateEventMessage(event);
-				}
-				Collections.sort(events);
 
-				request.setAttribute("events", events);
 
-				List<GroupExamModel> exams = GroupExamService.getAll(group_id);
+				
 				GroupUser association = null;
 				if (user.getRole().equals("student")
 						|| user.getRole().equals("applicant")) {
@@ -101,12 +91,12 @@ public class ShowGroup implements Action {
 				request.setAttribute("user_id", user);
 
 
-				request.setAttribute("exams", exams);
+				
 				request.setAttribute("association", association);
 
-				request.setAttribute("users", group_users);
+			
 				request.setAttribute("group", group);
-				request.getRequestDispatcher("/WEB-INF/group/show.jsp")
+				request.getRequestDispatcher("/WEB-INF/group/showTasks.jsp")
 						.forward(request, response);
 				return;
 			}
@@ -119,7 +109,7 @@ public class ShowGroup implements Action {
 	@Override
 	public String getName() {
 
-		return "show";
+		return "showTasks";
 	}
 
 }

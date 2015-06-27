@@ -160,6 +160,7 @@
     <filter-name>endSession</filter-name>
     <url-pattern>/AdminServlet</url-pattern>
   </filter-mapping>
+
   <filter>
     <filter-name>getBundle</filter-name>
     <filter-class>com.epam.project.filter.GetBandleFilter</filter-class>
@@ -168,4 +169,5 @@
     <filter-name>getBundle</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
 </web-app>

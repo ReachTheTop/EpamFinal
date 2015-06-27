@@ -21,13 +21,9 @@
 
 	<div class="container" style="">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-md-9">
 				<div class="panel-group" id="accordion" role="tablist"
 					aria-multiselectable="true">
-					
-					<c:if test="${empty listtasks}"> <h3>No Tasks</h3>  </c:if>
-					<c:if test="${not empty listtasks}"> <h3>All Tasks</h3>  </c:if>
-					
 
 					<c:forEach items="${requestScope.listtasks}" var="tasks">
 
@@ -70,43 +66,45 @@
 
 												</td>
 											</tr>
-											<tr>
-												<td>Your work</td>
-												<td>
-														<c:choose>
-														<c:when test="${tasks.key.getAvailable() == false}">
+
+											<c:if
+												test="${user.role =='student' || user.role =='applicant' }">
+												<tr>
+													<td>Your work</td>
+													<td><c:choose>
+															<c:when test="${tasks.key.getAvailable() == false}">
 															Time out
 														</c:when>
 
-														<c:otherwise>
-															<c:choose>
+															<c:otherwise>
+																<c:choose>
 
-																<c:when test="${tasks.value !=null}">
-																	<p>
-																		<a data-toggle="modal" href="#updateHomeWork"
-																			data-delete="${tasks.value.getData()}"
-																			data-homework="${tasks.value.getId()}"
-																			class="open-updateHomeWork btn btn-primary btn-sm">Update</a>
-																	</p>
-																</c:when>
+																	<c:when test="${tasks.value !=null}">
+																		<p>
+																			<a data-toggle="modal" href="#updateHomeWork"
+																				data-delete="${tasks.value.getData()}"
+																				data-homework="${tasks.value.getId()}"
+																				class="open-updateHomeWork btn btn-primary btn-sm">Update</a>
+																		</p>
+																	</c:when>
 
-																<c:otherwise>
-																	<p>
-																		<a data-toggle="modal" href="#uploadHomeWork"
-																			data-task="${tasks.key.getId()}"
-																			class="open-uploadHomeWork btn btn-primary btn-sm">Add
-																		</a>
-																	</p>
+																	<c:otherwise>
+																		<p>
+																			<a data-toggle="modal" href="#uploadHomeWork"
+																				data-task="${tasks.key.getId()}"
+																				class="open-uploadHomeWork btn btn-primary btn-sm">Add
+																			</a>
+																		</p>
 
-																</c:otherwise>
-															</c:choose>
-														</c:otherwise>
-													</c:choose></td>
+																	</c:otherwise>
+																</c:choose>
+															</c:otherwise>
+														</c:choose></td>
 
-<%-- 												<c:if test="${tasks.key.getAvailable() == false}">It's false!</c:if> --%>
+													<%-- 												<c:if test="${tasks.key.getAvailable() == false}">It's false!</c:if> --%>
 
-											</tr>
-
+												</tr>
+											</c:if>
 										</table>
 
 									</div>
@@ -119,7 +117,7 @@
 
 				</div>
 
-				
+
 			</div>
 		</div>
 	</div>
@@ -141,7 +139,7 @@
 							<input class="form-control" id="idTask" name="task_id"
 								type="hidden" value="">
 						</div>
-						
+
 						<input type="hidden" name="user_id" value="${user.id}" />
 
 

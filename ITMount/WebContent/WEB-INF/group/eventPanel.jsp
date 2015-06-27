@@ -20,10 +20,6 @@
 			Events
 
 		</h5>
-		<div class="ibox-tools">
-			<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-			</a>
-		</div>
 
 	</div>
 
@@ -32,13 +28,12 @@
 			<div class="timeline-item">
 				<div class="row">
 					<div class="col-xs-3 date">
-						<i class="${event.typeEvent }"></i> 
+						<i class="${event.typeEvent }"></i>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${event.date }" />
 						<fmt:formatDate pattern="hh:mm" value="${event.date }" />
-						 <br /> <small
-							class="text-navy">${event.message }</small>
+						<br /> <small class="text-navy">${event.message }</small>
 
-						
+
 					</div>
 					<div class="col-xs-7 content no-top-border">
 						<p class="m-b-xs">
@@ -49,23 +44,27 @@
 
 
 					</div>
-					<div class="col-xs-2 content no-top-border">
-						<p class="m-b-xs">
-							<strong>Options</strong>
-						</p>
 
-						<c:if
-							test="${not empty group.teacher_id && user.id == group.teacher_id}">
-							<td><a data-toggle="modal" class='editEvent'
-								id='${event.id }' href="#editEvent"><i
-									class='glyphicon glyphicon-edit'></i></a></td>
-							<td><a class='editEvent'
-								href="<c:url value='EventServlet?action=delete&event_id=${event.id }' />"><i
-									class='glyphicon glyphicon-minus'></i></a></td>
-						</c:if>
+					<c:if
+						test="${user.role == 'lecturer' && group.teacher_id == user.id}">
+						<div class="col-xs-2 content no-top-border">
+							<p class="m-b-xs">
+								<strong>Options</strong>
+							</p>
+
+							<c:if
+								test="${not empty group.teacher_id && user.id == group.teacher_id}">
+								<td><a data-toggle="modal" class='editEvent'
+									id='${event.id }' href="#editEvent"><i
+										class='glyphicon glyphicon-edit'></i></a></td>
+								<td><a class='editEvent'
+									href="<c:url value='EventServlet?action=delete&event_id=${event.id }' />"><i
+										class='glyphicon glyphicon-minus'></i></a></td>
+							</c:if>
 
 
-					</div>
+						</div>
+					</c:if>
 
 				</div>
 			</div>

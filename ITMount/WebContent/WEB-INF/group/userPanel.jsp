@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 
-<div class="col-md-10 column">
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<p>Teacher Panel</p>
@@ -83,7 +83,7 @@
 			</c:choose>
 		</div>
 	</div>
-</div>
+
 
 
 

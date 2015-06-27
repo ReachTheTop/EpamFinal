@@ -113,7 +113,7 @@
 						</div>
 
 
-						
+
 						<div class="form-group">
 							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
 										id="home.Phone" /> </b></label><input name="phone" class="form-control"
@@ -282,7 +282,7 @@
 
 
 	<c:choose>
-		<c:when test="${user.id == current_user.id && user.role !='admin' }">
+		<c:when test="${user.role !='admin' }">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8">
@@ -304,11 +304,12 @@
 									<div class="col-md-3 col-lg-3 " align="center">
 										<img id="fileImage1" src="upload/${current_user.image }"
 											alt="" class="img-rounded img-responsive" />
-
-										<button type="submit"
-											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#editUser" style="margin-top: 10px">
-											Update foto</button>
+										<c:if test="${user.id == current_user.id }">
+											<button type="submit"
+												class="btn btn-default btn-xs dropdown-toggle"
+												data-toggle="modal" href="#editUser"
+												style="margin-top: 10px">Update foto</button>
+										</c:if>
 									</div>
 
 
@@ -350,7 +351,8 @@
 												<tr>
 													<td>CV</td>
 													<td><c:choose>
-															<c:when test="${current_user.curriculum_vitae == null}">
+															<c:when
+																test="${current_user.curriculum_vitae == null && user.id == current_user.id }">
 																<button type="submit"
 																	class="btn btn-default btn-xs dropdown-toggle"
 																	data-toggle="modal" href="#editUser">Add CV</button>
@@ -358,10 +360,11 @@
 
 															<c:otherwise>
 																<p>
-																	<a id="cvFile1"
-																		href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
-																		class="btn btn-default btn-xs dropdown-toggle">Download
-																		CV</a>
+																	<c:if test="${current_user.curriculum_vitae != null}">
+																		<a id="cvFile1"
+																			href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
+																			><i class = "glyphicon glyphicon-file"></i> </a>
+																	</c:if>
 																</p>
 
 															</c:otherwise>
@@ -622,13 +625,9 @@
 
 
 								<a id="userNameSurname" data-toggle="collapse" class="courses"
-									
-
 									data-parent="#accordion" href="#collapse0" aria-expanded="true"
 									aria-controls="collapse0">${current_user.name }
-									${current_user.surname }</a>
-									<a data-toggle="modal"
-									href="#editUser"><i class="glyphicon glyphicon-edit"></i></a>
+									${current_user.surname }</a> 
 							</h4>
 						</div>
 
