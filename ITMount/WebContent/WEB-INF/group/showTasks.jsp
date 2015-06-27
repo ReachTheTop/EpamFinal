@@ -99,30 +99,25 @@ a {
 	<jsp:include page="../page/footer.jsp" />
 
 
-
-
-	<div id="myModal" class="modal fade bs-example-modal-sm">
-
+	<div id="myModalUpdate" class="modal fade bs-example-modal-sm">
 
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<!-- 					<form name=" form1" -->
-				<%-- 						action="TaskServlet?action=createTask&group_id=${group_id }" --%>
-				<!-- 						method="post" enctype="multipart/form-data" role="form" -->
-				<!-- 						role="form" id="form1"> -->
-
-				<form name=" form1"
-					action="<c:url value="/TaskServlet?action=createTask&group_id=${group.id }"/>"
-					method="post" enctype="multipart/form-data" id="form1" role="form">
+			
+	
+					
+					<form action="TaskServlet?action=updateTask&group_id=${group.id }" id='editTask'
+						method="post" enctype="multipart/form-data" role="form"
+						role="form">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Create new Task</h4>
+						<h4 class="modal-title">Update Task</h4>
 					</div>
 					<div class="modal-body">
 
-						<div id="incorectData" style="display: none;"
+						<div id="incorectData2" style="display: none;"
 							class="alert alert-danger">
 							<strong>Incorect data!</strong>
 						</div>
@@ -131,13 +126,13 @@ a {
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Task
 									Name</b></label> <input name="task_name" class="form-control"
-								id="login-username" type="text" placeholder="">
+								id="task_name" type="text" placeholder="">
 						</div>
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Task
 									Description</b></label>
 							<p>
-								<textarea class="form-control" name="task_description" rows="3"
+								<textarea class="form-control" name="task_description" id="task_description" rows="3"
 									name="text"></textarea>
 							</p>
 						</div>
@@ -145,20 +140,26 @@ a {
 						<div class="form-group">
 							<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label>
 							<input name="task_deadline" class="form-control"
-								id="login-username" type="datetime-local">
+								id="taskDeadline" type="datetime-local">
 						</div>
 
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b>File</b></label> <input class="form-control" id="task_file"
-								type="file" placeholder="" name="file">
+								<b>File</b></label> <input class="form-control" id="task_file1"
+								type="file" placeholder="" name="fileUpdate">
 						</div>
+						
+						<div class="form-group" hidden="true">
+
+						<input name="task_id" class="form-control" id="task_id"
+							type="text" placeholder="">
+					</div>
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Add task</button>
+							<button type="submit" class="btn btn-primary">Update task</button>
 						</div>
 
 					</div>
@@ -167,6 +168,94 @@ a {
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		var form2 = $('#editTask');
+		form2.submit(function(e) {
+			
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			request = $.ajax({
+				type : form2.attr('method'),
+				url : form2.attr('action'),
+				
+
+				data : new FormData(this),
+				processData : false,
+				contentType : false,
+
+				success : function(text) {
+
+					$("#incorectData2").hide();
+					
+					$('#myModalUpdate').modal('hide');
+					showToaast("Task was  successfully edited", 1);
+
+				},
+				error : function() {
+					$("#incorectData2").show();
+					showToaast("Task was not  successfully edited", 0);
+
+				}
+			});
+
+			return false;
+		});
+	</script>
+	
+	
+	
+	<script type="text/javascript">
+	$('a.updateTask').click(
+			function() {
+				var index = $(this).attr('id');
+				$('#task_id').val(index);
+				$.get('TaskServlet?action=show&task_id=' + index,
+						function(response) {
+					
+							$('#task_name').val(response.name);
+							$("#task_description").val(response.description);
+							
+							
+							var dateString = response.deadline;
+				
+							var date = new Date(Date.parse(dateString));
+
+							var year = date.getFullYear().toString();
+							var month = addZero(date.getMonth() + 1).toString();
+							var day = addZero(date.getDate()).toString();
+							var hours = addZero(date.getHours()).toString();
+							var minutes = addZero(date.getMinutes()).toString();
+
+							var correctDate = year.concat("-", month, "-", day, "T",
+									hours, ":", minutes);
+							
+							$("#taskDeadline").val(correctDate);
+							
+							
+						});
+			});
+	
+	
+	function addZero(i) {
+		if (i < 10) {
+			i = "0" + i;
+		}
+		return i;
+	}
+</script>
+
+
+	<script>
+		$(document).ready(function() {
+			$("#myModalUpdate").on("hidden.bs.modal", function() {
+			
+				$("#incorectData2").hide();
+
+			});
+		});
+	</script>
+	
 
 	<script src="resources/js/toastr.js"></script>
 
@@ -236,16 +325,82 @@ a {
 
 		}
 	</script>
+	
+	<div id="myModal" class="modal fade bs-example-modal-sm">
 
 
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<!-- 					<form name=" form1" -->
+				<%-- 						action="TaskServlet?action=createTask&group_id=${group_id }" --%>
+				<!-- 						method="post" enctype="multipart/form-data" role="form" -->
+				<!-- 						role="form" id="form1"> -->
+
+				<form name=" form1"
+					action="<c:url value="/TaskServlet?action=createTask&group_id=${group.id }"/>"
+					method="post" enctype="multipart/form-data" id="form1" role="form">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Create new Task</h4>
+					</div>
+					<div class="modal-body">
+
+						<div id="incorectData" style="display: none;"
+							class="alert alert-danger">
+							<strong>Incorect data!</strong>
+						</div>
+
+
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Task
+									Name</b></label> <input name="task_name" class="form-control"
+								id="login-username" type="text" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Task
+									Description</b></label>
+							<p>
+								<textarea class="form-control" name="task_description" rows="3"
+									name="text"></textarea>
+							</p>
+						</div>
+
+						<div class="form-group">
+							<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label>
+							<input name="task_deadline" class="form-control"
+								id="login-username" type="datetime-local">
+						</div>
+
+
+						<div class="form-group">
+							<label for="register-username"><i class="icon-user"></i>
+								<b>File</b></label> <input class="form-control" id="task_file"
+								type="file" placeholder="" name="file">
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit"  class="btn btn-primary"
+								data-dismiss="modal">Close</button>
+							<button type="submit"  id = "addTask" class="btn btn-primary">Add task</button>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<script>
-		var form = $('#form1');
-		form.submit(function(e) {
+		var form1 = $('#form1');
+		form1.submit(function(e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			request = $.ajax({
-				type : form.attr('method'),
-				url : form.attr('action'),
+				type : form1.attr('method'),
+				url : form1.attr('action'),
 
 				data : new FormData(this),
 				processData : false,
@@ -281,6 +436,8 @@ a {
 			});
 		});
 	</script>
+	
+	
 
 
 	<script type="text/javascript">

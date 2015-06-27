@@ -30,10 +30,15 @@
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingThree">
 								<h4 class="panel-title">
+										<a  data-toggle="modal" id="${tasks.key.id}" class="updateTask" style =""
+												href="#myModalUpdate"><i class="fa fa-edit"></i></a>
+									
 									<a class="collapsed" role="button" data-toggle="collapse"
 										data-parent="#accordion" href="#collapse${tasks.key.id}"
 										aria-expanded="false" aria-controls="collapse${tasks.key.id}">
 										${tasks.key.name} </a>
+										
+									
 								</h4>
 							</div>
 							<div id="collapse${tasks.key.id}" class="panel-collapse collapse"

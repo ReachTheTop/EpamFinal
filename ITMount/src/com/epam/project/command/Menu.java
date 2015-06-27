@@ -22,6 +22,7 @@ public class Menu {
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		action = request.getParameter("action");
+	
 		if(action == null){
 			action = "index";
 		}
