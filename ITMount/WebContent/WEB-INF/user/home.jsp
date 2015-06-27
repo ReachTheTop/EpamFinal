@@ -996,7 +996,7 @@
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right">Create</button>
+								class="btn pull-right">Update</button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
