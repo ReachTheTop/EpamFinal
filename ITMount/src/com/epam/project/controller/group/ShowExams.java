@@ -76,7 +76,7 @@ public class ShowExams implements Action {
 
 				
 				request.setAttribute("group", group);
-				request.getRequestDispatcher("/WEB-INF/group2/showExams.jsp")
+				request.getRequestDispatcher("/WEB-INF/group/showExams.jsp")
 						.forward(request, response);
 				return;
 			}

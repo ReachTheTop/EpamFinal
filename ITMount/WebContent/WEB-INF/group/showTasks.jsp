@@ -1,92 +1,102 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${ group.name }</title>
+<jsp:include page="../page/head.jsp" />
+
+
+<script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
+
+<link
+	href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css"
+	rel="stylesheet">
+<script
+	src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
 
+<link rel="stylesheet" href="resources/css/font-awesome.css">
+<link rel="stylesheet" href="resources/css/animate.css">
 
+<title>${ group.name }</title>
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<p>Teacher Panel</p>
-			<a href="#myModal" class="btn btn-sm btn-primary" data-toggle="modal">Create
-				Task</a>
-		</div>
-		<div class="panel-body">
+<style type="text/css">
+.nav-pills>li.active>a {
+	background-color: #4B4B4C;
+}
 
-			<h2>Group Users</h2>
+.nav-pills>li.active>a:hover {
+	background-color: #4B4B4C;
+}
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
+a {
+	color: #514D61;
+	text-decoration: none;
+}
 
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${users}" var="user">
-						<tr>
-							<td>${user.name }${user.surname}</td>
-							<td>${user.email }</td>
-							<td><a
-								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
-									homework</a></td>
+.sidebar-nav .navbar li a {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+}
+</style>
 
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div class="panel-footer">
-			<c:choose>
-				<c:when
-					test="${user.role == 'lecturer' && group.teacher_id == user.id}">
-					<c:choose>
-						<c:when test="${group.isConfirmed == true}">
-							<a class='btn btn-danger'
-								href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />">Disband
-								group</a>
-						</c:when>
-						<c:otherwise>
-							<a class='btn btn-success' id='confirmation' >Confirm
-								group</a>
+</head>
+<body>
+	<jsp:include page="../page/header.jsp" />
 
-							<script type="text/javascript">
-								$('#confirmation')
-										.click(
-												function() {
-													$(this).remove();
-													$
-															.get(
-																	'AdminServlet?action=confirm&group_id='
-																			+ "${group.id}",
-																	function(
-																			response) {
-
-																	});
-													var $a = $("<a class='btn btn-danger' href='GroupServlet?action=delete&group_id=${group.id}'>Disband group</a>");
-													$("div#panel-footer")
-															.append($a);
-												});
-							</script>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:when
-					test="${user.role == 'student' || user.role == 'applicant' }">
-					<a
-						href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />">Leave
-						group</a>
-
-				</c:when>
-			</c:choose>
+	<div class="section section-breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>
+						<c:out value="${group.name }" />
+					</h1>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked">
+						<li  ><a
+						href="<c:url value="/GroupServlet?action=show&group_id=11" />"><i
+							class="fa fa-home fa-fw"></i>Main</a></li>
+					<li class="active" ><a
+						href="<c:url value="/GroupServlet?action=showTasks&group_id=11" />"><i
+							class="fa fa-tasks fa-fw"></i>Tasks</a></li>
+					<li ><a
+						href="<c:url value="/GroupServlet?action=showEvents&group_id=11" />"><i
+							class="fa fa-users fa-fw"></i>Events</a></li>
+					<li><a
+						href="<c:url value="/GroupServlet?action=showExams&group_id=11" />"><i
+							class="fa fa-check fa-fw"></i>Exams</a></li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+			
+			<a href="#myModal" class="btn btn-sm btn-primary" data-toggle="modal">Create
+				Task</a>
 
+				<jsp:include page="AllTaskUser.jsp"></jsp:include>
 
-
-
+			</div>
+		</div>
+	</div>
+	
+	
+<jsp:include page="../page/footer.jsp" />
 
 
 
@@ -254,9 +264,7 @@
 							error : function() {
 								$("#incorectData").show();
 								showToaast("Task was not  created", 0);
-								showToaast(
-										'<div><input class="input-small" value="textbox"/>&nbsp;<a href="http://johnpapa.net" target="_blank">This is a hyperlink</a></div>',
-										1);
+							
 							}
 						});
 
@@ -335,4 +343,9 @@
 										});
 					});
 </script>
+	
 
+
+	
+</body>
+</html>

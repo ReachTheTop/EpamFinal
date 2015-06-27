@@ -64,13 +64,7 @@
 				<li class="active"><a href="<c:url value="/home" />">Home</a></li>
 				<li><a href="<c:url value="/CourseServlet" />">Course</a></li>
 				<li><a href="<c:url value="/ArticleServlet" />">Article</a>
-				<li><a
-					href="<c:url
-							value="/GroupServlet?action=show&group_id=11" />">Base11
-
-
-
-				</a></li>
+			
 
 			</ul>
 		</nav>

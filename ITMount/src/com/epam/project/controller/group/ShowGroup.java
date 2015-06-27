@@ -106,7 +106,7 @@ public class ShowGroup implements Action {
 
 				request.setAttribute("users", group_users);
 				request.setAttribute("group", group);
-				request.getRequestDispatcher("/WEB-INF/group2/show.jsp")
+				request.getRequestDispatcher("/WEB-INF/group/show.jsp")
 						.forward(request, response);
 				return;
 			}

@@ -77,7 +77,7 @@ public class ShowEvents implements Action {
 				request.setAttribute("user_id", user);
 				request.setAttribute("association", association);
 				request.setAttribute("group", group);
-				request.getRequestDispatcher("/WEB-INF/group2/showEvent.jsp")
+				request.getRequestDispatcher("/WEB-INF/group/showEvent.jsp")
 						.forward(request, response);
 				return;
 			}

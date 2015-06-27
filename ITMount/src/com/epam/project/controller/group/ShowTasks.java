@@ -96,7 +96,7 @@ public class ShowTasks implements Action {
 
 			
 				request.setAttribute("group", group);
-				request.getRequestDispatcher("/WEB-INF/group2/showTasks.jsp")
+				request.getRequestDispatcher("/WEB-INF/group/showTasks.jsp")
 						.forward(request, response);
 				return;
 			}

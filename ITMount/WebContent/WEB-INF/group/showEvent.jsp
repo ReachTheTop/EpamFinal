@@ -70,23 +70,25 @@ a {
 		<div class="row">
 			<div class="col-md-3">
 				<ul class="nav nav-pills nav-stacked">
-					<li><a
+					<li  ><a
 						href="<c:url value="/GroupServlet?action=show&group_id=11" />"><i
 							class="fa fa-home fa-fw"></i>Main</a></li>
-					<li  class="active"><a
+					<li ><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=11" />"><i
-							class="fa fa-file-o fa-fw"></i>Tasks</a></li>
-					<li><a
+							class="fa fa-tasks fa-fw"></i>Tasks</a></li>
+					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=11" />"><i
-							class="fa fa-home fa-fw"></i>Events</a></li>
+							class="fa fa-users fa-fw"></i>Events</a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=11" />"><i
-							class="fa fa-file-o fa-fw"></i>Exams</a></li>
+							class="fa fa-check fa-fw"></i>Exams</a></li>
+
+
 				</ul>
 			</div>
 			<div class="col-md-9">
-
-				<jsp:include page="AllTaskUser.jsp"></jsp:include>
+			
+			<jsp:include page="eventPanel.jsp"></jsp:include>
 
 			</div>
 		</div>
