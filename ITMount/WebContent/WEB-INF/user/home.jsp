@@ -504,7 +504,7 @@
 
 					$('button#submit-course-edit').click(function() {
 						$('#editCourse').modal('hide');
-						showToast("Course successfully updated", 1);
+						showToaast("Course successfully updated", 1);
 					});
 				</script>
 
@@ -609,7 +609,7 @@
 					$('button#submit-group-edit').click(function() {
 
 						$('#editGroup').modal('hide');
-						showToast("Group successfully updated", 1);
+						showToaast("Group successfully updated", 1);
 					});
 				</script>
 
