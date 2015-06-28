@@ -20,7 +20,7 @@ public class TaskServlet extends HttpServlet {
 
 	public TaskServlet() {
         super();
-       menu = new Menu(new CreateTaskCommand());
+       menu = new Menu(new UpdateTaskCommand(),new CreateTaskCommand(), new ShowTask() );
     }
 
 	protected void doGet(HttpServletRequest request,

@@ -141,10 +141,34 @@
 				$.get('GroupExamServlet?action=show&exam_id=' + index,
 						function(response) {
 							$('#examDescription').val(response.description);
+							
+							
+							var dateString = response.exam_date;
+							alert(dateString);
+							
+							var date = new Date(Date.parse(dateString));
 
-							$("#examDate").val(response.date);
+							var year = date.getFullYear().toString();
+							var month = addZero(date.getMonth() + 1).toString();
+							var day = addZero(date.getDate()).toString();
+							var hours = addZero(date.getHours()).toString();
+							var minutes = addZero(date.getMinutes()).toString();
+
+							var correctDate = year.concat("-", month, "-", day, "T",
+									hours, ":", minutes);
+							
+							$("#examDate").val(correctDate);
+
+						
 						});
 			});
+	
+	function addZero(i) {
+		if (i < 10) {
+			i = "0" + i;
+		}
+		return i;
+	}
 </script>
 
 

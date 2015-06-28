@@ -432,16 +432,12 @@ body-small.fixed-sidebar.mini-navbar .top-navigation #page-wrapper {
 .btn-warning.btn-outline {
   color: #f8ac59;
 }
-.btn-danger.btn-outline {
-  color: #ed5565;
-}
+
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
 .btn-info.btn-outline:hover,
 .btn-warning.btn-outline:hover,
-.btn-danger.btn-outline:hover {
-  color: #fff;
-}
+
 
 
 .btn-primary.disabled,
@@ -563,43 +559,8 @@ fieldset[disabled] .btn-warning.active {
   background-color: #f9b66d;
   border-color: #f9b66d;
 }
-.btn-danger {
-  background-color: #ed5565;
-  border-color: #ed5565;
-  color: #FFFFFF;
-}
-.btn-danger:hover,
-.btn-danger:focus,
-.btn-danger:active,
-.btn-danger.active,
-.open .dropdown-toggle.btn-danger {
-  background-color: #ec4758;
-  border-color: #ec4758;
-  color: #FFFFFF;
-}
-.btn-danger:active,
-.btn-danger.active,
-.open .dropdown-toggle.btn-danger {
-  background-image: none;
-}
-.btn-danger.disabled,
-.btn-danger.disabled:hover,
-.btn-danger.disabled:focus,
-.btn-danger.disabled:active,
-.btn-danger.disabled.active,
-.btn-danger[disabled],
-.btn-danger[disabled]:hover,
-.btn-danger[disabled]:focus,
-.btn-danger[disabled]:active,
-.btn-danger.active[disabled],
-fieldset[disabled] .btn-danger,
-fieldset[disabled] .btn-danger:hover,
-fieldset[disabled] .btn-danger:focus,
-fieldset[disabled] .btn-danger:active,
-fieldset[disabled] .btn-danger.active {
-  background-color: #ef6776;
-  border-color: #ef6776;
-}
+
+
 .btn-link {
   color: inherit;
 }
@@ -743,12 +704,8 @@ button.btn-success.dim {
 button.btn-success.dim:active {
   box-shadow: inset 0px 0px 0px #1872ab, 0px 2px 0px 0px #1872ab, 0px 5px 3px #999999;
 }
-button.btn-danger.dim {
-  box-shadow: inset 0px 0px 0px #ea394c, 0px 5px 0px 0px #ea394c, 0px 10px 5px #999999;
-}
-button.btn-danger.dim:active {
-  box-shadow: inset 0px 0px 0px #ea394c, 0px 2px 0px 0px #ea394c, 0px 5px 3px #999999;
-}
+
+
 button.dim:before {
   font-size: 50px;
   line-height: 1em;

@@ -53,7 +53,7 @@ public class ShowEvents implements Action {
 				for(Event event :events){
 					EventMessage.updateEventMessage(event);
 				}
-				Collections.sort(events);
+				//Collections.sort(events);
 
 				request.setAttribute("events", events);
 
