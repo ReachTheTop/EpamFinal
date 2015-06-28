@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,16 +79,16 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i>Main</a></li>
+							class="fa fa-home fa-fw"></i><t:i18n id='group.main'/></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i>Tasks</a></li>
+							class="fa fa-tasks fa-fw"></i><t:i18n id='group.tasks'/></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i>Events</a></li>
+							class="fa fa-users fa-fw"></i><t:i18n id='group.events'/></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i>Exams</a></li>
+							class="fa fa-check fa-fw"></i><t:i18n id='group.exams'/></a></li>
 					<li><c:choose>
 							<c:when
 								test="${user.role == 'lecturer' && group.teacher_id == user.id}">
@@ -96,11 +97,10 @@ a {
 										<a class='btn btn-danger'
 											style="padding-top: 12px; padding-bottom: 12px;"
 											onclick="return confirm('Are you sure?')"
-											href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />">Disband
-											group</a>
+											href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />"><t:i18n id='group.disband'/></a>
 									</c:when>
 									<c:otherwise>
-										<a class='btn btn-success' id='confirmation'>Confirm group</a>
+										<a class='btn btn-success' id='confirmation'><t:i18n id='group.confirm'/></a>
 
 										<script type="text/javascript">
 											$('#confirmation')
@@ -130,8 +130,7 @@ a {
 								test="${user.role == 'student' || user.role == 'applicant' }">
 								<a class='btn btn-danger'
 									onclick="return confirm('Are you sure?')"
-									href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />">Leave
-									group</a>
+									href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />"><t:i18n id='group.user.leave'/></a>
 
 							</c:when>
 						</c:choose></li>
@@ -173,11 +172,11 @@ a {
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Image</th>
-							<th>Name</th>
+							<th><t:i18n id='group.user.image'/></th>
+							<th><t:i18n id='group.user.name'/></th>
 							<th>Email</th>
-							<th>Contacts</th>
-							<th>Homework</th>
+							<th><t:i18n id='group.user.contacts'/></th>
+							<th><t:i18n id='group.user.homework'/></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -200,8 +199,7 @@ a {
 									</td>
 								<td><a class="btn btn-sm btn-primary"
 									
-									href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
-										homework</a></td>
+									href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><t:i18n id='group.user.homework.button'/></a></td>
 
 							</tr>
 							

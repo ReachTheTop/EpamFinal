@@ -2,11 +2,12 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Courses</title>
+<title><t:i18n id='articles'/></title>
 <jsp:include page="../page/head.jsp" />
 
 <script
@@ -25,7 +26,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<a href="<c:url value='ArticleServlet' />">Articles</a>
+						<a href="<c:url value='ArticleServlet' />"><t:i18n id='articles'/></a>
 					</h1>
 
 				</div>
@@ -45,7 +46,7 @@
 							<div class="input-group">
 								<input hidden="true" id="pages" value="${pages }"> <input
 									class="form-control" type="text" name="token"
-									id='article-search' placeholder="Article Search"
+									id='article-search' placeholder="<t:i18n id='article.search'/>"
 									value="${token }"> <span class="input-group-btn">
 
 
@@ -63,9 +64,8 @@
 											</button>
 											<ul class="dropdown-menu">
 												<li><a
-													href="<c:url value="/ArticleServlet?action=new" />">New
-														Article</a></li>
-												<li><a href="<c:url value="/ArticleServlet?action=myarticles"/>">My articles</a></li>
+													href="<c:url value="/ArticleServlet?action=new" />"><t:i18n id='article.new'/></a></li>
+												<li><a href="<c:url value="/ArticleServlet?action=myarticles"/>"><t:i18n id='article.my'/></a></li>
 
 											</ul>
 										</c:if>
@@ -126,7 +126,7 @@
 								
 								<a
 									href="<c:url value="ArticleServlet?action=show&article_id=${article.id }" />"
-									class="btn btn-primary" id='read-mode'>Read more</a>
+									class="btn btn-primary" id='read-mode'><t:i18n id='article.more'/></a>
 							</div>
 						</div>
 					</div>

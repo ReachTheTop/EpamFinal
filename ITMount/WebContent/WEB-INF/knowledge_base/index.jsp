@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Resources</title>
+<title><t:i18n id='knowledgebase'/></title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
@@ -17,12 +18,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Resources</h1>
-					<c:if test="${is_lecturer==true}">
-					<a data-toggle="modal" class="btn" href="#addKnbase">Add
-						knowledgebase</a>
+					<h1><t:i18n id='knowledgebase'/>
+					<c:if test="${is_lecturer==true}"><span>
+					<a data-toggle="modal" class="btn btn-primary" href="#addKnbase"><t:i18n id='knowledgebase.add'/></a>
+						</span>
 						</c:if>
-
+</h1>
 				</div>
 			</div>
 		</div>
@@ -31,7 +32,7 @@
 
 
 	<div class="container">
-		<h2>knowledge base</h2>
+		
 
 
 
@@ -58,22 +59,22 @@
 					<p>
 							<a
 							href="<c:url value="/downloadFile?file=${kbase.key.getPath()}"/>"
-							class="btn glyphicon glyphicon-download-alt"></a>
+							class="btn btn-primary glyphicon glyphicon-download-alt"></a>
 					<c:if test="${is_lecturer==true}">
 						<a
 							href="<c:url value="/KnowledgeBaseServlet?action=delete&deleteFile=${kbase.key.getPath()}&id_kbase=${kbase.key.getId()}"/>"
-							class="btn glyphicon glyphicon-trash"></a>
+							class="btn btn-primary glyphicon glyphicon-trash"></a>
 							
 						<c:choose>
 						<c:when test="${kbase.key.getAvailable()==true}">
 						<a
 							href="<c:url value="/KnowledgeBaseServlet?action=active&active=false&id_kbase=${kbase.key.getId()}"/>"
-							class="btn glyphicon glyphicon-thumbs-down"></a>
+							class="btn btn-primary glyphicon glyphicon-thumbs-down"></a>
 						</c:when>
 						<c:otherwise>
 						<a
 							href="<c:url value="/KnowledgeBaseServlet?action=active&active=true&id_kbase=${kbase.key.getId()}"/>"
-							class="btn glyphicon glyphicon-thumbs-up"></a>
+							class="btn btn-primary glyphicon glyphicon-thumbs-up"></a>
 						</c:otherwise>
 						</c:choose>	
 							</c:if>
@@ -90,14 +91,14 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Add kbase</h4>
+					<h4 class="modal-title"><t:i18n id='knowledgebase.add'/></h4>
 				</div>
 				<div class="modal-body">
 					<form action="KnowledgeBaseServlet?action=new" method="post"
 						enctype="multipart/form-data" role="form" id="uploadFile">
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='knowledgebase.file'/></b></label>
 							<input name="file" class="form-control" type="file"
 								required="required" placeholder="">
 						</div>
@@ -108,7 +109,7 @@
 						</div>
 						<div class="form-group">
 
-							<button type="submit" class="btn pull-right">Add</button>
+							<button type="submit" class="btn btn-primary pull-right"><t:i18n id='knowledgebase.add.button'/></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -138,7 +139,7 @@
 										                    file: {
 										                        extension: 'jpeg,png,jpg,pmp,mp3,doc,docx,zip,rar,7z,pdf,doc,docx,ppt,pptx,odp,xml,js,jar,сss,exl,exlx,sql',
 										                
-										                        message: 'Please choose corect file'
+										                        message: "<t:i18n id='knowledgebase.error.format'/>"
 										                    }
 										                }
 										            }

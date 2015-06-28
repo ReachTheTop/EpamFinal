@@ -2,14 +2,14 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<c:if test="${group.teacher_id == user.id }">
 			<a data-toggle="modal" id="createEventModal" href="#createExam"><i
 				class='glyphicon glyphicon-plus'></i></a>
 		</c:if>
-		Exams
+		<t:i18n id='group.exams'/>
 	</div>
 	<table class="table">
 		<c:forEach items="${ exams}" var="exam">
@@ -39,20 +39,19 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">New Exam</h4>
+				<h4 class="modal-title"><t:i18n id='group.exam.new'/></h4>
 			</div>
 			<div class="modal-body">
 				<form action="GroupExamServlet?action=create" data-async
 					id='create-event-form' method="post" role="form" role="form">
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Exam
-								Description</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.exam.description'/></b></label>
 						<textarea name="description" class="form-control" type="text"
 							placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Date</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.exam.date'/></b></label>
 						<input name="exam_date" class="form-control" id="comment"
 							type="datetime-local" required="required" placeholder="">
 					</div>
@@ -65,7 +64,7 @@
 					<div class="form-group">
 
 						<button type="submit" id='submit-event-create'
-							class="btn pull-right">Update</button>
+							class="btn pull-right"><t:i18n id='group.exam.create'/></button>
 						<div class="clearfix"></div>
 					</div>
 				</form>
@@ -103,20 +102,19 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Update exam</h4>
+				<h4 class="modal-title"><t:i18n id='group.exam.update.title'/></h4>
 			</div>
 			<div class="modal-body">
 				<form action="GroupExamServlet?action=update" data-async
 					id='create-event-form' method="post" role="form" role="form">
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Exam
-								Description</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.exam.description'/></b></label>
 						<textarea name="description" id="examDescription"
 							class="form-control" type="text" placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Date</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.exam.date'/></b></label>
 						<input name="date" class="form-control" id="examDate"
 							type="datetime-local" required="required" placeholder="">
 					</div>
@@ -129,7 +127,7 @@
 					<div class="form-group">
 
 						<button type="submit" id='submit-event-create'
-							class="btn pull-right">Update</button>
+							class="btn pull-right"><t:i18n id='group.exam.update'/></button>
 						<div class="clearfix"></div>
 					</div>
 				</form>

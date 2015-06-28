@@ -2,11 +2,12 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Article</title>
+<title><t:i18n id='article'/></title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
@@ -19,7 +20,7 @@
 				<div class="col-md-12">
 					<h1>
 
-						<a href="<c:url value='ArticleServlet' />">Articles</a>
+						<a href="<c:url value='ArticleServlet' />"><t:i18n id='articles'/></a>
 					</h1>
 				</div>
 			</div>
@@ -47,7 +48,7 @@
 						<div class="single-post-content">${article.data }</div>
 						<!-- Comments -->
 						<div class="post-coments">
-							<h4>Comments</h4>
+							<h4><t:i18n id='article.comments'/></h4>
 							<c:forEach items="${comments }" var="comment">
 								<ul class="post-comments">
 
@@ -73,7 +74,7 @@
 								</ul>
 							</c:forEach>
 							<!-- Comments Form -->
-							<h4>Leave a Comment</h4>
+							<h4><t:i18n id='article.leave.comment'/></h4>
 							<c:choose>
 								<c:when test="${not empty user }">
 									<div class="comment-form-wrapper">
@@ -83,13 +84,12 @@
 
 											<div class="form-group">
 												<label for="comment-message"><i
-													class="glyphicon glyphicon-comment"></i> <b>Your
-														Message</b></label>
+													class="glyphicon glyphicon-comment"></i> <b><t:i18n id='article.comment.message'/></b></label>
 												<textarea class="form-control" name="content" rows="5"
 													id="comment-message"></textarea>
 											</div>
 											<div class="form-group">
-												<button type="submit" class="btn btn-large pull-right">Send</button>
+												<button type="submit" class="btn btn-large pull-right"><t:i18n id='article.comment.send'/></button>
 											</div>
 											<div class="clearfix"></div>
 										</form>
@@ -97,7 +97,7 @@
 								</c:when>
 								<c:otherwise>
 								<div class="alert alert-info" role="alert">
-									Only registered users can leave comments. Plese sign in <a href="<c:url value="/login" />">Ligin</a>
+									<t:i18n id='article.comment.authorize'/><a href="<c:url value="/login" />"><t:i18n id='login.login'/></a>
 									
 								</div>
 								</c:otherwise>

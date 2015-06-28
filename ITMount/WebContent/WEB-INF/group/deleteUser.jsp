@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <div id="deleteUserFromGroup" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Delete user from group</h4>
+				<h4 class="modal-title"><t:i18n id='group.panel.delete.user'/></h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-group" hidden="true">
@@ -17,21 +17,20 @@
 				</div>
 
 				<div class="form-group" id='message-subject'>
-					<label for="login-username"><i class="icon-user"></i> <b>Message
-							subject</b></label> <input name="subject" class="form-control"
+					<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.panel.subject'/></b></label> <input name="subject" class="form-control"
 						id="group-name-edit" type="text" placeholder="">
 				</div>
 
 				<div class="form-group" id='passed'>
 					<label for="login-username"><i class="icon-user"></i> <b>
-							Message</b></label>
+							<t:i18n id='group.panel.message'/></b></label>
 					<textarea name="message" class="form-control" id="group-name-edit"
 						placeholder=""></textarea>
 				</div>
 
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary pull-right" name="action"
-						value="remove">Remove Users</button>
+						value="remove"><t:i18n id='group.panel.delete.user.button'/></button>
 					<div class="clearfix"></div>
 				</div>
 

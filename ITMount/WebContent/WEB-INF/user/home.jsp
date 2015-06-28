@@ -1389,7 +1389,10 @@
 	</script>
 
 	<jsp:include page="../page/footer.jsp" />
-
-
+<label hidden="true" id="confirm"><t:i18n id='admin.group.confirm'/></label>
+<label hidden="true" id="ban"><t:i18n id='admin.user.ban'/></label>
+<label hidden="true" id="activate"><t:i18n id='admin.user.activate'/></label>
+<label hidden="true" id="close" ><t:i18n id='admin.course.close'/></label>
+<label hidden="true" id="open"><t:i18n id='admin.course.open'/></label>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -50,24 +51,24 @@
 
 										<table class="table table-bordered">
 											<tr>
-												<td>Task name</td>
+												<td><t:i18n id='group.task.name'/></td>
 												<td><c:out value="${tasks.key.name }" /></td>
 											</tr>
 											<tr>
-												<td>Task description</td>
+												<td><t:i18n id='group.task.description'/></td>
 												<td><c:out value="${tasks.key.description }" /></td>
 											</tr>
 											<tr>
-												<td>Task deadline</td>
+												<td><t:i18n id='group.task.deadline'/></td>
 												<td>${tasks.key.deadline }</td>
 											</tr>
 											<tr>
-												<td>Task</td>
+												<td><t:i18n id='group.task'/></td>
 												<td>
 													<p>
 														<a
 															href="<c:url value="/downloadFile?file=${tasks.key.file}"/>"
-															class="btn btn-primary btn-sm">Download</a>
+															class="btn btn-primary btn-sm"><t:i18n id='group.task.download'/></a>
 													</p>
 
 
@@ -77,10 +78,10 @@
 											<c:if
 												test="${user.role =='student' || user.role =='applicant' }">
 												<tr>
-													<td>Your work</td>
+													<td><t:i18n id='group.task.homework'/></td>
 													<td><c:choose>
 															<c:when test="${tasks.key.getAvailable() == false}">
-															Time out
+															<t:i18n id='group.task.timeout'/>
 														</c:when>
 
 															<c:otherwise>
@@ -91,7 +92,7 @@
 																			<a data-toggle="modal" href="#updateHomeWork"
 																				data-delete="${tasks.value.getData()}"
 																				data-homework="${tasks.value.getId()}"
-																				class="open-updateHomeWork btn btn-primary btn-sm">Update</a>
+																				class="open-updateHomeWork btn btn-primary btn-sm"><t:i18n id='group.task.update'/></a>
 																		</p>
 																	</c:when>
 
@@ -99,7 +100,7 @@
 																		<p>
 																			<a data-toggle="modal" href="#uploadHomeWork"
 																				data-task="${tasks.key.getId()}"
-																				class="open-uploadHomeWork btn btn-primary btn-sm">Add
+																				class="open-uploadHomeWork btn btn-primary btn-sm"><t:i18n id='group.task.homework.add'/>
 																			</a>
 																		</p>
 
@@ -135,7 +136,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Add new task</h4>
+					<h4 class="modal-title"><t:i18n id='group.task.new'/></h4>
 				</div>
 				<div class="modal-body">
 					<form action="<c:url value="/Homework?action=upload"/>"
@@ -152,15 +153,15 @@
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b>File</b></label> <input class="form-control" id="register-username"
+								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="register-username"
 								type="file" placeholder="" name="file">
 						</div>
 
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Ok</button>
+								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
+							<button type="submit" class="btn btn-primary"><t:i18n id='group.task.homework.add'/></button>
 						</div>
 					</form>
 				</div>
@@ -177,7 +178,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Add file</h4>
+					<h4 class="modal-title"><t:i18n id='group.task.file.add'/></h4>
 				</div>
 				<div class="modal-body">
 					<form action="<c:url value="/Homework?action=update"/>"
@@ -196,15 +197,15 @@
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b>File</b></label> <input class="form-control" id="register-username"
+								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="register-username"
 								type="file" placeholder="" name="file">
 						</div>
 
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Ok</button>
+								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
+							<button type="submit" class="btn btn-primary"><t:i18n id='group.task.update'/></button>
 						</div>
 					</form>
 				</div>

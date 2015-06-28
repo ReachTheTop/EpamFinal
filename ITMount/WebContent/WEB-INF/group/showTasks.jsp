@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +62,7 @@ a {
 				<div class="col-md-12">
 					<h1>
 						<c:out value="${group.name }" />
-						Tasks
+						<t:i18n id='group.tasks'/>
 					</h1>
 				</div>
 			</div>
@@ -73,20 +74,20 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i>Main</a></li>
+							class="fa fa-home fa-fw"></i><t:i18n id='group.main'/></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i>Tasks</a></li>
+							class="fa fa-tasks fa-fw"></i><t:i18n id='group.tasks'/></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i>Events</a></li>
+							class="fa fa-users fa-fw"></i><t:i18n id='group.events'/></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i>Exams</a></li>
+							class="fa fa-check fa-fw"></i><t:i18n id='group.exams'/></a></li>
 					<c:if
 						test="${not empty group.teacher_id && user.id == group.teacher_id}">
 						<li><a href="#myModal" class="btn btn-sm btn-primary"
-							data-toggle="modal">Create Task</a></li>
+							data-toggle="modal"><t:i18n id='group.task.create'/></a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -116,24 +117,22 @@ a {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Update Task</h4>
+						<h4 class="modal-title"><t:i18n id='group.task.update'/></h4>
 					</div>
 					<div class="modal-body">
 
 						<div id="incorectData2" style="display: none;"
 							class="alert alert-danger">
-							<strong>Incorect data!</strong>
+							<strong><t:i18n id='group.task.error'/></strong>
 						</div>
 
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Task
-									Name</b></label> <input name="task_name" class="form-control"
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.name'/></b></label> <input name="task_name" class="form-control"
 								id="task_name" type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Task
-									Description</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.description'/></b></label>
 							<p>
 								<textarea class="form-control" name="task_description"
 									id="task_description" rows="3" name="text"></textarea>
@@ -141,7 +140,7 @@ a {
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.deadline'/></b></label>
 							<input name="task_deadline" class="form-control"
 								id="taskDeadline" type="datetime-local">
 						</div>
@@ -149,7 +148,7 @@ a {
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b>File</b></label> <input class="form-control" id="task_file1"
+								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="task_file1"
 								type="file" placeholder="" name="fileUpdate">
 						</div>
 
@@ -161,9 +160,8 @@ a {
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Update
-								task</button>
+								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
+							<button type="submit" class="btn btn-primary"><t:i18n id='group.task.update'/></button>
 						</div>
 
 					</div>
@@ -192,12 +190,12 @@ a {
 					$("#incorectData2").hide();
 
 					$('#myModalUpdate').modal('hide');
-					showToaast("Task was  successfully edited", 1);
+					showToaast("<t:i18n id='group.task.success'/>", 1);
 
 				},
 				error : function() {
 					$("#incorectData2").show();
-					showToaast("Task was not  successfully edited", 0);
+					showToaast("<t:i18n id='group.task.error.update'/>", 0);
 
 				}
 			});
@@ -343,24 +341,22 @@ a {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Create new Task</h4>
+						<h4 class="modal-title"><t:i18n id='group.task.new'/></h4>
 					</div>
 					<div class="modal-body">
 
 						<div id="incorectData" style="display: none;"
 							class="alert alert-danger">
-							<strong>Incorect data!</strong>
+							<strong><t:i18n id='group.task.error'/></strong>
 						</div>
 
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Task
-									Name</b></label> <input name="task_name" class="form-control"
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.name'/></b></label> <input name="task_name" class="form-control"
 								id="login-username" type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Task
-									Description</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.description'/></b></label>
 							<p>
 								<textarea class="form-control" name="task_description" rows="3"
 									name="text"></textarea>
@@ -368,7 +364,7 @@ a {
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Deadline</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.deadline'/></b></label>
 							<input name="task_deadline" class="form-control"
 								id="login-username" type="datetime-local">
 						</div>
@@ -376,15 +372,14 @@ a {
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b>File</b></label> <input class="form-control" id="task_file"
+								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="task_file"
 								type="file" placeholder="" name="file">
 						</div>
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
-								data-dismiss="modal">Close</button>
-							<button type="submit" id="addTask" class="btn btn-primary">Add
-								task</button>
+								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
+							<button type="submit" id="addTask" class="btn btn-primary"><t:i18n id='group.task.add'/></button>
 						</div>
 
 					</div>
@@ -413,13 +408,13 @@ a {
 					$("#incorectData").hide();
 					document.getElementById("form1").reset();
 					$('#myModal').modal('hide');
-					showToaast("Task was  successfully created", 1);
+					showToaast("<t:i18n id='group.task.create.success'/>", 1);
 					window.location.href = '/ITMount/GroupServlet?action=showTasks&group_id=${group.id}';
 
 				},
 				error : function() {
 					$("#incorectData").show();
-					showToaast("Task was not  created", 0);
+					showToaast("<t:i18n id='group.task.create.error.update'/>", 0);
 
 				}
 			});
@@ -449,7 +444,7 @@ a {
 							$('#form1')
 									.bootstrapValidator(
 											{
-												message : 'This value is not valid',
+												message : '<t:i18n id="group.validation"/>',
 												feedbackIcons : {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
@@ -459,24 +454,24 @@ a {
 													email : {
 														validators : {
 															emailAddress : {
-																message : 'The input is not a valid email address'
+																message : "<t:i18n id='group.validation.email'/>"
 															}
 
 														}
 													},
 													task_name : {
-														message : 'The Task name is not valid',
+														message : "<t:i18n id='group.validation.name'/>",
 														validators : {
 															notEmpty : {
-																message : 'The Task name cannot be empty'
+																message : "<t:i18n id='group.validation.name.empty'/>"
 															},
 														}
 													},
 													task_description : {
-														message : 'The Task description  is not valid',
+														message : "<t:i18n id='group.validation.description'/>",
 														validators : {
 															notEmpty : {
-																message : 'The Task description  cannot be empty'
+																message : "<t:i18n id='group.validation.description.empty'/>"
 															},
 
 														}
@@ -484,17 +479,8 @@ a {
 													task_deadline : {
 														validators : {
 															notEmpty : {
-																message : 'The date is required and cannot be empty'
+																message : "<t:i18n id='group.validation.deadline'/>"
 															},
-														}
-													},
-													photo : {
-														validators : {
-															file : {
-																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
-																message : 'Please choose a image file with a size less than 5M.'
-															}
 														}
 													},
 												}

@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +61,8 @@ a {
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<c:out value="${group.name }" /> Exams
+						<c:out value="${group.name }" />
+						<t:i18n id='group.exams' />
 					</h1>
 				</div>
 			</div>
@@ -70,25 +72,25 @@ a {
 		<div class="row">
 			<div class="col-md-3">
 				<ul class="nav nav-pills nav-stacked">
-						<li  ><a
+					<li><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i>Main</a></li>
-					<li ><a
+							class="fa fa-home fa-fw"></i><t:i18n id='group.main'/></a></li>
+					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i>Tasks</a></li>
-					<li ><a
+							class="fa fa-tasks fa-fw"></i><t:i18n id='group.tasks'/></a></li>
+					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i>Events</a></li>
+							class="fa fa-users fa-fw"></i><t:i18n id='group.events'/></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i>Exams</a></li>
+							class="fa fa-check fa-fw"></i><t:i18n id='group.exams'/></a></li>
 
 
 				</ul>
 			</div>
 			<div class="col-md-9">
-			
-			<jsp:include page="examPanel.jsp"></jsp:include>
+
+				<jsp:include page="examPanel.jsp"></jsp:include>
 
 			</div>
 		</div>

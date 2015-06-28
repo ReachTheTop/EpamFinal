@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;  charset=utf-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1><a href="<c:url value='CourseServlet' />">Courses</a></h1>
+					<h1><a href="<c:url value='CourseServlet' />"><t:i18n id='courses'/></a></h1>
 
 
 				</div>
@@ -47,7 +48,7 @@
 									<li class="portfolio-project-name"><c:out value="${course.name }" /> </li>
 									<li class="read-more"><a
 										href="<c:url value="/CourseServlet?action=readMore&course_id=${course.id }"/>"
-										class="btn">Read more</a></li>
+										class="btn btn-primary"><t:i18n id='courses.more'/></a></li>
 								</ul>
 							</div>
 						</div>

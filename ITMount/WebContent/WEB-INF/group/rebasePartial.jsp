@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <div id="editGroup" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Group settings</h4>
+				<h4 class="modal-title"><t:i18n id='group.panel.rebase'/></h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-group" hidden="true">
@@ -56,20 +56,18 @@
 					});
 				</script>
 				<div class="form-group" id='create-group'>
-					<label for="login-username"><i class="icon-user"></i> <b>Create
-							Group</b></label> <input name="name" class="form-control"
+					<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.panel.group.create'/></b></label> <input name="name" class="form-control"
 						id="group-name-edit" type="text" placeholder="">
 				</div>
 
 				<div class="form-group" id="select-group">
-					<label for="login-password"><i class="icon-lock"></i> <b>Select
-							Group</b></label> <select name="new_group_id" class="form-control"
+					<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.panel.group.select'/></b></label> <select name="new_group_id" class="form-control"
 						id="group-teacher-edit"></select>
 				</div>
 				<div class="form-group">
 
 					<button type="submit" name="action" value="rebase"
-						class="btn pull-right">Rebase</button>
+						class="btn pull-right"><t:i18n id='group.panel.rebase.button'/></button>
 					<div class="clearfix"></div>
 				</div>
 

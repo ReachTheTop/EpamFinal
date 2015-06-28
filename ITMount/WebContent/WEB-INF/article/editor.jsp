@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 
 <div class="container">
 	<div class="hero-unit">
@@ -9,9 +9,8 @@
 		<div id="asd"></div>
 
 		<div class="form-group">
-			<label>Article subject</label> <input type="text"
-				class='form-control' id='art-header'> <label>Article
-				tag</label> <select class='form-control' value="${article.course_id }"
+			<label><t:i18n id='article.subject'/></label> <input type="text"
+				class='form-control' id='art-header'> <label><t:i18n id='article.tag'/></label> <select class='form-control' value="${article.course_id }"
 				id="article-course">
 				<c:forEach items="${courses }" var="course">
 					<option value="${course.id }"><c:out
@@ -82,7 +81,7 @@
 
 					<input class="form-control" placeholder="URL" type="text"
 						data-edit="createLink" />
-					<button class="btn btn-primary" type="button">Add</button>
+					<button class="btn btn-primary" type="button"><t:i18n id='article.link.add'/></button>
 				</div>
 				<a class="btn btn-primary" data-edit="unlink"
 					title="Remove Hyperlink"><i class="icon-cut"></i></a>
@@ -98,7 +97,7 @@
 					data-edit="formatBlock pre" title="Code"><i class="icon-cog"></i></a>
 			</div>
 			<div class="btn-group pull-right">
-				<a class="btn btn-primary" id="create-article">Create</a>
+				<a class="btn btn-primary" id="create-article"><t:i18n id='article.create'/></a>
 			</div>
 			<input type="text" data-edit="inserttext" id="voiceBtn"
 				x-webkit-speech="">
@@ -118,7 +117,7 @@
 			.click(
 					function() {
 						if(!$('#art-header').val()){
-							showToaast("Header must not be empty", 0);
+							showToaast("<t:i18n id='article.error.header'/>", 0);
 						}else{
 						if($('div#editor').html().length <= 88000){
 						$.post("ArticleServlet?action=create",
@@ -136,7 +135,7 @@
 													+ response.id;
 						});
 						}else{
-							showToaast("Article is too long", 0);
+							showToaast("<t:i18n id='article.error.long'/>", 0);
 						}
 					}
 					});

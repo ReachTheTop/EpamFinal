@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Create new course</title>
+<title><t:i18n id='article.new.title'/></title>
 
 <script src="assets/editor/external/google-code-prettify/prettify.js"></script>
 
@@ -48,7 +49,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>New Article</h1>
+					<h1><t:i18n id='article.new'/></h1>
 				</div>
 			</div>
 		</div>

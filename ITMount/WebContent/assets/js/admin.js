@@ -68,11 +68,11 @@ $(function() {
 			$a = $("<a class='btn' id='triger' >");
 			$a.attr('name', item['id']);
 			if (item['is_active'] === true) {
-				$a.text('Close');
+				$a.text($("label#close").text());
 
 			} else {
 
-				$a.text('Open');
+				$a.text($("label#open").text());
 			}
 
 			$courseLink.text(item['name']);
@@ -141,11 +141,11 @@ $(function() {
 						+ $(this).attr('name'), function(response) {
 
 					if (response['is_active'] === true) {
-						object.text("Close");
+						object.text($("label#close").text());
 
 					} else {
 
-						object.text("Open");
+						object.text($("label#open").text());
 					}
 					object.parent().prev().text(response['is_active']);
 
@@ -240,7 +240,7 @@ $(function() {
 			}else{
 				var $confirmation = $("<a id='confirmation' class='btn'>");
 				$confirmation.attr('name', item['id']);
-				$confirmation.text('Confirm');
+				$confirmation.text($('label#confirm').text());
 				$td5.append($confirmation);
 			}
 			
@@ -407,10 +407,10 @@ $(function() {
 			}
 			
 			if(item['is_active'] === true){
-				$trigerUser.text("Ban");
+				$trigerUser.text($("label#ban").text());
 				$trigerUser.attr('class','btn btn-danger');
 			}else{
-				$trigerUser.text("Activate");
+				$trigerUser.text($("label#activate").text());
 				$trigerUser.attr('class','btn btn-success');
 			}
 			$tr.append($td7.append($trigerUser));
@@ -430,10 +430,10 @@ $(function() {
 				  $(this).attr('name'), function(response) {
 					  
 					  if(response.is_active === true){
-						  object.text("Ban");
+						  object.text($("label#ban").text());
 						  object.attr('class','btn btn-danger');
 					  }else{
-						  object.text("Activate");
+						  object.text($("label#activate").text());
 						  object.attr('class','btn btn-success');
 					  }
 				  });

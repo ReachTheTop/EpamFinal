@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><c:out value="${course.name }" /> </title>
 <jsp:include page="../page/head.jsp" />
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 </head>
@@ -18,7 +19,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h1>
-						<a href="<c:url value="CourseServlet" />">Courses</a>
+						<a href="<c:url value="CourseServlet" />"><t:i18n id='courses'/></a>
 					</h1>
 
 				</div>
@@ -46,21 +47,20 @@
 						<c:out value="${course.name}" />
 					</h3>
 					<ul class="no-list-style">
-						<li><b>Description:</b> <c:out value="${course.description}" /></li>
+						<li><c:out value="${course.description}" /></li>
 						<li class="portfolio-visit-btn"><c:if
 								test="${user == null || registationOFF==true}">
 								<form
 									action="<c:url value="/CourseServlet?action=register&course_id=${course.id }" />"
 									method="get" id="form1" role="form">
 
-									<button id="registration" type="submit" class="btn btn-primary">Register
-										On Course</button>
+									<button id="registration" type="submit" class="btn btn-primary"><t:i18n id='courses.register'/></button>
 
 								</form>
 							</c:if> <c:if test="${user!=null && knowladeTrue==true}">
 								<a
 									href="<c:url value="/KnowledgeBaseServlet?action=index&course_id=${course.id }" />"
-									class="btn">Knowledgebase</a>
+									class="btn btn-primary"><t:i18n id='courses.knowledgebase'/></a>
 							</c:if>
 					</ul>
 
@@ -68,7 +68,7 @@
 				<!-- End Project Info Column -->
 			</div>
 			<!-- Related Projects -->
-			<h3>Other course</h3>
+			<h3><t:i18n id='courses.other'/></h3>
 			<div class="row">
 				<c:forEach items="${courses }" var="cours">
 
@@ -86,7 +86,7 @@
 											value="${cours.name }" /></li>
 									<li class="read-more"><a
 										href="<c:url value="/CourseServlet?action=readMore&course_id=${cours.id }"/>"
-										class="btn">Read more</a></li>
+										class="btn btn-primary"><t:i18n id='courses.more'/></a></li>
 								</ul>
 							</div>
 						</div>

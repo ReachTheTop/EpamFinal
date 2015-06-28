@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 
 <link rel="stylesheet" href="resources/css/styleEvent.css"
 	type="text/css">
@@ -17,7 +17,7 @@
 				<a data-toggle="modal" id="createEventModal" href="#createEvent"><i
 					class='glyphicon glyphicon-plus'></i></a>
 			</c:if>
-			Events
+			<t:i18n id='group.events'/>
 
 		</h5>
 
@@ -49,7 +49,7 @@
 						test="${user.role == 'lecturer' && group.teacher_id == user.id}">
 						<div class="col-xs-2 content no-top-border">
 							<p class="m-b-xs">
-								<strong>Options</strong>
+								<strong><t:i18n id='group.events.options'/></strong>
 							</p>
 
 							<c:if
@@ -81,21 +81,19 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">New event</h4>
+				<h4 class="modal-title"><t:i18n id='group.event.new'/></h4>
 			</div>
 			<div class="modal-body">
 				<form action="EventServlet?action=create" id='create-event-form'
 					method="post" role="form" role="form">
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Name</b></label> <input name="eventName" class="form-control" id="eventName"
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.name'/></b></label> <input name="eventName" class="form-control" id="eventName"
 							type="text" required="required" placeholder="">
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Type</b></label> <select class="form-control " name="typeEvent" id="sel1">
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.type'/></b></label> <select class="form-control " name="typeEvent" id="sel1">
 							<option value="fa fa-calendar">other</option>
 							<option value="fa fa-birthday-cake">birthday</option>
 							<option value="fa fa-beer">beer</option>
@@ -110,14 +108,13 @@
 
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Description</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.description'/></b></label>
 						<textarea name="description" class="form-control" type="text"
 							placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Date</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.date'/></b></label>
 						<input name="date" class="form-control" id="comment"
 							type="datetime-local" required="required" placeholder="">
 					</div>
@@ -130,7 +127,7 @@
 					<div class="form-group">
 
 						<button type="submit" id='submit-event-create'
-							class="btn pull-right">Add</button>
+							class="btn pull-right"><t:i18n id='group.event.add'/></button>
 						<div class="clearfix"></div>
 					</div>
 				</form>
@@ -180,21 +177,19 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Update Event</h4>
+				<h4 class="modal-title"><t:i18n id='group.event.update'/></h4>
 			</div>
 			<div class="modal-body">
 				<form action="EventServlet?action=update" id='create-event-form'
 					method="post" role="form" role="form">
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Name</b></label> <input name="eventName" class="form-control"
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.name'/></b></label> <input name="eventName" class="form-control"
 							id="eventName1" type="text" required="required" placeholder="">
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Type</b></label> <select class="form-control " name="typeEvent"
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.type'/></b></label> <select class="form-control " name="typeEvent"
 							id="eventType">
 							<option value="fa fa-calendar">other</option>
 							<option value="fa fa-birthday-cake">birthday</option>
@@ -209,14 +204,13 @@
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Event
-								Description</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.description'/></b></label>
 						<textarea name="description" id="eventDescription"
 							class="form-control" type="text" placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
-						<label for="login-password"><i class="icon-lock"></i> <b>Date</b></label>
+						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.date'/></b></label>
 						<input name="date" class="form-control" id="eventDate"
 							type="datetime-local" required="required" placeholder="">
 					</div>
@@ -234,7 +228,7 @@
 					<div class="form-group">
 
 						<button type="submit" id='submit-event-create'
-							class="btn pull-right">Update</button>
+							class="btn pull-right"><t:i18n id='group.event.update.button'/></button>
 						<div class="clearfix"></div>
 					</div>
 				</form>
