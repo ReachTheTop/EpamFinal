@@ -88,8 +88,7 @@ a {
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
 							class="fa fa-check fa-fw"></i>Exams</a></li>
-
-					<c:choose>
+					<li><c:choose>
 							<c:when
 								test="${user.role == 'lecturer' && group.teacher_id == user.id}">
 								<c:choose>
@@ -135,9 +134,7 @@ a {
 									group</a>
 
 							</c:when>
-						</c:choose>
-
-
+						</c:choose></li>
 
 
 

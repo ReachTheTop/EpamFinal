@@ -5,8 +5,11 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<a data-toggle="modal" id="createEventModal" href="#createExam"><i
-			class='glyphicon glyphicon-plus'></i></a> Exams
+		<c:if test="${group.teacher_id == user.id }">
+			<a data-toggle="modal" id="createEventModal" href="#createExam"><i
+				class='glyphicon glyphicon-plus'></i></a>
+		</c:if>
+		Exams
 	</div>
 	<table class="table">
 		<c:forEach items="${ exams}" var="exam">
@@ -17,12 +20,13 @@
 						value="${exam.exam_date }" /></td>
 				<td></td>
 				<td><c:out value="${exam.description }" /></td>
-				<td><a data-toggle="modal" id="${exam.id }" class="updateExam"
-					href="#updateExam"><i class='glyphicon glyphicon-edit'></i></a></td>
-				<td><a data-toggle="modal" id="${exam.id }" class="updateExam"
-					href="<c:url value="GroupExamServlet?action=toCSV&exam_id=${exam.id }" />"><i
-						class='glyphicon glyphicon-file'></i></a></td>
-
+				<c:if test="${group.teacher_id == user.id }">
+					<td><a data-toggle="modal" id="${exam.id }" class="updateExam"
+						href="#updateExam"><i class='glyphicon glyphicon-edit'></i></a></td>
+					<td><a data-toggle="modal" id="${exam.id }" class="updateExam"
+						href="<c:url value="GroupExamServlet?action=toCSV&exam_id=${exam.id }" />"><i
+							class='glyphicon glyphicon-file'></i></a></td>
+				</c:if>
 			</tr>
 
 		</c:forEach>
@@ -134,35 +138,46 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$('a.updateExam').click(
-			function() {
-				var index = $(this).attr('id');
-				$('#exam_id').val(index);
-				$.get('GroupExamServlet?action=show&exam_id=' + index,
-						function(response) {
-							$('#examDescription').val(response.description);
-							
-							
-							var dateString = response.exam_date;
-							alert(dateString);
-							
-							var date = new Date(Date.parse(dateString));
+	$('a.updateExam')
+			.click(
+					function() {
+						var index = $(this).attr('id');
+						$('#exam_id').val(index);
+						$
+								.get(
+										'GroupExamServlet?action=show&exam_id='
+												+ index,
+										function(response) {
+											$('#examDescription').val(
+													response.description);
 
-							var year = date.getFullYear().toString();
-							var month = addZero(date.getMonth() + 1).toString();
-							var day = addZero(date.getDate()).toString();
-							var hours = addZero(date.getHours()).toString();
-							var minutes = addZero(date.getMinutes()).toString();
+											var dateString = response.exam_date;
 
-							var correctDate = year.concat("-", month, "-", day, "T",
-									hours, ":", minutes);
-							
-							$("#examDate").val(correctDate);
+											var date = new Date(Date
+													.parse(dateString));
 
-						
-						});
-			});
-	
+											var year = date.getFullYear()
+													.toString();
+											var month = addZero(
+													date.getMonth() + 1)
+													.toString();
+											var day = addZero(date.getDate())
+													.toString();
+											var hours = addZero(date.getHours())
+													.toString();
+											var minutes = addZero(
+													date.getMinutes())
+													.toString();
+
+											var correctDate = year.concat("-",
+													month, "-", day, "T",
+													hours, ":", minutes);
+
+											$("#examDate").val(correctDate);
+
+										});
+					});
+
 	function addZero(i) {
 		if (i < 10) {
 			i = "0" + i;

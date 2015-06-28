@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="resources/css/font-awesome.css">
 <link rel="stylesheet" href="resources/css/animate.css">
 
-<title>${ group.name }</title>
+<title><c:out value="${ group.name }" /></title>
 
 <style type="text/css">
 .nav-pills>li.active>a {
@@ -60,7 +60,7 @@ a {
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<c:out value="${group.name }" />
+						<c:out value="${group.name }" /> Events
 					</h1>
 				</div>
 			</div>

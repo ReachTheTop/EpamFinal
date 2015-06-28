@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Courses</h1>
+					<h1><a href="<c:url value='CourseServlet' />">Courses</a></h1>
 
 
 				</div>
@@ -44,7 +44,7 @@
 							</div>
 							<div class="portfolio-info">
 								<ul>
-									<li class="portfolio-project-name">${course.name }</li>
+									<li class="portfolio-project-name"><c:out value="${course.name }" /> </li>
 									<li class="read-more"><a
 										href="<c:url value="/CourseServlet?action=readMore&course_id=${course.id }"/>"
 										class="btn">Read more</a></li>

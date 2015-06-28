@@ -60,7 +60,7 @@ a {
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<c:out value="${group.name }" />
+						<c:out value="${group.name }" /> Exams
 					</h1>
 				</div>
 			</div>

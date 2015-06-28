@@ -21,7 +21,7 @@
 										href="<c:url value="/lenguage?language=${lang.getLanguage() }&country=${lang.getCountry()}" />"><img
 											src="resources/img/flags/${lang.getImage()}"
 											onerror="this.src='resources/img/flags/up.png'"
-											alt="${lang.getName()}"> ${lang.getName()}</a></li>
+											alt="${lang.getName()}"><c:out value="${lang.getName()}" />  </a></li>
 
 								</c:forEach>
 
@@ -37,7 +37,7 @@
 						<li class="shopping-cart-items"><a
 							href="<c:url value="/UserServlet" />"><i
 								class="glyphicon glyphicon-user icon-white"><b>
-										${user.getName()}</b></i></a></li>
+									<c:out value="${user.getName()}" />	</b></i></a></li>
 						<li class="shopping-cart-items"><a
 							href="<c:url value="/exit" />"><i
 								class="glyphicon glyphicon-log-out icon-white"><b> <t:i18n
@@ -58,7 +58,7 @@
 		<nav id="mainmenu" class="mainmenu">
 			<ul>
 				<li class="logo-wrapper"><a href="<c:url value="home" />"><img
-						src="resources/img/mPurpose-logo.png"
+						src="resources/img/jquery.png"
 						alt="Multipurpose Twitter Bootstrap Template"></a></li>
 				<li class="active"><a href="<c:url value="/home" />"><t:i18n
 							id="header.home" /></a></li>

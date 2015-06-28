@@ -31,16 +31,16 @@
 						<i class="${event.typeEvent }"></i>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${event.date }" />
 						<fmt:formatDate pattern="hh:mm" value="${event.date }" />
-						<br /> <small class="text-navy">${event.message }</small>
+						<br /> <small class="text-navy"><c:out value="${event.message }" /> </small>
 
 
 					</div>
 					<div class="col-xs-7 content no-top-border">
 						<p class="m-b-xs">
-							<strong>${event.nameEvent }</strong>
+							<strong><c:out value=" ${event.nameEvent }" /></strong>
 						</p>
 
-						<p>${event.description }</p>
+						<p><c:out value="${event.description }" /> </p>
 
 
 					</div>

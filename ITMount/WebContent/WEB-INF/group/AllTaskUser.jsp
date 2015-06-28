@@ -30,15 +30,17 @@
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingThree">
 								<h4 class="panel-title">
-										<a  data-toggle="modal" id="${tasks.key.id}" class="updateTask" style =""
-												href="#myModalUpdate"><i class="fa fa-edit"></i></a>
-									
+									<c:if test="${group.teacher_id == user.id }">
+										<a data-toggle="modal" id="${tasks.key.id}" class="updateTask"
+											style="" href="#myModalUpdate"><i class="fa fa-edit"></i></a>
+									</c:if>
 									<a class="collapsed" role="button" data-toggle="collapse"
 										data-parent="#accordion" href="#collapse${tasks.key.id}"
 										aria-expanded="false" aria-controls="collapse${tasks.key.id}">
-										${tasks.key.name} </a>
-										
-									
+										<c:out value="${tasks.key.name} " />
+									</a>
+
+
 								</h4>
 							</div>
 							<div id="collapse${tasks.key.id}" class="panel-collapse collapse"
@@ -49,11 +51,11 @@
 										<table class="table table-bordered">
 											<tr>
 												<td>Task name</td>
-												<td>${tasks.key.name }</td>
+												<td><c:out value="${tasks.key.name }" /></td>
 											</tr>
 											<tr>
 												<td>Task description</td>
-												<td>${tasks.key.description }</td>
+												<td><c:out value="${tasks.key.description }" /></td>
 											</tr>
 											<tr>
 												<td>Task deadline</td>

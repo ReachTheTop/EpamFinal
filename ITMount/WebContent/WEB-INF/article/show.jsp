@@ -54,9 +54,10 @@
 									<li>
 										<div class="comment-wrapper">
 											<div class="comment-author">
+												<a class="link" href="<c:url value='UserServlet?user_id=${comment.sender.id }' />"> 
 												<img src="upload/${comment.sender.image }" alt="User Name">
 												<c:out value="${comment.sender.name }" />
-												<c:out value="${comment.sender.surname }" />
+												<c:out value="${comment.sender.surname }" /></a> 
 											</div>
 											<p>
 												<c:out value="${comment.content }" />

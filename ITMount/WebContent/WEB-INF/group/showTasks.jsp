@@ -83,8 +83,11 @@ a {
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
 							class="fa fa-check fa-fw"></i>Exams</a></li>
-					<li><a href="#myModal" class="btn btn-sm btn-primary"
-						data-toggle="modal">Create Task</a></li>
+					<c:if
+						test="${not empty group.teacher_id && user.id == group.teacher_id}">
+						<li><a href="#myModal" class="btn btn-sm btn-primary"
+							data-toggle="modal">Create Task</a></li>
+					</c:if>
 				</ul>
 			</div>
 			<div class="col-md-9">
@@ -103,12 +106,12 @@ a {
 
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-			
-	
-					
-					<form action="TaskServlet?action=updateTask&group_id=${group.id }" id='editTask'
-						method="post" enctype="multipart/form-data" role="form"
-						role="form">
+
+
+
+				<form action="TaskServlet?action=updateTask&group_id=${group.id }"
+					id='editTask' method="post" enctype="multipart/form-data"
+					role="form" role="form">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -132,8 +135,8 @@ a {
 							<label for="login-username"><i class="icon-user"></i> <b>Task
 									Description</b></label>
 							<p>
-								<textarea class="form-control" name="task_description" id="task_description" rows="3"
-									name="text"></textarea>
+								<textarea class="form-control" name="task_description"
+									id="task_description" rows="3" name="text"></textarea>
 							</p>
 						</div>
 
@@ -149,17 +152,18 @@ a {
 								<b>File</b></label> <input class="form-control" id="task_file1"
 								type="file" placeholder="" name="fileUpdate">
 						</div>
-						
+
 						<div class="form-group" hidden="true">
 
-						<input name="task_id" class="form-control" id="task_id"
-							type="text" placeholder="">
-					</div>
+							<input name="task_id" class="form-control" id="task_id"
+								type="text" placeholder="">
+						</div>
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Update task</button>
+							<button type="submit" class="btn btn-primary">Update
+								task</button>
 						</div>
 
 					</div>
@@ -168,17 +172,16 @@ a {
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
 		var form2 = $('#editTask');
 		form2.submit(function(e) {
-			
+
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			request = $.ajax({
 				type : form2.attr('method'),
 				url : form2.attr('action'),
-				
 
 				data : new FormData(this),
 				processData : false,
@@ -187,7 +190,7 @@ a {
 				success : function(text) {
 
 					$("#incorectData2").hide();
-					
+
 					$('#myModalUpdate').modal('hide');
 					showToaast("Task was  successfully edited", 1);
 
@@ -202,60 +205,57 @@ a {
 			return false;
 		});
 	</script>
-	
-	
-	
+
+
+
 	<script type="text/javascript">
-	$('a.updateTask').click(
-			function() {
-				var index = $(this).attr('id');
-				$('#task_id').val(index);
-				$.get('TaskServlet?action=show&task_id=' + index,
-						function(response) {
-					
-							$('#task_name').val(response.name);
-							$("#task_description").val(response.description);
-							
-							
-							var dateString = response.deadline;
-				
-							var date = new Date(Date.parse(dateString));
+		$('a.updateTask').click(
+				function() {
+					var index = $(this).attr('id');
+					$('#task_id').val(index);
+					$.get('TaskServlet?action=show&task_id=' + index, function(
+							response) {
 
-							var year = date.getFullYear().toString();
-							var month = addZero(date.getMonth() + 1).toString();
-							var day = addZero(date.getDate()).toString();
-							var hours = addZero(date.getHours()).toString();
-							var minutes = addZero(date.getMinutes()).toString();
+						$('#task_name').val(response.name);
+						$("#task_description").val(response.description);
 
-							var correctDate = year.concat("-", month, "-", day, "T",
-									hours, ":", minutes);
-							
-							$("#taskDeadline").val(correctDate);
-							
-							
-						});
-			});
-	
-	
-	function addZero(i) {
-		if (i < 10) {
-			i = "0" + i;
+						var dateString = response.deadline;
+
+						var date = new Date(Date.parse(dateString));
+
+						var year = date.getFullYear().toString();
+						var month = addZero(date.getMonth() + 1).toString();
+						var day = addZero(date.getDate()).toString();
+						var hours = addZero(date.getHours()).toString();
+						var minutes = addZero(date.getMinutes()).toString();
+
+						var correctDate = year.concat("-", month, "-", day,
+								"T", hours, ":", minutes);
+
+						$("#taskDeadline").val(correctDate);
+
+					});
+				});
+
+		function addZero(i) {
+			if (i < 10) {
+				i = "0" + i;
+			}
+			return i;
 		}
-		return i;
-	}
-</script>
+	</script>
 
 
 	<script>
 		$(document).ready(function() {
 			$("#myModalUpdate").on("hidden.bs.modal", function() {
-			
+
 				$("#incorectData2").hide();
 
 			});
 		});
 	</script>
-	
+
 
 	<script src="resources/js/toastr.js"></script>
 
@@ -325,7 +325,7 @@ a {
 
 		}
 	</script>
-	
+
 	<div id="myModal" class="modal fade bs-example-modal-sm">
 
 
@@ -381,9 +381,10 @@ a {
 						</div>
 
 						<div class="modal-footer">
-							<button type="submit"  class="btn btn-primary"
+							<button type="submit" class="btn btn-primary"
 								data-dismiss="modal">Close</button>
-							<button type="submit"  id = "addTask" class="btn btn-primary">Add task</button>
+							<button type="submit" id="addTask" class="btn btn-primary">Add
+								task</button>
 						</div>
 
 					</div>
@@ -392,7 +393,7 @@ a {
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
 		var form1 = $('#form1');
 		form1.submit(function(e) {
@@ -436,8 +437,8 @@ a {
 			});
 		});
 	</script>
-	
-	
+
+
 
 
 	<script type="text/javascript">

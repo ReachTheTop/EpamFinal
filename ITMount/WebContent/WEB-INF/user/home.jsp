@@ -293,14 +293,14 @@
 
 
 	<c:choose>
-		<c:when test="${user.role !='admin' }">
+		<c:when test="${user.id !=current_user.id || user.role !='admin' }">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
 								<h3 class="panel-title" id="userNameSurname">
-									${current_user.name } ${current_user.surname }
+								<c:out value="${current_user.name }" />	<c:out value="${current_user.surname }" /> 
 
 									<%-- 									<c:if test="${current_user.id == user.id }"> --%>
 									<!-- 										<a data-toggle="modal" href="#editUser"><i -->
@@ -325,15 +325,15 @@
 												<tr>
 
 													<td><t:i18n id="home.FirstName"/></td>
-													<td id = "userName"><p > ${current_user.name } </p></td>
+													<td id = "userName"><p ><c:out value="${current_user.name }" /> </p></td>
 												</tr>
 												<tr>
 													<td><t:i18n id="home.MiddleName"/></td>
-													<td id = "userMiddleName">${current_user.middle_name }</td>
+													<td id = "userMiddleName"><c:out value="${current_user.middle_name }" /> </td>
 												</tr>
 												<tr>
 													<td><t:i18n id="home.Surname"/></td>
-													<td id = "userSurName"><p>${current_user.surname }</p></td>
+													<td id = "userSurName"><p><c:out value="${current_user.surname }" /> </p></td>
 												</tr>
 
 												
@@ -346,7 +346,7 @@
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td>${current_user.email}</td>
+													<td><c:out value="${current_user.email}" /> </td>
 												</tr>
 												<tr>
 
@@ -387,7 +387,7 @@
 												<tr>
 
 													<td><t:i18n id="home.AboutMyself"/></td>
-													<td id="userDescription"><p>${current_user.description}</p></td>
+													<td id="userDescription"><p><c:out value="${current_user.description}" /></p></td>
 												</tr>
 
 
@@ -421,7 +421,7 @@
 
 										<img src="upload/${group.course.icon }" class="img-circle"
 										alt="Cinque Terre" width="150" height="150"
-										alt="${group.name }">
+										alt="<c:out value='${group.name }' />">
 
 									</a>
 								</div>
@@ -484,7 +484,7 @@
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
 											<b><t:i18n id="admin.course.description"/></b></label>
-										<textarea name="description" class="form-control"
+										<textarea name="description" rows="10" class="form-control"
 											id="course-description-edit" placeholder=""> </textarea>
 									</div>
 									<div class="form-group">
@@ -640,8 +640,8 @@
 
 								<a id="userNameSurname" data-toggle="collapse" class="courses"
 									data-parent="#accordion" href="#collapse0" aria-expanded="true"
-									aria-controls="collapse0">${current_user.name }
-									${current_user.surname }</a> 
+									aria-controls="collapse0"><c:out value="${current_user.name }" /> <c:out value="${current_user.surname }" />
+									</a> 
 							</h4>
 						</div>
 
@@ -666,16 +666,16 @@
 												<tr>
 													<td><t:i18n id="home.FirstName"/></td>
 
-													<td id="userName">${current_user.name }</td>
+													<td id="userName"><c:out value="${current_user.name }" /> </td>
 
 												</tr>
 												<tr>
 													<td><t:i18n id="home.MiddleName"/></td>
-													<td id="userMiddleName">${current_user.middle_name }</td>
+													<td id="userMiddleName"><c:out value="${current_user.middle_name }" /> </td>
 												</tr>
 												<tr>
 													<td><t:i18n id="home.Surname"/></td>
-													<td id="userSurName"><p>${current_user.surname }</p></td>
+													<td id="userSurName"><p><c:out value="${current_user.surname }" /> </p></td>
 												</tr>
 
 												<tr>
@@ -685,7 +685,7 @@
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td>${current_user.email}</td>
+													<td><c:out value="${current_user.email}" /> </td>
 												</tr>
 												<tr>
 													<td><t:i18n id="home.Phone"/></td>
@@ -719,7 +719,7 @@
 												<!-- 												</tr> -->
 												<tr>
 													<td><t:i18n id="home.AboutMyself"/></td>
-													<td id="userDescription"><p>${current_user.description}</p></td>
+													<td id="userDescription"><p><c:out value="${current_user.description}" /></p></td>
 
 												</tr>
 

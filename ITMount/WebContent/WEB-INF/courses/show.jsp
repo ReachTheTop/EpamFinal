@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>${ course.name }course</title>
+<title><c:out value="${ course.name } " /> course</title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
