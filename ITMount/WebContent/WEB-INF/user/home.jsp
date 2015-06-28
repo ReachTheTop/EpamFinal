@@ -53,6 +53,7 @@
 		</div>
 	</div>
 
+
 	<div id="editUser" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -68,6 +69,7 @@
 						method="post" enctype="multipart/form-data" role="form"
 						role="form">
 						<div class="form-group">
+
 							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
 										id="home.FirstName" /> </b></label> <input name="name"
 								class="form-control" id="userNameModal" type="text"
@@ -85,6 +87,7 @@
 										id="home.Surname" /> </b></label><input name="surname"
 								class="form-control" id="userSurNameModal" type="text"
 								placeholder="" value="${user.surname }">
+
 						</div>
 						<div class="form-group" style="display: none">
 							<label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
@@ -135,6 +138,9 @@
 								placeholder=""><c:out value="${user.description }" /> </textarea>
 						</div>
 
+
+
+
 						<div class="form-group">
 
 							<button type="submit" class="btn pull-right">
@@ -144,8 +150,10 @@
 						</div>
 					</form>
 				</div>
+
 			</div>
 		</div>
+
 	</div>
 
 	<script src="resources/js/toastr.js"></script>
@@ -262,11 +270,14 @@
 					$("#userDescription").html(description);
 
 					$('#editUser').modal('hide');
-					showToaast("Profile was successfully edited", 1);
+
+					showToaast('<t:i18n id="home.ProfileWasSuccessfullyEdited"/>', 1);
+
 				},
 				error : function() {
+			
+					showToaast('<t:i18n id="home.ProfileWasNotEdited"/>', 0);
 
-					showToaast("Profile was not edited", 0);
 				}
 			});
 			return false;
@@ -304,12 +315,7 @@
 									<div class="col-md-3 col-lg-3 " align="center">
 										<img id="fileImage1" src="upload/${current_user.image }"
 											alt="" class="img-rounded img-responsive" />
-										<c:if test="${user.id == current_user.id }">
-											<button type="submit"
-												class="btn btn-default btn-xs dropdown-toggle"
-												data-toggle="modal" href="#editUser"
-												style="margin-top: 10px">Update foto</button>
-										</c:if>
+										
 									</div>
 
 
@@ -317,31 +323,36 @@
 										<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td>First Name</td>
-													<td id="userName"><p>${current_user.name }</p></td>
+
+													<td><t:i18n id="home.FirstName"/></td>
+													<td id = "userName"><p > ${current_user.name } </p></td>
 												</tr>
 												<tr>
-													<td>Middle Name</td>
-													<td id="userMiddleName">${current_user.middle_name }</td>
+													<td><t:i18n id="home.MiddleName"/></td>
+													<td id = "userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
-													<td>Surname</td>
-													<td id="userSurName"><p>${current_user.surname }</p></td>
+													<td><t:i18n id="home.Surname"/></td>
+													<td id = "userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
+												
 												<tr>
-												<tr>
-													<td>Birthday</td>
-													<td><fmt:formatDate pattern="yyyy-MM-dd"
+
+													<td><t:i18n id="home.Birthday"/></td>
+													<td id="userBirtday"><fmt:formatDate pattern="yyyy-MM-dd"
 															value="${current_user.birtday }" /></td>
+
 												</tr>
 												<tr>
 													<td>Email</td>
 													<td>${current_user.email}</td>
 												</tr>
 												<tr>
-													<td>Phone</td>
-													<td id="userPhone"><p>${contact.phone}</p></td>
+
+													<td><t:i18n id="home.Phone"/></td>
+													<td id="userPhone">${contact.phone}</td>
+
 												</tr>
 												<tr>
 													<td>Skype</td>
@@ -349,22 +360,24 @@
 
 												</tr>
 												<tr>
-													<td>CV</td>
+													<td><t:i18n id="home.CurriculumVitae"/></td>
 													<td><c:choose>
 															<c:when
 																test="${current_user.curriculum_vitae == null && user.id == current_user.id }">
 																<button type="submit"
 																	class="btn btn-default btn-xs dropdown-toggle"
-																	data-toggle="modal" href="#editUser">Add CV</button>
+																	data-toggle="modal" href="#editUser"><t:i18n id="home.AddCV"/></button>
 															</c:when>
 
 															<c:otherwise>
 																<p>
+
 																	<c:if test="${current_user.curriculum_vitae != null}">
 																		<a id="cvFile1"
 																			href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
 																			><i class = "glyphicon glyphicon-file"></i> </a>
 																	</c:if>
+
 																</p>
 
 															</c:otherwise>
@@ -372,9 +385,9 @@
 														</c:choose></td>
 												</tr>
 												<tr>
-													<td>Description</td>
-													<td id="userDescription"><p>${current_user.description}</p></td>
 
+													<td><t:i18n id="home.AboutMyself"/></td>
+													<td id="userDescription"><p>${current_user.description}</p></td>
 												</tr>
 
 
@@ -390,8 +403,9 @@
 
 					<jsp:include page="notificationHistory.jsp" />
 					<div class="col-md-4">
+
 						<h2>
-							My courses
+							<t:i18n id="home.MyCourses"/>
 							<c:if test="${current_user.id == user.id && not empty history }">
 								<a data-toggle="modal" href="#notificationHistory"><i
 									class="glyphicon glyphicon-th-list"></i> </a>
@@ -437,7 +451,7 @@
 		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
 			<div class="container">
-				<h2>Admin Panel</h2>
+				<h2><t:i18n id="admin.panel"/></h2>
 
 
 				<div id="editCourse" class="modal fade">
@@ -446,7 +460,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Course settings</h4>
+								<h4 class="modal-title"><t:i18n id="admin.course.settings"/></h4>
 							</div>
 							<div class="modal-body">
 								<form action="CourseServlet?action=update" data-async
@@ -458,25 +472,25 @@
 									</div>
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b>Name</b></label> <input name="name" class="form-control"
+											<b><t:i18n id="admin.course.name"/></b></label> <input name="name" class="form-control"
 											id="course-name-edit" type="text" placeholder="">
 									</div>
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b>Image</b></label> <input name="image" class="form-control"
+											<b><t:i18n id="admin.course.image"/></b></label> <input name="image" class="form-control"
 											id="course-icon-edit" type="file" placeholder="">
 									</div>
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b>Description</b></label>
+											<b><t:i18n id="admin.course.description"/></b></label>
 										<textarea name="description" class="form-control"
 											id="course-description-edit" placeholder=""> </textarea>
 									</div>
 									<div class="form-group">
 
 										<button type="submit" id='submit-course-edit'
-											class="btn pull-right">Update</button>
+											class="btn pull-right"><t:i18n id="admin.course.update"/></button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -504,7 +518,7 @@
 
 					$('button#submit-course-edit').click(function() {
 						$('#editCourse').modal('hide');
-						showToaast("Course successfully updated", 1);
+						showToaast("<t:i18n id='admin.course.toast'/>", 1);
 					});
 				</script>
 
@@ -517,7 +531,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title">New course</h4>
+								<h4 class="modal-title"><t:i18n id="admin.course.new"/></h4>
 							</div>
 							<div class="modal-body">
 								<form action="CourseServlet?action=create"
@@ -525,19 +539,19 @@
 									enctype="multipart/form-data" role="form" role="form">
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b>Course Name</b></label> <input name="name" class="form-control"
+											<b><t:i18n id="admin.course.name"/></b></label> <input name="name" class="form-control"
 											id="login-username" type="text" placeholder="">
 									</div>
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b>Icon</b></label> <input name="icon" class="form-control" id="file"
+											<b><t:i18n id="admin.course.image"/></b></label> <input name="icon" class="form-control" id="file"
 											type="file" required="required" placeholder="">
 									</div>
 
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b>Description</b></label>
+											<b><t:i18n id="admin.course.description"/></b></label>
 										<textarea name="description" class="form-control" id="comment"
 											placeholder=""></textarea>
 									</div>
@@ -547,7 +561,7 @@
 
 									<div class="form-group">
 
-										<button type="submit" class="btn pull-right">Create</button>
+										<button type="submit" class="btn pull-right"><t:i18n id="admin.course.create"/></button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -567,7 +581,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Group settings</h4>
+								<h4 class="modal-title"><t:i18n id="admin.group.settings"/></h4>
 							</div>
 							<div class="modal-body">
 								<form action="GroupServlet?action=update" data-async
@@ -585,19 +599,19 @@
 									</div>
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b>Name</b></label> <input name="name" class="form-control"
+											<b><t:i18n id="admin.group.name"/></b></label> <input name="name" class="form-control"
 											id="group-name-edit" type="text" placeholder="">
 									</div>
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b>Teacher</b></label> <select name="teacher_id" class="form-control"
+											<b><t:i18n id="admin.group.teacher"/></b></label> <select name="teacher_id" class="form-control"
 											id="group-teacher-edit"></select>
 									</div>
 									<div class="form-group">
 
 										<button type="submit" id='submit-group-edit'
-											class="btn pull-right">Update</button>
+											class="btn pull-right"><t:i18n id="admin.group.update"/></button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -609,7 +623,7 @@
 					$('button#submit-group-edit').click(function() {
 
 						$('#editGroup').modal('hide');
-						showToaast("Group successfully updated", 1);
+						showToaast("<t:i18n id='admin.group.update.toast'/>", 1);
 					});
 				</script>
 
@@ -642,10 +656,7 @@
 										<img id="fileImage1" src="upload/${current_user.image }"
 											alt="" class="img-rounded img-responsive" />
 
-										<button type="submit"
-											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#editUser" style="margin-top: 10px">
-											Update foto</button>
+										
 									</div>
 
 
@@ -653,23 +664,23 @@
 										<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td>First Name</td>
+													<td><t:i18n id="home.FirstName"/></td>
 
 													<td id="userName">${current_user.name }</td>
 
 												</tr>
 												<tr>
-													<td>Middle Name</td>
+													<td><t:i18n id="home.MiddleName"/></td>
 													<td id="userMiddleName">${current_user.middle_name }</td>
 												</tr>
 												<tr>
-													<td>Surname</td>
+													<td><t:i18n id="home.Surname"/></td>
 													<td id="userSurName"><p>${current_user.surname }</p></td>
 												</tr>
 
 												<tr>
 												<tr>
-													<td>Birthday</td>
+													<td><t:i18n id="home.Birthday"/></td>
 													<td id="userBirthday2"><p>${userBirthdayString }</p></td>
 												</tr>
 												<tr>
@@ -677,7 +688,7 @@
 													<td>${current_user.email}</td>
 												</tr>
 												<tr>
-													<td>Phone</td>
+													<td><t:i18n id="home.Phone"/></td>
 													<td id="userPhone"><p>${contact.phone}</p></td>
 												</tr>
 												<tr>
@@ -707,7 +718,7 @@
 												<%-- 														</c:choose></td> --%>
 												<!-- 												</tr> -->
 												<tr>
-													<td>Description</td>
+													<td><t:i18n id="home.AboutMyself"/></td>
 													<td id="userDescription"><p>${current_user.description}</p></td>
 
 												</tr>
@@ -727,7 +738,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="courses"
-									data-parent="#accordion" href="#collapse1">Courses</a>
+									data-parent="#accordion" href="#collapse1"><t:i18n id="admin.courses"/></a>
 							</h4>
 
 						</div>
@@ -740,13 +751,13 @@
 										<div class="form-group">
 
 											<input type="text" id="search-field"
-												placeholder="Course Search" class='form-control'>
+												placeholder="<t:i18n id='admin.course.search'/>" class='form-control'>
 
 										</div>
 									</div>
 									<div class="col-xs-4 col-sm-2">
 										<a data-toggle="modal" class='btn btn-primary'
-											href="#newCourse">Create New Course</a> <a
+											href="#newCourse"><t:i18n id="admin.course.create.new"/></a> <a
 											data-toggle="modal" id="courseEditModal" href="#editCourse"><i
 											class='glyphicon glyphicon-edit'></i></a>
 									</div>
@@ -755,10 +766,10 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Is active</th>
-											<th>Triger course</th>
-											<th>Edit course</th>
+											<th><t:i18n id="admin.course.name"/></th>
+											<th><t:i18n id="admin.course.activity"/></th>
+											<th><t:i18n id="admin.course.triger"/></th>
+											<th><t:i18n id="admin.course.edit"/></th>
 										<tr>
 									</thead>
 									<tbody id="courses-body">
@@ -777,7 +788,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class='groups'
-									data-parent="#accordion" href="#collapse2">Groups</a>
+									data-parent="#accordion" href="#collapse2"><t:i18n id="admin.groups"/></a>
 							</h4>
 						</div>
 						<div id="collapse2" class="panel-collapse collapse">
@@ -787,7 +798,7 @@
 									<div class="form-group">
 
 										<input type="text" id="search-groups"
-											placeholder="Group Search" class='form-control'>
+											placeholder="<t:i18n id='admin.group.search'/>" class='form-control'>
 									</div>
 
 
@@ -795,11 +806,11 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>Course</th>
-											<th>Group Name</th>
-											<th>Teacher</th>
-											<th>Confirmed</th>
-											<th>Edit</th>
+											<th><t:i18n id="admin.group.course"/></th>
+											<th><t:i18n id="admin.group.name1"/></th>
+											<th><t:i18n id="admin.group.teacher"/></th>
+											<th><t:i18n id="admin.group.confirmed"/></th>
+											<th><t:i18n id="admin.group.edit"/></th>
 										<tr>
 									</thead>
 									<tbody id="groups-body">
@@ -820,7 +831,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="users" data-parent="#accordion"
-									href="#collapse3">Users</a>
+									href="#collapse3"><t:i18n id="admin.users"/></a>
 							</h4>
 						</div>
 						<div id="collapse3" class="panel-collapse collapse">
@@ -830,7 +841,7 @@
 									<div class="form-group">
 
 										<input type="text" id="search-users"
-											placeholder="Group Search" class='form-control'>
+											placeholder="<t:i18n id='admin.user.search'/>" class='form-control'>
 									</div>
 
 
@@ -838,13 +849,13 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Surname</th>
-											<th>Role</th>
+											<th><t:i18n id="admin.user.name"/></th>
+											<th><t:i18n id="admin.user.surname"/></th>
+											<th><t:i18n id="admin.user.role"/></th>
 											<th>Email</th>
-											<th>Phone</th>
+											<th><t:i18n id="admin.user.phone"/></th>
 											<th>Skype</th>
-											<th>Active</th>
+											<th><t:i18n id="admin.user.activity"/></th>
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -867,7 +878,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class='language'
-									data-parent="#accordion" href="#collapse5">Language</a>
+									data-parent="#accordion" href="#collapse5"><t:i18n id="admin.languages"/></a>
 							</h4>
 						</div>
 						<div id="collapse5" class="panel-collapse collapse">
@@ -877,15 +888,13 @@
 									<div class="form-group">
 										<a
 											href="<c:url value="/downloadFile?file=WEB-INF\\classes\\i18n.properties"/>"
-											class="btn btn-default btn-xs dropdown-toggle">Downaload
-											pattern</a>
+											class="btn btn-default btn-xs dropdown-toggle"><t:i18n id="admin.language.pattern"/></a>
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#updatePatternLanguage">Update
-											pattern</button>
+											data-toggle="modal" href="#updatePatternLanguage"><t:i18n id="admin.language.pattern.update"/></button>
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#addLanguage">Add Language</button>
+											data-toggle="modal" href="#addLanguage"><t:i18n id="admin.language.add"/></button>
 
 										<a data-toggle="modal" id="languageEditModal"
 											href="#languageEdit"><i
@@ -899,13 +908,13 @@
 									<thead>
 										<tr>
 											<th>№</th>
-											<th>Name</th>
-											<th>Language</th>
-											<th>Country</th>
-											<th>Image</th>
+											<th><t:i18n id="admin.language.name"/></th>
+											<th><t:i18n id="admin.language"/></th>
+											<th><t:i18n id="admin.language.country"/></th>
+											<th><t:i18n id="admin.language.image"/></th>
 
-											<th>Active</th>
-											<th>Action</th>
+											<th><t:i18n id="admin.language.activity"/></th>
+											<th><t:i18n id="admin.language.actions"/></th>
 										<tr>
 									</thead>
 									<tbody id="language-body">
@@ -932,7 +941,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">New Language</h4>
+					<h4 class="modal-title"><t:i18n id="admin.language.new"/></h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -941,30 +950,30 @@
 						enctype="multipart/form-data" role="form">
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.name"/></b></label>
 							<input name="name" class="form-control" id="new-name" type="text"
 								placeholder="">
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Language</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language"/></b></label>
 							<input name="language" class="form-control" id="new-language"
 								type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Country</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.country"/></b></label>
 							<input name="country" class="form-control" id="new-language"
 								type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
 							<input name="bandle" class="form-control" id="new-file"
 								type="file" placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right">Create</button>
+								class="btn pull-right"><t:i18n id="admin.language.create"/></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -980,7 +989,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Update Pattern</h4>
+					<h4 class="modal-title"><t:i18n id="admin.language.pattern.update"/></h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -989,14 +998,14 @@
 						enctype="multipart/form-data" role="form">
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
 							<input name="bandle" class="form-control" type="file"
 								placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right">Update</button>
+								class="btn pull-right"><t:i18n id="admin.language.update"/></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -1010,7 +1019,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Update Language</h4>
+					<h4 class="modal-title"><t:i18n id="admin.language.update.title"/></h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -1023,20 +1032,20 @@
 								id="language-id-edit" type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.name"/></b></label>
 							<input name="name" class="form-control" id="language-name-edit"
 								type="text" placeholder="">
 						</div>
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b>File</b></label>
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
 							<input name="bandle" class="form-control" type="file"
 								placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right">Create</button>
+								class="btn pull-right"><t:i18n id="admin.language.update"/></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -1070,10 +1079,10 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>",
 																min : 5,
 																max : 30,
-																message : 'The username must be more than 5 and less than 30 characters long'
+																message : '<t:i18n id="validation.size"/>'
 															}
 
 														}
@@ -1081,7 +1090,7 @@
 													teacher_id : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty'
+																message : "<t:i18n id='validation.not.empty'/>"
 
 															}
 
@@ -1110,10 +1119,10 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>",
 																min : 2,
 																max : 30,
-																message : 'The username must be more than 2 and less than 30 characters long'
+																message : "<t:i18n id='validation.course.name.size'/>"
 															}
 
 														}
@@ -1123,17 +1132,17 @@
 															file : {
 																extension : 'png,jpg',
 																maxSize : 5 * 1024 * 1024,
-																message : 'Please choose a image file with a size less than 5M.'
+																message : "<t:i18n id='validation.course.image'/>"
 															}
 														}
 													},
 													description : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>",
 																min : 100,
 																max : 2000,
-																message : 'The username must be more than 100 and less than 2000 characters long'
+																message : "<t:i18n id='validation.course.description'/>"
 															}
 
 														}
@@ -1161,10 +1170,10 @@
 													surname : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>",
 																min : 2,
 																max : 30,
-																message : 'The username must be more than 2 and less than 30 characters long'
+																message : "<t:i18n id='validation.surname'/>" 
 															}
 
 														}
@@ -1172,7 +1181,7 @@
 													email : {
 														validators : {
 															emailAddress : {
-																message : 'The input is not a valid email address'
+																message : "<t:i18n id='validation.email'/>"
 															}
 														}
 													},
@@ -1180,7 +1189,7 @@
 														validators : {
 															regexp : {
 																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
-																message : 'Invalid skype name'
+																message : "<t:i18n id='validation.skype'/>"
 															},
 
 														}
@@ -1189,7 +1198,7 @@
 														validators : {
 															regexp : {
 																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
-																message : 'Invalid phone number'
+																message : "<t:i18n id='validation.phone'/>"
 															},
 
 														}
@@ -1199,7 +1208,7 @@
 															file : {
 																extension : 'png,jpg',
 																maxSize : 5 * 1024 * 1024,
-																message : 'Please choose a image file with a size less than 5M.'
+																message : "<t:i18n id='validation.course.image'/>"
 															}
 														}
 													},
@@ -1208,7 +1217,7 @@
 															file : {
 																extension : 'pdf,doc,docx',
 																maxSize : 5 * 1024 * 1024,
-																message : 'Please choose a image file with a size less than 5M.'
+																message : "<t:i18n id='validation.cv'/>"
 															}
 														}
 													}
@@ -1316,13 +1325,13 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>",
 															},
 
 															stringLength : {
 																min : 1,
 																max : 15,
-																message : 'The language name must be more than 2 and less than 10 characters long'
+																message : "<t:i18n id='validation.language.name'/>" 
 
 															}
 
@@ -1334,12 +1343,12 @@
 															stringLength : {
 																min : 1,
 																max : 2,
-																message : 'The language  must be 2 characters long'
+																message : "<t:i18n id='validation.language'/>"
 															},
 
 															regexp : {
 																regexp : /[a-z]*/,
-																message : 'Must be lowercase'
+																message : "<t:i18n id='validation.language.lower'/>"
 															}
 
 														}
@@ -1347,29 +1356,29 @@
 													country : {
 														validators : {
 															notEmpty : {
-																message : 'The field is required and cannot be empty',
+																message : "<t:i18n id='validation.not.empty'/>"
 
 															},
 															stringLength : {
 																min : 1,
 																max : 2,
-																message : 'The language  must be 2 characters long'
+																message : "<t:i18n id='validation.language'/>"
 															},
 															regexp : {
 																regexp : /[A-Z]*/,
-																message : 'Must be uppercase'
+																message : "<t:i18n id='validation.language.uper'/>"
 															}
 														}
 													},
 													bandle : {
 														validators : {
 															notEmpty : {
-																message : 'The file is required and cannot be empty'
+																message : "<t:i18n id='validation.not.empty'/>"
 															},
 															file : {
 																extension : 'properties',
 
-																message : 'Please choose a properties file.'
+																message : "<t:i18n id='validation.language.file'/>"
 															}
 														}
 													}

@@ -25,7 +25,7 @@ public class UserDAO {
 
 	public static final String SQL_GET_ALL_USERS = "SELECT SQL_CALC_FOUND_ROWS * FROM user WHERE surname REGEXP ? OR email REGEXP ? LIMIT ?, ?;";
 	public static final String SQL_GET_USER = "SELECT * FROM user WHERE id=?";
-	public static final String SQL_GET_USER_EMAIL = "SELECT * FROM user WHERE email=?";
+	public static final String SQL_GET_USER_EMAIL = "SELECT * FROM user WHERE email=? AND is_active= 1";
 	public static final String GET_ROLE = "SELECT role FROM role WHERE id = ?;";
 	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";
 

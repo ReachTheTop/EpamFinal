@@ -19,35 +19,38 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1><t:i18n id="login.login"/></h1>
+					<h1>
+						<t:i18n id="login.login" />
+					</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="section"> 
+	<div class="section">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="basic-login">
 						<c:if test="${errorLogin!=null}">
 							<div class="alert alert-danger">
-								<strong>Error!</strong>${errorLogin}
+								<strong><t:i18n id="login.error" /></strong>${errorLogin}
 							</div>
 						</c:if>
 						<form action="<c:url value="/login" />" id="loginForm"
 							method="post" role="form">
 							<div class="form-group">
-								<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="login.UsernameOrEmail"/> 
-								</b></label> <input class="form-control" id="login-username"
-									name="emaill" type="email" value="${emaill}" placeholder="">
+								<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+											id="login.UsernameOrEmail" /> </b></label> <input class="form-control"
+									id="login-username" name="emaill" type="email"
+									value="${emaill}" placeholder="">
 
 							</div>
 
 							<div class="form-group">
-								<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="login.password"/>
-								</b></label><input class="form-control" id="login-password" name="password"
-									type="password">
+								<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+											id="login.password" /> </b></label><input class="form-control"
+									id="login-password" name="password" type="password">
 							</div>
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
@@ -55,8 +58,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<a href="<c:url value="/reset" />" class="forgot-password"><t:i18n id="login.ForgotPassword"/>
-								</a><button type="submit" class="btn pull-right"><t:i18n id="login.login"/></button>
+								<a href="<c:url value="/reset" />" class="forgot-password"><t:i18n
+										id="login.ForgotPassword" /> </a>
+								<button type="submit" class="btn pull-right">
+									<t:i18n id="login.login" />
+								</button>
 								<div class="clearfix"></div>
 							</div>
 						</form>
@@ -64,16 +70,21 @@
 				</div>
 				<div class="col-sm-7 social-login">
 
-					<p><t:i18n id="login.OrLoginWithYourFacebook"/></p>
+					<p>
+						<t:i18n id="login.OrLoginWithYourFacebook" />
+					</p>
 					<div class="social-login-buttons">
-						<a href="<c:url value="/FbLoginServlet?action=fb" />" class="btn-facebook-login">Login with Facebook</a>
+						<a href="<c:url value="/FbLoginServlet?action=fb" />"
+							class="btn-facebook-login">Facebook</a>
 
 
 					</div>
 					<div class="clearfix"></div>
 					<div class="not-member">
-						<p><t:i18n id="login.NotAMember"/><a href="<c:url value="/registration" />">
-						<t:i18n id="login.RegisterHere"/></a>
+						<p>
+							<t:i18n id="login.NotAMember" />
+							<a href="<c:url value="/registration" />"> <t:i18n
+									id="login.RegisterHere" /></a>
 						</p>
 					</div>
 				</div>
@@ -88,17 +99,30 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="login.Confirmation"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="login.Confirmation" />
+					</h4>
 				</div>
 				<div class="modal-body">
-					<p><t:i18n id="login.ConfirmYourEmail"/></p>
+					<p>
+						<t:i18n id="login.ConfirmYourEmail" />
+					</p>
 					<p class="text-warning">
-						<small><t:i18n id="login.ToSendALinkToConfirmAgainClickOnTheButtonSend"/></small>
+						<small> <t:i18n id="login.ThankYouForRegisteringOnOurSite" />
+							<t:i18n
+								id="login.AConfirmationMessageHasBeenSentToYourEmailAaddress" />
+							<t:i18n id="login.PleaseClickTheLinkToActivateYourAccount" /> <br>
+						<br> <t:i18n
+								id="login.ToSendALinkToConfirmAgainClickOnTheButtonSend" />
+						</small>
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><t:i18n id="login.Close"/></button>
-					<a href="<c:url value="/sendconfirm" />" class="btn btn-primary"><t:i18n id="login.Send"/></a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<t:i18n id="login.Close" />
+					</button>
+					<a href="<c:url value="/sendconfirm" />" class="btn btn-primary"><t:i18n
+							id="login.Send" /></a>
 
 				</div>
 			</div>
@@ -112,14 +136,20 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="login.Congratulations"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="login.Congratulations" />
+					</h4>
 				</div>
 				<div class="modal-body">
-					<p><t:i18n id="login.YouHaveSuccessfullyVerifiedYourEmail"/></p>
+					<p>
+						<t:i18n id="login.YouHaveSuccessfullyVerifiedYourEmail" />
+					</p>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><t:i18n id="login.Close"/></button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<t:i18n id="login.Close" />
+					</button>
 
 
 				</div>
@@ -153,30 +183,34 @@
 							$('#loginForm')
 									.bootstrapValidator(
 											{
-												message : 'This value is not valid',
+												message : '<t:i18n id="bootstrap.ThisValueIsNotValid"/>',
 												feedbackIcons : {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
 													validating : 'glyphicon glyphicon-refresh'
 												},
 												fields : {
-													email : {
+													emaill : {
 														validators : {
+
+															notEmpty : {
+																message : '<t:i18n id="bootstrap.ThePasswordIsRequiredAndCannotBeEmpty"/>'
+															},
 															emailAddress : {
-																message : 'The input is not a valid email address'
+																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 															}
-															
+
 														}
 													},
 													password : {
 														validators : {
 															notEmpty : {
-																message : 'The password is required and cannot be empty'
+																message : '<t:i18n id="bootstrap.ThePasswordIsRequiredAndCannotBeEmpty"/>'
 															},
 															stringLength : {
 																min : 6,
 																max : 30,
-																message : 'The username must be more than 6 and less than 30 characters long'
+																message : '<t:i18n id="bootstrap.ThePasswordMustBeMoreThanAndLessThanCharactersLong"/>'
 															}
 														}
 													}
@@ -185,6 +219,6 @@
 						});
 	</script>
 	<jsp:include page="footer.jsp" />
-	
+
 </body>
 </html>
