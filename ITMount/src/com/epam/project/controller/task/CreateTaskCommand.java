@@ -1,7 +1,6 @@
 package com.epam.project.controller.task;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +16,7 @@ import com.epam.project.command.Action;
 import com.epam.project.db.model.Task;
 import com.epam.project.db.service.TaskService;
 import com.epam.project.util.file.UploadFile;
+import com.google.gson.Gson;
 
 public class CreateTaskCommand implements Action {
 
@@ -75,6 +75,10 @@ public class CreateTaskCommand implements Action {
 				task.setFile(fileName);
 				
 				TaskService.addNewTask(task);
+				/*Gson json = new Gson();
+				
+				response.setContentType("application/json");
+				response.getWriter().write(json.toJson(task));*/
 			}
 			return;
 

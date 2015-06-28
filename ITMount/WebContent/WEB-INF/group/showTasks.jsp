@@ -414,6 +414,7 @@ a {
 					document.getElementById("form1").reset();
 					$('#myModal').modal('hide');
 					showToaast("Task was  successfully created", 1);
+					window.location.href = '/ITMount/GroupServlet?action=showTasks&group_id=${group.id}';
 
 				},
 				error : function() {
