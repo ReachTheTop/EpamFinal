@@ -169,55 +169,46 @@ a {
 						</c:choose>
 					</c:if>
 				</div>
-
-
-				<c:forEach items="${users}" var="user">
-					<div class="col-lg-6">
-						<div class="contact-box">
-
-
-							<div class="col-sm-4">
-								<div class="text-center">
-									<img alt="image" class="img-circle m-t-xs img-responsive"
-										src="upload/${user.image }">
-									<!--                             <div class="m-t-xs font-bold">Graphics designer</div> -->
-								</div>
-							</div>
-							<div class="col-sm-8">
-								<h4>
-									<a href="<c:url value="UserServlet?user_id=${user.id }" />">
-										<strong>${user.name } <br> ${user.surname}
+				<div class="contact-box">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Contacts</th>
+							<th>Homework</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${users}" var="user">
+						
+							<tr>
+								<td><img alt="image" class="img-circle img-responsive"
+									height="50px" width="50px" src="upload/${user.image }"></td>
+								<td><a
+									href="<c:url value="UserServlet?user_id=${user.id }" />"> <strong>${user.name }
+											<br> ${user.surname}
 									</strong>
-									</a>
-								</h4>
+								</a></td>
+								<td><strong>${user.email }</strong></td>
+								<td>
+										<i class=" fa fa-skype"></i>&nbsp; ${user.contacts.skype }
+									<br>
+										<i class=" fa fa-mobile-phone"></i>&nbsp;
+										${user.contacts.phone }
+									</td>
+								<td><a class="btn btn-sm btn-primary"
+									
+									href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
+										homework</a></td>
 
-								<strong>${user.email }</strong><br>
-
-
-								<p>
-									<i class="fa fa-birthday-cake"></i>
-									<fmt:formatDate pattern="yyyy-MM-dd" value="${user.birtday }" />
-								</p>
-								<p>
-									<i class=" fa fa-skype"></i>&nbsp; ${user.contacts.skype }
-								</p>
-								<p>
-									<i class=" fa fa-mobile-phone"></i>&nbsp; ${user.contacts.phone }
-								</p>
-
-
-							</div>
-							<div class="clearfix"></div>
-							<a class="btn btn-sm btn-primary" style="margin-left: 36%;"
-								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
-								homework</a>
-						</div>
-
-					</div>
-
-
-				</c:forEach>
-
+							</tr>
+							
+						</c:forEach>
+					</tbody>
+				</table>
+</div>
 			</div>
 		</div>
 	</div>
