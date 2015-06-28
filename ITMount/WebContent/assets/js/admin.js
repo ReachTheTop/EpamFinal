@@ -365,7 +365,7 @@ $(function() {
 		var $td7;
 		var $td8;
 		var $trigerUser;
-		//var $select = handleRoles();
+		var $a;
 		$userPages = response.amount;
 		
 		
@@ -389,11 +389,11 @@ $(function() {
 			$td8 = $("<td id='user-role'>");
 			$trigerUser = $("<a class='btn btn-danger' id='triger-user'>");
 			$trigerUser.attr("name", item['id']);
-			
-			
+			$a = $("<a href='/ITMount/UserServlet?user_id="+item['id']+"'>");
+			$a.text(item.surname);
 			
 			$tr.append($td1.text(item['name']));
-			$tr.append($td2.text(item['surname']));
+			$tr.append($td2.append($a));
 			$td3.attr('name', item['id']);
 			$tr.append($td3.append( $("select#userRoles").last().clone(true,true).val(item['role_id'])));
 			$tr.append($td4.text(item['email']));

@@ -36,6 +36,10 @@ public class UserHome implements Action {
 			
 		}
 
+		if(current_user == null){
+			response.sendError(404);
+			return;
+		}
 		List<Group> groups = null;
 		if (current_user.getRole().equals("applicant")
 				|| current_user.getRole().equals("student")) {
