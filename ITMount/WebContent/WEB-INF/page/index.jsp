@@ -7,9 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="head.jsp" />
+
+
+	
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	
+
+	
 
 	<!-- Homepage Slider -->
 	<div class="homepage-slider">
@@ -21,7 +27,7 @@
 					<h2 class="title">Responsive</h2> <!-- Slide Text -->
 					<h3 class="subtitle">It looks great on desktops, laptops,
 						tablets and smartphones</h3> <!-- Slide Image --> <img
-					class="slide-img" src="resources/img/homepage-slider/slide1.png"
+					class="slide-img" src="resources/img/homepage-slider/foto1.png"
 					alt="Slide 1" />
 				</li>
 				<!-- End Slide 1 -->
@@ -31,7 +37,7 @@
 					<h2 class="title">Color Schemes</h2> <!-- Slide Text -->
 					<h3 class="subtitle">Comes with 5 color schemes and it's easy
 						to make your own!</h3> <!-- Slide Image --> <img class="slide-img"
-					src="resources/img/homepage-slider/slide2.png" alt="Slide 2" />
+					src="resources/img/homepage-slider/foto2.png" alt="Slide 2" />
 				</li>
 				<!-- End Slide 2 -->
 				<!-- Slide 3 -->
@@ -40,7 +46,7 @@
 					<h2 class="title">Feature Rich</h2> <!-- Slide Text -->
 					<h3 class="subtitle">Huge amount of components and over 30
 						sample pages!</h3> <!-- Slide Image --> <img class="slide-img"
-					src="resources/img/homepage-slider/slide3.png" alt="Slide 3" />
+					src="resources/img/homepage-slider/foto3.png" alt="Slide 3" />
 				</li>
 				<!-- End Slide 3 -->
 			</ul>
