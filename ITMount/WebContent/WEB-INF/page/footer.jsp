@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
  
+ <div class="row">
+ <br><br><br><br>
+ </div>
 	    <div class="footer navbar-fixed-bottom">
 	    	<div class="container">
 		    	
