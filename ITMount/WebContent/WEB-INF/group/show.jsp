@@ -93,8 +93,8 @@ a {
 					<c:if test="${user.role == 'student' }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-check fa-fw"></i>
-							<t:i18n id='group.user.homework.button' /></a></li>
+								class="fa fa-list fa-fw"></i>
+							<t:i18n id='group.user.homework' /></a></li>
 					</c:if>
 
 
