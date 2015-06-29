@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class UpdatePatternLanguage implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
-
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		Map<String, String> testBandle;
 		Map<String, String> newBandle;
 		String pachBundle = request.getRealPath("") + "WEB-INF\\classes\\";
@@ -47,11 +48,11 @@ public class UpdatePatternLanguage implements Action {
 		File fileNewBandle = new File(fileName);
 		
 		testBandle = getTestMap(fileTestBanble);
-		newBandle = getMap(fileNewBandle);
+		newBandle = getMap(fileNewBandle, res);
 		
 		
-		if(newBandle.size()>=testBandle.size()&&equalsMap(newBandle, testBandle)){
-			message = "Update pattern properties";
+		if(newBandle.size()>=testBandle.size()&&equalsMap(newBandle, testBandle, res)){
+			message = res.getString("uploadLanguage.updatePattern.success");
 			
 			File deleteFile= new File(pachBundle+"i18n.properties");
 			
@@ -73,7 +74,7 @@ public class UpdatePatternLanguage implements Action {
 		}
 		}else{
 			status = "fail";
-			message = "Error update!";
+			message = res.getString("uploadLanguage.updatePattern.error");
 		}
 		try {
 			
@@ -90,7 +91,7 @@ public class UpdatePatternLanguage implements Action {
 		return "updateP";
 	}
 	
-	private Map<String, String> getMap(File file) {
+	private Map<String, String> getMap(File file, ResourceBundle res) {
 		Map<String, String> map = new HashMap<>();
 		int count = 0;
 		String line = null;
@@ -103,6 +104,7 @@ public class UpdatePatternLanguage implements Action {
 				count++;
 				
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 
@@ -122,7 +124,7 @@ public class UpdatePatternLanguage implements Action {
 			}
 		} catch (IOException | ArrayIndexOutOfBoundsException e) {
 			status = "fail";
-			message = "Error in line " + count + " incorect " + line;
+			message = res.getString("uploadLanguage.updatePattern.error.line") + count + " "+res.getString("uploadLanguage.updatePattern.error.line.incorect")+" " + line;
 		}finally{
 			try {
 				input.close();
@@ -143,6 +145,7 @@ public class UpdatePatternLanguage implements Action {
 
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString(), null);
 				}
@@ -163,21 +166,21 @@ public class UpdatePatternLanguage implements Action {
 	}
 
 	private Boolean equalsMap(Map<String, String> newBandel,
-			Map<String, String> testBandel) {
+			Map<String, String> testBandel, ResourceBundle res) {
 		int sizeNew = newBandel.size();
 		int sizeTest = testBandel.size();
 		String line = null;
 		try {
 			if (sizeNew < sizeTest) {
-				line = "Wrong count line! Standart pattern=" + sizeTest
-						+ " lines your upload " + sizeNew;
+				line = res.getString("uploadLanguage.updatePattern.error.sizeStandart") +" "+ sizeTest
+						+ res.getString("uploadLanguage.updatePattern.error.sizeNew")+" " + sizeNew;
 				throw new Exception();
 			}
 			for (java.util.Map.Entry<String, String> entry : testBandel
 					.entrySet()) {
 
 				if (!newBandel.containsKey(entry.getKey())) {
-					line = "Error new pattern not contains key "+entry.getKey();
+					line =res.getString("uploadLanguage.updatePattern.error.contains")+" "+entry.getKey();
 					throw new Exception();
 				}
 

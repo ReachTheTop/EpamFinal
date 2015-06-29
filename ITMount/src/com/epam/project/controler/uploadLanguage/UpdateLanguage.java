@@ -8,11 +8,13 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,6 +31,7 @@ public class UpdateLanguage implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		String name = request.getParameter("name");
 		Integer id = Integer.parseInt( request.getParameter("language_id"));
 		response.setContentType("application/json");
@@ -49,11 +52,12 @@ public class UpdateLanguage implements Action{
 		File fileNewBandle = new File(fileName);
 		
 		testBandle = getTestMap(fileTestBanble);
-		newBandle = getMap(fileNewBandle);
+		newBandle = getMap(fileNewBandle, res);
 		
-	
-		if(testBandle.size()<=newBandle.size()&&equalsMap(newBandle, testBandle)&&!name.isEmpty()){
-			message = "Update language!";
+		System.out.println(testBandle);
+		System.out.println(newBandle);
+		if(testBandle.size()<=newBandle.size()&&equalsMap(newBandle, testBandle, res)&&!name.isEmpty()){
+			message = res.getString("uploadLanguage.update.success");
 			
 			File deleteFile= new File(pachBundle+"i18n_"+lang.getLanguage()+"_"+lang.getCountry()+".properties");
 			
@@ -76,7 +80,7 @@ public class UpdateLanguage implements Action{
 		}
 		}else{
 			status = "fail";
-			message = "Error! such bundel already exists, change country or language!";
+			message = res.getString("uploadLanguage.update.error.exist");
 		}
 		try {
 			
@@ -93,7 +97,7 @@ public class UpdateLanguage implements Action{
 		return "update";
 	}
 	
-	private Map<String, String> getMap(File file) {
+	private Map<String, String> getMap(File file, ResourceBundle res) {
 		Map<String, String> map = new HashMap<>();
 		int count = 0;
 		String line = null;
@@ -107,6 +111,7 @@ public class UpdateLanguage implements Action{
 				count++;
 				
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 				
@@ -119,7 +124,7 @@ public class UpdateLanguage implements Action{
 			}
 		} catch (Exception e) {
 			status = "fail";
-			message = "Error! in line " + count + " incorect " + line;
+			message = res.getString("uploadLanguage.update.error.line")+" " + count +" "+res.getString("uploadLanguage.update.error.line.incorect")+ "  " + line;
 		}finally{
 			try {
 				input.close();
@@ -140,6 +145,7 @@ public class UpdateLanguage implements Action{
 
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString().trim(), null);
 				}
@@ -160,21 +166,21 @@ public class UpdateLanguage implements Action{
 	}
 
 	private Boolean equalsMap(Map<String, String> newBandel,
-			Map<String, String> testBandel) {
+			Map<String, String> testBandel, ResourceBundle res) {
 		int sizeNew = newBandel.size();
 		int sizeTest = testBandel.size();
 		String line = null;
 		try {
 			 if (sizeNew < sizeTest) {
-				line = "Wrong count line! Standart bandle=" + sizeTest
-						+ " lines your upload " + sizeNew;
+				line = res.getString("uploadLanguage.update.error.sizeStandart")+ sizeTest
+						+ res.getString("uploadLanguage.update.error.sizeNew") + sizeNew;
 				throw new Exception();
 			}
 			for (java.util.Map.Entry<String, String> entry : testBandel
 					.entrySet()) {
 
 				if (!newBandel.containsKey(entry.getKey())) {
-					line = "Error! in "+entry.getKey()+" " + newBandel.get(entry.getKey());
+					line = res.getString("uploadLanguage.update.error.in")+entry.getKey()+" " + newBandel.get(entry.getKey());
 					throw new Exception();
 				}
 

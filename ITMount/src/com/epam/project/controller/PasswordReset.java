@@ -56,8 +56,9 @@ public class PasswordReset extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		HttpSession sesion = request.getSession();
-		String email = request.getParameter("resetemail");
 		ResourceBundle res = (ResourceBundle) sesion.getAttribute("bundle");
+		String email = request.getParameter("resetemail");
+		
 		sesion.removeAttribute("inforeset");
 		sesion.removeAttribute("modalreset");
 		User user = UserService.getUserWhereEmail(email);

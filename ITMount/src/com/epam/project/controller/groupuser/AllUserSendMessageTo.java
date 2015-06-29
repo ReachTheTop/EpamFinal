@@ -28,9 +28,7 @@ public class AllUserSendMessageTo {
 
 		List<Group> listGroup = GroupService.getGroupsUserStudy(user.getId());
 
-		for (Group g : listGroup) {
-			System.out.println("List groups1 " + g.toString());
-		}
+		
 
 		/*
 		 * if group not active it delete
@@ -41,9 +39,7 @@ public class AllUserSendMessageTo {
 			}
 		}
 
-		for (Group g : listGroup) {
-			System.out.println("List groups2 " + g.toString());
-		}
+		
 
 		for (int i = 0; i < listGroup.size(); i++) {
 			List<User> users = GroupUserService.getAllUserByGroupId(listGroup
@@ -59,9 +55,7 @@ public class AllUserSendMessageTo {
 		  listUsers = new ArrayList<User>();
 		  listUsers.addAll(s); 
 
-		for (User us : listUsers) {
-			System.out.println(us);
-		}
+		
 
 		return listUsers;
 

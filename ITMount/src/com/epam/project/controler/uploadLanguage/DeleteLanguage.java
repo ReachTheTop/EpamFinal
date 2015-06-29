@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,23 +24,25 @@ public class DeleteLanguage implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
+	
 		Integer id = Integer.parseInt(request.getParameter("language_id"));
 		Language language = LanguageService.getLanguage(id);
 		String pachBundle = request.getRealPath("") + "WEB-INF\\classes\\";
 		try{
 
 			if(language==null){
-				message ="Error delete!";
+				message =res.getString("uploadLanguage.delete.error.delete");
 				throw new Exception();
 			}
 			if(language.getCountry().equals("US")&&language.getLanguage().equals("en")){
-				message ="Sorry this base language";
+				message =res.getString("uploadLanguage.delete.error.baseLanguage");
 				throw new Exception();
 			}
-			ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
+			
 
 			if(res!=null&&res.getLocale().getCountry().equals(language.getCountry())&&res.getLocale().getLanguage().equals(language.getLanguage())){
-				message ="Error this language available";
+				message =res.getString("uploadLanguage.delete.error.availableLanguage");
 				throw new Exception();
 			}
 			
@@ -47,7 +50,7 @@ public class DeleteLanguage implements Action{
 			deleteFile.delete();
 			LanguageService.delLanguage(id);
 			status ="success";
-			message="Language delete";
+			message =res.getString("uploadLanguage.delete.success");
 			
 			
 		}

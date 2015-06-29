@@ -1,16 +1,13 @@
 package com.epam.project.controler.uploadLanguage;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.KeyStore.Entry;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +31,7 @@ public class UploadLanguage implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
-
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		Map<String, String> testBandle;
 		Map<String, String> newBandle;
 		String pachBundle = request.getRealPath("") + "WEB-INF\\classes\\";
@@ -55,11 +52,11 @@ public class UploadLanguage implements Action {
 		File fileNewBandle = new File(fileName);
 		
 		testBandle = getTestMap(fileTestBanble);
-		newBandle = getMap(fileNewBandle);
+		newBandle = getMap(fileNewBandle, res);
 		System.out.println(testBandle);
 		System.out.println(newBandle);
-		if(testBandle.size()<=newBandle.size()&&equalsMap(newBandle, testBandle)){
-			message = "Create language";
+		if(testBandle.size()<=newBandle.size()&&equalsMap(newBandle, testBandle, res)){
+			message = res.getString("uploadLanguage.uploadPattern.success");
 			Language newLanguage = new Language();
 			newLanguage.setName(name);
 			newLanguage.setCountry(country);
@@ -72,11 +69,11 @@ public class UploadLanguage implements Action {
 		}
 		}else{
 			status = "fail";
-			message = "Error! such bundel already exists, change country or language!";
+			message = res.getString("uploadLanguage.uploadPattern.error.exist");
 		}
 		}else{
 			status = "fail";
-			message = "Please enter all fields!";
+			message = res.getString("uploadLanguage.uploadPattern.error.notEmpty");
 		}
 		try {
 			
@@ -93,7 +90,7 @@ public class UploadLanguage implements Action {
 		return "upload";
 	}
 
-	private Map<String, String> getMap(File file) {
+	private Map<String, String> getMap(File file, ResourceBundle res) {
 		Map<String, String> map = new HashMap<>();
 		int count = 0;
 		String line = null;
@@ -106,6 +103,7 @@ public class UploadLanguage implements Action {
 				count++;
 				
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 
@@ -116,7 +114,7 @@ public class UploadLanguage implements Action {
 			}
 		} catch (IOException | ArrayIndexOutOfBoundsException e) {
 			status = "fail";
-			message = "Error! in line " + count + " incorect " + line;
+			message = res.getString("uploadLanguage.uploadPattern.error.line")+" "+ count +" "+res.getString("uploadLanguage.uploadPattern.error.line.incorect") +" " + line;
 
 		}finally{
 			try {
@@ -139,6 +137,7 @@ public class UploadLanguage implements Action {
 
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
+				line= line.replaceAll("п»ї", "");
 				if(!line.isEmpty()){
 				map.put(line.replaceAll("=", "").toString().trim(), null);
 				}
@@ -159,21 +158,21 @@ public class UploadLanguage implements Action {
 	}
 
 	private Boolean equalsMap(Map<String, String> newBandel,
-			Map<String, String> testBandel) {
+			Map<String, String> testBandel, ResourceBundle res) {
 		int sizeNew = newBandel.size();
 		int sizeTest = testBandel.size();
 		String line = null;
 		try {
 			if (sizeNew < sizeTest) {
-				line = "Wrong count line! Standart bandle=" + sizeTest
-						+ " lines your upload " + sizeNew;
+				line =res.getString("uploadLanguage.uploadPattern.error.sizeStandart")+ " " + sizeTest
+						+" "+ res.getString("uploadLanguage.uploadPattern.error.sizeNew")+" " + sizeNew;
 				throw new Exception();
 			}
 			for (java.util.Map.Entry<String, String> entry : testBandel
 					.entrySet()) {
 
 				if (!newBandel.containsKey(entry.getKey())) {
-					line = "Error! field "+entry.getKey()+" not found";
+					line = res.getString("uploadLanguage.uploadPattern.error.feild")+" "+entry.getKey()+" "+ res.getString("uploadLanguage.uploadPattern.error.notFound");
 					throw new Exception();
 				}
 

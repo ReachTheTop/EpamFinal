@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
 
 
 
@@ -70,7 +72,7 @@ public class Registration extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		request.setCharacterEncoding("utf-8");
 		String name = request.getParameter("name");
 		String midlename = request.getParameter("midlename");

@@ -1,6 +1,7 @@
 package com.epam.project.controller.homework;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ public class UpdateHomework implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		String fileUpload = request.getParameter("uploadFile");
 		String homework_id = request.getParameter("id_homework");
 		Part file = request.getPart("file");
@@ -38,10 +40,10 @@ public class UpdateHomework implements Action {
 			HomeWorkService.updateHomeWork(homework);
 			DeleteFile.deleteFile(fileUpload, request.getServletContext());
 			status = "success";
-			message = "Homework update";
+			message = res.getString("Homework.update.success");
 		}else{
 			status = "fail";
-			message = "Error update";
+			message = res.getString("Homework.update.error");
 		}
 		
 		try {

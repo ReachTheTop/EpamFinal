@@ -1,6 +1,7 @@
 package com.epam.project.controller.homework;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,12 @@ public class DeleteHomework implements Action {
 			throws ServletException, IOException {
 		response.setContentType("application/json");
 		String homework_id = request.getParameter("id_homework");
-		
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		HomeWork home = HomeWorkService.getHomeWork(Integer.parseInt(homework_id));
 		DeleteFile.deleteFile(home.getData(), request.getServletContext());
 		HomeWorkService.delHomeWork(Integer.parseInt(homework_id));
 		status = "success";
-		message = "Homework is delete!";
+		message = res.getString("Homework.Delete.success");
 		try {
 			
 			response.getWriter().print(new JSONObject().put(status, message));

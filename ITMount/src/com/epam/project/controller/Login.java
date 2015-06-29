@@ -1,6 +1,7 @@
 package com.epam.project.controller;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,14 +54,14 @@ public class Login extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		String email = request.getParameter("emaill");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("utf-8");
 		if (email.isEmpty() || password.isEmpty()) {
 			session.setAttribute("emaill", email);
-			session.setAttribute("errorLogin", "Wrong email or password");
+			session.setAttribute("errorLogin", res.getString("Login.error.wrongEmail"));
 			request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(
 					request, response);
 			
@@ -89,7 +90,7 @@ public class Login extends HttpServlet {
 			} else {
 
 				session.setAttribute("emaill", email);
-				session.setAttribute("errorLogin", " Wrong email or password");
+				session.setAttribute("errorLogin", res.getString("Login.error.wrongEmail"));
 				request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(
 						request, response);
 				return;

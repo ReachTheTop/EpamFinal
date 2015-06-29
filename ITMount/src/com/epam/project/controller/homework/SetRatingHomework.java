@@ -1,6 +1,7 @@
 package com.epam.project.controller.homework;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class SetRatingHomework implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		Integer homework_id =Integer.parseInt( request.getParameter("id_homework"));
 		Integer rating =Integer.parseInt(request.getParameter("rating"));
 		
@@ -34,12 +36,12 @@ public class SetRatingHomework implements Action {
 				throw new Exception();
 			}
 			status = "success";
-			message = "Rating set";
+			message = res.getString("Homework.setRating");
 			homework.setRating(rating);
 			HomeWorkService.updateHomeWork(homework);
 		} catch (Exception e) {
 			status = "fail";
-			message = "Error! Enter rating 0-10";
+			message = res.getString("Homework.setRating.error");
 		}
 		
 		try {

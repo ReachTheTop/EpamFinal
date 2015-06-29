@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class CSVList implements Action {
 		response.setContentType("text/csv");
 		response.setHeader("Content-Disposition",
 				"attachment; filename=\"userDirectory.csv\"");
-
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 		Connection connection = DBConnection.getConnection();
 		String query = "SELECT * FROM user AS u LEFT JOIN contact AS c ON u.id = c.user_id WHERE u.id IN (SELECT user_id FROM group_user WHERE exam_id = ?);";
 		PreparedStatement statement = null;
@@ -42,15 +43,15 @@ public class CSVList implements Action {
 
 			ArrayList<String> rows = new ArrayList<String>();
 
-			rows.add("Surname");
+			rows.add(res.getString("CSVList.surname"));
 			rows.add(";");
-			rows.add("First name");
+			rows.add(res.getString("CSVList.firstname"));
 			rows.add(";");
-			rows.add("Last name");
+			rows.add(res.getString("CSVList.lastname"));
 			rows.add(";");
-			rows.add("Email");
+			rows.add(res.getString("CSVList.email"));
 			rows.add(";");
-			rows.add("Phone");
+			rows.add(res.getString("CSVList.phone"));
 			rows.add("\n");
 			while (data.next()) {
 				rows.add(data.getString("surname"));
