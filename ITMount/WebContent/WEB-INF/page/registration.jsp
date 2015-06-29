@@ -147,7 +147,7 @@
 																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 															},
 															notEmpty : {
-																message : 'The email is required and cannot be empty'
+																message : '<t:i18n id="bootstrap.TheEmailIsRequiredAndCannotBeEmpty"/>'
 															}
 														}
 													},
@@ -155,15 +155,20 @@
 														message : '<t:i18n id="bootstrap.TheNameIsNotValid"/>',
 														validators : {
 															notEmpty : {
-																message : '<t:i18n id="bootstrap.TheNameIsRequiredAndCannotBeEmpty"/>'
+																message : '<t:i18n id="bootstrap.ThisFieldIsRequiredAndCannotBeEmpty"/>'
 															},
 															regexp : {
-																regexp : /^[a-zA-Z0-9А-Яіа-я_\.]+$/,
-																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
+																regexp : /^[a-zA-ZА-ЯІіЄєЇїа-я][a-zA-ZА-ЯІіЄєЇїа-я-`']*$/,
+																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabetical"/>'
 															},
 															different : {
 																field : 'password',
 																message : '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
+															},
+															stringLength : {
+																min : 1,
+																max : 40,
+																message : '<t:i18n id="bootstrap.ThisFieldIsTooLong"/>'
 															}
 														}
 													},
@@ -171,17 +176,21 @@
 														message : '<t:i18n id="bootstrap.TheMiddleNameIsNotValid"/>',
 														validators : {
 															notEmpty : {
-																message : '<t:i18n id="bootstrap.TheMiddleNameIsRequiredAndCannotBeEmpty"/>'
+																message : '<t:i18n id="bootstrap.ThisFieldIsRequiredAndCannotBeEmpty"/>'
 															},
-															regexp : {
-																regexp : /^[a-zA-ZА-Яіа-я0-9_\.]+$/,
-
-																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
+															 regexp : {
+																regexp : /^[a-zA-ZА-ЯІіЄєЇїа-я][a-zA-ZА-ЯІіЄєЇїа-я-`']*$/,
+																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabetical"/>'
 
 															},
 															different : {
 																field : 'password',
 																message : '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
+															},
+															stringLength : {
+																min : 1,
+																max : 40,
+																message : '<t:i18n id="bootstrap.ThisFieldIsTooLong"/>'
 															}
 														}
 													},
@@ -189,40 +198,44 @@
 														message : '<t:i18n id="bootstrap.TheSurnameIsNotValid"/>',
 														validators : {
 															notEmpty : {
-																message : '<t:i18n id="bootstrap.TheSurnameIsRequiredAndCannotBeEmpty"/>'
+																message : '<t:i18n id="bootstrap.ThisFieldIsRequiredAndCannotBeEmpty"/>'
 															},
 															regexp : {
-
-																regexp : /^[a-zA-ZА-Яіа-я0-9_\.]+$/,
-																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
+																regexp : /^[a-zA-ZА-ЯІіЄєЇїа-я][a-zA-ZА-ЯІіЄєЇїа-я-`\s']*$/,
+																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabetical"/>'
 
 															},
 															different : {
 																field : 'password',
 																message : '<t:i18n id="bootstrap.TheUsernameAndPasswordCannotBeTheSameAsEachOther"/>'
+															},
+															stringLength : {
+																min : 1,
+																max : 40,
+																message : '<t:i18n id="bootstrap.ThisFieldIsTooLong"/>'
 															}
 														}
 													},
 													date : {
 														validators : {
 															notEmpty : {
-																message : '<t:i18n id="bootstrap.TheDateIsRequiredAndCannotBeEmpty"/>'
+																message : '<t:i18n id="bootstrap.ThisFieldIsRequiredAndCannotBeEmpty"/>'
 															}
 														}
 													},
 													skype : {
 														validators : {
 															regexp : {
-																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
+																regexp : /^[a-zA-ZА-ЯіЇїа-я]([a-zA-ZА-ЯіЇїа-я0-9.,_-]{5,31})$/,
 																message : '<t:i18n id="bootstrap.InvalidSkypeName"/>'
-															},
+															}													
 
 														}
 													},
 													tel : {
 														validators : {
 															regexp : {
-																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+																regexp : /^([+]([0-9]{2}))?([0-9]{10})$/,
 																message : '<t:i18n id="bootstrap.InvalidPhoneNumber"/>'
 															},
 
