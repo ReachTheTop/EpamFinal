@@ -24,7 +24,7 @@ public class HomeWork extends Validator implements Serializable {
 	private Integer user_id;
 	
 	@Column(value="rating")
-	private int rating;
+	private Integer rating;
 	
 	public HomeWork() {
 		// TODO Auto-generated constructor stub
@@ -54,10 +54,10 @@ public class HomeWork extends Validator implements Serializable {
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
-	public int getRating() {
+	public Integer getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 
