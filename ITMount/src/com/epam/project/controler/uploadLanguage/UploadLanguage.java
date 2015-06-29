@@ -109,7 +109,7 @@ public class UploadLanguage implements Action {
 				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 
-				map.put(mass[0], mass[1]);
+				map.put(mass[0].trim(), mass[1]);
 				if (mass[0].isEmpty() || mass[1].isEmpty()) {
 					throw new IOException();
 				}}
@@ -140,7 +140,7 @@ public class UploadLanguage implements Action {
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
 				if(!line.isEmpty()){
-				map.put(line.replaceAll("=", "").toString(), null);
+				map.put(line.replaceAll("=", "").toString().trim(), null);
 				}
 			}
 		} catch (IOException e) {
