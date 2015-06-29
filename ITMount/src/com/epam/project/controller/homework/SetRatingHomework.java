@@ -6,34 +6,49 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.epam.project.command.Action;
 import com.epam.project.db.model.HomeWork;
 import com.epam.project.db.service.HomeWorkService;
 
 public class SetRatingHomework implements Action {
 
+	private String message;
+	private String status;
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String homework_id = request.getParameter("id_homework");
-		String ratingS = request.getParameter("rating");
-		Integer rating;
-		HomeWork homework = HomeWorkService.getHomeWork(Integer.parseInt(homework_id));
+		response.setContentType("application/json");
+		Integer homework_id =Integer.parseInt( request.getParameter("id_homework"));
+		Integer rating =Integer.parseInt(request.getParameter("rating"));
+		
+		HomeWork homework = HomeWorkService.getHomeWork(homework_id);
 		try {
 
-			rating = Integer.parseInt(ratingS);
+			
 
-			if (rating > 100 || rating < 0) {
+			if (rating > 10 || rating <0) {
 				throw new Exception();
 			}
+			status = "success";
+			message = "Rating set";
+			homework.setRating(rating);
+			HomeWorkService.updateHomeWork(homework);
 		} catch (Exception e) {
-			response.sendRedirect(request.getHeader("Referer"));
-			return;
+			status = "fail";
+			message = "Error! Enter rating 0-10";
 		}
-		homework.setRating(rating);
-		HomeWorkService.updateHomeWork(homework);
-		response.sendRedirect(request.getHeader("Referer"));
-		return;
+		
+		try {
+			
+			response.getWriter().print(new JSONObject().put(status, message));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public String getName() {

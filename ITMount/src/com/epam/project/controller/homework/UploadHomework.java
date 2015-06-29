@@ -24,6 +24,7 @@ public class UploadHomework implements Action {
 		
 		if (file.getSize()>0) {
 			HomeWork homeWork = new HomeWork();
+			homeWork.setRating(-1);
 			homeWork.setTask_id(task_id);
 			homeWork.setUser_id(user_id);
 			HomeWorkService.addHomeWork(homeWork);
@@ -31,6 +32,7 @@ public class UploadHomework implements Action {
 			
 			String fileName = m.uploadFile(file, request.getServletContext(),"homework_id_"+homeWork.getId());
 			homeWork.setData(fileName);
+			
 			HomeWorkService.updateHomeWork(homeWork);
 			
 		}
