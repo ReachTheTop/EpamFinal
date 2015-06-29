@@ -110,7 +110,7 @@ public class UpdateLanguage implements Action{
 				if(!line.isEmpty()){
 				String[] mass = line.split("=");
 				
-				map.put(mass[0], mass[1]);
+				map.put(mass[0].trim(), mass[1]);
 				
 				if (mass[0].isEmpty() || mass[1].isEmpty()) {
 					throw new Exception();
@@ -141,7 +141,7 @@ public class UpdateLanguage implements Action{
 			while ((line = input.readLine()) != null) {
 				line= line.replaceAll("#.*", "");
 				if(!line.isEmpty()){
-				map.put(line.replaceAll("=", "").toString(), null);
+				map.put(line.replaceAll("=", "").toString().trim(), null);
 				}
 			}
 		} catch (IOException e) {
@@ -165,7 +165,7 @@ public class UpdateLanguage implements Action{
 		int sizeTest = testBandel.size();
 		String line = null;
 		try {
-			if (sizeNew != sizeTest) {
+			 if (sizeNew < sizeTest) {
 				line = "Wrong count line! Standart bandle=" + sizeTest
 						+ " lines your upload " + sizeNew;
 				throw new Exception();
