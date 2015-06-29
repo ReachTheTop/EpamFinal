@@ -275,6 +275,8 @@ $(document).on("click", ".open-ratingHomeWork", function () {
 				success : function(data) {
 					if (data.success) {
 						$('#retingHomeWork').modal('hide');
+						
+						homeworkid.parent().parent().reset();
 						showToaast(data.success, 1);
 					
 					} else {
