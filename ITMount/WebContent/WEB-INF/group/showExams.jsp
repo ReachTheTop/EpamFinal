@@ -11,11 +11,11 @@
 <jsp:include page="../page/head.jsp" />
 
 
-<script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
+<script src="assets/js/project.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
+	src="assets/js/jquery.autocomplete.multiselect.js"></script>
 
 <link
 	href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css"

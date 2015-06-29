@@ -11,11 +11,11 @@
 <jsp:include page="../page/head.jsp" />
 
 
-<script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
+<script src="assets/js/project.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
+	src="assets/js/jquery.autocomplete.multiselect.js"></script>
 
 <link
 	href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css"
@@ -79,16 +79,13 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i>
-						<t:i18n id='group.main' /></a></li>
+							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i>
-						<t:i18n id='group.tasks' /></a></li>
+							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i>
-						<t:i18n id='group.events' /></a></li>
+							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
 							class="fa fa-check fa-fw"></i>
@@ -96,8 +93,11 @@ a {
 					<c:if test="${user.role == 'student' }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+								class="fa fa-check fa-fw"></i>
+							<t:i18n id='group.user.homework.button' /></a></li>
 					</c:if>
+
+
 					<li><c:choose>
 							<c:when
 								test="${user.role == 'lecturer' && group.teacher_id == user.id}">
@@ -181,6 +181,7 @@ a {
 					</c:if>
 				</div>
 				<div class="contact-box">
+
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -188,35 +189,39 @@ a {
 								<th><t:i18n id='group.user.name' /></th>
 								<th>Email</th>
 								<th><t:i18n id='group.user.contacts' /></th>
-								<th><t:i18n id='group.user.homework' /></th>
+								<c:if test="${user.role == 'lecturer' }">
+									<th><t:i18n id='group.user.homework' /></th>
+								</c:if>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${users}" var="user">
+							<c:forEach items="${users}" var="userS">
 
 								<tr>
 									<td><img alt="image" class="img-circle img-responsive"
-										height="50px" width="50px" src="upload/${user.image }"></td>
+										height="50px" width="50px" src="upload/${userS.image }"></td>
 									<td><a
-										href="<c:url value="UserServlet?user_id=${user.id }" />">
-											<strong>${user.name } <br> ${user.surname}
+										href="<c:url value="UserServlet?user_id=${userS.id }" />">
+											<strong>${userS.name } <br> ${userS.surname}
 										</strong>
 									</a></td>
-									<td><strong>${user.email }</strong></td>
+									<td><strong>${userS.email }</strong></td>
 									<td><i class=" fa fa-skype"></i>&nbsp;
-										${user.contacts.skype } <br> <i
-										class=" fa fa-mobile-phone"></i>&nbsp; ${user.contacts.phone }
+										${userS.contacts.skype } <br> <i
+										class=" fa fa-mobile-phone"></i>&nbsp; ${userS.contacts.phone }
 									</td>
-									<td><a class="btn btn-sm btn-primary"
-										href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><t:i18n
-												id='group.user.homework.button' /></a></td>
-
+									<c:if test="${user.role == 'lecturer' }">
+										<td><a class="btn btn-sm btn-primary"
+											href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${userS.id }" />"><t:i18n
+													id='group.user.homework.button' /></a></td>
+									</c:if>
 								</tr>
 
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
+
 			</div>
 		</div>
 	</div>

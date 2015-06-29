@@ -11,10 +11,10 @@
 <jsp:include page="../page/head.jsp" />
 
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
+	src="assets/js/jquery.bootpag.min.js"></script>
 
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
+	src="assets/js/jquery.bootpag.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />

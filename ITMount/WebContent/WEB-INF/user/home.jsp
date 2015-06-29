@@ -12,9 +12,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User page</title>
 <jsp:include page="../page/head.jsp" />
-<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+<script src="assets/js/admin.js"></script>
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.bootpag.min.js"></script>
+	src="assets/js/jquery.bootpag.min.js"></script>
 
 <script src="resources/js/toastr.js"></script>
 

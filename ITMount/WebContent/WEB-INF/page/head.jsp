@@ -31,7 +31,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/assets/js/jquery.autocomplete.multiselect.js"></script>
+	src="assets/js/jquery.autocomplete.multiselect.js"></script>
 
 <!-- block for autokomplite -->
 <link rel="stylesheet" type="text/css"
@@ -46,7 +46,7 @@
 
 
 
-<script src="${pageContext.request.contextPath}/assets/js/project.js"></script>
+<script src="assets/js/project.js"></script>
 <!-- block for autokomplite -->
 
 
@@ -68,9 +68,9 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/bootstrapValidator.min.js">
+	src="resources/js/bootstrapValidator.min.js">
 	
 </script>
 
