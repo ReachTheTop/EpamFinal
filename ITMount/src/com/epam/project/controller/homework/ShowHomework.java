@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Action;
+import com.epam.project.db.model.Group;
 import com.epam.project.db.model.HomeWork;
 import com.epam.project.db.model.Task;
+import com.epam.project.db.service.GroupService;
 import com.epam.project.db.service.HomeWorkService;
 import com.epam.project.db.service.TaskService;
 
@@ -22,6 +24,7 @@ public class ShowHomework implements Action {
 			throws ServletException, IOException {
 		String group_id= request.getParameter("group_id");
 		String user_id= request.getParameter("users_id");
+		Group group = GroupService.getById(Integer.parseInt(group_id));
 		Map<HomeWork, Task> homew = new LinkedHashMap<HomeWork, Task>();
 		for (HomeWork home : HomeWorkService.getAllHomeworkWhereUserID(Integer.parseInt(user_id))) {
 			Task task =TaskService.getTask(home.getTask_id());
@@ -29,6 +32,7 @@ public class ShowHomework implements Action {
 			homew.put(home, task); 
 			}
 		}
+		request.setAttribute("group", group);
 		request.setAttribute("homeworks", homew);
 		request.getRequestDispatcher("/WEB-INF/homework/show.jsp")
 		.forward(request, response);

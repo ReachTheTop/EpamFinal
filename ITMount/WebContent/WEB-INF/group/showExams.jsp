@@ -74,18 +74,26 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i><t:i18n id='group.main'/></a></li>
+							class="fa fa-home fa-fw"></i>
+						<t:i18n id='group.main' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i><t:i18n id='group.tasks'/></a></li>
+							class="fa fa-tasks fa-fw"></i>
+						<t:i18n id='group.tasks' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i><t:i18n id='group.events'/></a></li>
+							class="fa fa-users fa-fw"></i>
+						<t:i18n id='group.events' /></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i><t:i18n id='group.exams'/></a></li>
+							class="fa fa-check fa-fw"></i>
+						<t:i18n id='group.exams' /></a></li>
 
-
+					<c:if test="${user.role == 'student' }">
+						<li><a
+							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+					</c:if>
 				</ul>
 			</div>
 			<div class="col-md-9">

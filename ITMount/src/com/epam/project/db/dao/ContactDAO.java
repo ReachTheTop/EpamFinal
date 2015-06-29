@@ -82,7 +82,7 @@ public class ContactDAO {
 		Contact contact = null;
 		try {
 
-			PreparedStatement st = connection.prepareStatement(SELECT_CONTACT);
+			PreparedStatement st = connection.prepareStatement(GET_BY_USER_ID);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			contact = ContactTransformer.getContact(rs);

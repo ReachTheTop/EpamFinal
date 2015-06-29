@@ -62,7 +62,7 @@ a {
 				<div class="col-md-12">
 					<h1>
 						<c:out value="${group.name }" />
-						<t:i18n id='group.tasks'/>
+						<t:i18n id='group.tasks' />
 					</h1>
 				</div>
 			</div>
@@ -74,20 +74,26 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i><t:i18n id='group.main'/></a></li>
+							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i><t:i18n id='group.tasks'/></a></li>
+							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i><t:i18n id='group.events'/></a></li>
+							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
+
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i><t:i18n id='group.exams'/></a></li>
+							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+					<c:if test="${user.role == 'student' }">
+						<li><a
+							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+					</c:if>
 					<c:if
 						test="${not empty group.teacher_id && user.id == group.teacher_id}">
 						<li><a href="#myModal" class="btn btn-sm btn-primary"
-							data-toggle="modal"><t:i18n id='group.task.create'/></a></li>
+							data-toggle="modal"><t:i18n id='group.task.create' /></a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -105,7 +111,7 @@ a {
 
 	<div id="myModalUpdate" class="modal fade bs-example-modal-sm">
 
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 
 
@@ -117,22 +123,26 @@ a {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><t:i18n id='group.task.update'/></h4>
+						<h4 class="modal-title">
+							<t:i18n id='group.task.update' />
+						</h4>
 					</div>
 					<div class="modal-body">
 
 						<div id="incorectData2" style="display: none;"
 							class="alert alert-danger">
-							<strong><t:i18n id='group.task.error'/></strong>
+							<strong><t:i18n id='group.task.error' /></strong>
 						</div>
 
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.name'/></b></label> <input name="task_name" class="form-control"
-								id="task_name" type="text" placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.name' /></b></label> <input name="task_name"
+								class="form-control" id="task_name" type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.description'/></b></label>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.description' /></b></label>
 							<p>
 								<textarea class="form-control" name="task_description"
 									id="task_description" rows="3" name="text"></textarea>
@@ -140,16 +150,17 @@ a {
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.deadline'/></b></label>
-							<input name="task_deadline" class="form-control"
-								id="taskDeadline" type="datetime-local">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.deadline' /></b></label> <input name="task_deadline"
+								class="form-control" id="taskDeadline" type="datetime-local">
 						</div>
 
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="task_file1"
-								type="file" placeholder="" name="fileUpdate">
+								<b><t:i18n id='group.task.file' /></b></label> <input
+								class="form-control" id="task_file1" type="file" placeholder=""
+								name="fileUpdate">
 						</div>
 
 						<div class="form-group" hidden="true">
@@ -160,8 +171,12 @@ a {
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
-								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
-							<button type="submit" class="btn btn-primary"><t:i18n id='group.task.update'/></button>
+								data-dismiss="modal">
+								<t:i18n id='group.task.close' />
+							</button>
+							<button type="submit" class="btn btn-primary">
+								<t:i18n id='group.task.update' />
+							</button>
 						</div>
 
 					</div>
@@ -327,7 +342,7 @@ a {
 	<div id="myModal" class="modal fade bs-example-modal-sm">
 
 
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- 					<form name=" form1" -->
 				<%-- 						action="TaskServlet?action=createTask&group_id=${group_id }" --%>
@@ -341,45 +356,55 @@ a {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><t:i18n id='group.task.new'/></h4>
+						<h4 class="modal-title">
+							<t:i18n id='group.task.new' />
+						</h4>
 					</div>
 					<div class="modal-body">
 
 						<div id="incorectData" style="display: none;"
 							class="alert alert-danger">
-							<strong><t:i18n id='group.task.error'/></strong>
+							<strong><t:i18n id='group.task.error' /></strong>
 						</div>
 
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.name'/></b></label> <input name="task_name" class="form-control"
-								id="login-username" type="text" placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.name' /></b></label> <input name="task_name"
+								class="form-control" id="login-username" type="text"
+								placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.description'/></b></label>
-							<p>
-								<textarea class="form-control" name="task_description" rows="3"
-									name="text"></textarea>
-							</p>
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.description' /></b></label>
+
+							<textarea class="form-control" name="task_description" rows="3"
+								name="text"></textarea>
+
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id='group.task.deadline'/></b></label>
-							<input name="task_deadline" class="form-control"
-								id="login-username" type="datetime-local">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id='group.task.deadline' /></b></label> <input name="task_deadline"
+								class="form-control" id="login-username" type="datetime-local">
 						</div>
 
 
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
-								<b><t:i18n id='group.task.file'/></b></label> <input class="form-control" id="task_file"
-								type="file" placeholder="" name="file">
+								<b><t:i18n id='group.task.file' /></b></label> <input
+								class="form-control" id="task_file" type="file" placeholder=""
+								name="file">
 						</div>
 
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary"
-								data-dismiss="modal"><t:i18n id='group.task.close'/></button>
-							<button type="submit" id="addTask" class="btn btn-primary"><t:i18n id='group.task.add'/></button>
+								data-dismiss="modal">
+								<t:i18n id='group.task.close' />
+							</button>
+							<button type="submit" id="addTask" class="btn btn-primary">
+								<t:i18n id='group.task.add' />
+							</button>
 						</div>
 
 					</div>
@@ -391,36 +416,42 @@ a {
 
 	<script>
 		var form1 = $('#form1');
-		form1.submit(function(e) {
-			e.preventDefault();
-			e.stopImmediatePropagation();
-			request = $.ajax({
-				type : form1.attr('method'),
-				url : form1.attr('action'),
+		form1
+				.submit(function(e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					request = $
+							.ajax({
+								type : form1.attr('method'),
+								url : form1.attr('action'),
 
-				data : new FormData(this),
-				processData : false,
-				contentType : false,
+								data : new FormData(this),
+								processData : false,
+								contentType : false,
 
-				//data : form.serialize(),
-				success : function(text) {
+								//data : form.serialize(),
+								success : function(text) {
 
-					$("#incorectData").hide();
-					document.getElementById("form1").reset();
-					$('#myModal').modal('hide');
-					showToaast("<t:i18n id='group.task.create.success'/>", 1);
-					window.location.href = '/ITMount/GroupServlet?action=showTasks&group_id=${group.id}';
+									$("#incorectData").hide();
+									document.getElementById("form1").reset();
+									$('#myModal').modal('hide');
+									showToaast(
+											"<t:i18n id='group.task.create.success'/>",
+											1);
+									window.location.href = '/ITMount/GroupServlet?action=showTasks&group_id=${group.id}';
 
-				},
-				error : function() {
-					$("#incorectData").show();
-					showToaast("<t:i18n id='group.task.create.error.update'/>", 0);
+								},
+								error : function() {
+									$("#incorectData").show();
+									showToaast(
+											"<t:i18n id='group.task.create.error.update'/>",
+											0);
 
-				}
-			});
+								}
+							});
 
-			return false;
-		});
+					return false;
+				});
 	</script>
 
 
