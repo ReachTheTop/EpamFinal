@@ -104,12 +104,12 @@
     <filter-name>loginuserFilter</filter-name>
     <url-pattern>/confirm</url-pattern>
   </filter-mapping>
-  	<servlet>
-		<servlet-name>OpenCreateTask</servlet-name>
-		<servlet-class>com.epam.project.controller.OpenCreateTask</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>OpenCreateTask</servlet-name>
-		<url-pattern>/openCreateTask</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <servlet-name>OpenCreateTask</servlet-name>
+    <servlet-class>com.epam.project.controller.OpenCreateTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OpenCreateTask</servlet-name>
+    <url-pattern>/openCreateTask</url-pattern>
+  </servlet-mapping>
 </web-app>

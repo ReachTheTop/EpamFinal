@@ -9,7 +9,7 @@ import com.epam.project.db.model.annotation.Unique;
 import com.epam.project.db.model.validator.Validator;
 
 @Table(name = "user")
-public class User extends Validator implements Serializable {
+public class User extends Validator implements Serializable, Comparable<User> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -220,4 +220,13 @@ public class User extends Validator implements Serializable {
 		this.contacts = contacts;
 	}
 
+	@Override
+	public int compareTo(User o) {
+		int last = this.surname.compareTo(o.surname);
+		last = last == 0 ? this.name.compareTo(o.name) : last;
+		return last == 0 ? this.id.compareTo(o.getId()): last;
+	}
+	public int compareTo(Integer id){
+		return this.id.compareTo(id);
+	}
 }

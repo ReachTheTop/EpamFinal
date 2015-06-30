@@ -1,7 +1,7 @@
 package com.epam.project.db.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;
@@ -11,6 +11,16 @@ import com.epam.project.db.model.validator.Validator;
 public class Journal extends Validator implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public Journal(Integer groupID, Integer userID, Date date, Boolean visit,
+			String description) {
+		super();
+		this.groupID = groupID;
+		this.userID = userID;
+		this.date = date;
+		this.visit = visit;
+		this.description = description;
+	}
 
 	@Column(value = "id")
 	private Integer id;
