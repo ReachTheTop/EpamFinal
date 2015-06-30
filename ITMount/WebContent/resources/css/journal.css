@@ -1,0 +1,10 @@
+/*.visit_true {
+	background-color: rgb(102, 207, 102);  display: block;
+}
+
+.visit_false {
+	background-color: rgb(252, 100, 100);  display: block;
+}*/
+.table-nonfluid {
+   width: auto !important;
+}
