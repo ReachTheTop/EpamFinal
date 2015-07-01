@@ -111,4 +111,10 @@ public class UserService {
 		closeConnection(connection);
 		return emails;
 	}
+	
+	public static void delUser(Integer id){
+		Connection connection = DBConnection.getConnection();
+		UserDAO.delUser(id, connection);
+		closeConnection(connection);
+	}
 }

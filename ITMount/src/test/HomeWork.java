@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 
@@ -19,7 +19,6 @@ public class HomeWork extends Validator implements Serializable {
 	
 	@Column(value="data")
 	@Presence
-	@Format(format="zip|7z|rar$")
 	private String data;
 	
 	@Column(value="task_id")

@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,7 +25,6 @@ public class Course extends Validator implements Serializable {
 	private String name;
 
 	@Column(value = "icon")
-	@Format(format="png|jpg|jpeg$")
 	private String icon;
 
 	@Column(value = "description")

@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -53,7 +53,6 @@ public class User extends Validator implements Serializable {
 	private String password_hash;
 
 	@Column(value = "curriculum_vitae")
-	@Format(format="pdf|docx|doc$")
 	private String curriculum_vitae;
 
 	@Column(value = "description")
@@ -70,10 +69,11 @@ public class User extends Validator implements Serializable {
 	private String key;
 
 	@Column(value = "image")
-	@Format(format="png|jpg|jpeg$")
 	private String image;
 
 	@Column(value = "email")
+	@Unique
+	@Email
 	@Presence()
 	private String email;
 

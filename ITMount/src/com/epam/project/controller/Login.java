@@ -78,6 +78,8 @@ public class Login extends HttpServlet {
 					request.getRequestDispatcher("WEB-INF/page/login.jsp").forward(
 							request, response);
 					
+				}else if(!user.getIs_active()){
+					session.setAttribute("errorLogin", res.getString("Login.error.banned"));
 				}else{
 					session.setAttribute("user", user);	
 					

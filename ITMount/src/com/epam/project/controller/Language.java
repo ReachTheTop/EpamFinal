@@ -35,7 +35,7 @@ public class Language extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		String languge = request.getParameter("language");
 		String country = request.getParameter("country");

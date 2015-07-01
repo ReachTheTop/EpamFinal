@@ -115,10 +115,10 @@ public class Validator {
 	private void checkFormat(Field field, Annotation annotation) {
 		try {
 			field.setAccessible(true);
+			Object data = field.get(this);
 			if (field.get(this) == null
 					|| field.get(this).toString().equals("")) {
-				setError(field.getAnnotation(Column.class).value(),
-						((Format) annotation).message());
+				return;
 			}
 
 			Pattern pattern = Pattern.compile(((Format) annotation).format());

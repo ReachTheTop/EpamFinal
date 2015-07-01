@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 
@@ -17,11 +17,11 @@ public class Contact extends Validator implements Serializable {
 	private Integer id;
 
 	@Column(value = "skype")
-	//@Format(format="^[a-zA-ZА-Яа-я0-9_-]{3,15}$")
+	@Format(format="^[a-zA-ZА-Яа-я0-9_-]{3,15}$")
 	private String skype;
 
 	@Column(value = "phone")
-	//@Format(format="^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$")
+	@Format(format="^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$")
 	private String phone;
 
 	@Column(value = "user_id")
