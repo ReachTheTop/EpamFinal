@@ -5,7 +5,7 @@
  <div class="row">
  <br><br><br><br>
  </div>
-	    <div class="footer navbar-fixed-bottom">
+	    <div class="footer ">
 	    	<div class="container">
 		    	
 		    	<div class="row">
