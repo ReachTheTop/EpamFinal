@@ -28,6 +28,11 @@
 <link rel="stylesheet" href="resources/css/font-awesome.css">
 <link rel="stylesheet" href="resources/css/animate.css">
 
+<script type="text/javascript" src="assets/chat/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="assets/chat/jquery.atmosphere.js"></script>
+<script type="text/javascript" src="assets/chat/application.js"></script>
+<link rel="stylesheet" href="assets/chat/css/chat.css">
+
 <title><c:out value="${ group.name }" /></title>
 
 <style type="text/css">
@@ -77,13 +82,13 @@ a {
 					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
 							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
-					<li class="active"><a
+					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
 							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
-					<li><a
+					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
 							class="fa fa-weixin"></i> Chat</a></li>
 					<c:if test="${user.role == 'student' }">
@@ -94,9 +99,29 @@ a {
 				</ul>
 			</div>
 			<div class="col-md-9">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-comment"></span> Chat
+					</div>
+					<div class="panel-body">
+						<ul class="chat">
 
-				<jsp:include page="eventPanel.jsp"></jsp:include>
 
+						</ul>
+					</div>
+					<div class="panel-footer">
+						<div class="form-group">
+
+
+							<textarea id="input" class="form-control" disabled="disabled"></textarea>
+							<input hidden="true" type="text" id="room" value="${group.id }" />
+							<input hidden="true" type="text" id="author"
+								value="${user.name } ${user.surname}" /> <input hidden="true"
+								type="text" id="image" value="${user.image} " />
+
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

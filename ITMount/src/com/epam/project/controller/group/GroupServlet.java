@@ -26,7 +26,7 @@ public class GroupServlet extends HttpServlet {
 				new UpdateGroup(), new GeoupUsersComand(),
 				new RemoveUsersFromGroup(), new AddUsersToGroup(),
 				new LeavUsersInGroup(), new RebaseUsers(),
-				new GetTeacherGroups(), new ShowEvents(), new ShowExams(), new ShowTasks() );
+				new GetTeacherGroups(), new ShowEvents(), new ShowExams(), new ShowTasks(), new GroupChat() );
 	}
 
 	/**
