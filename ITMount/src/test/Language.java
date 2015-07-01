@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 
@@ -40,7 +40,6 @@ public class Language extends Validator implements Serializable {
 	private String file;
 
 	@Column(value = "img")
-	@Format(format="png|jpg|jpeg$")
 	private String image;
 
 	@Column(value = "active")

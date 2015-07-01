@@ -3,7 +3,8 @@ package com.epam.project.db.model;
 import java.util.Date;
 
 public class Article {
-
+	
+	
 	private String header;
 	private String data;
 	private Integer id;

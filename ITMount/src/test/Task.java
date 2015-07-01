@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,7 +38,6 @@ public class Task extends Validator implements Serializable, Comparable<Task> {
 	private Boolean available;
 
 	@Column(value = "file")
-	@Format(format="pdf|doc|xml|docx|rar|zip|7z$")
 	@Presence
 	private String file;
 

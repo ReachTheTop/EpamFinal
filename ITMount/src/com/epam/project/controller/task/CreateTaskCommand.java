@@ -47,7 +47,7 @@ public class CreateTaskCommand implements Action {
 		task.setAvailable(true);
 
 		String pathFile = request.getParameter("task_file");
-		System.out.println(pathFile);
+		
 		
 		task.setIs_active(true);
 
@@ -58,7 +58,7 @@ public class CreateTaskCommand implements Action {
 		Part file = request.getPart("file");
 		UploadFile m = new UploadFile();
 
-		if (task.isValid()) {
+		
 
 			if (task.getDeadline() != null) {
 				if (checkDate(task.getDeadline()) == false) {
@@ -73,12 +73,16 @@ public class CreateTaskCommand implements Action {
 
 				String fileName = m.uploadFile(file, request.getServletContext(),"group_id_"+idGroup);
 				task.setFile(fileName);
-				
+				if (task.isValid()) {
 				TaskService.addNewTask(task);
 				/*Gson json = new Gson();
 				
 				response.setContentType("application/json");
 				response.getWriter().write(json.toJson(task));*/
+			}else{
+				
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				return;
 			}
 			return;
 

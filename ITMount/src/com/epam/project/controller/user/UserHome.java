@@ -67,7 +67,7 @@ public class UserHome implements Action {
 		if(birthday!=null){
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String s = formatter.format(birthday);
-		System.out.println(s);
+	
 		request.setAttribute("userBirthdayString", s);
 		}
 		request.getRequestDispatcher("/WEB-INF/user/home.jsp").forward(request,

@@ -88,8 +88,12 @@ public class UpdateTaskCommand implements Action {
 								request.getServletContext());
 					}
 					task.setFile(fileName);
-
+					if(task.isValid()){
 					TaskService.updateTask(task);
+					}else{
+						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						return;	
+					}
 				}
 
 			}

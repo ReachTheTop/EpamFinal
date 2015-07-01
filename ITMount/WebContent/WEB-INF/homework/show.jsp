@@ -54,7 +54,7 @@ a {
 	</div>
 
 	<div class="container">
-		<div class="container">
+		
 			<div class="row">
 				<div class="col-md-3">
 					<ul class="nav nav-pills nav-stacked">
@@ -90,7 +90,7 @@ a {
 								<c:if test="${home.key.getRating()>=0}">
 									<p>Rating: ${home.key.getRating()}</p>
 								</c:if>
-
+								<p id="ratingData" data-ratingHomework="${home.key.getId()}"></p>
 								<p>
 									<a
 										href="<c:url value="/downloadFile?file=${home.key.getData()}"/>"
@@ -106,10 +106,12 @@ a {
 											data-homework="${home.key.getId()}"
 											class="open-updateHomeWork btn btn-success glyphicon glyphicon-edit"></a>
 									</c:if>
+									</p>
 									<%-- <p><a data-toggle="modal" href="#uploadHomeWork"  data-userId="${home.key.getUser()}" data-TaskId="${home.key.getTask()}" class="open-uploadHomeWork btn">Upload</a></p>--%>
+									<p>
 									<c:if
 										test="${user.role =='lecturer' && home.key.getRating()<0  }">
-										<a data-toggle="modal" href="#retingHomeWork"
+										<a id="setReting" data-toggle="modal" href="#retingHomeWork"
 											data-homework="${home.key.getId()}"
 											class="open-ratingHomeWork btn"><t:i18n
 												id='group.homework.rating' /></a>
@@ -126,7 +128,7 @@ a {
 
 
 
-	</div>
+	
 
 	<div id="updateHomeWork" class="modal fade">
 		<div class="modal-dialog">
@@ -250,7 +252,7 @@ a {
 						<div class="form-group">
 							<label for="register-username"><i class="icon-user"></i>
 								<b><t:i18n id='group.homework.rating' /></b></label> <input
-								class="form-control" id="register-username" type="number"
+								class="form-control" id="register" type="number"
 								placeholder="" name="rating">
 						</div>
 
@@ -288,7 +290,7 @@ a {
 								message : "<t:i18n id='group.homework.validation.rating' />"
 							},
 							regexp : {
-								regexp : /[10|0-9]/,
+								regexp : /^(10)$|^[0-9]$/,
 								message : 'Enter 0-10 '
 							}
 						}
@@ -360,8 +362,8 @@ a {
 				success : function(data) {
 					if (data.success) {
 						$('#retingHomeWork').modal('hide');
-						
-						homeworkid.parent().parent().reset();
+						$('body').find("[data-ratinghomework='"+$('#idHomework').val()+"']").text("Rating:"+$('#register').val());
+						$('body').find("[data-homework='"+$('#idHomework').val()+"']").hide();
 						showToaast(data.success, 1);
 
 					} else {

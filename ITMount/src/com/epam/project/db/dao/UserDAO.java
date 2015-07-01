@@ -28,7 +28,8 @@ public class UserDAO {
 	public static final String SQL_GET_USER_EMAIL = "SELECT * FROM user WHERE email=? AND is_active= 1";
 	public static final String GET_ROLE = "SELECT role FROM role WHERE id = ?;";
 	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";
-
+	public static final String DELETE = "DELETE FROM user WHERE id=?";
+	
 	public static List<User> getByRole(String role, Connection connection) {
 		ResultSet rs = null;
 		List<User> user = null;
@@ -274,5 +275,17 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return emails;
+	}
+	public static void delUser(Integer id,  Connection connection){
+		
+		try {
+			
+			PreparedStatement st = connection.prepareStatement(DELETE);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

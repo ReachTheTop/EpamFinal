@@ -1327,7 +1327,12 @@
 															notEmpty : {
 																message : "<t:i18n id='validation.not.empty'/>",
 															},
+															regexp : {
+																regexp : /^[a-zA-ZА-ЯІіЇїЄєа-я]*$/,
 
+																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
+
+															},
 															stringLength : {
 																min : 1,
 																max : 15,
@@ -1347,7 +1352,7 @@
 															},
 
 															regexp : {
-																regexp : /[a-z]*/,
+																regexp : /^[a-z]*$/,
 																message : "<t:i18n id='validation.language.lower'/>"
 															}
 
@@ -1365,7 +1370,7 @@
 																message : "<t:i18n id='validation.language'/>"
 															},
 															regexp : {
-																regexp : /[A-Z]*/,
+																regexp : /^[A-Z]*$/,
 																message : "<t:i18n id='validation.language.uper'/>"
 															}
 														}

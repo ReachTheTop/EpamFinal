@@ -1,4 +1,4 @@
-package com.epam.project.db.model;
+package test;
 
 import java.io.Serializable;
 import java.util.Date;

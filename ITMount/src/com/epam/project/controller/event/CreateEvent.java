@@ -37,8 +37,10 @@ public class CreateEvent implements Action {
 		
 		Gson json = new Gson();
 		
-
-		event = EventService.getById(EventService.newEvent(event));
+		if(event.isValid()){
+			event = EventService.getById(EventService.newEvent(event));
+		}
+		
 			/*
 			response.setContentType("application/json");
 			response.getWriter().write(json.toJson(event));

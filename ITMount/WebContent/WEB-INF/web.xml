@@ -76,6 +76,15 @@
     <servlet-name>downloadFile</servlet-name>
     <url-pattern>/downloadFile</url-pattern>
   </servlet-mapping>
+  <servlet>
+		<servlet-name>Log4JInitServlet</servlet-name>
+		<servlet-class>com.epam.project.controller.Log4jInit</servlet-class>
+		<init-param>
+			<param-name>log4j-properties-location</param-name>
+			<param-value>WEB-INF/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+  </servlet>
   <filter>
     <filter-name>languageFilter</filter-name>
     <filter-class>com.epam.project.filter.LanguageFilter</filter-class>
@@ -160,7 +169,6 @@
     <filter-name>endSession</filter-name>
     <url-pattern>/AdminServlet</url-pattern>
   </filter-mapping>
-
   <filter>
     <filter-name>getBundle</filter-name>
     <filter-class>com.epam.project.filter.GetBandleFilter</filter-class>
@@ -169,5 +177,5 @@
     <filter-name>getBundle</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-
+  
 </web-app>
