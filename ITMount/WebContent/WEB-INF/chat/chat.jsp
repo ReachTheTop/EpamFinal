@@ -31,9 +31,10 @@
 <script type="text/javascript" src="assets/chat/jquery-2.0.3.js"></script>
 <script type="text/javascript" src="assets/chat/jquery.atmosphere.js"></script>
 <script type="text/javascript" src="assets/chat/application.js"></script>
+<script type="text/javascript" src="assets/chat/chatHistory.js"></script>
 <link rel="stylesheet" href="assets/chat/css/chat.css">
 
-<title><c:out value="${ group.name }" /></title>
+<title><c:out value="${ group.name }" /> <t:i18n id='group.chat'/></title>
 
 <style type="text/css">
 .nav-pills>li.active>a {
@@ -90,7 +91,7 @@ a {
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i> Chat</a></li>
+							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
 					<c:if test="${user.role == 'student' }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
@@ -101,11 +102,11 @@ a {
 			<div class="col-md-9">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<span class="glyphicon glyphicon-comment"></span> Chat
+						<span class="glyphicon glyphicon-comment"></span> <t:i18n id='group.chat'/>
 					</div>
 					<div class="panel-body">
 						<ul class="chat">
-
+							<li><a id="history" ><t:i18n id='group.chat.history'/></a></li>
 
 						</ul>
 					</div>

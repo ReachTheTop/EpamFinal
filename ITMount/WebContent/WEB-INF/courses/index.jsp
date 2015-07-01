@@ -66,6 +66,12 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
+	<script type="text/javascript">
+$(function(){
+	$('nav.mainmenu  li.active').removeAttr('class');
+	$('nav.mainmenu  li#courses').attr("class", "active");
+});
+</script>
 
 </body>
 </html>

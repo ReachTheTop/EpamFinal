@@ -170,5 +170,11 @@
 
 	<jsp:include page="../page/footer.jsp" />
 
+<script type="text/javascript">
+$(function(){
+	$('nav.mainmenu  li.active').removeAttr('class');
+	$('nav.mainmenu  li#articles').attr("class", "active");
+});
+</script>
 </body>
 </html>

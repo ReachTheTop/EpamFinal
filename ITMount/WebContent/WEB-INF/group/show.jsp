@@ -76,6 +76,7 @@ a {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
+			<c:if test="${user.role != 'student'|| user.role == 'student' && association.isActive == true }">
 				<ul class="nav nav-pills nav-stacked">
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
@@ -91,9 +92,9 @@ a {
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i> Chat</a></li>
+							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
 
-					<c:if test="${user.role == 'student' }">
+					<c:if test="${user.role == 'student'  }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
 								class="fa fa-list fa-fw"></i> <t:i18n id='group.user.homework' /></a></li>
@@ -152,6 +153,7 @@ a {
 
 
 				</ul>
+				</c:if>
 			</div>
 			<div class="col-md-9">
 
@@ -182,6 +184,7 @@ a {
 						</c:choose>
 					</c:if>
 				</div>
+				<c:if test="${ user.role != 'student'||user.role == 'student' && association.isActive == true }">
 				<div class="contact-box">
 
 					<table class="table table-hover">
@@ -223,7 +226,7 @@ a {
 						</tbody>
 					</table>
 				</div>
-
+</c:if>
 			</div>
 		</div>
 	</div>

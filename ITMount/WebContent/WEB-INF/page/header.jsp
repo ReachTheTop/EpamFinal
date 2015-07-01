@@ -60,11 +60,11 @@
 				<li class="logo-wrapper"><a href="<c:url value="home" />"><img
 						src="resources/img/jquery.png"
 						alt="Multipurpose Twitter Bootstrap Template"></a></li>
-				<li class="active"><a href="<c:url value="/home" />"><t:i18n
+				<li id="home" class="active"><a href="<c:url value="/home" />"><t:i18n
 							id="header.home" /></a></li>
-				<li><a href="<c:url value="/CourseServlet" />"><t:i18n
+				<li id="courses" ><a href="<c:url value="/CourseServlet" />"><t:i18n
 							id="header.courses" /></a></li>
-				<li><a href="<c:url value="/ArticleServlet" />"><t:i18n
+				<li id="articles"><a href="<c:url value="/ArticleServlet" />"><t:i18n
 							id="header.article" /></a></li>
 
 			</ul>

@@ -60,10 +60,9 @@ public class MessageDAO {
 
 		PreparedStatement stmt;
 		Integer key = null;
-		Connection con = DBConnection.getConnection();
 
 		try {
-			stmt = con.prepareStatement(SQL_ADD_NEW_MESSAGE,
+			stmt = connection.prepareStatement(SQL_ADD_NEW_MESSAGE,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, message.getSubject());
 			stmt.setString(2, message.getContent());
@@ -241,12 +240,14 @@ public class MessageDAO {
 		return comment_id;
 	}
 
-	public static List<Message> getNotificationHistory(Connection connection, Integer user_id) {
+	public static List<Message> getNotificationHistory(Connection connection,
+			Integer user_id) {
 		List<Message> messages = null;
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		try {
-			statement = connection.prepareStatement("SELECT * FROM message WHERE id IN(SELECT message_id FROM user_message WHERE receiver_id = ?);");
+			statement = connection
+					.prepareStatement("SELECT * FROM message WHERE id IN(SELECT message_id FROM user_message WHERE receiver_id = ?);");
 			statement.setInt(1, user_id);
 			set = statement.executeQuery();
 			messages = MessageTransformer.getAllMessages(set);
@@ -254,5 +255,50 @@ public class MessageDAO {
 			e.printStackTrace();
 		}
 		return messages;
+	}
+
+	public static void addGroupMessage(Connection connection,
+			Integer message_id, Integer group_id) {
+		PreparedStatement statement = null;
+		try {
+			statement = connection
+					.prepareStatement("INSERT INTO user_message (message_id, receiver_id, type) VALUE (?,?,?);");
+			statement.setInt(1, message_id);
+			statement.setInt(2, group_id);
+			statement.setString(3, "chat");
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static List<Message> getChatHistory(Connection connection,
+			Integer group_id, Integer last_id) {
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		List<Message> history = null;
+		Integer message_id = last_id;
+		try {
+
+			if (last_id == null) {
+				statement = connection
+						.prepareStatement("SELECT id FROM message ORDER BY id DESC LIMIT 1;");
+				result = statement.executeQuery();
+				result.next();
+				message_id = result.getInt("id")+1;
+			}
+
+			statement = connection
+					.prepareStatement("SELECT  m.*, send_date FROM message AS m "
+							+ "LEFT JOIN user_message ON m.id = user_message.message_id "
+							+ "WHERE type = 'chat' AND receiver_id = ? AND message_id < ? ORDER BY send_date DESC;");
+			statement.setInt(1, group_id);
+			statement.setInt(2, message_id);
+			result = statement.executeQuery();
+			history = MessageTransformer.getAllMessages(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
 	}
 }

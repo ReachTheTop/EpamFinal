@@ -86,7 +86,7 @@ a {
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i> Chat</a></li>
+							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
 					<c:if test="${user.role == 'student' }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i

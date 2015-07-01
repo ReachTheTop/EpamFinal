@@ -125,5 +125,23 @@ public class MessageService {
 		closeConnection(connection);
 		return messages;
 	}
+	
+	public static Integer newGroupMessage(Message message, Integer group_id){
+		Connection connection = DBConnection.getConnection();
+		Integer message_id = MessageDAO.addNewMessage(message, connection);
+		MessageDAO.addGroupMessage(connection, message_id, group_id);
+		closeConnection(connection);
+		return message_id;
+	}
 
+	public static List<Message> getChatHistory(Integer group_id, Integer last_id){
+		Connection connection = DBConnection.getConnection();
+		List<Message> messages = MessageDAO.getChatHistory(connection, group_id, last_id);
+		for (Message message : messages) {
+			message.setSender(UserDAO.getUser(message.getSender_id(),
+					connection));
+		}
+		closeConnection(connection);
+		return messages;
+	}
 }

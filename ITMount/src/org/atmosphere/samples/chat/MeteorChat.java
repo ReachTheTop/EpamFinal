@@ -33,6 +33,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.epam.project.db.model.Message;
+import com.epam.project.db.model.User;
+import com.epam.project.db.service.MessageService;
+
 /**
  * Simple Servlet that implement the logic to build a Chat application using
  * a {@link Meteor} to suspend and broadcast chat message.
@@ -70,24 +74,30 @@ public class MeteorChat extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String body = req.getReader().readLine().trim();
-        // Simple JSON -- Use Jackson for more complex structure
-        // Message looks like { "author" : "foo", "message" : "bar" }
         HashMap<String, String> data = new ObjectMapper().readValue(body, HashMap.class);
-        
-        /*String author = body.substring(body.indexOf(":") + 2, body.indexOf(",") - 1);
-        String message = body.substring(body.lastIndexOf(":") + 2, body.length() - 2);*/
-        /*List<String> path = new ArrayList<String>(Arrays.asList(url.split("/")));*/
         String url = req.getRequestURI().substring(req.getContextPath().length());
-      
         url = url.replaceAll("meteor/", "meteor/meteor/");
         
-        
-        System.out.println(url);
         
         String author = data.get("author");
         String message = data.get("message");
         String image = data.get("image");
-        broadcasterFactory.lookup(url).broadcast(new Data(image, author, message).toString());
+        Integer group_id = Integer.parseInt( data.get("group_id"));
+        User user = (User) req.getSession().getAttribute("user");
+        Integer message_id = saveMessage(user.getId(), group_id , message);
+        
+        
+        
+        
+        broadcasterFactory.lookup(url).broadcast(new Data(user.getId(),image, author, message, message_id).toString());
+    }
+    
+    private Integer saveMessage(Integer author_id, Integer group_id , String message){
+    	Message chat_message = new Message();
+    	chat_message.setContent(message);
+    	chat_message.setSender_id(author_id);
+    	Integer message_id = MessageService.newGroupMessage(chat_message, group_id);
+    	return message_id;
     }
 
     private final static class Data {
@@ -95,10 +105,14 @@ public class MeteorChat extends HttpServlet {
         private final String text;
         private final String author;
         private final String image;
-        public Data(String image, String author, String text) {
+        private final Integer author_id;
+        private final Integer message_id;
+        public Data(Integer author_id, String image, String author, String text, Integer message_id) {
             this.author = author;
             this.text = text;
             this.image = image;
+            this.author_id = author_id;
+            this.message_id = message_id;
         }
 
         public String toString() {
@@ -108,6 +122,8 @@ public class MeteorChat extends HttpServlet {
 				json.put("text", text);
 				json.put("author", author);
 				json.put("time", new Date().getTime());
+				json.put("id", author_id);
+				json.put("message_id", message_id);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
