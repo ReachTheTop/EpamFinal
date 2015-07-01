@@ -14,8 +14,7 @@
 <script src="assets/js/project.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script
-	src="assets/js/jquery.autocomplete.multiselect.js"></script>
+<script src="assets/js/jquery.autocomplete.multiselect.js"></script>
 
 <link
 	href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css"
@@ -74,20 +73,19 @@ a {
 				<ul class="nav nav-pills nav-stacked">
 					<li><a
 						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i>
-						<t:i18n id='group.main' /></a></li>
+							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i>
-						<t:i18n id='group.tasks' /></a></li>
+							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i>
-						<t:i18n id='group.events' /></a></li>
+							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
 					<li class="active"><a
 						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i>
-						<t:i18n id='group.exams' /></a></li>
+							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+					<li><a
+						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
+							class="fa fa-weixin"></i> Chat</a></li>
 
 					<c:if test="${user.role == 'student' }">
 						<li><a

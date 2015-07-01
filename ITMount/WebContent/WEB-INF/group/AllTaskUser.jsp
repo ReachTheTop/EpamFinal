@@ -2,27 +2,6 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create new task</title>
-
-<!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
-
-
-<%-- <jsp:include page="../page/head.jsp" /> --%>
-<link href="responsive.css" rel="stylesheet">
-
-</head>
-<body>
-
-
-
-	<div class="container" style="">
-		<div class="row">
-			<div class="col-md-9">
 				<div class="panel-group" id="accordion" role="tablist"
 					aria-multiselectable="true">
 
@@ -126,9 +105,6 @@
 				</div>
 
 
-			</div>
-		</div>
-	</div>
 
 	<div id="uploadHomeWork" class="modal fade">
 		<div class="modal-dialog">
@@ -235,6 +211,3 @@
 		});
 	</script>
 
-
-</body>
-</html>
