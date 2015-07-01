@@ -45,9 +45,11 @@
 				<!-- Slide 3 -->
 				<li class="bg1">
 					<!-- Slide Title -->
-					<h2 class="title">Feature Rich</h2> <!-- Slide Text -->
-					<h3 class="subtitle">Huge amount of components and over 30
-						sample pages!</h3> <!-- Slide Image --> <img class="slide-img"
+					<h2 class="title">Openness</h2> <!-- Slide Text -->
+					<h3 class="subtitle">We promote educational opportunity and social 
+      justice by providing high-quality  education to all who wish to realise their 
+      ambitions and fulfil their potential. We are committed to promoting equal opportunities
+      for all, and close monitoring makes sure that we live up to our ideals.</h3> <!-- Slide Image --> <img class="slide-img"
 					src="resources/img/homepage-slider/foto3.png" alt="Slide 3" />
 				</li>
 				<!-- End Slide 3 -->
@@ -67,15 +69,24 @@
 	<div class="section">
 		<div class="container">
 			<h2>Our Team</h2>
+			
+			<div class="row">
+				<blockquote class="pull-right">
+					<p>The world is a dangerous place to live; not because of the
+						people who are evil, but because of the people who don't do
+						anything about it.</p>
+					<small>by <cite>Albert Einstein</cite></small>
+				</blockquote>
+
+			</div>
 
 			<div class="row">
 				<!-- Team Member -->
-				<div class="col-md-4 col-sm-6">
+				<div class="col-md-3 col-sm-5">
 					<div class="team-member">
 						<!-- Team Member Photo -->
 						<div class="team-member-image">
-							<img src="resources/img/homepage-slider/foto1.png"
-								alt="Name Surname">
+							<img src="resources/img/team/vova.jpg" alt="Name Surname">
 						</div>
 						<div class="team-member-info">
 							<ul>
@@ -83,9 +94,9 @@
 								<li class="team-member-name">Volodya Lobachov</li>
 								<li>Capitan, Web Developer <!-- Team Member Social Links -->
 									<span class="team-member-social"> <a href="#"><i
-											class="icon-facebook"></i></a> <a href="#"><i
-											class="icon-github"></i></a> <a href="#"><i
-											class="icon-tumblr"></i></a>
+											class="fa fa-facebook"></i></a> <a href="#"><i
+											class="fa fa-vk"></i></a> <a href="#"><i
+											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>
 							</ul>
@@ -93,49 +104,46 @@
 					</div>
 				</div>
 				<!-- End Team Member -->
-				<div class="col-md-4 col-sm-6">
+				<div class="col-md-3 col-sm-5">
 					<div class="team-member">
 						<div class="team-member-image">
-							<img src="resources/img/homepage-slider/foto1.png"
-								alt="Name Surname">
+							<img src="resources/img/team/maks.jpg" alt="Name Surname">
 						</div>
 						<div class="team-member-info">
 							<ul>
 								<li class="team-member-name">Maxim Borsky</li>
 								<li>Web Developer <span class="team-member-social">
-										<a href="#"><i class="icon-facebook"></i></a> <a href="#"><i
-											class="icon-dribbble"></i></a> <a href="#"><i
-											class="icon-tumblr"></i></a>
+										<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+											class="fa fa-vk"></i></a> <a href="#"><i
+											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-6">
+				<div class="col-md-3 col-sm-5">
 					<div class="team-member">
 						<div class="team-member-image">
-							<img src="resources/img/homepage-slider/foto1.png"
-								alt="Name Surname">
+							<img src="resources/img/team/petro.jpg" alt="Name Surname">
 						</div>
 						<div class="team-member-info">
 							<ul>
 								<li class="team-member-name">Petro Andrushchak</li>
 								<li>Web Developer <span class="team-member-social">
-										<a href="#"><i class="icon-facebook"></i></a> <a href="#"><i
-											class="icon-dribbble"></i></a> <a href="#"><i
-											class="icon-tumblr"></i></a>
+										<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+											class="fa fa-vk"></i></a> <a href="#"><i
+											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-6">
+				<div class="col-md-3 col-sm-5">
 					<div class="team-member">
 						<div class="team-member-image">
-							<img src="resources/img/homepage-slider/foto1.png"
-								alt="Name Surname">
+							<img src="resources/img/team/dana.jpg" alt="Name Surname">
 						</div>
 						<div class="team-member-info">
 							<ul>
@@ -143,26 +151,7 @@
 								<li>Web Developer <span class="team-member-social">
 										<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 											class="fa fa-vk"></i></a> <a href="#"><i
-											class="fa fa-linkedin"></i></a>  
-								</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="team-member">
-						<div class="team-member-image">
-							<img src="resources/img/homepage-slider/foto1.png"
-								alt="Name Surname">
-						</div>
-						<div class="team-member-info">
-							<ul>
-								<li class="team-member-name">Viktor Plutus</li>
-								<li>Web Developer <span class="team-member-social">
-										<a href="#"><i class="icon-facebook"></i></a> <a href="#"><i
-											class="icon-dribbble"></i></a> <a href="#"><i
-											class="icon-tumblr"></i></a>
+											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>
 							</ul>
@@ -191,19 +180,62 @@
 						width="450" height="300" frameborder="0" style="border: 0"
 						allowfullscreen></iframe>
 				</div>
+
+				<p class="contact-us-details">
+					<b>Address:</b> Stepana Bandery 28A, Lviv, Ukraine<br /> <b>Phone:</b>
+					+380986463663<br /> <b>Skype:</b> EpamLabItMount<br /> <b>Email:</b>
+					<a href="mailto:getintoutch@yourcompanydomain.com">epamlabfinalproject@gmail.com
+					</a>
+				</p>
 				<!-- End Map -->
 
 			</div>
 
 			<div class="col-sm-5">
 				<!-- Contact Form -->
-				<h3>Contact information</h3>
+				<!-- Contact Form -->
+				<h3>Send Us a Message</h3>
 				<div class="contact-form-wrapper">
-					<p class="contact-us-details">
-						<b>Address:</b> Stepana Bandery 28A, Lviv, Ukraine<br />
-						<b>Phone:</b> +380986463663<br /> <b>Skype:</b> EpamLabItMount<br />
-						<b>Email:</b> <a href="mailto:getintoutch@yourcompanydomain.com">epamlabfinalproject@gmail.com </a>
-					</p>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="Name" class="col-sm-3 control-label"><b>Your
+									name</b></label>
+							<div class="col-sm-9">
+								<input class="form-control" id="Name" type="text" placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-email" class="col-sm-3 control-label"><b>Your
+									Email</b></label>
+							<div class="col-sm-9">
+								<input class="form-control" id="contact-email" type="text"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-message" class="col-sm-3 control-label"><b>Select
+									Topic</b></label>
+							<div class="col-sm-9">
+								<select class="form-control" id="prependedInput">
+									<option>Please select topic...</option>
+									<option>General</option>
+									<option>Services</option>
+									<option>Orders</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-message" class="col-sm-3 control-label"><b>Message</b></label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="5" id="contact-message"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<button type="submit" class="btn pull-right">Send</button>
+							</div>
+						</div>
+					</form>
 				</div>
 				<!-- End Contact Info -->
 			</div>
@@ -211,22 +243,52 @@
 
 		</div>
 	</div>
-	
+
 	<div class="section">
 		<div class="container">
 			<h2>Technology we have worked</h2>
 			<div class="clients-logo-wrapper text-center row">
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/log4j.png" alt="Client Name"></a></div>  
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/apache_maven.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/eclipse.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/junit.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/mysql.png" alt="Client Name"></a></div>  
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/javaservlet.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="resources/img/technology/jsp.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="img/logos/ea.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="img/logos/ea.png" alt="Client Name"></a></div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="img/logos/ebay.png" alt="Client Name"></a></div>
-						</div>
+			
+			<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/bootstrap.png" alt="Client Name"></a>
+				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/log4j.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img
+						src="resources/img/technology/apache_maven.png" alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/eclipse.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/junit.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/mysql.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/javaservlet.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/jsp.png"
+						alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+						<a href="#"><img src="resources/img/technology/xml.png" alt="Client Name"></a>
+				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/json.png" alt="Client Name"></a>
+				</div>
+			</div>
 
 
 		</div>
