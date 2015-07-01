@@ -73,14 +73,20 @@ $(function () {
     });
 
     function addMessage(image, author, message, color, datetime) {
-        content.append(
-
-        '<li class="left clearfix"><span class="chat-img pull-left">'+
+        $("li#top").removeAttr('id');
+    	content.append(
+        		
+        '<li  id="top" class="left clearfix"><span class="chat-img pull-left">'+
         '<img src="upload/'+image+'" alt="User Avatar"  style="border-radius: 50%;"  width="50" height="50" /></span>'+
         '<div class="chat-body clearfix" style="word-wrap: break-word"><div class="header">'+
         '<strong class="primary-font">'+author+'</strong><small class="pull-right text-muted">'+
         '<span class="glyphicon glyphicon-time"></span>'+ new Date(datetime).toDateString()+'</small></div><p>'+
         message + '</p></div></li>');
+        
+    	$("div.panel-body").delay(200).animate({
+            scrollTop : $("#top").offset().top
+
+        },1000);
     }
 });
 
