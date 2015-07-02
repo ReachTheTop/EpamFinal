@@ -1,5 +1,6 @@
 package com.epam.project.db.dao;
 
+import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +54,7 @@ public class ArticleDAO {
 			connection.setAutoCommit(false);
 			statement = connection
 					.prepareStatement("SELECT SQL_CALC_FOUND_ROWS * FROM article "
-							+ "WHERE is_active = 1 AND (header REGEXP ? OR "
+							+ "WHERE type = 'article' AND is_active = 1 AND (header REGEXP ? OR "
 							+ "course_id IN (SELECT id FROM course WHERE name REGEXP ?) "
 							+ "OR user_id IN (SELECT id FROM user WHERE surname REGEXP ?)) LIMIT ?,?;");
 			statement.setString(1, pattern);
@@ -123,13 +124,83 @@ public class ArticleDAO {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		try {
-			statement = connection.prepareStatement("SELECT * FROM article WHERE user_id = ?;");
+			statement = connection
+					.prepareStatement("SELECT * FROM article WHERE type = 'article' AND user_id = ?;");
 			statement.setInt(1, author_id);
-			set =  statement.executeQuery();
+			set = statement.executeQuery();
 			articles = ArticleTransformer.getAllArticles(set);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return articles;
+	}
+
+	public static List<Article> getFAQ(Connection connection) {
+		List<Article> qa = null;
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		try {
+			statement = connection
+					.prepareStatement("SELECT * FROM article WHERE type = 'faq' ");
+			set = statement.executeQuery();
+			qa = ArticleTransformer.getAllArticles(set);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return qa;
+	}
+
+	public static Integer createFAQ(Connection connection, Article faq) {
+		Integer qa_id = null;
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		try {
+			statement = connection
+					.prepareStatement(
+							"INSERT INTO article (header, course_id, data, type) VALUE (?,?,?, 'faq')",
+							Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, faq.getHeader());
+			statement.setInt(2, faq.getCourse_id());
+			statement.setString(3, faq.getData());
+			statement.executeUpdate();
+			set = statement.getGeneratedKeys();
+			set.next();
+			qa_id = set.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return qa_id;
+	}
+
+	public static List<Article> getFAQByCategory(Connection connection,
+			Integer category_id) {
+		List<Article> qa = null;
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		try {
+			statement = connection
+					.prepareStatement("SELECT * FROM article WHERE type = 'faq' AND course_id = ? ");
+			statement.setInt(1, category_id);
+			set = statement.executeQuery();
+			qa = ArticleTransformer.getAllArticles(set);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return qa;
+	}
+
+	public static Article getFAQById(Connection connection, Integer faq_id) {
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		Article question = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM article WHERE type = 'faq' AND id = ?");
+			statement.setInt(1, faq_id);
+			set = statement.executeQuery();
+			question = ArticleTransformer.getArticle(set);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return question;
 	}
 }

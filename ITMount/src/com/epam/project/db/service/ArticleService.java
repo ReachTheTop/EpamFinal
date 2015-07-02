@@ -66,4 +66,28 @@ public class ArticleService {
 		closeConnection(connection);
 		return articles;
 	}
+	
+	public static List<Article> getFAQ(){
+		Connection connection = DBConnection.getConnection();
+		List<Article> qa = null;
+		qa = ArticleDAO.getFAQ(connection);
+		closeConnection(connection);
+		return qa;
+	}
+	
+	public static Integer createFAQ(Article faq){
+		Integer qa_id = null;
+		Connection connection = DBConnection.getConnection();
+		qa_id = ArticleDAO.createFAQ(connection, faq);
+		closeConnection(connection);
+		return qa_id;
+	}
+	
+	public static Article getFAQById(Integer faq_id){
+		Article question = null;
+		Connection connection = DBConnection.getConnection();
+		question = ArticleDAO.getFAQById(connection, faq_id);
+		closeConnection(connection);
+		return question;
+	}
 }
