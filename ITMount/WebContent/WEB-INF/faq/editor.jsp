@@ -9,8 +9,8 @@
 
 
 		<div class="form-group">
-			<label>Question</label> <input type="text" class='form-control'
-				id='art-header' value="${qa.header }"> <label>Category</label>
+			<label><t:i18n id="faq.question"/></label> <input type="text" class='form-control'
+				id='art-header' value="${qa.header }"> <label><t:i18n id="faq.category"/></label>
 			<div class="input-group">
 				<select class='form-control' id="article-course">
 					<c:forEach items="${categories }" var="category">
@@ -27,8 +27,8 @@
 					</button>
 					<ul class="dropdown-menu">
 
-						<li><a data-toggle="modal" href="#addCategory">Add</a></li>
-						<li><a data-toggle="modal" id="editCat" href="#editCategory">Edit</a></li>
+						<li><a data-toggle="modal" href="#addCategory"><t:i18n id="faq.category.add"/></a></li>
+						<li><a data-toggle="modal" id="editCat" href="#editCategory"><t:i18n id="faq.category.edit"/></a></li>
 
 
 					</ul>
@@ -132,7 +132,7 @@
 					data-edit="formatBlock pre" title="Code"><i class="icon-cog"></i></a>
 			</div>
 			<div class="btn-group pull-right">
-				<a class="btn btn-primary" id="create-article">Confirm</a>
+				<a class="btn btn-primary" id="create-article"><t:i18n id="faq.question.confirm"/></a>
 			</div>
 			<input type="text" data-edit="inserttext" id="voiceBtn"
 				x-webkit-speech="">
@@ -228,7 +228,7 @@
 			}
 			$(
 					'<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'
-							+ '<strong>File upload error</strong> '
+							+ '<strong>'+"<t:i18n id='faq.editor.file.error'/>"+'</strong> '
 							+ msg
 							+ ' </div>').prependTo('#alerts');
 		}

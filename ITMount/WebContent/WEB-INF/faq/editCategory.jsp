@@ -8,7 +8,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Edit category</h4>
+				<h4 class="modal-title"><t:i18n id="faq.category.edit"/></h4>
 			</div>
 			<div class="modal-body">
 				<form id="editCategory" action="FaqServlet?action=editCategory"
@@ -21,14 +21,14 @@
 
 
 					<div class="form-group" id='message-subject'>
-						<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+						<label for="login-username"><i class="glyphicon glyphicon-certificate"></i> <b><t:i18n id="faq.category.name"/></b></label>
 						<input name="categoryName" class="form-control" id="categoryName"
 							type="text" placeholder="">
 					</div>
 
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary pull-right"
-							value="Edit">
+							value="<t:i18n id="faq.category.edit.button"/>">
 
 
 						<div class="clearfix"></div>
@@ -58,7 +58,7 @@
 
 				$('div#editCategory').modal('hide');
 				$("select option:selected").text(text.category);
-				showToaast("FAQ category was succesfully edited", 1);
+				showToaast("<t:i18n id='faq.category.edit.success'/>", 1);
 				//showToaast("<t:i18n id='group.task.success'/>", 1);
 
 			},

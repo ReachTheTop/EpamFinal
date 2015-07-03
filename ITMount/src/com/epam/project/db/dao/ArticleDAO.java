@@ -1,6 +1,5 @@
 package com.epam.project.db.dao;
 
-import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,7 +55,7 @@ public class ArticleDAO {
 					.prepareStatement("SELECT SQL_CALC_FOUND_ROWS * FROM article "
 							+ "WHERE type = 'article' AND is_active = 1 AND (header REGEXP ? OR "
 							+ "course_id IN (SELECT id FROM course WHERE name REGEXP ?) "
-							+ "OR user_id IN (SELECT id FROM user WHERE surname REGEXP ?)) LIMIT ?,?;");
+							+ "OR user_id IN (SELECT id FROM user WHERE surname REGEXP ?)) ORDER BY date DESC LIMIT ?,?;");
 			statement.setString(1, pattern);
 			statement.setString(2, coursePattern);
 			statement.setString(3, authorPattern);

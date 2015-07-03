@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Edit question</title>
+<title><t:i18n id="faq.edit"/></title>
 
 
 
@@ -51,7 +51,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Edit question</h1>
+					<h1><t:i18n id="faq.edit"/></h1>
 				</div>
 			</div>
 		</div>

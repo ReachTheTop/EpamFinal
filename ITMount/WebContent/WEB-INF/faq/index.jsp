@@ -25,9 +25,9 @@
 				<div class="col-md-12">
 					<h1>
 						FAQ
-						<t:i18n id='articles' />
-						<a href="<c:url value="/FaqServlet?action=new" />">New</a>
-
+						<c:if test="${user.role == 'admin' }">
+							<a class="btn btn-primary" href="<c:url value="/FaqServlet?action=new" />"><t:i18n id="faq.new"/></a>
+						</c:if>
 					</h1>
 
 				</div>
@@ -52,9 +52,13 @@
 										<a class="accordion-toggle" data-toggle="collapse"
 											data-parent="#accordion2" href="#collapse${qa.id }"> <c:out
 												value="${qa.header }" />
-										</a> <a class="pull-right"
-											href="<c:url value="/FaqServlet?action=edit&faq_id=${qa.id }" />"><i
-											class="glyphicon glyphicon-edit"></i> </a>
+
+										</a>
+										<c:if test="${user.role == 'admin' }">
+											<a class="pull-right"
+												href="<c:url value="/FaqServlet?action=edit&faq_id=${qa.id }" />"><i
+												class="glyphicon glyphicon-edit"></i> </a>
+										</c:if>
 
 									</div>
 									<div id="collapse${qa.id }" class="accordion-body collapse">

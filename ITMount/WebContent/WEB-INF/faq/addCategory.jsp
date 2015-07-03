@@ -8,20 +8,20 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">New FAQ category</h4>
+				<h4 class="modal-title"><t:i18n id="faq.category.new"/></h4>
 			</div>
 			<div class="modal-body">
 				<form id="addCategory" action="FaqServlet?action=newCategory" method="post">
 				
 					<div class="form-group" id='message-subject'>
-						<label for="login-username"><i class="icon-user"></i> <b>Name</b></label>
+						<label for="login-username"><i class="glyphicon glyphicon-certificate"></i> <b><t:i18n id="faq.category.name"/></b></label>
 						<input name="category" class="form-control" id="category"
 							type="text" placeholder="">
 					</div>
 
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary pull-right"
-							value="Add">
+							value="<t:i18n id="faq.category.add.button"/>">
 
 
 						<div class="clearfix"></div>
@@ -50,7 +50,7 @@
 
 					$('div#addCategory').modal('hide');
 					
-					showToaast("FAQ category was succesfully created",1);
+					showToaast("<t:i18n id='faq.category.create.success'/>",1);
 					//showToaast("<t:i18n id='group.task.success'/>", 1);
 
 				},

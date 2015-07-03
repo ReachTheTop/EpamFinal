@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h1>
-						<a href="<c:url value="CourseServlet" />"><t:i18n id='courses'/></a>
+						<t:i18n id='courses'/>
 					</h1>
 
 				</div>

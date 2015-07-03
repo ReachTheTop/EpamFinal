@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title><t:i18n id='article'/></title>
+<title><t:i18n id='article' /></title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>
@@ -20,7 +20,8 @@
 				<div class="col-md-12">
 					<h1>
 
-						<a href="<c:url value='ArticleServlet' />"><t:i18n id='articles'/></a>
+
+						<t:i18n id='articles' />
 					</h1>
 				</div>
 			</div>
@@ -42,23 +43,28 @@
 							</h3>
 						</div>
 						<div class="single-post-info">
-							<i class="glyphicon glyphicon-time"></i><span><c:out value="${article.date }"></c:out> </span>
+							<i class="glyphicon glyphicon-time"></i><span> <fmt:formatDate
+									value="${article.date }" pattern="MM/dd/yyyy HH:mm" /></span>
 						</div>
 
 						<div class="single-post-content">${article.data }</div>
 						<!-- Comments -->
 						<div class="post-coments">
-							<h4><t:i18n id='article.comments'/></h4>
+							<h4>
+								<t:i18n id='article.comments' />
+							</h4>
 							<c:forEach items="${comments }" var="comment">
 								<ul class="post-comments">
 
 									<li>
 										<div class="comment-wrapper">
 											<div class="comment-author">
-												<a class="link" href="<c:url value='UserServlet?user_id=${comment.sender.id }' />"> 
-												<img src="upload/${comment.sender.image }" alt="User Name">
-												<c:out value="${comment.sender.name }" />
-												<c:out value="${comment.sender.surname }" /></a> 
+												<a class="link"
+													href="<c:url value='UserServlet?user_id=${comment.sender.id }' />">
+													<img src="upload/${comment.sender.image }" alt="User Name">
+													<c:out value="${comment.sender.name }" /> <c:out
+														value="${comment.sender.surname }" />
+												</a>
 											</div>
 											<p>
 												<c:out value="${comment.content }" />
@@ -74,7 +80,9 @@
 								</ul>
 							</c:forEach>
 							<!-- Comments Form -->
-							<h4><t:i18n id='article.leave.comment'/></h4>
+							<h4>
+								<t:i18n id='article.leave.comment' />
+							</h4>
 							<c:choose>
 								<c:when test="${not empty user }">
 									<div class="comment-form-wrapper">
@@ -84,22 +92,27 @@
 
 											<div class="form-group">
 												<label for="comment-message"><i
-													class="glyphicon glyphicon-comment"></i> <b><t:i18n id='article.comment.message'/></b></label>
+													class="glyphicon glyphicon-comment"></i> <b><t:i18n
+															id='article.comment.message' /></b></label>
 												<textarea class="form-control" name="content" rows="5"
 													id="comment-message"></textarea>
 											</div>
 											<div class="form-group">
-												<button type="submit" class="btn btn-large pull-right"><t:i18n id='article.comment.send'/></button>
+												<button type="submit" class="btn btn-large pull-right">
+													<t:i18n id='article.comment.send' />
+												</button>
 											</div>
 											<div class="clearfix"></div>
 										</form>
 									</div>
 								</c:when>
 								<c:otherwise>
-								<div class="alert alert-info" role="alert">
-									<t:i18n id='article.comment.authorize'/><a href="<c:url value="/login" />"><t:i18n id='login.login'/></a>
-									
-								</div>
+									<div class="alert alert-info" role="alert">
+										<t:i18n id='article.comment.authorize' />
+										<a href="<c:url value="/login" />"><t:i18n
+												id='login.login' /></a>
+
+									</div>
 								</c:otherwise>
 							</c:choose>
 							<!-- End Comment Form -->
@@ -116,7 +129,12 @@
 
 
 	<jsp:include page="../page/footer.jsp" />
+	<script type="text/javascript">
+		$(function() {
+			$('nav.mainmenu  li.active').removeAttr('class');
 
+		});
+	</script>
 
 </body>
 </html>

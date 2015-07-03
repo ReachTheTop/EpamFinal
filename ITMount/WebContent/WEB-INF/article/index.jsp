@@ -7,14 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title><t:i18n id='articles'/></title>
+<title><t:i18n id='articles' /></title>
 <jsp:include page="../page/head.jsp" />
 
-<script
-	src="assets/js/jquery.bootpag.min.js"></script>
+<script src="assets/js/jquery.bootpag.min.js"></script>
 
-<script
-	src="assets/js/jquery.bootpag.min.js"></script>
+<script src="assets/js/jquery.bootpag.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -26,7 +24,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<a href="<c:url value='ArticleServlet' />"><t:i18n id='articles'/></a>
+						<t:i18n id='articles' />
 					</h1>
 
 				</div>
@@ -51,25 +49,27 @@
 
 
 
-									
-										<button type="submit" class="btn btn-primary" value="">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
-										<c:if test="${not empty user && user.role != 'student' }">
-											<button type="button" class="btn btn-primary dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<span class="caret"></span> <span class="sr-only">Toggle
-													Dropdown</span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a
-													href="<c:url value="/ArticleServlet?action=new" />"><t:i18n id='article.new'/></a></li>
-												<li><a href="<c:url value="/ArticleServlet?action=myarticles"/>"><t:i18n id='article.my'/></a></li>
 
-											</ul>
-										</c:if>
-									
+									<button type="submit" class="btn btn-primary" value="">
+										<span class="glyphicon glyphicon-search"></span>
+									</button> <c:if test="${not empty user && user.role != 'student' }">
+										<button type="button" class="btn btn-primary dropdown-toggle"
+											data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false">
+											<span class="caret"></span> <span class="sr-only">Toggle
+												Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a
+												href="<c:url value="/ArticleServlet?action=new" />"><t:i18n
+														id='article.new' /></a></li>
+											<li><a
+												href="<c:url value="/ArticleServlet?action=myarticles"/>"><t:i18n
+														id='article.my' /></a></li>
+
+										</ul>
+									</c:if>
+
 
 
 
@@ -122,11 +122,10 @@
 									href="ArticleServlet?token=${article.author.surname }"><c:out
 											value="${article.author.name }" /> <c:out
 											value="${article.author.surname }" /></a>
-								</span>
-								
-								<a
+								</span> <a
 									href="<c:url value="ArticleServlet?action=show&article_id=${article.id }" />"
-									class="btn btn-primary" id='read-mode'><t:i18n id='article.more'/></a>
+									class="btn btn-primary" id='read-mode'><t:i18n
+										id='article.more' /></a>
 							</div>
 						</div>
 					</div>
@@ -170,11 +169,11 @@
 
 	<jsp:include page="../page/footer.jsp" />
 
-<script type="text/javascript">
-$(function(){
-	$('nav.mainmenu  li.active').removeAttr('class');
-	$('nav.mainmenu  li#articles').attr("class", "active");
-});
-</script>
+	<script type="text/javascript">
+		$(function() {
+			$('nav.mainmenu  li.active').removeAttr('class');
+			$('nav.mainmenu  li#articles').attr("class", "active");
+		});
+	</script>
 </body>
 </html>

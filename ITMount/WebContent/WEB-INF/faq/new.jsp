@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title><t:i18n id='article.new.title' /></title>
+<title><t:i18n id="faq.new"/></title>
 
 <script src="assets/editor/external/google-code-prettify/prettify.js"></script>
 
@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<t:i18n id='article.new' />
+						<t:i18n id="faq.new"/>
 					</h1>
 				</div>
 			</div>

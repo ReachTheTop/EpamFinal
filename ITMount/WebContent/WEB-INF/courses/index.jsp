@@ -18,7 +18,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1><a href="<c:url value='CourseServlet' />"><t:i18n id='courses'/></a></h1>
+					<h1><t:i18n id='courses'/></h1>
 
 
 				</div>
