@@ -73,3 +73,45 @@
 	});
 </script>
 
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#editCategory')
+									.bootstrapValidator(
+											{
+												message : '<t:i18n id="group.validation"/>',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},submitHandler: function(validator, form, submitButton) {
+										          
+										        },
+												fields : {
+													
+													categoryName: {
+														validators :{
+															notEmpty : {
+																message : '<t:i18n id="category.error.empty"/>'
+															},
+										                    stringLength: {
+										                        min: 2,
+										                        max: 100,
+										                        message: '<t:i18n id="category.error.length"/>'
+										                    }
+														}
+													}
+												}
+											});
+							
+						});
+	</script>
+
+
+
+
+
+
+
+

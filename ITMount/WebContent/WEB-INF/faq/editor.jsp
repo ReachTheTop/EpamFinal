@@ -150,7 +150,7 @@
 <script type="text/javascript">
 	$("a#create-article").click(function() {
 		if (!$('#art-header').val()) {
-			showToaast("<t:i18n id='article.error.header'/>", 0);
+			showToaast("<t:i18n id='faq.error.title'/>", 0);
 		} else {
 			if ($('div#editor').html().length <= 88000) {
 				$.post("FaqServlet?action=${action}", {
@@ -163,7 +163,7 @@
 					window.location.href = '/ITMount/FaqServlet';
 				});
 			} else {
-				showToaast("<t:i18n id='article.error.long'/>", 0);
+				showToaast("<t:i18n id='faq.error.long'/>", 0);
 			}
 		}
 	});
@@ -307,4 +307,6 @@
 
 	}
 </script>
+
+
 
