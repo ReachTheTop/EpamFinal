@@ -27,8 +27,13 @@ public class Menu {
 			action = "index";
 		}
 		currentTask =  menu.get(action);
-		
+		try{
 		currentTask.execute(request, response);
+		}catch(NullPointerException e){
+			response.sendError(404);
+			return;
+		}
+		
 		
 	}
 	

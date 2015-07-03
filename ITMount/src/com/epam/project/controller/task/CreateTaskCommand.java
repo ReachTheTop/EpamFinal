@@ -39,7 +39,7 @@ public class CreateTaskCommand implements Action {
 		try {
 			dateDeadline = deadline.parse(stringDateDeadline);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		}
@@ -75,10 +75,10 @@ public class CreateTaskCommand implements Action {
 				task.setFile(fileName);
 				if (task.isValid()) {
 				TaskService.addNewTask(task);
-				/*Gson json = new Gson();
+				Gson json = new Gson();
 				
 				response.setContentType("application/json");
-				response.getWriter().write(json.toJson(task));*/
+				response.getWriter().write(json.toJson(task));
 			}else{
 				
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

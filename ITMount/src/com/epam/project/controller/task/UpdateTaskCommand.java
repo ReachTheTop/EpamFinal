@@ -17,6 +17,7 @@ import com.epam.project.db.model.Task;
 import com.epam.project.db.service.TaskService;
 import com.epam.project.util.file.DeleteFile;
 import com.epam.project.util.file.UploadFile;
+import com.google.gson.Gson;
 
 public class UpdateTaskCommand implements Action {
 
@@ -97,6 +98,9 @@ public class UpdateTaskCommand implements Action {
 				}
 
 			}
+			response.setContentType("application/json");
+			Gson json = new Gson();
+			response.getWriter().write(json.toJson(task));
 			return;
 
 		} else {

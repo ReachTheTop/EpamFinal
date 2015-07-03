@@ -53,7 +53,7 @@ $(function () {
     var subSocket = socket.subscribe(request);
 
     input.keydown(function(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && $(this).val()) {
             var msg = $(this).val();
             author = $("#author").val();
             var image = $("#image").val();

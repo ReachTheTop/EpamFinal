@@ -8,9 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${ group.name }</title>
+
+
 <jsp:include page="../page/head.jsp" />
-
-
 <script src="assets/js/project.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
@@ -86,7 +86,8 @@ a {
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
+							class="fa fa-weixin"></i>
+						<t:i18n id='group.chat' /></a></li>
 					<c:if test="${user.role == 'student' }">
 						<li><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
@@ -130,11 +131,6 @@ a {
 						</h4>
 					</div>
 					<div class="modal-body">
-
-						<div id="incorectData2" style="display: none;"
-							class="alert alert-danger">
-							<strong><t:i18n id='group.task.error' /></strong>
-						</div>
 
 
 						<div class="form-group">
@@ -203,7 +199,11 @@ a {
 				contentType : false,
 
 				success : function(text) {
-
+					$('#form1, #editTask').data('bootstrapValidator').resetForm();
+					$("a#task"+$("#task_id").val()).text(text.name);
+					$("td#taskName"+$("#task_id").val()).text(text.name);
+					$("td#taskDesc"+$("#task_id").val()).text(text.description);
+					$("a#taskFile"+$("#task_id").val()).attr("href","/ITMount/downloadFile?file="+text.file);
 					$("#incorectData2").hide();
 
 					$('#myModalUpdate').modal('hide');
@@ -211,7 +211,7 @@ a {
 
 				},
 				error : function() {
-					$("#incorectData2").show();
+					
 					showToaast("<t:i18n id='group.task.error.update'/>", 0);
 
 				}
@@ -364,10 +364,7 @@ a {
 					</div>
 					<div class="modal-body">
 
-						<div id="incorectData" style="display: none;"
-							class="alert alert-danger">
-							<strong><t:i18n id='group.task.error' /></strong>
-						</div>
+						
 
 
 						<div class="form-group">
@@ -433,7 +430,7 @@ a {
 
 								//data : form.serialize(),
 								success : function(text) {
-
+									$('#form1, #editTask').data('bootstrapValidator').resetForm();
 									$("#incorectData").hide();
 									document.getElementById("form1").reset();
 									$('#myModal').modal('hide');
@@ -461,7 +458,7 @@ a {
 		$(document).ready(function() {
 			$("#myModal").on("hidden.bs.modal", function() {
 				document.getElementById("form1").reset();
-				$("#incorectData").hide();
+				
 
 			});
 		});
@@ -474,7 +471,7 @@ a {
 		$(document)
 				.ready(
 						function() {
-							$('#form1')
+							$('#form1, #editTask')
 									.bootstrapValidator(
 											{
 												message : '<t:i18n id="group.validation"/>',
@@ -482,7 +479,9 @@ a {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
 													validating : 'glyphicon glyphicon-refresh'
-												},
+												},submitHandler: function(validator, form, submitButton) {
+										          
+										        },
 												fields : {
 													email : {
 														validators : {
@@ -498,14 +497,25 @@ a {
 															notEmpty : {
 																message : "<t:i18n id='group.validation.name.empty'/>"
 															},
+										                    stringLength: {
+										                        min: 2,
+										                        max: 70,
+										                        message: "<t:i18n id='task.validation.name'/>"
+										                    }
 														}
 													},
 													task_description : {
 														message : "<t:i18n id='group.validation.description'/>",
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='group.validation.description.empty'/>"
+																message : "<t:i18n id='group.validation.description.empty'/>",
+																
 															},
+										                    stringLength: {
+										                        min: 6,
+										                        max: 400,
+										                        message: "<t:i18n id='task.validation.desc'/>"
+										                    }
 
 														}
 													},
@@ -518,6 +528,7 @@ a {
 													},
 												}
 											});
+							
 						});
 	</script>
 

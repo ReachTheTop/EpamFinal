@@ -184,4 +184,56 @@
 	}
 </script>
 
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#create-event-form')
+									.bootstrapValidator(
+											{
+												message : '<t:i18n id="group.validation"/>',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},submitHandler: function(validator, form, submitButton) {
+										          
+										        },
+												fields : {
+													exam_date : {
+														validators : {
+															notEmpty : {
+																message : '<t:i18n id="event.validate.date"/>'
+															},
+														}
+													},
+													description: {
+														validators :{
+															notEmpty : {
+																message : '<t:i18n id="event.validate.desc"/>'
+															},
+										                    stringLength: {
+										                        min: 6,
+										                        max: 200,
+										                        message: '<t:i18n id="event.validate.desc.length"/>'
+										                    }
+														}
+													},
+													date : {
+														validators : {
+															notEmpty : {
+																message : '<t:i18n id="event.validate.date"/>'
+															},
+														}
+													}
+												}
+											});
+							
+						});
+	</script>
+
+
+
+
+
 

@@ -94,14 +94,14 @@
 
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.type'/></b></label> <select class="form-control " name="typeEvent" id="sel1">
-							<option value="fa fa-calendar">other</option>
-							<option value="fa fa-birthday-cake">birthday</option>
-							<option value="fa fa-beer">beer</option>
-							<option value="fa fa-futbol-o">sport</option>
-							<option value="fa fa-coffee">coffee</option>
-							<option value="fa fa-camera">foto</option>
-							<option value="fa fa-tree">holiday</option>
-							<option value="fa fa-usd">money</option>
+							<option value="fa fa-calendar"><t:i18n id='event.other'/></option>
+							<option value="fa fa-birthday-cake"><t:i18n id='event.birthday'/></option>
+							<option value="fa fa-beer"><t:i18n id='event.beer'/></option>
+							<option value="fa fa-futbol-o"><t:i18n id='event.sport'/></option>
+							<option value="fa fa-coffee"><t:i18n id='event.coffee'/></option>
+							<option value="fa fa-camera"><t:i18n id='event.foto'/></option>
+							<option value="fa fa-tree"><t:i18n id='event.holiday'/></option>
+							<option value="fa fa-usd"><t:i18n id='event.money'/></option>
 
 						</select>
 					</div>
@@ -191,14 +191,14 @@
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.type'/></b></label> <select class="form-control " name="typeEvent"
 							id="eventType">
-							<option value="fa fa-calendar">other</option>
-							<option value="fa fa-birthday-cake">birthday</option>
-							<option value="fa fa-beer">beer</option>
-							<option value="fa fa-futbol-o">sport</option>
-							<option value="fa fa-coffee">coffee</option>
-							<option value="fa fa-camera">foto</option>
-							<option value="fa fa-tree">holiday</option>
-							<option value="fa fa-usd">money</option>
+							<option value="fa fa-calendar"><t:i18n id='event.other'/></option>
+							<option value="fa fa-birthday-cake"><t:i18n id='event.birthday'/></option>
+							<option value="fa fa-beer"><t:i18n id='event.beer'/></option>
+							<option value="fa fa-futbol-o"><t:i18n id='event.sport'/></option>
+							<option value="fa fa-coffee"><t:i18n id='event.coffee'/></option>
+							<option value="fa fa-camera"><t:i18n id='event.foto'/></option>
+							<option value="fa fa-tree"><t:i18n id='event.holiday'/></option>
+							<option value="fa fa-usd"><t:i18n id='event.money'/></option>
 
 						</select>
 					</div>
@@ -206,7 +206,7 @@
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id='group.event.description'/></b></label>
 						<textarea name="description" id="eventDescription"
-							class="form-control" type="text" placeholder=""></textarea>
+							class="form-control"  placeholder=""></textarea>
 					</div>
 
 					<div class="form-group">
@@ -275,6 +275,58 @@
 	}
 </script>
 
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#create-event-form, #editTask')
+									.bootstrapValidator(
+											{
+												message : '<t:i18n id="group.validation"/>',
+												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},submitHandler: function(validator, form, submitButton) {
+										          
+										        },
+												fields : {
+													eventName : {
+														validators : {
+															notEmpty : {
+																message : '<t:i18n id="event.validate.title"/>'
+															},
+										                    stringLength: {
+										                        min: 2,
+										                        max: 70,
+										                        message: '<t:i18n id="event.validate.title.length"/>'
+										                    }
+														}
+													},
+													description: {
+														validators :{
+															notEmpty : {
+																message : '<t:i18n id="event.validate.desc"/>'
+															},
+										                    stringLength: {
+										                        min: 6,
+										                        max: 200,
+										                        message: '<t:i18n id="event.validate.desc.length"/>'
+										                    }
+														}
+													},
+													date : {
+														validators : {
+															notEmpty : {
+																message : '<t:i18n id="event.validate.date"/>'
+															},
+														}
+													}
+												}
+											});
+							
+						});
+	</script>
 
 
 

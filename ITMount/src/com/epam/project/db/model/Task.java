@@ -26,7 +26,7 @@ public class Task extends Validator implements Serializable, Comparable<Task> {
 
 	@Column(value = "description")
 	@Presence
-	@Size(min=1,max=250)
+	@Size(min=1,max=500)
 	@Format(format="^[^<^>]*$")
 	private String description;
 
@@ -38,7 +38,7 @@ public class Task extends Validator implements Serializable, Comparable<Task> {
 	private Boolean available;
 
 	@Column(value = "file")
-	@Format(format="pdf|doc|xml|docx|rar|zip|7z$")
+	@Format(format="pdf|doc|xml|docx|rar|pptx|zip|7z$")
 	@Presence
 	private String file;
 
