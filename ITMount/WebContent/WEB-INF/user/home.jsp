@@ -18,7 +18,7 @@
 
 <script src="resources/js/toastr.js"></script>
 
-<link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+<!-- <link rel="stylesheet" href="resources/css/tabPanel.css"></link> -->
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 <style type="text/css">
@@ -52,6 +52,7 @@
 			</div>
 		</div>
 	</div>
+		
 
 
 	<div id="editUser" class="modal fade">
@@ -289,7 +290,7 @@
 
 
 
-
+	
 
 
 	<c:choose>
@@ -450,8 +451,13 @@
 	<c:choose>
 		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
+			
 			<div class="container">
-				<h2><t:i18n id="admin.panel"/></h2>
+			
+				<h2><t:i18n id="admin.panel"/> 
+				
+				<jsp:include page="statistic.jsp" />
+				</h2>
 
 
 				<div id="editCourse" class="modal fade">
@@ -931,6 +937,12 @@
 							</div>
 						</div>
 					</div>
+					
+					
+					
+				
+					
+					
 				</div>
 			</div>
 		</c:when>
@@ -1062,169 +1074,169 @@
 		</select>
 	</div>
 
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('form#edit-group-form')
-									.bootstrapValidator(
+	<script type="text/javascript"> 
+ 		$(document)
+ 				.ready(
+ 						function() {
+ 							$('form#edit-group-form')
+ 									.bootstrapValidator(
+ 											{
+ 												message : 'This value is not valid',
+ 												feedbackIcons : {
+ 													valid : 'glyphicon glyphicon-ok',
+ 													invalid : 'glyphicon glyphicon-remove',
+ 													validating : 'glyphicon glyphicon-refresh'
+ 												},
+ 												fields : {
+ 													name : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>",
+ 																min : 5,
+ 																max : 30,
+ 																message : '<t:i18n id="validation.size"/>'
+ 															}
+
+ 														}
+ 													},
+ 													teacher_id : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>"
+
+ 															}
+
+ 														}
+ 													}
+ 												}
+ 											});
+						});
+ 	</script> 
+
+
+ 	<script type="text/javascript"> 
+ 		$(document)
+ 				.ready(
+ 						function() {
+ 							$('form#edit-course-form, form#create-new-course')
+ 									.bootstrapValidator(
+ 											{
+ 												message : 'This value is not valid',
+ 												feedbackIcons : {
+													valid : 'glyphicon glyphicon-ok',
+ 													invalid : 'glyphicon glyphicon-remove',
+ 													validating : 'glyphicon glyphicon-refresh'
+ 												},
+ 												fields : {
+ 													name : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>",
+ 																min : 2,
+ 																max : 30,
+ 																message : "<t:i18n id='validation.course.name.size'/>"
+ 															}
+
+ 														}
+ 													},
+ 													image : {
+ 														validators : {
+ 															file : {
+ 																extension : 'png,jpg',
+ 																maxSize : 5 * 1024 * 1024,
+ 																message : "<t:i18n id='validation.course.image'/>"
+ 															}
+ 														}
+ 													},
+ 													description : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>",
+ 																min : 100,
+ 																max : 2000,
+ 																message : "<t:i18n id='validation.course.description'/>"
+ 															}
+
+ 														}
+ 													}
+ 												}
+ 											});
+ 						});
+	</script> 
+
+
+ 	<script type="text/javascript">
+ 		$(document)
+ 				.ready(
+ 						function() {
+ 							$('#editUserForm')
+ 									.bootstrapValidator(
 											{
 												message : 'This value is not valid',
-												feedbackIcons : {
-													valid : 'glyphicon glyphicon-ok',
-													invalid : 'glyphicon glyphicon-remove',
-													validating : 'glyphicon glyphicon-refresh'
-												},
-												fields : {
-													name : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 5,
+											feedbackIcons : {
+ 													valid : 'glyphicon glyphicon-ok',
+ 													invalid : 'glyphicon glyphicon-remove',
+												validating : 'glyphicon glyphicon-refresh'
+ 												},
+											fields : {
+												surname : {
+													validators : {
+ 															notEmpty : {
+															message : "<t:i18n id='validation.not.empty'/>",
+															min : 2,
 																max : 30,
-																message : '<t:i18n id="validation.size"/>'
+															message : "<t:i18n id='validation.surname'/>" 
 															}
 
 														}
-													},
-													teacher_id : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>"
+ 													},
+ 													email : {
+ 														validators : {
+ 															emailAddress : {
+ 																message : "<t:i18n id='validation.email'/>"
+ 															}
+ 														}
+ 													},
+ 													skype : {
+ 														validators : {
+ 															regexp : {
+ 																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
+ 																message : "<t:i18n id='validation.skype'/>"
+ 															},
 
-															}
+ 														}
+ 													},
+ 													phone : {
+ 														validators : {
+ 															regexp : {
+ 																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
+ 																message : "<t:i18n id='validation.phone'/>"
+ 															},
 
-														}
-													}
-												}
-											});
-						});
-	</script>
-
-
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('form#edit-course-form, form#create-new-course')
-									.bootstrapValidator(
-											{
-												message : 'This value is not valid',
-												feedbackIcons : {
-													valid : 'glyphicon glyphicon-ok',
-													invalid : 'glyphicon glyphicon-remove',
-													validating : 'glyphicon glyphicon-refresh'
-												},
-												fields : {
-													name : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 2,
-																max : 30,
-																message : "<t:i18n id='validation.course.name.size'/>"
-															}
-
-														}
-													},
-													image : {
-														validators : {
-															file : {
-																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
-																message : "<t:i18n id='validation.course.image'/>"
-															}
-														}
-													},
-													description : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 100,
-																max : 2000,
-																message : "<t:i18n id='validation.course.description'/>"
-															}
-
-														}
-													}
-												}
-											});
-						});
-	</script>
-
-
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('#editUserForm')
-									.bootstrapValidator(
-											{
-												message : 'This value is not valid',
-												feedbackIcons : {
-													valid : 'glyphicon glyphicon-ok',
-													invalid : 'glyphicon glyphicon-remove',
-													validating : 'glyphicon glyphicon-refresh'
-												},
-												fields : {
-													surname : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 2,
-																max : 30,
-																message : "<t:i18n id='validation.surname'/>" 
-															}
-
-														}
-													},
-													email : {
-														validators : {
-															emailAddress : {
-																message : "<t:i18n id='validation.email'/>"
-															}
-														}
-													},
-													skype : {
-														validators : {
-															regexp : {
-																regexp : /^[a-zА-Яа-я0-9_-]{3,15}$/,
-																message : "<t:i18n id='validation.skype'/>"
-															},
-
-														}
-													},
-													phone : {
-														validators : {
-															regexp : {
-																regexp : /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/,
-																message : "<t:i18n id='validation.phone'/>"
-															},
-
-														}
-													},
-													image : {
-														validators : {
-															file : {
-																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
-																message : "<t:i18n id='validation.course.image'/>"
-															}
-														}
-													},
-													cv : {
-														validators : {
-															file : {
-																extension : 'pdf,doc,docx',
-																maxSize : 5 * 1024 * 1024,
-																message : "<t:i18n id='validation.cv'/>"
-															}
-														}
-													}
-												}
-											});
-						});
-	</script>
+ 														}
+ 													},
+ 													image : {
+ 														validators : {
+ 															file : {
+ 																extension : 'png,jpg',
+ 																maxSize : 5 * 1024 * 1024,
+ 																message : "<t:i18n id='validation.course.image'/>"
+ 															}
+ 														}
+ 													},
+ 													cv : {
+ 														validators : {
+ 															file : {
+ 																extension : 'pdf,doc,docx',
+ 																maxSize : 5 * 1024 * 1024,
+ 																message : "<t:i18n id='validation.cv'/>"
+ 															}
+ 														}
+ 													}
+ 												}
+ 											});
+ 						});
+ 	</script> 
 
 	<c:if test="${showEditModal!=null }">
 	${showEditModal=null }
@@ -1308,90 +1320,90 @@
 	</script>
 
 
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('form#add-language-form')
-									.bootstrapValidator(
-											{
-												message : 'This value is not valid',
-												feedbackIcons : {
-													valid : 'glyphicon glyphicon-ok',
-													invalid : 'glyphicon glyphicon-remove',
-													validating : 'glyphicon glyphicon-refresh'
-												},
-												fields : {
-													name : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-															},
-															regexp : {
-																regexp : /^[a-zA-ZА-ЯІіЇїЄєа-я]*$/,
+ 	<script type="text/javascript"> 
+ 		$(document)
+ 				.ready(
+ 						function() {
+ 							$('form#add-language-form')
+ 									.bootstrapValidator(
+ 											{
+ 												message : 'This value is not valid',
+ 												feedbackIcons : {
+ 													valid : 'glyphicon glyphicon-ok',
+ 													invalid : 'glyphicon glyphicon-remove',
+ 													validating : 'glyphicon glyphicon-refresh'
+ 												},
+ 												fields : {
+ 													name : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>",
+ 															},
+ 															regexp : {
+ 																regexp : /^[a-zA-ZА-ЯІіЇїЄєа-я]*$/,
 
-																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
+ 																message : '<t:i18n id="bootstrap.TheUsernameCanOnlyConsistOfAlphabeticalNumberDotUnderscore"/>'
 
-															},
-															stringLength : {
-																min : 1,
-																max : 15,
-																message : "<t:i18n id='validation.language.name'/>" 
+ 															},
+ 															stringLength : {
+ 																min : 1,
+ 																max : 15,
+ 																message : "<t:i18n id='validation.language.name'/>" 
 
-															}
+ 															}
 
-														}
-													},
-													language : {
-														validators : {
+ 														}
+ 													},
+ 													language : {
+ 														validators : {
 
-															stringLength : {
-																min : 1,
-																max : 2,
-																message : "<t:i18n id='validation.language'/>"
-															},
+ 															stringLength : {
+ 																min : 1,
+ 																max : 2,
+ 																message : "<t:i18n id='validation.language'/>"
+ 															},
 
-															regexp : {
-																regexp : /^[a-z]*$/,
-																message : "<t:i18n id='validation.language.lower'/>"
-															}
+ 															regexp : {
+ 																regexp : /^[a-z]*$/,
+ 																message : "<t:i18n id='validation.language.lower'/>"
+ 															}
 
-														}
-													},
-													country : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>"
+ 														}
+ 													},
+ 													country : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>"
 
-															},
-															stringLength : {
-																min : 1,
-																max : 2,
-																message : "<t:i18n id='validation.language'/>"
-															},
-															regexp : {
-																regexp : /^[A-Z]*$/,
-																message : "<t:i18n id='validation.language.uper'/>"
-															}
-														}
-													},
-													bandle : {
-														validators : {
-															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>"
-															},
-															file : {
-																extension : 'properties',
+ 															},
+ 															stringLength : {
+ 																min : 1,
+ 																max : 2,
+ 																message : "<t:i18n id='validation.language'/>"
+ 															},
+ 															regexp : {
+ 																regexp : /^[A-Z]*$/,
+ 																message : "<t:i18n id='validation.language.uper'/>"
+ 															}
+ 														}
+ 													},
+ 													bandle : {
+ 														validators : {
+ 															notEmpty : {
+ 																message : "<t:i18n id='validation.not.empty'/>"
+ 															},
+ 															file : {
+ 																extension : 'properties',
 
-																message : "<t:i18n id='validation.language.file'/>"
-															}
-														}
-													}
+ 																message : "<t:i18n id='validation.language.file'/>"
+ 															}
+ 														}
+ 													}
 
-												}
-											});
-						});
-	</script>
+ 												}
+ 											});
+ 						});
+ 	</script> 
 
 	<jsp:include page="../page/footer.jsp" />
 <label hidden="true" id="confirm"><t:i18n id='admin.group.confirm'/></label>

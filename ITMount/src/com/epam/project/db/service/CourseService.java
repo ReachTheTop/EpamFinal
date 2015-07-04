@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.epam.project.controler.statistic.CourseComplited;
+import com.epam.project.controler.statistic.CourseStudent;
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.CourseCorteg;
 import com.epam.project.db.dao.CourseDAO;
@@ -11,6 +13,34 @@ import com.epam.project.db.model.Course;
 import com.epam.project.db.transformer.CourseTransformer;
 
 public class CourseService {
+
+	public static List<CourseComplited> getCountStudentCoursesComplited(Integer id) {
+
+		Connection connection = DBConnection.getConnection();
+		List<CourseComplited> list = CourseDAO
+				.getCountStudentCoursesComplited(connection,id);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public static List<CourseStudent> getCountStudentCourses() {
+		Connection connection = DBConnection.getConnection();
+		List<CourseStudent> list = CourseDAO.getStudentCountCourses(connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 	public static void trigerCourse(Course course) {
 		Connection connection = DBConnection.getConnection();
@@ -79,7 +109,7 @@ public class CourseService {
 	}
 
 	public static CourseCorteg getAllCourses(String searchToken, Integer page) {
-		
+
 		Connection connection = DBConnection.getConnection();
 		CourseCorteg searchResult = CourseDAO.getAllCurses(connection,
 				searchToken, page);
@@ -97,5 +127,5 @@ public class CourseService {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
