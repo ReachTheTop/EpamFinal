@@ -931,6 +931,20 @@
 							</div>
 						</div>
 					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a  href="<c:url value='FeedbackServlet?action=inbox' />"><t:i18n id="admin.feedback"/></a>
+							</h4>
+						</div>
+						<div id="collapse6" class="panel-collapse collapse">
+							<div class="panel-body">
+								
+								
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</c:when>

@@ -16,7 +16,7 @@ public class ShowEvent implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("I'm in ShowEvent");
+		
 		Integer event_id = null;
 		try {
 			if (request.getParameter("event_id") != null) {
