@@ -68,7 +68,12 @@
 							id="header.courses" /></a></li>
 				<li id="articles"><a href="<c:url value="/ArticleServlet" />"><t:i18n
 							id="header.article" /></a></li>
+
 				<li id="faq"><a href="<c:url value="/FaqServlet" />">FAQ</a></li>
+
+				<li><a href="<c:url value="/Contact" />"><t:i18n
+							id="header.contact" /></a></li>
+
 
 			</ul>
 		</nav>

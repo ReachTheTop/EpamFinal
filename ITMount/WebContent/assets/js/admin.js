@@ -507,7 +507,16 @@ $(function() {
 
 		});
 	});
-	
+	function updateLanguage(){
+
+		
+			$.get('LanguageUploadServlet?action=show', function(response) {
+
+				handleLanguage(response);
+
+			
+		});
+	}
 	$('body').on(
 			'click',
 			'a#active-language',
@@ -644,7 +653,7 @@ $(function() {
 						$('#addLanguage').modal('hide');
 						
 						showToaast(data.success, 1);
-					
+						updateLanguage();
 					} else {
 						$('#addLanguage').modal('hide');
 						showToaast(data.fail, 0);
