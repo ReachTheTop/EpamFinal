@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.epam.project.controler.statistic.CourseStudent;
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.model.User;
 import com.epam.project.db.transformer.UserTransformer;
@@ -29,6 +30,10 @@ public class UserDAO {
 	public static final String GET_ROLE = "SELECT role FROM role WHERE id = ?;";
 	public static final String GET_BY_ROLE = "SELECT  * FROM user WHERE role_id = (SELECT id FROM role WHERE role = ?);";
 	public static final String DELETE = "DELETE FROM user WHERE id=?";
+	
+	
+	
+
 	
 	public static List<User> getByRole(String role, Connection connection) {
 		ResultSet rs = null;

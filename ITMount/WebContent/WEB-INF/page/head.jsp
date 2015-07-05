@@ -62,7 +62,7 @@
 
 <script src="resources/js/jquery.metisMenu.js"></script>
 <script src="resources/js/inspinia.js"></script>
-<script src="resources/js/bootstrap-select.js"></script>
+<!-- <script src="resources/js/bootstrap-select.js"></script> -->
 <script src="resources/js/moment.js"></script>
 
 <script

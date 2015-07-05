@@ -26,9 +26,10 @@
 				<!-- Slide 1 -->
 				<li class="bg4">
 					<!-- Slide Title -->
-					<h2 class="title">Responsive</h2> <!-- Slide Text -->
-					<h3 class="subtitle">It looks great on desktops, laptops,
-						tablets and smartphones</h3> <!-- Slide Image --> <img
+					<h2 class="title">Стабільність</h2> <!-- Slide Text -->
+					<h3 class="subtitle">Ми гарантуємо надійність роботи нашого сервісу,
+					 а також позитивний результат після закінчення навчання у вигляді
+					  нових набутих навичок та досвіду.</h3> <!-- Slide Image --> <img
 					class="slide-img" src="resources/img/homepage-slider/foto1.png"
 					alt="Slide 1" />
 				</li>
@@ -36,9 +37,9 @@
 				<!-- Slide 2 -->
 				<li class="bg3">
 					<!-- Slide Title -->
-					<h2 class="title">Color Schemes</h2> <!-- Slide Text -->
-					<h3 class="subtitle">Comes with 5 color schemes and it's easy
-						to make your own!</h3> <!-- Slide Image --> <img class="slide-img"
+					<h2 class="title">Креативність</h2> <!-- Slide Text -->
+					<h3 class="subtitle">Ми пропонуємо доступ до десятків програм різноманітної тематики, креативний підхід до самого 
+					процесу навчання та незвичні, але ефективні заняття.</h3> <!-- Slide Image --> <img class="slide-img"
 					src="resources/img/homepage-slider/foto2.png" alt="Slide 2" />
 				</li>
 				<!-- End Slide 2 -->
@@ -48,8 +49,7 @@
 					<h2 class="title">Openness</h2> <!-- Slide Text -->
 					<h3 class="subtitle">We promote educational opportunity and social 
       justice by providing high-quality  education to all who wish to realise their 
-      ambitions and fulfil their potential. We are committed to promoting equal opportunities
-      for all, and close monitoring makes sure that we live up to our ideals.</h3> <!-- Slide Image --> <img class="slide-img"
+      ambitions and fulfil their potential.</h3> <!-- Slide Image --> <img class="slide-img"
 					src="resources/img/homepage-slider/foto3.png" alt="Slide 3" />
 				</li>
 				<!-- End Slide 3 -->
@@ -64,6 +64,40 @@
 		</div>
 	</div>
 	<!-- End Homepage Slider -->
+	
+	<div class="section">
+		<div class="container">
+			<h2>About us</h2>
+			<div class="clients-logo-wrapper text-center row">
+			
+			<div class="container">	
+			<div class="row">
+					<div class="col-sm-6">
+						<h3>Наша Місія</h3>
+						<p>
+						Ми надаєм доступ до одного з найкращих методів начання!	
+						</p>
+						<h3>Як це працює</h3>
+						<p>
+							ItMount - це сервіс, який дозволяє
+						</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="video-wrapper">
+							<iframe src="http://player.vimeo.com/video/47000322?title=0&amp;byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+						</div>
+					</div>
+				</div>
+				</div>
+			
+
+			
+				
+			</div>
+
+
+		</div>
+	</div>
 
 
 	<div class="section">
@@ -72,10 +106,8 @@
 			
 			<div class="row">
 				<blockquote class="pull-right">
-					<p>The world is a dangerous place to live; not because of the
-						people who are evil, but because of the people who don't do
-						anything about it.</p>
-					<small>by <cite>Albert Einstein</cite></small>
+					<p>Щоб здивуватися, потрібна мить, а щоб зробити дивовижну річ, потрібні роки терпіння і наполегливої праці.</p>
+					<small>by <cite>До. Гельвецій</cite></small>
 				</blockquote>
 
 			</div>
@@ -91,8 +123,8 @@
 						<div class="team-member-info">
 							<ul>
 								<!-- Team Member Info & Social Links -->
-								<li class="team-member-name">Volodya Lobachov</li>
-								<li>Capitan, Web Developer <!-- Team Member Social Links -->
+								<li class="team-member-name">Volodya  Lobachov</li>
+								<li>Captain, Web Developer <!-- Team Member Social Links -->
 									<span class="team-member-social"> <a href="#"><i
 											class="fa fa-facebook"></i></a> <a href="#"><i
 											class="fa fa-vk"></i></a> <a href="#"><i
@@ -171,7 +203,8 @@
 		<div class="container">
 			<h2>Technology we have worked</h2>
 			<div class="clients-logo-wrapper text-center row">
-			
+				
+			<div class="row">	
 			<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
 					<a href="#"><img src="resources/img/technology/bootstrap.png" alt="Client Name"></a>
 				</div>
@@ -211,6 +244,42 @@
 				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
 					<a href="#"><img src="resources/img/technology/json.png" alt="Client Name"></a>
 				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/ajax.png" alt="Client Name"></a>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<a href="#"><img src="resources/img/technology/tomcat.png" alt="Client Name"></a>
+				</div>
+				
+				</div>
+				
+				<div class="row">
+					
+				<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6" style = "float: left;" >
+					<a href="#"><img src="resources/img/technology/jdbc.png" alt="Client Name"></a>
+				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+					<a href="#"><img src="resources/img/technology/jquery.png" alt="Client Name"></a>
+				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+					<a href="#"><img src="resources/img/technology/gitHub.png" alt="Client Name"></a>
+				</div>
+						
+				<div class="col-lg-2 col-md-1 col-sm-1 col-xs-1">
+					<a href="#"><img src="resources/img/technology/1.png" alt="Client Name"></a>
+				</div>
+				
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+					<a href="#"><img src="resources/img/technology/AsyncIO.png" alt="Client Name"></a>
+				</div>
+				
+				
+				</div>
+			
+				
 			</div>
 
 

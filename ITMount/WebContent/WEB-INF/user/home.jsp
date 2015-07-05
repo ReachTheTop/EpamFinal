@@ -13,12 +13,11 @@
 <title>User page</title>
 <jsp:include page="../page/head.jsp" />
 <script src="assets/js/admin.js"></script>
-<script
-	src="assets/js/jquery.bootpag.min.js"></script>
+<script src="assets/js/jquery.bootpag.min.js"></script>
 
 <script src="resources/js/toastr.js"></script>
 
-<link rel="stylesheet" href="resources/css/tabPanel.css"></link>
+<!-- <link rel="stylesheet" href="resources/css/tabPanel.css"></link> -->
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
 <style type="text/css">
@@ -52,6 +51,7 @@
 			</div>
 		</div>
 	</div>
+
 
 
 	<div id="editUser" class="modal fade">
@@ -271,11 +271,13 @@
 
 					$('#editUser').modal('hide');
 
-					showToaast('<t:i18n id="home.ProfileWasSuccessfullyEdited"/>', 1);
+					showToaast(
+							'<t:i18n id="home.ProfileWasSuccessfullyEdited"/>',
+							1);
 
 				},
 				error : function() {
-			
+
 					showToaast('<t:i18n id="home.ProfileWasNotEdited"/>', 0);
 
 				}
@@ -300,7 +302,8 @@
 						<div class="panel panel-default">
 							<div class="panel-heading  panel-heading-custom">
 								<h3 class="panel-title" id="userNameSurname">
-								<c:out value="${current_user.name }" />	<c:out value="${current_user.surname }" /> 
+									<c:out value="${current_user.name }" />
+									<c:out value="${current_user.surname }" />
 
 									<%-- 									<c:if test="${current_user.id == user.id }"> --%>
 									<!-- 										<a data-toggle="modal" href="#editUser"><i -->
@@ -315,7 +318,7 @@
 									<div class="col-md-3 col-lg-3 " align="center">
 										<img id="fileImage1" src="upload/${current_user.image }"
 											alt="" class="img-rounded img-responsive" />
-										
+
 									</div>
 
 
@@ -324,33 +327,38 @@
 											<tbody>
 												<tr>
 
-													<td><t:i18n id="home.FirstName"/></td>
-													<td id = "userName"><p ><c:out value="${current_user.name }" /> </p></td>
+													<td><t:i18n id="home.FirstName" /></td>
+													<td id="userName"><p>
+															<c:out value="${current_user.name }" />
+														</p></td>
 												</tr>
 												<tr>
-													<td><t:i18n id="home.MiddleName"/></td>
-													<td id = "userMiddleName"><c:out value="${current_user.middle_name }" /> </td>
+													<td><t:i18n id="home.MiddleName" /></td>
+													<td id="userMiddleName"><c:out
+															value="${current_user.middle_name }" /></td>
 												</tr>
 												<tr>
-													<td><t:i18n id="home.Surname"/></td>
-													<td id = "userSurName"><p><c:out value="${current_user.surname }" /> </p></td>
+													<td><t:i18n id="home.Surname" /></td>
+													<td id="userSurName"><p>
+															<c:out value="${current_user.surname }" />
+														</p></td>
 												</tr>
 
-												
+
 												<tr>
 
-													<td><t:i18n id="home.Birthday"/></td>
-													<td id="userBirtday"><fmt:formatDate pattern="yyyy-MM-dd"
-															value="${current_user.birtday }" /></td>
+													<td><t:i18n id="home.Birthday" /></td>
+													<td id="userBirtday"><fmt:formatDate
+															pattern="yyyy-MM-dd" value="${current_user.birtday }" /></td>
 
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><c:out value="${current_user.email}" /> </td>
+													<td><c:out value="${current_user.email}" /></td>
 												</tr>
 												<tr>
 
-													<td><t:i18n id="home.Phone"/></td>
+													<td><t:i18n id="home.Phone" /></td>
 													<td id="userPhone">${contact.phone}</td>
 
 												</tr>
@@ -360,13 +368,15 @@
 
 												</tr>
 												<tr>
-													<td><t:i18n id="home.CurriculumVitae"/></td>
+													<td><t:i18n id="home.CurriculumVitae" /></td>
 													<td><c:choose>
 															<c:when
 																test="${current_user.curriculum_vitae == null && user.id == current_user.id }">
 																<button type="submit"
 																	class="btn btn-default btn-xs dropdown-toggle"
-																	data-toggle="modal" href="#editUser"><t:i18n id="home.AddCV"/></button>
+																	data-toggle="modal" href="#editUser">
+																	<t:i18n id="home.AddCV" />
+																</button>
 															</c:when>
 
 															<c:otherwise>
@@ -374,8 +384,8 @@
 
 																	<c:if test="${current_user.curriculum_vitae != null}">
 																		<a id="cvFile1"
-																			href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"
-																			><i class = "glyphicon glyphicon-file"></i> </a>
+																			href="<c:url  value="/downloadFile?file=${current_user.curriculum_vitae}"/>"><i
+																			class="glyphicon glyphicon-file"></i> </a>
 																	</c:if>
 
 																</p>
@@ -386,8 +396,10 @@
 												</tr>
 												<tr>
 
-													<td><t:i18n id="home.AboutMyself"/></td>
-													<td id="userDescription"><p><c:out value="${current_user.description}" /></p></td>
+													<td><t:i18n id="home.AboutMyself" /></td>
+													<td id="userDescription"><p>
+															<c:out value="${current_user.description}" />
+														</p></td>
 												</tr>
 
 
@@ -405,7 +417,7 @@
 					<div class="col-md-4">
 
 						<h2>
-							<t:i18n id="home.MyCourses"/>
+							<t:i18n id="home.MyCourses" />
 							<c:if test="${current_user.id == user.id && not empty history }">
 								<a data-toggle="modal" href="#notificationHistory"><i
 									class="glyphicon glyphicon-th-list"></i> </a>
@@ -450,8 +462,14 @@
 	<c:choose>
 		<c:when test="${user.id == current_user.id && user.role =='admin' }">
 
+
 			<div class="container">
-				<h2><t:i18n id="admin.panel"/></h2>
+
+				<h2>
+					<t:i18n id="admin.panel" />
+
+					<jsp:include page="statistic.jsp" />
+				</h2>
 
 
 				<div id="editCourse" class="modal fade">
@@ -460,7 +478,9 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title"><t:i18n id="admin.course.settings"/></h4>
+								<h4 class="modal-title">
+									<t:i18n id="admin.course.settings" />
+								</h4>
 							</div>
 							<div class="modal-body">
 								<form action="CourseServlet?action=update" data-async
@@ -472,25 +492,29 @@
 									</div>
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b><t:i18n id="admin.course.name"/></b></label> <input name="name" class="form-control"
-											id="course-name-edit" type="text" placeholder="">
+											<b><t:i18n id="admin.course.name" /></b></label> <input name="name"
+											class="form-control" id="course-name-edit" type="text"
+											placeholder="">
 									</div>
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b><t:i18n id="admin.course.image"/></b></label> <input name="image" class="form-control"
-											id="course-icon-edit" type="file" placeholder="">
+											<b><t:i18n id="admin.course.image" /></b></label> <input name="image"
+											class="form-control" id="course-icon-edit" type="file"
+											placeholder="">
 									</div>
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b><t:i18n id="admin.course.description"/></b></label>
+											<b><t:i18n id="admin.course.description" /></b></label>
 										<textarea name="description" rows="10" class="form-control"
 											id="course-description-edit" placeholder=""> </textarea>
 									</div>
 									<div class="form-group">
 
 										<button type="submit" id='submit-course-edit'
-											class="btn pull-right"><t:i18n id="admin.course.update"/></button>
+											class="btn pull-right">
+											<t:i18n id="admin.course.update" />
+										</button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -531,7 +555,9 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title"><t:i18n id="admin.course.new"/></h4>
+								<h4 class="modal-title">
+									<t:i18n id="admin.course.new" />
+								</h4>
 							</div>
 							<div class="modal-body">
 								<form action="CourseServlet?action=create"
@@ -539,19 +565,21 @@
 									enctype="multipart/form-data" role="form" role="form">
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b><t:i18n id="admin.course.name"/></b></label> <input name="name" class="form-control"
-											id="login-username" type="text" placeholder="">
+											<b><t:i18n id="admin.course.name" /></b></label> <input name="name"
+											class="form-control" id="login-username" type="text"
+											placeholder="">
 									</div>
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b><t:i18n id="admin.course.image"/></b></label> <input name="icon" class="form-control" id="file"
-											type="file" required="required" placeholder="">
+											<b><t:i18n id="admin.course.image" /></b></label> <input name="icon"
+											class="form-control" id="file" type="file"
+											required="required" placeholder="">
 									</div>
 
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b><t:i18n id="admin.course.description"/></b></label>
+											<b><t:i18n id="admin.course.description" /></b></label>
 										<textarea name="description" class="form-control" id="comment"
 											placeholder=""></textarea>
 									</div>
@@ -561,7 +589,9 @@
 
 									<div class="form-group">
 
-										<button type="submit" class="btn pull-right"><t:i18n id="admin.course.create"/></button>
+										<button type="submit" class="btn pull-right">
+											<t:i18n id="admin.course.create" />
+										</button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -581,7 +611,9 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title"><t:i18n id="admin.group.settings"/></h4>
+								<h4 class="modal-title">
+									<t:i18n id="admin.group.settings" />
+								</h4>
 							</div>
 							<div class="modal-body">
 								<form action="GroupServlet?action=update" data-async
@@ -599,19 +631,23 @@
 									</div>
 									<div class="form-group">
 										<label for="login-username"><i class="icon-user"></i>
-											<b><t:i18n id="admin.group.name"/></b></label> <input name="name" class="form-control"
-											id="group-name-edit" type="text" placeholder="">
+											<b><t:i18n id="admin.group.name" /></b></label> <input name="name"
+											class="form-control" id="group-name-edit" type="text"
+											placeholder="">
 									</div>
 
 									<div class="form-group">
 										<label for="login-password"><i class="icon-lock"></i>
-											<b><t:i18n id="admin.group.teacher"/></b></label> <select name="teacher_id" class="form-control"
+											<b><t:i18n id="admin.group.teacher" /></b></label> <select
+											name="teacher_id" class="form-control"
 											id="group-teacher-edit"></select>
 									</div>
 									<div class="form-group">
 
 										<button type="submit" id='submit-group-edit'
-											class="btn pull-right"><t:i18n id="admin.group.update"/></button>
+											class="btn pull-right">
+											<t:i18n id="admin.group.update" />
+										</button>
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -620,11 +656,15 @@
 					</div>
 				</div>
 				<script type="text/javascript">
-					$('button#submit-group-edit').click(function() {
+					$('button#submit-group-edit')
+							.click(
+									function() {
 
-						$('#editGroup').modal('hide');
-						showToaast("<t:i18n id='admin.group.update.toast'/>", 1);
-					});
+										$('#editGroup').modal('hide');
+										showToaast(
+												"<t:i18n id='admin.group.update.toast'/>",
+												1);
+									});
 				</script>
 
 
@@ -640,8 +680,9 @@
 
 								<a id="userNameSurname" data-toggle="collapse" class="courses"
 									data-parent="#accordion" href="#collapse0" aria-expanded="true"
-									aria-controls="collapse0"><c:out value="${current_user.name }" /> <c:out value="${current_user.surname }" />
-									</a> 
+									aria-controls="collapse0"><c:out
+										value="${current_user.name }" /> <c:out
+										value="${current_user.surname }" /> </a>
 							</h4>
 						</div>
 
@@ -656,7 +697,7 @@
 										<img id="fileImage1" src="upload/${current_user.image }"
 											alt="" class="img-rounded img-responsive" />
 
-										
+
 									</div>
 
 
@@ -664,31 +705,35 @@
 										<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td><t:i18n id="home.FirstName"/></td>
+													<td><t:i18n id="home.FirstName" /></td>
 
-													<td id="userName"><c:out value="${current_user.name }" /> </td>
+													<td id="userName"><c:out value="${current_user.name }" />
+													</td>
 
 												</tr>
 												<tr>
-													<td><t:i18n id="home.MiddleName"/></td>
-													<td id="userMiddleName"><c:out value="${current_user.middle_name }" /> </td>
+													<td><t:i18n id="home.MiddleName" /></td>
+													<td id="userMiddleName"><c:out
+															value="${current_user.middle_name }" /></td>
 												</tr>
 												<tr>
-													<td><t:i18n id="home.Surname"/></td>
-													<td id="userSurName"><p><c:out value="${current_user.surname }" /> </p></td>
+													<td><t:i18n id="home.Surname" /></td>
+													<td id="userSurName"><p>
+															<c:out value="${current_user.surname }" />
+														</p></td>
 												</tr>
 
 												<tr>
 												<tr>
-													<td><t:i18n id="home.Birthday"/></td>
+													<td><t:i18n id="home.Birthday" /></td>
 													<td id="userBirthday2"><p>${userBirthdayString }</p></td>
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><c:out value="${current_user.email}" /> </td>
+													<td><c:out value="${current_user.email}" /></td>
 												</tr>
 												<tr>
-													<td><t:i18n id="home.Phone"/></td>
+													<td><t:i18n id="home.Phone" /></td>
 													<td id="userPhone"><p>${contact.phone}</p></td>
 												</tr>
 												<tr>
@@ -718,8 +763,10 @@
 												<%-- 														</c:choose></td> --%>
 												<!-- 												</tr> -->
 												<tr>
-													<td><t:i18n id="home.AboutMyself"/></td>
-													<td id="userDescription"><p><c:out value="${current_user.description}" /></p></td>
+													<td><t:i18n id="home.AboutMyself" /></td>
+													<td id="userDescription"><p>
+															<c:out value="${current_user.description}" />
+														</p></td>
 
 												</tr>
 
@@ -738,7 +785,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="courses"
-									data-parent="#accordion" href="#collapse1"><t:i18n id="admin.courses"/></a>
+									data-parent="#accordion" href="#collapse1"><t:i18n
+										id="admin.courses" /></a>
 							</h4>
 
 						</div>
@@ -751,14 +799,15 @@
 										<div class="form-group">
 
 											<input type="text" id="search-field"
-												placeholder="<t:i18n id='admin.course.search'/>" class='form-control'>
+												placeholder="<t:i18n id='admin.course.search'/>"
+												class='form-control'>
 
 										</div>
 									</div>
 									<div class="col-xs-4 col-sm-2">
 										<a data-toggle="modal" class='btn btn-primary'
-											href="#newCourse"><t:i18n id="admin.course.create.new"/></a> <a
-											data-toggle="modal" id="courseEditModal" href="#editCourse"><i
+											href="#newCourse"><t:i18n id="admin.course.create.new" /></a>
+										<a data-toggle="modal" id="courseEditModal" href="#editCourse"><i
 											class='glyphicon glyphicon-edit'></i></a>
 									</div>
 
@@ -766,10 +815,10 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th><t:i18n id="admin.course.name"/></th>
-											<th><t:i18n id="admin.course.activity"/></th>
-											<th><t:i18n id="admin.course.triger"/></th>
-											<th><t:i18n id="admin.course.edit"/></th>
+											<th><t:i18n id="admin.course.name" /></th>
+											<th><t:i18n id="admin.course.activity" /></th>
+											<th><t:i18n id="admin.course.triger" /></th>
+											<th><t:i18n id="admin.course.edit" /></th>
 										<tr>
 									</thead>
 									<tbody id="courses-body">
@@ -788,7 +837,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class='groups'
-									data-parent="#accordion" href="#collapse2"><t:i18n id="admin.groups"/></a>
+									data-parent="#accordion" href="#collapse2"><t:i18n
+										id="admin.groups" /></a>
 							</h4>
 						</div>
 						<div id="collapse2" class="panel-collapse collapse">
@@ -798,7 +848,8 @@
 									<div class="form-group">
 
 										<input type="text" id="search-groups"
-											placeholder="<t:i18n id='admin.group.search'/>" class='form-control'>
+											placeholder="<t:i18n id='admin.group.search'/>"
+											class='form-control'>
 									</div>
 
 
@@ -806,11 +857,11 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th><t:i18n id="admin.group.course"/></th>
-											<th><t:i18n id="admin.group.name1"/></th>
-											<th><t:i18n id="admin.group.teacher"/></th>
-											<th><t:i18n id="admin.group.confirmed"/></th>
-											<th><t:i18n id="admin.group.edit"/></th>
+											<th><t:i18n id="admin.group.course" /></th>
+											<th><t:i18n id="admin.group.name1" /></th>
+											<th><t:i18n id="admin.group.teacher" /></th>
+											<th><t:i18n id="admin.group.confirmed" /></th>
+											<th><t:i18n id="admin.group.edit" /></th>
 										<tr>
 									</thead>
 									<tbody id="groups-body">
@@ -831,7 +882,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class="users" data-parent="#accordion"
-									href="#collapse3"><t:i18n id="admin.users"/></a>
+									href="#collapse3"><t:i18n id="admin.users" /></a>
 							</h4>
 						</div>
 						<div id="collapse3" class="panel-collapse collapse">
@@ -841,7 +892,8 @@
 									<div class="form-group">
 
 										<input type="text" id="search-users"
-											placeholder="<t:i18n id='admin.user.search'/>" class='form-control'>
+											placeholder="<t:i18n id='admin.user.search'/>"
+											class='form-control'>
 									</div>
 
 
@@ -849,13 +901,13 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th><t:i18n id="admin.user.name"/></th>
-											<th><t:i18n id="admin.user.surname"/></th>
-											<th><t:i18n id="admin.user.role"/></th>
+											<th><t:i18n id="admin.user.name" /></th>
+											<th><t:i18n id="admin.user.surname" /></th>
+											<th><t:i18n id="admin.user.role" /></th>
 											<th>Email</th>
-											<th><t:i18n id="admin.user.phone"/></th>
+											<th><t:i18n id="admin.user.phone" /></th>
 											<th>Skype</th>
-											<th><t:i18n id="admin.user.activity"/></th>
+											<th><t:i18n id="admin.user.activity" /></th>
 										<tr>
 									</thead>
 									<tbody id="users-body">
@@ -878,7 +930,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" class='language'
-									data-parent="#accordion" href="#collapse5"><t:i18n id="admin.languages"/></a>
+									data-parent="#accordion" href="#collapse5"><t:i18n
+										id="admin.languages" /></a>
 							</h4>
 						</div>
 						<div id="collapse5" class="panel-collapse collapse">
@@ -888,13 +941,18 @@
 									<div class="form-group">
 										<a
 											href="<c:url value="/downloadFile?file=WEB-INF\\classes\\i18n.properties"/>"
-											class="btn btn-default btn-xs dropdown-toggle"><t:i18n id="admin.language.pattern"/></a>
+											class="btn btn-default btn-xs dropdown-toggle"><t:i18n
+												id="admin.language.pattern" /></a>
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#updatePatternLanguage"><t:i18n id="admin.language.pattern.update"/></button>
+											data-toggle="modal" href="#updatePatternLanguage">
+											<t:i18n id="admin.language.pattern.update" />
+										</button>
 										<button type="submit"
 											class="btn btn-default btn-xs dropdown-toggle"
-											data-toggle="modal" href="#addLanguage"><t:i18n id="admin.language.add"/></button>
+											data-toggle="modal" href="#addLanguage">
+											<t:i18n id="admin.language.add" />
+										</button>
 
 										<a data-toggle="modal" id="languageEditModal"
 											href="#languageEdit"><i
@@ -908,13 +966,13 @@
 									<thead>
 										<tr>
 											<th>№</th>
-											<th><t:i18n id="admin.language.name"/></th>
-											<th><t:i18n id="admin.language"/></th>
-											<th><t:i18n id="admin.language.country"/></th>
-											<th><t:i18n id="admin.language.image"/></th>
+											<th><t:i18n id="admin.language.name" /></th>
+											<th><t:i18n id="admin.language" /></th>
+											<th><t:i18n id="admin.language.country" /></th>
+											<th><t:i18n id="admin.language.image" /></th>
 
-											<th><t:i18n id="admin.language.activity"/></th>
-											<th><t:i18n id="admin.language.actions"/></th>
+											<th><t:i18n id="admin.language.activity" /></th>
+											<th><t:i18n id="admin.language.actions" /></th>
 										<tr>
 									</thead>
 									<tbody id="language-body">
@@ -931,20 +989,19 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a  href="<c:url value='FeedbackServlet?action=inbox' />"><t:i18n id="admin.feedback"/></a>
+								<a href="<c:url value='FeedbackServlet?action=inbox' />"><t:i18n
+										id="admin.feedback" /></a>
 							</h4>
 						</div>
 						<div id="collapse6" class="panel-collapse collapse">
-							<div class="panel-body">
-								
-								
-
-							</div>
+							<div class="panel-body"></div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</c:when>
@@ -955,7 +1012,9 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="admin.language.new"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="admin.language.new" />
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -964,30 +1023,34 @@
 						enctype="multipart/form-data" role="form">
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.name"/></b></label>
-							<input name="name" class="form-control" id="new-name" type="text"
-								placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="admin.language.name" /></b></label> <input name="name"
+								class="form-control" id="new-name" type="text" placeholder="">
 						</div>
 
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language"/></b></label>
-							<input name="language" class="form-control" id="new-language"
-								type="text" placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="admin.language" /></b></label> <input name="language"
+								class="form-control" id="new-language" type="text"
+								placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.country"/></b></label>
-							<input name="country" class="form-control" id="new-language"
-								type="text" placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="admin.language.country" /></b></label> <input name="country"
+								class="form-control" id="new-language" type="text"
+								placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
-							<input name="bandle" class="form-control" id="new-file"
-								type="file" placeholder="">
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="admin.language.file" /></b></label> <input name="bandle"
+								class="form-control" id="new-file" type="file" placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right"><t:i18n id="admin.language.create"/></button>
+								class="btn pull-right">
+								<t:i18n id="admin.language.create" />
+							</button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -1003,7 +1066,9 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="admin.language.pattern.update"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="admin.language.pattern.update" />
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -1012,14 +1077,16 @@
 						enctype="multipart/form-data" role="form">
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
-							<input name="bandle" class="form-control" type="file"
-								placeholder="">
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="admin.language.file" /></b></label> <input name="bandle"
+								class="form-control" type="file" placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right"><t:i18n id="admin.language.update"/></button>
+								class="btn pull-right">
+								<t:i18n id="admin.language.update" />
+							</button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -1033,7 +1100,9 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"><t:i18n id="admin.language.update.title"/></h4>
+					<h4 class="modal-title">
+						<t:i18n id="admin.language.update.title" />
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form
@@ -1046,20 +1115,23 @@
 								id="language-id-edit" type="text" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="login-username"><i class="icon-user"></i> <b><t:i18n id="admin.language.name"/></b></label>
-							<input name="name" class="form-control" id="language-name-edit"
-								type="text" placeholder="">
+							<label for="login-username"><i class="icon-user"></i> <b><t:i18n
+										id="admin.language.name" /></b></label> <input name="name"
+								class="form-control" id="language-name-edit" type="text"
+								placeholder="">
 						</div>
 
 						<div class="form-group">
-							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n id="admin.language.file"/></b></label>
-							<input name="bandle" class="form-control" type="file"
-								placeholder="">
+							<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
+										id="admin.language.file" /></b></label> <input name="bandle"
+								class="form-control" type="file" placeholder="">
 						</div>
 						<div class="form-group">
 
 							<button type="submit" id='submit-upload-language'
-								class="btn pull-right"><t:i18n id="admin.language.update"/></button>
+								class="btn pull-right">
+								<t:i18n id="admin.language.update" />
+							</button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -1187,7 +1259,7 @@
 																message : "<t:i18n id='validation.not.empty'/>",
 																min : 2,
 																max : 30,
-																message : "<t:i18n id='validation.surname'/>" 
+																message : "<t:i18n id='validation.surname'/>"
 															}
 
 														}
@@ -1350,7 +1422,7 @@
 															stringLength : {
 																min : 1,
 																max : 15,
-																message : "<t:i18n id='validation.language.name'/>" 
+																message : "<t:i18n id='validation.language.name'/>"
 
 															}
 
@@ -1408,10 +1480,13 @@
 	</script>
 
 	<jsp:include page="../page/footer.jsp" />
-<label hidden="true" id="confirm"><t:i18n id='admin.group.confirm'/></label>
-<label hidden="true" id="ban"><t:i18n id='admin.user.ban'/></label>
-<label hidden="true" id="activate"><t:i18n id='admin.user.activate'/></label>
-<label hidden="true" id="close" ><t:i18n id='admin.course.close'/></label>
-<label hidden="true" id="open"><t:i18n id='admin.course.open'/></label>
+	<label hidden="true" id="confirm"><t:i18n
+			id='admin.group.confirm' /></label>
+	<label hidden="true" id="ban"><t:i18n id='admin.user.ban' /></label>
+	<label hidden="true" id="activate"><t:i18n
+			id='admin.user.activate' /></label>
+	<label hidden="true" id="close"><t:i18n
+			id='admin.course.close' /></label>
+	<label hidden="true" id="open"><t:i18n id='admin.course.open' /></label>
 </body>
 </html>

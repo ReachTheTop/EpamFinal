@@ -5,10 +5,52 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.epam.project.controler.statistic.CourseComplited;
+import com.epam.project.controler.statistic.CourseStudent;
 import com.epam.project.db.model.Course;
 
-
 public class CourseTransformer {
+
+	public static List<CourseComplited> getCountCoursesStudentComplited(
+			ResultSet rs) {
+
+		List<CourseComplited> listCountStudent = new ArrayList<>();
+
+		try {
+			while (rs.next()) {				
+				CourseComplited courseComplited = new CourseComplited();
+				courseComplited.setCountStudent(rs.getInt(1));
+				courseComplited.setYear(rs.getString(2));
+				listCountStudent.add(courseComplited);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listCountStudent;
+	}
+
+	public static List<CourseStudent> getCountCoursesStudent(ResultSet rs) {
+
+		List<CourseStudent> listUserCourses = new ArrayList<>();
+
+		try {
+			while (rs.next()) {
+				CourseStudent cs = new CourseStudent();
+				cs.setLabel(rs.getString(1));
+				cs.setValue(rs.getInt(2));
+				listUserCourses.add(cs);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listUserCourses;
+
+	}
 
 	public static Course getCourse(ResultSet rs) {
 
@@ -22,7 +64,6 @@ public class CourseTransformer {
 				course.setIcon(rs.getString(3));
 				course.setDescription(rs.getString(4));
 				course.setStatus(rs.getBoolean(5));
-				
 
 			}
 		} catch (SQLException e) {
@@ -55,5 +96,5 @@ public class CourseTransformer {
 		return list;
 
 	}
-	
+
 }

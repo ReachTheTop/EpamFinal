@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import com.epam.project.controler.statistic.CourseComplited;
+import com.epam.project.controler.statistic.CourseStudent;
 import com.epam.project.db.model.Course;
 import com.epam.project.db.transformer.CourseTransformer;
+import com.epam.project.db.transformer.UserTransformer;
 
 public class CourseDAO {
 
@@ -25,6 +28,52 @@ public class CourseDAO {
 	private static final String SELECT = "SELECT * FROM course WHERE id=?";
 
 	private static final String TRIGER = "UPDATE course set is_active = !is_active  WHERE id = ?";
+	
+	public static final String GET_COUNT_STUDENT_COURSES = "select c.name,count(*) as kk from group_user gu join group1 g"
+			+ " join course c where c.id=g.course_id and gu.group_id=g.id group by c.name";
+	public static final String GET_COUNT_STUDENT_COURSES_COMPLITED_YEAR = "select count(*) as counStudent, "
+			+ "year(g.date_exam) as year from group1 g join group_user  gu  where g.id = gu.group_id and g.is_active ='0'"
+			+ " and g.course_id=? group by year(g.date_exam)";
+	
+	public static List<CourseComplited> getCountStudentCoursesComplited(
+			Connection connection, Integer id) {
+		
+		ResultSet rs = null;
+		List<CourseComplited> countUser = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_COUNT_STUDENT_COURSES_COMPLITED_YEAR);
+			st.setInt(1, id);
+			
+			rs = st.executeQuery();
+			countUser = CourseTransformer.getCountCoursesStudentComplited(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return countUser;
+		
+		
+	}
+	
+	
+	public static List<CourseStudent> getStudentCountCourses(Connection connection){
+		
+		ResultSet rs = null;
+		List<CourseStudent> countUser = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(GET_COUNT_STUDENT_COURSES);
+			
+			rs = st.executeQuery();
+			countUser = CourseTransformer.getCountCoursesStudent(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return countUser;
+	}
+	
 	
 	public static void trigerCourse(Course course, Connection connection) {
 		PreparedStatement st = null;
@@ -163,6 +212,9 @@ public class CourseDAO {
 		return courses;
 
 	}
+
+
+	
 
 	
 
