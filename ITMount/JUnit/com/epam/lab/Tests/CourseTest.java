@@ -13,18 +13,25 @@ import org.junit.Test;
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.model.Course;
 import com.epam.project.db.service.CourseService;
+import com.epam.project.db.service.GroupService;
 
 
 public class CourseTest {
 	
 	Connection connection;
 	Savepoint savepoint1;
+	Course course;
 	
 	@Before
 	public void setUp() throws Exception {
 		connection =  DBConnection.getConnection();
 		connection.setAutoCommit(false);
-		savepoint1 = connection.setSavepoint("Savepoint1");		
+		savepoint1 = connection.setSavepoint("Savepoint1");	
+		
+		course = new Course();
+		course.setName("name");
+		course.setIcon("icon");
+		course.setDescription("description");
 	}
 
 	@After
@@ -35,16 +42,21 @@ public class CourseTest {
 
 	@Test
 	public void testAddCourse() throws Exception   {		
-				
-		Course course = new Course();
-		course.setName("name");
-		course.setIcon("icon");
-		course.setDescription("description");
-		
+			
 		Integer id = CourseService.addCourse(course);	
 		assertNotNull(id);	
-		//CourseService.delCourse(id);
 	} 	
+	
+	@Test
+	public void testUpdateCourse() throws Exception   {
+		
+		course.setId(CourseService.addCourse(course));
+		course.setName("newName");		
+	    CourseService.updateCourse(course);	
+	    Course newCourse = new Course();
+	    newCourse = CourseService.getCourse(course.getId());
+		assertEquals("newName", newCourse.getName());	
+	}
 	
 	@Test
 	public void testGetAllActiveCourses() {		
@@ -53,20 +65,17 @@ public class CourseTest {
 		assertTrue(courses.size() > 0);
 	}
 	
-//	@Test
-//	public void testDeleteteCourse() throws Exception   {		
-//				
-//		Course course = new Course();
-//		course.setName("name");
-//		course.setIcon("icon");
-//		course.setDescription("description");
-//		
-//		Integer id = CourseService.addCourse(course);	
-//		
-//		
-//		
-//		CourseService.delCourse(id);
-//		//assertNull(id);
-//	}
+	@Test
+	public void testDeleteteCourse() throws Exception   {		
+		
+		
+		Integer id = CourseService.addCourse(course);	
+		
+		GroupService.completelyRemove(id);
+		CourseService.delCourse(id);
+		Course newCourse = new Course();
+		newCourse = CourseService.getCourse(id);
+		assertNull(newCourse);
+	}
 	
 }

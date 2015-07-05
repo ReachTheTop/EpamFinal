@@ -26,6 +26,13 @@ public class GroupService {
 		GroupDAO.delete(id, connection);
 		closeConnection(connection);
 	}
+	
+	public static void completelyRemove(Integer id) {
+
+		Connection connection = DBConnection.getConnection();
+		GroupDAO.completelyRemove(id, connection);
+		closeConnection(connection);
+	}
 
 	public static Group getById(Integer id) {
 		Connection connection = DBConnection.getConnection();

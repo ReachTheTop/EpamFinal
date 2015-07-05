@@ -61,11 +61,11 @@ public class UserTest {
 			assertNotNull(newUser);		
 	} 
 	
-	@Test
-	public void testGetUserWhereEmail() {
-		
-		assertNotNull(UserService.getUserWhereEmail("danielle@mail.ua"));
-	}
+//	@Test
+//	public void testGetUserWhereEmail() {
+//		
+//		assertNotNull(UserService.getUserWhereEmail("danielle@mail.ua"));
+//	}
 	
 	@Test
 	public void testGetByRole() {		
@@ -81,7 +81,10 @@ public class UserTest {
 		user.setName("NewName");
 		UserService.updateUser(user);
 		
-		assertEquals("NewName", user.getName());		
+		User newUser = new User();
+		newUser = UserService.getUserWhereEmail("email@com");	
+		
+		assertEquals("NewName", newUser.getName());		
 	}
 	
 	@Test

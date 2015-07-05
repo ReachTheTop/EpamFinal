@@ -18,6 +18,7 @@ public class GroupDAO {
 	private static final String ADD_USER = "INSERT INTO group_user(user_id, group_id) VALUE (?,?);";
 	private static final String CONFIRM_GROUP = "UPDATE group1 SET confirmed = 1 WHERE id = ?;";
 	private static final String GET_GROUP_BY_ID = "SELECT * FROM group1 WHERE id=?";
+	private static final String DELETE_GROUP_BY_COURSE_ID = "DELETE FROM group1 WHERE course_id=?;";
 	private static final String GET_ALL_GROUP = "SELECT SQL_CALC_FOUND_ROWS * FROM group1 WHERE is_active =1 AND name REGEXP ? LIMIT ?,?;";
 	private static final String CALC_ROWS = "SELECT found_rows();";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name) value (?, ?, ?);";
@@ -44,6 +45,19 @@ public class GroupDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void completelyRemove(Integer id, Connection con) {
+		con = DBConnection.getConnection();
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(DELETE_GROUP_BY_COURSE_ID);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public static Integer addUser(Connection connection, User user, Integer id) {
 		Integer group_id = null;
