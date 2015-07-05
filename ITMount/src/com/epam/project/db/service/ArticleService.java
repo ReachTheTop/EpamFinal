@@ -37,6 +37,13 @@ public class ArticleService {
 		closeConnection(connection);
 		return article;
 	}
+	
+	public static Article getByIdWithoutUser(Integer article_id) {
+		Connection connection = DBConnection.getConnection();
+		Article article = ArticleDAO.getById(connection, article_id);
+		closeConnection(connection);
+		return article;
+	}
 
 	public static void updateArticle(Article article) {
 		Connection connection = DBConnection.getConnection();
@@ -65,5 +72,11 @@ public class ArticleService {
 		articles = ArticleDAO.getByAuthor(connection, author_id);
 		closeConnection(connection);
 		return articles;
+	}
+	
+	public static void deleteArticle(Integer article_id) {
+		Connection connection = DBConnection.getConnection();
+		ArticleDAO.deleteArticle(connection, article_id);
+		closeConnection(connection);
 	}
 }
