@@ -24,6 +24,7 @@ public class Examples {
 
     public static Document document;
 
+    
     public static Document document2;
 
     public static Session session;
@@ -37,8 +38,8 @@ public class Examples {
 
        example1();
         example2();
-        example3();
-        example4();
+       example3();
+       /*   example4();
         example5();
         example6();
         example7();
@@ -51,7 +52,7 @@ public class Examples {
         example14();
         example15();
         example16();
-        example17();
+        example17();*/
     }
 
     /*
@@ -80,6 +81,9 @@ public class Examples {
         }
 
         System.out.println();
+        System.out.print("  Creating... ");
+
+     
     }
 
     /*
@@ -146,6 +150,25 @@ public class Examples {
         }
 
         System.out.println();
+        try {
+            session = document2.createSession();
+
+            System.out.println("success :)");
+            System.out.println("  Session id is " + session.getId() + ".");
+            System.out.println("  Session expires on "
+                               + session.getExpiresAt().toString() + ".");
+            System.out.println("  Session view URL is " + session.getViewUrl()
+                               + ".");
+            System.out.println("  Session assets URL is "
+                               + session.getAssetsUrl() + ".");
+            System.out.println("  Session realtime URL is "
+                               + session.getRealtimeUrl() + ".");
+        } catch (BoxViewException e) {
+            System.out.println("failed :(");
+            System.out.println("  Error Code: " + e.getCode());
+            System.out.println("  Error Message: " + e.getMessage());
+        }
+        
     }
 
     /*
@@ -422,6 +445,7 @@ public class Examples {
         }
 
         System.out.println();
+        
     }
 
     /*

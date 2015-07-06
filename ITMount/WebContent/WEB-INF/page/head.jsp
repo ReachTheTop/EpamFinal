@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="resources/css/leaflet.ie.css" />
   <![endif]-->
 <link rel="stylesheet" href="resources/css/main.css">
-
+<link rel="stylesheet" href="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.css">
 
 
 
@@ -74,6 +74,8 @@
 	src="resources/js/bootstrapValidator.min.js">
 	
 </script>
+
+<script src="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
 
 
 

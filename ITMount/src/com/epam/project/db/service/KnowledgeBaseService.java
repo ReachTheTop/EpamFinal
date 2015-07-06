@@ -68,7 +68,17 @@ public class KnowledgeBaseService{
 		}
 		return kBase;
 	}
-	
+	public static KnowledgeBase getKnowledgeBase(String path){
+		Connection connection =  DBConnection.getConnection();
+		KnowledgeBase kBase = KnowledgeBaseDAO.getKnowledgeBase(path, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return kBase;
+	}
 	public static List<KnowledgeBase> getAllKnowledgeBaseForCourse(Integer course_id){
 		Connection connection =  DBConnection.getConnection();
 		List<KnowledgeBase> list = KnowledgeBaseDAO.getAllKnowledgeBaseForCourse(course_id, connection);

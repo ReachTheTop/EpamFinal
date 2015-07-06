@@ -10,7 +10,12 @@
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="<c:url value='FeedbackServlet?action=inbox' />"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">${newMessage}</span> </a></li>
+                                <li><a href="<c:url value='FeedbackServlet?action=inbox' />"> <i class="fa fa-inbox "></i> Inbox 
+                               <c:if test="${newMessage>0}">
+                                <span class="label label-warning pull-right">${newMessage}</span>
+                               </c:if>
+                               
+                                 </a></li>
                                 <li><a href="<c:url value='FeedbackServlet?action=send' />"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                                 <li><a href="<c:url value='FeedbackServlet?action=important' />"> <i class="fa fa-certificate"></i> Important</a></li>
                              
