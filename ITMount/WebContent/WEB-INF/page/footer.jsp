@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
 
-<div class="row-fluid">
-	<br>
-	<br>
-	<br>
-	<br>
-</div>
-<div class="footer " style="position:fixed; bottom: 0;width:100%;">
+
+
+
+
+<footer class="footer" style="position: fixed; bottom: 0; width: 100%;">
 	<div class="container">
 
 		<div class="row">
@@ -20,4 +18,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</footer>

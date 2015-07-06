@@ -15,7 +15,7 @@
 
 
 
-<a style="float: right;" href="#" class="btn btn-primary btn-sm"
+<a  href="#" 
 	id="openBtn">Statistic</a>
 
 <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
