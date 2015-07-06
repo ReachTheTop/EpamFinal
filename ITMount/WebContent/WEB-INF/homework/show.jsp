@@ -72,8 +72,7 @@ a {
 							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i>
-						<t:i18n id='group.chat' /></a></li>
+							class="fa fa-weixin"></i> <t:i18n id='group.chat' /></a></li>
 					<c:if test="${user.role == 'student' }">
 						<li class="active"><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
@@ -81,48 +80,54 @@ a {
 					</c:if>
 				</ul>
 			</div>
-			<div class="col-md-14">
+			<div class="col-md-9">
 
 
 				<c:forEach items="${homeworks}" var="home">
 
-					<div class="col-md-3 col-sm-3">
-						<div class="service-wrapper">
-							<img src="resources/img/service-icon/box.png" alt="Task">
-							<h3>${home.value.getName()}</h3>
-							<p>${home.value.getDescription()}</p>
-							<c:if test="${home.key.getRating()>=0}">
-								<p>Rating: ${home.key.getRating()}</p>
-							</c:if>
-							<p id="ratingData" data-ratingHomework="${home.key.getId()}"></p>
-							<p>
-								<a
-									href="<c:url value="/downloadFile?file=${home.key.getData()}"/>"
-									class="btn btn-warning glyphicon glyphicon-download-alt"></a>
-								<c:if test="${user.role =='lecturer' }">
-									<a id="delete-homework" data-delete="${home.key.getId()}"
-										class="btn btn-danger glyphicon glyphicon-trash"></a>
+					
+						<div class="service-wrapper col-md-12 vcenter">
+							<div class="col-md-3 vcenter">
+								<img src="resources/img/service-icon/box.png" alt="Task">
+								<h3>${home.value.getName()}</h3>
+								<c:if test="${home.key.getRating()>=0}">
+									<p>Rating: ${home.key.getRating()}</p>
 								</c:if>
+								<p id="ratingData" data-ratingHomework="${home.key.getId()}"></p>
+							</div>
+							<div class="col-md-6 vcenter">
+								<p><c:out value="${home.value.getDescription()}" /> </p>
+							</div>
+							<div class="col-md-3 vcenter">
+								
+								
+								
+									<a
+										href="<c:url value="/downloadFile?file=${home.key.getData()}"/>"
+										class="btn btn-warning glyphicon glyphicon-download-alt btn-md"></a>
+									<c:if test="${user.role =='lecturer' }">
+										<a id="delete-homework" data-delete="${home.key.getId()}"
+											class="btn btn-danger glyphicon glyphicon-trash btn-md"></a>
+									</c:if>
 
-								<c:if test="${user.role =='student' && home.key.getRating()<0}">
-									<a data-toggle="modal" href="#updateHomeWork"
-										data-delete="${home.key.getData()}"
-										data-homework="${home.key.getId()}"
-										class="open-updateHomeWork btn btn-success glyphicon glyphicon-edit"></a>
-								</c:if>
-							</p>
-							<%-- <p><a data-toggle="modal" href="#uploadHomeWork"  data-userId="${home.key.getUser()}" data-TaskId="${home.key.getTask()}" class="open-uploadHomeWork btn">Upload</a></p>--%>
-							<p>
-								<c:if
-									test="${user.role =='lecturer' && home.key.getRating()<0  }">
-									<a id="setReting" data-toggle="modal" href="#retingHomeWork"
-										data-homework="${home.key.getId()}"
-										class="open-ratingHomeWork btn"><t:i18n
-											id='group.homework.rating' /></a>
-								</c:if>
-							</p>
+									<c:if test="${user.role =='student' && home.key.getRating()<0}">
+										<a data-toggle="modal" href="#updateHomeWork"
+											data-delete="${home.key.getData()}"
+											data-homework="${home.key.getId()}"
+											class="open-updateHomeWork btn btn-success glyphicon glyphicon-edit btn-md"></a>
+									</c:if>
+								
+									<c:if
+										test="${user.role =='lecturer' && home.key.getRating()<0  }">
+										<a id="setReting" data-toggle="modal" href="#retingHomeWork"
+											data-homework="${home.key.getId()}"
+											class="open-ratingHomeWork btn btm-primary btn-sm"><t:i18n
+												id='group.homework.rating' /></a>
+									</c:if>
+								
+							</div>
 						</div>
-					</div>
+					
 
 				</c:forEach>
 
