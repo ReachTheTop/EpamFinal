@@ -4,9 +4,20 @@
 
 
 
+<div class="row-fluid">
+<br><br><br>
+</div>
 
-
-<footer class="footer" style="position: fixed; bottom: 0; width: 100%;">
+<div class="footer" style=" 
+ position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 10px 20px;
+  
+  border-top: 1px solid #e7eaec;
+  ">
 	<div class="container">
 
 		<div class="row">
@@ -18,4 +29,4 @@
 			</div>
 		</div>
 	</div>
-</footer>
+</div>
