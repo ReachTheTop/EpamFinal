@@ -31,11 +31,13 @@ public class GroupDAO {
 	private static final String GET_GROUP_BY_TEACHER_COURSE = "SELECT * FROM group1 WHERE teacher_id = ? and course_id = ? ";
 	private static final String GET_GROUP_BY_USER_REGISTER_ON_COURSE = "SELECT *FROM group1 g  JOIN group_user gu ON g.id=gu.group_id  WHERE g.course_id=? AND gu.user_id =?  AND g.is_active='1'";
 	private static final String GET_GROUP_BY_ACCESS_TO_KNOWLADGE_BASE ="SELECT * FROM group1 g WHERE  g.course_id =? AND g.is_active='1'  AND g.confirmed='1' AND ( g.id in (SELECT gu.group_id FROM group_user gu WHERE gu.user_id=? AND gu.group_id=g.id AND gu.is_active='1' ) OR g.teacher_id=?) LIMIT 1";
+	
+	private static final String GET_ALL_ACTIVE_GROUP = "SELECT * FROM group1 WHERE is_active = 1;";
+	
 	private Connection con;
 	private PreparedStatement statement;
 
 	public static void delete(Integer id, Connection con) {
-		con = DBConnection.getConnection();
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(DELETE);
@@ -317,6 +319,23 @@ public class GroupDAO {
 		}
 		return group;
 
+	}
+	
+	public static List<Group> getAllActiveGroups(Connection connection) {
+
+		ResultSet rs = null;
+		List<Group> list = null;
+		try {
+
+			PreparedStatement st = connection
+					.prepareStatement(GET_ALL_ACTIVE_GROUP);
+			rs = st.executeQuery();
+			list = GroupTransformer.getAllGroups(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 }
