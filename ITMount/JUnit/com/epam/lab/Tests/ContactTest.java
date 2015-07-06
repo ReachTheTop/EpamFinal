@@ -67,7 +67,7 @@ public class ContactTest {
 	}
 	
 	@Test
-	public void testDeleteteContact() throws Exception   {			
+	public void testDeleteContact() throws Exception   {			
 		
 		ContactDAO.addContact(contact, connection);	
 		contact.setId(ContactDAO.getByUserId(connection, contact.getUser_id()).getId());

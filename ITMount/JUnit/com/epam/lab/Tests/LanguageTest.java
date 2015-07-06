@@ -69,7 +69,7 @@ public class LanguageTest {
 	}
 	
 	@Test
-	public void testDeleteteLanguage() throws Exception   {		
+	public void testDeleteLanguage() throws Exception   {		
 		
 		
 		LanguageDAO.addLanguage(language, connection);	

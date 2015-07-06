@@ -72,7 +72,7 @@ public class HomeworkTest {
 	}
 	
 	@Test
-	public void testDeleteteHomework() throws Exception   {		
+	public void testDeleteHomework() throws Exception   {		
 		
 		
 		HomeworkDAO.addHomework(homework, connection);	

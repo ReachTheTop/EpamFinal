@@ -77,7 +77,7 @@ public class ExamTest {
 	}
 	
 	@Test
-	public void testDeleteteExam() throws Exception   {		
+	public void testDeleteExam() throws Exception   {		
 		
 		GroupExamDAO.createExam(connection, exam);
 		exam.setId(GroupExamDAO.getByDescription(connection, exam.getDescription()).getId());

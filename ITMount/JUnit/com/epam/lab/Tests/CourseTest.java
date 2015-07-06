@@ -66,7 +66,7 @@ public class CourseTest {
 	}
 	
 	@Test
-	public void testDeleteteCourse() throws Exception   {		
+	public void testDeleteCourse() throws Exception   {		
 		
 		
 		Integer id = CourseDAO.addCourse(course, connection);	

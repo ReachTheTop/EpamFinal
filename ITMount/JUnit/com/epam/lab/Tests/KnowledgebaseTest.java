@@ -39,7 +39,7 @@ public class KnowledgebaseTest {
 	}
 
 	@Test
-	public void testAddCourse() throws Exception   {		
+	public void testAddKnowledgeBase() throws Exception   {		
 			
 		KnowledgeBaseDAO.addKnowledgeBase(kBase, connection);	
 		kBase = KnowledgeBaseDAO.getSingleKnowledgeBaseForCourseAndPath(kBase.getCourse_id(), kBase.getPath(), connection);
@@ -47,7 +47,7 @@ public class KnowledgebaseTest {
 	} 	
 	
 	@Test
-	public void testUpdateCourse() throws Exception   {
+	public void testUpdateKnowledgeBase() throws Exception   {
 		
 		KnowledgeBaseDAO.addKnowledgeBase(kBase, connection);	
 		kBase = KnowledgeBaseDAO.getSingleKnowledgeBaseForCourseAndPath(kBase.getCourse_id(), kBase.getPath(), connection);
@@ -59,14 +59,14 @@ public class KnowledgebaseTest {
 	}
 	
 	@Test
-	public void testGetAllActiveCourses() {		
+	public void testGetAllKnowledgeBase() {		
 		
 		List<KnowledgeBase> kBases = KnowledgeBaseDAO.getAllKnowledgeBase(connection);
 		assertTrue(kBases.size() > 0);
 	}
 	
 	@Test
-	public void testDeleteteCourse() throws Exception   {		
+	public void testDeleteKnowledgeBase() throws Exception   {		
 		
 		
 		KnowledgeBaseDAO.addKnowledgeBase(kBase, connection);	

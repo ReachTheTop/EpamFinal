@@ -66,7 +66,7 @@ public class ArticleTest {
 	}
 	
 	@Test
-	public void testDeleteteArticle() throws Exception   {			
+	public void testDeleteArticle() throws Exception   {			
 		
 		article.setId(ArticleDAO.createArticle(connection, article));	
 		
