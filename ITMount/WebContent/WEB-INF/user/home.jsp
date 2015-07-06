@@ -56,7 +56,7 @@
 
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="profileTab.jsp"/>
+			<jsp:include page="profileTab.jsp" />
 		</c:otherwise>
 	</c:choose>
 
@@ -243,10 +243,26 @@
 													validating : 'glyphicon glyphicon-refresh'
 												},
 												fields : {
+													name : {
+														validators : {
+															notEmpty : {
+																message : "<t:i18n id='validation.not.empty'/>"
+															},
+															stringLength : {
+																min : 2,
+																max : 30,
+																message : '<t:i18n id="event.validate.title.length"/>'
+															}
+
+														}
+													},
 													surname : {
 														validators : {
 															notEmpty : {
 																message : "<t:i18n id='validation.not.empty'/>",
+
+															},
+															stringLength : {
 																min : 2,
 																max : 30,
 																message : "<t:i18n id='validation.surname'/>"

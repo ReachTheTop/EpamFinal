@@ -96,7 +96,7 @@
 </div>
 <script type="text/javascript">
 	$('button#submit-group-edit').click(function() {
-
+		$('#edit-group-form').data('bootstrapValidator').resetForm();
 		$('#editGroup').modal('hide');
 		showToaast("<t:i18n id='admin.group.update.toast'/>", 1);
 	});

@@ -291,6 +291,8 @@
 							dataType : "json",
 
 							success : function(data) {
+								
+								$('#editUserForm').data('bootstrapValidator').resetForm();
 								var nameUser = data.name;
 								$("#userName").html(nameUser);
 								$("#userNameModal").html(nameUser);

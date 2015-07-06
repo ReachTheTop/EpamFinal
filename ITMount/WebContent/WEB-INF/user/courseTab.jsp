@@ -187,6 +187,7 @@
 			data : $form.serialize(),
 
 			success : function(data, status) {
+				$('form').data('bootstrapValidator').resetForm();
 				$target.html(data);
 			}
 		});
