@@ -11,20 +11,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.CourseDAO;
+import com.epam.project.db.dao.GroupDAO;
 import com.epam.project.db.model.Course;
-import com.epam.project.db.service.CourseService;
 
 
 public class CourseTest {
 	
 	Connection connection;
 	Savepoint savepoint1;
+	Course course;
 	
 	@Before
 	public void setUp() throws Exception {
 		connection =  DBConnection.getConnection();
 		connection.setAutoCommit(false);
-		savepoint1 = connection.setSavepoint("Savepoint1");		
+		savepoint1 = connection.setSavepoint("Savepoint1");	
+		
+		course = new Course();
+		course.setName("name");
+		course.setIcon("icon");
+		course.setDescription("description");
 	}
 
 	@After
@@ -35,38 +42,40 @@ public class CourseTest {
 
 	@Test
 	public void testAddCourse() throws Exception   {		
-				
-		Course course = new Course();
-		course.setName("name");
-		course.setIcon("icon");
-		course.setDescription("description");
-		
-		Integer id = CourseService.addCourse(course);	
+			
+		Integer id = CourseDAO.addCourse(course, connection);	
 		assertNotNull(id);	
-		//CourseService.delCourse(id);
 	} 	
+	
+	@Test
+	public void testUpdateCourse() throws Exception   {
+		
+		course.setId(CourseDAO.addCourse(course, connection));
+		course.setName("newName");		
+	    CourseDAO.updateCourse(course, connection);	
+	    Course newCourse = new Course();
+	    newCourse = CourseDAO.getCourse(course.getId(), connection);
+		assertEquals("newName", newCourse.getName());	
+	}
 	
 	@Test
 	public void testGetAllActiveCourses() {		
 		
-		List<Course> courses = CourseService.getAllActiveCourses();
+		List<Course> courses = CourseDAO.getAllActiveCourses(connection);
 		assertTrue(courses.size() > 0);
 	}
 	
-//	@Test
-//	public void testDeleteteCourse() throws Exception   {		
-//				
-//		Course course = new Course();
-//		course.setName("name");
-//		course.setIcon("icon");
-//		course.setDescription("description");
-//		
-//		Integer id = CourseService.addCourse(course);	
-//		
-//		
-//		
-//		CourseService.delCourse(id);
-//		//assertNull(id);
-//	}
+	@Test
+	public void testDeleteCourse() throws Exception   {		
+		
+		
+		Integer id = CourseDAO.addCourse(course, connection);	
+		
+		GroupDAO.completelyRemove(id, connection);
+		CourseDAO.delCourse(id,connection);
+		Course newCourse = new Course();
+		newCourse = CourseDAO.getCourse(id,connection);
+		assertNull(newCourse);
+	}
 	
 }

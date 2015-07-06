@@ -18,6 +18,8 @@ public class ArticleDAO {
 	private static final String UPDATE_ARTICLE = "UPDATE article SET header= ?, data= ?, course_id = ? WHERE id = ?;";
 	private static final String TOGLE_ARTICLE = "UPDATE article SET is_active = !is_active WHERE id = ?;";
 
+	private static final String DELETE = "DELETE FROM article WHERE id=?";
+
 	public static Integer createArticle(Connection connection, Article article) {
 		PreparedStatement statement = null;
 		Integer article_id = null;
@@ -193,7 +195,8 @@ public class ArticleDAO {
 		ResultSet set = null;
 		Article question = null;
 		try {
-			statement = connection.prepareStatement("SELECT * FROM article WHERE type = 'faq' AND id = ?");
+			statement = connection
+					.prepareStatement("SELECT * FROM article WHERE type = 'faq' AND id = ?");
 			statement.setInt(1, faq_id);
 			set = statement.executeQuery();
 			question = ArticleTransformer.getArticle(set);
@@ -201,5 +204,16 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return question;
+	}
+
+	public static void deleteArticle(Connection connection, Integer article_id) {
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE);
+			statement.setInt(1, article_id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

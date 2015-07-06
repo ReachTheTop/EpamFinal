@@ -59,4 +59,17 @@ public class GroupExamService {
 		closeConnection(connection);
 		return exam;
 	}
+	
+	public static GroupExamModel getByDescription(String description){
+		Connection connection = DBConnection.getConnection();
+		GroupExamModel exam = GroupExamDAO.getByDescription(connection, description);
+		closeConnection(connection);
+		return exam;
+	}
+	
+	public static void deleteExam(Integer id){
+		Connection connection = DBConnection.getConnection();
+		GroupExamDAO.deleteExam(connection, id);
+		closeConnection(connection);
+	}
 }

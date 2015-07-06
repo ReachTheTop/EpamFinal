@@ -24,6 +24,9 @@ public class TaskDAO {
 	public static final String SQL_GET_ALL_TASKS = "SELECT * FROM task";
 	public static final String SQL_GET_ALL_TASKS_BY_GROUP_ID = "SELECT * FROM task where group_id =?";
 	public static final String SQL_GET_TASK = "SELECT * FROM task WHERE id=?";
+	
+	public static final String SQL_GET_TASK_BY_NAME = "SELECT * FROM task WHERE name=?";
+	public static final String SQL_DELETE_TASK = "DELETE FROM task WHERE id=?";
 
 	public static Task getTask(Integer id, Connection connection) {
 
@@ -80,10 +83,8 @@ public class TaskDAO {
 
 		PreparedStatement stmt;
 
-		Connection con = DBConnection.getConnection();
-
 		try {
-			stmt = con.prepareStatement(SQL_ADD_NEW_TASK);
+			stmt = connection.prepareStatement(SQL_ADD_NEW_TASK);
 			
 			stmt.setString(1, task.getName());
 			stmt.setString(2, task.getDescription());
@@ -124,6 +125,35 @@ public class TaskDAO {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static Task getTaskByName(String name, Connection connection) {
+
+		ResultSet rs = null;
+		Task task = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(SQL_GET_TASK_BY_NAME);
+			st.setString(1, name);
+			rs = st.executeQuery();
+			task = TaskTransformer.getTask(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return task;
+	}
+	
+	public static void delTask(Integer id,  Connection connection){
+		
+		try {
+			
+			PreparedStatement st = connection.prepareStatement(SQL_DELETE_TASK);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 
 }

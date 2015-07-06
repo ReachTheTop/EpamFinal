@@ -19,7 +19,7 @@ public class ArticleService {
 		return article_id;
 	}
 
-	public static ArticleCorteg  getAll(String token, Integer page) {
+	public static ArticleCorteg getAll(String token, Integer page) {
 		Connection connection = DBConnection.getConnection();
 		ArticleCorteg cortage = null;
 		cortage = ArticleDAO.getAll(connection, token, page);
@@ -58,36 +58,44 @@ public class ArticleService {
 			e.printStackTrace();
 		}
 	}
-	
-	public static List<Article> getByAuthor(Integer author_id){
+
+	public static List<Article> getByAuthor(Integer author_id) {
 		List<Article> articles = null;
 		Connection connection = DBConnection.getConnection();
 		articles = ArticleDAO.getByAuthor(connection, author_id);
 		closeConnection(connection);
 		return articles;
 	}
-	
-	public static List<Article> getFAQ(){
+
+	public static List<Article> getFAQ() {
 		Connection connection = DBConnection.getConnection();
 		List<Article> qa = null;
 		qa = ArticleDAO.getFAQ(connection);
 		closeConnection(connection);
 		return qa;
 	}
-	
-	public static Integer createFAQ(Article faq){
+
+	public static Integer createFAQ(Article faq) {
 		Integer qa_id = null;
 		Connection connection = DBConnection.getConnection();
 		qa_id = ArticleDAO.createFAQ(connection, faq);
 		closeConnection(connection);
 		return qa_id;
 	}
-	
-	public static Article getFAQById(Integer faq_id){
+
+	public static Article getFAQById(Integer faq_id) {
 		Article question = null;
 		Connection connection = DBConnection.getConnection();
 		question = ArticleDAO.getFAQById(connection, faq_id);
 		closeConnection(connection);
 		return question;
+
+	}
+
+	public static void deleteArticle(Integer article_id) {
+		Connection connection = DBConnection.getConnection();
+		ArticleDAO.deleteArticle(connection, article_id);
+		closeConnection(connection);
+
 	}
 }

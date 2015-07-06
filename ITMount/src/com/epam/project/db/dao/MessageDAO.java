@@ -21,6 +21,8 @@ public class MessageDAO {
 	public static final String SQL_ADD_NEW_COMMENT = "INSERT INTO  message (content, sender_id) VALUE (?,?);";
 	public static final String SQL_UPDATE_TASK = "Update task SET name=?, description=?, deadline=?, available=?,"
 			+ " file=?, is_active =?, group_id = ? WHERE id=?";
+	
+	public static final String SQL_DELETE_MESSAGE = "DELETE FROM message WHERE id=?";
 
 	public static Message getMessage(Integer id, Connection connection) {
 
@@ -300,5 +302,18 @@ public class MessageDAO {
 			e.printStackTrace();
 		}
 		return history;
+	}
+	
+	public static void delMessage(Integer id,  Connection connection){
+		
+		try {
+			
+			PreparedStatement st = connection.prepareStatement(SQL_DELETE_MESSAGE);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

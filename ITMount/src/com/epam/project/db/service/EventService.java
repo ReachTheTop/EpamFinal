@@ -43,6 +43,14 @@ public class EventService {
 		eventBrodge.close();
 
 	}
+	
+	public static void completelyRemove(String name) {
+		EventDAO eventBrodge = new EventDAO();
+
+		eventBrodge.completelyRemove(name);
+		eventBrodge.close();
+
+	}
 
 	public static List<Event> getAll() {
 		EventDAO eventBridge = new EventDAO();

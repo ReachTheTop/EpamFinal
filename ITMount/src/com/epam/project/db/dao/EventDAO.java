@@ -34,6 +34,9 @@ public class EventDAO {
 	private static final String GET_BY_ID = "SELECT * FROM event WHERE id = ?;";
 	
 	private static final String GET_BY_ID_GROUP = "SELECT * FROM EVENT WHERE group_id=? AND is_active =1 ORDER BY date  DESC;";
+	
+	
+	private static final String COMPLETELY_REMOVE_BY_NAME = "DELETE from event WHERE name = ?;";
 
 	private PreparedStatement statement;
 	private Connection con;
@@ -83,6 +86,17 @@ public class EventDAO {
 		try {
 			statement = con.prepareStatement(DELETE);
 			statement.setInt(1, event_id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void completelyRemove(String name) {
+		con = DBConnection.getConnection();
+		try {
+			statement = con.prepareStatement(COMPLETELY_REMOVE_BY_NAME);
+			statement.setString(1, name);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
