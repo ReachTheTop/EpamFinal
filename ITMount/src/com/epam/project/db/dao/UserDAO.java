@@ -121,10 +121,10 @@ public class UserDAO {
 
 		PreparedStatement stmt;
 
-		Connection con = DBConnection.getConnection();
+		//Connection con = DBConnection.getConnection();
 
 		try {
-			stmt = con.prepareStatement(SQL_ADD_NEW_USER);
+			stmt = connection.prepareStatement(SQL_ADD_NEW_USER);
 
 			stmt.setString(1, user.getName());
 			stmt.setString(2, user.getMiddle_name());

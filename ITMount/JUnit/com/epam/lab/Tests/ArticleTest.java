@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.ArticleDAO;
 import com.epam.project.db.model.Article;
-import com.epam.project.db.service.ArticleService;
 
 
 public class ArticleTest {
@@ -43,36 +43,36 @@ public class ArticleTest {
 	@Test
 	public void testAddArticle() throws Exception   {		
 			
-		Integer id = ArticleService.createArticle(article);	
+		Integer id = ArticleDAO.createArticle(connection, article);	
 		assertNotNull(id);	
 	} 	
 	
 	@Test
 	public void testUpdateArticle() throws Exception   {
 		
-		article.setId(ArticleService.createArticle(article));	
+		article.setId(ArticleDAO.createArticle(connection, article));	
 		article.setHeader("newHeader");	
-		ArticleService.updateArticle(article);	
+		ArticleDAO.updateArticle(connection, article);	
 		Article newArticle = new Article();
-		newArticle = ArticleService.getByIdWithoutUser(article.getId());
+		newArticle = ArticleDAO.getById(connection, article.getId());
 		assertEquals("newHeader", newArticle.getHeader());	
 	}
 	
 	@Test
 	public void testGetByAuthor() {		
 		
-		List<Article> articles = ArticleService.getByAuthor(25);
+		List<Article> articles = ArticleDAO.getByAuthor(connection, 13);
 		assertTrue(articles.size() > 0);
 	}
 	
 	@Test
 	public void testDeleteteArticle() throws Exception   {			
 		
-		article.setId(ArticleService.createArticle(article));	
+		article.setId(ArticleDAO.createArticle(connection, article));	
 		
-		ArticleService.deleteArticle(article.getId());	
+		ArticleDAO.deleteArticle(connection, article.getId());	
 		Article newArticle = new Article();
-		newArticle = ArticleService.getByIdWithoutUser(article.getId());
+		newArticle = ArticleDAO.getById(connection, article.getId());
 		assertNull(newArticle);
 	}
 	

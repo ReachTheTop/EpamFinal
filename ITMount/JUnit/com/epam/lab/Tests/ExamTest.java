@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.GroupExamDAO;
 import com.epam.project.db.model.GroupExamModel;
-import com.epam.project.db.service.GroupExamService;
 
 public class ExamTest {
 	
@@ -50,39 +50,39 @@ public class ExamTest {
 	@Test
 	public void testAddExam() throws Exception   {		
 			
-		GroupExamService.createExam(exam);	
+		GroupExamDAO.createExam(connection, exam);	
 		GroupExamModel newExam = new GroupExamModel();
-		newExam = GroupExamService.getByDescription(exam.getDescription());	
+		newExam = GroupExamDAO.getByDescription(connection, exam.getDescription());	
 		assertNotNull(newExam);	
 	} 	
 	
 	@Test
 	public void testUpdateExam() throws Exception   {
 		
-		GroupExamService.createExam(exam);
-		exam.setId(GroupExamService.getByDescription(exam.getDescription()).getId());
+		GroupExamDAO.createExam(connection, exam);
+		exam.setId(GroupExamDAO.getByDescription(connection, exam.getDescription()).getId());
 		exam.setDescription("newDescription");
-		GroupExamService.updateExam(exam);
+		GroupExamDAO.updateExam(connection, exam);
 		
 		GroupExamModel newExam = new GroupExamModel();
-		newExam = GroupExamService.getById(exam.getId());
+		newExam = GroupExamDAO.getById(connection, exam.getId());
 		assertEquals("newDescription", newExam.getDescription());	;	
 	}
 	
 	@Test
 	public void testGetExams() {		
 		
-		List<GroupExamModel> exams = GroupExamService.getAll(32);
+		List<GroupExamModel> exams = GroupExamDAO.getAll(connection, 32);
 		assertTrue(exams.size() > 0);
 	}
 	
 	@Test
 	public void testDeleteteExam() throws Exception   {		
 		
-		GroupExamService.createExam(exam);
-		exam.setId(GroupExamService.getByDescription(exam.getDescription()).getId());
-		GroupExamService.deleteExam(exam.getId());
-		assertNull(GroupExamService.getById(exam.getId()));
+		GroupExamDAO.createExam(connection, exam);
+		exam.setId(GroupExamDAO.getByDescription(connection, exam.getDescription()).getId());
+		GroupExamDAO.deleteExam(connection, exam.getId());
+		assertNull(GroupExamDAO.getById(connection, exam.getId()));
 	}
 	
 }

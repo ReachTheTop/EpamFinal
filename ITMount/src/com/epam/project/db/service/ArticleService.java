@@ -38,13 +38,6 @@ public class ArticleService {
 		return article;
 	}
 	
-	public static Article getByIdWithoutUser(Integer article_id) {
-		Connection connection = DBConnection.getConnection();
-		Article article = ArticleDAO.getById(connection, article_id);
-		closeConnection(connection);
-		return article;
-	}
-
 	public static void updateArticle(Article article) {
 		Connection connection = DBConnection.getConnection();
 		ArticleDAO.updateArticle(connection, article);

@@ -43,7 +43,7 @@ public class CourseDAO {
 		PreparedStatement st = null;
 		Integer course_id = null;
 		try {
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			st = connection.prepareStatement(INSERT,
 					Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, course.getName());
@@ -64,8 +64,8 @@ public class CourseDAO {
 
 			st.executeUpdate();
 
-			connection.commit();
-			connection.setAutoCommit(true);
+			//connection.commit();
+			//connection.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

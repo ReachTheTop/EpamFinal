@@ -14,20 +14,36 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.dao.UserDAO;
 import com.epam.project.db.model.User;
-import com.epam.project.db.service.UserService;
 
 
 public class UserTest {
 	
 	Connection connection;
 	Savepoint savepoint1;
+	User user;
 	
 	@Before
 	public void setUp() throws Exception {
 		connection =  DBConnection.getConnection();
 		connection.setAutoCommit(false);
-		savepoint1 = connection.setSavepoint("Savepoint1");		
+		savepoint1 = connection.setSavepoint("Savepoint1");
+		
+		user = new User(); ;
+		user.setName("name");
+		user.setMiddle_name("midlename");
+		user.setSurname("surname");
+		user.setEmail("email@com");
+		user.setPassword_hash("password");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date d = sdf.parse("1993-12-08");
+			user.setBirtday(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		user.setRole_id(2);
 	}
 
 	@After
@@ -39,62 +55,43 @@ public class UserTest {
 	@Test
 	public void testAddNewUser() throws Exception   {		
 				
-			User user = new User();
-			user.setName("name");
-			user.setMiddle_name("midlename");
-			user.setSurname("surname");
-			user.setEmail("email@com");
-			user.setPassword_hash("password");
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			try {
-				Date d = sdf.parse("1993-12-08");
-				user.setBirtday(d);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//user.setBirtdayString("1993-12-08");
-			user.setRole_id(2);
-			UserService.addNewUser(user);
 			
-			User newUser = UserService.getUserWhereEmail("email@com");		
-			assertNotNull(newUser);		
+			UserDAO.addNewUser(user, connection);
+					
+			assertNotNull(UserDAO.getUserWhereEmail(user.getEmail(), connection));		
 	} 
 	
-//	@Test
-//	public void testGetUserWhereEmail() {
-//		
-//		assertNotNull(UserService.getUserWhereEmail("danielle@mail.ua"));
-//	}
 	
 	@Test
 	public void testGetByRole() {		
 		
-		List<User> users = UserService.getByRole("student");
+		List<User> users = UserDAO.getByRole("student", connection);
 		assertTrue(users.size() > 0);
 	}
 	
 	@Test
 	public void testUpdateUser() {	
-		User user = UserService.getUserWhereEmail("email@com");	
+		
+		UserDAO.addNewUser(user, connection);
+		user = UserDAO.getUserWhereEmail(user.getEmail(), connection);
+		//user.setId(UserDAO.getUserWhereEmail(user.getEmail(), connection).getId());
 		
 		user.setName("NewName");
-		UserService.updateUser(user);
+		UserDAO.updateUser(user, connection);
 		
 		User newUser = new User();
-		newUser = UserService.getUserWhereEmail("email@com");	
+		newUser = UserDAO.getUserWhereEmail(user.getEmail(), connection);	
 		
 		assertEquals("NewName", newUser.getName());		
 	}
-	
+		
 	@Test
 	public void testDeletedUser() {	
 		
-		User user = UserService.getUserWhereEmail("email@com");
+		UserDAO.addNewUser(user, connection);
+		user.setId(UserDAO.getUserWhereEmail(user.getEmail(), connection).getId());		
 		
-		Integer id = user.getId();		
-		
-		UserService.delUser(id);
-		assertNull(UserService.getUserWhereEmail("email@com"));		
+		UserDAO.delUser(user.getId(), connection);
+		assertNull(UserDAO.getUserWhereEmail(user.getEmail(), connection));		
 	}
 }

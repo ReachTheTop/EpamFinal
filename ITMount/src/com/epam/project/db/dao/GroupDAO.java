@@ -47,7 +47,6 @@ public class GroupDAO {
 	}
 	
 	public static void completelyRemove(Integer id, Connection con) {
-		con = DBConnection.getConnection();
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(DELETE_GROUP_BY_COURSE_ID);
