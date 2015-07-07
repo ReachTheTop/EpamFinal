@@ -23,6 +23,7 @@ public class DBConnection {
 
 		config.setPassword("rt6745683");								//CHANGE TO YOUR DB PASSWORD
 
+
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

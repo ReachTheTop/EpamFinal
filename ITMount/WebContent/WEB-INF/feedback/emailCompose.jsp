@@ -69,7 +69,7 @@
             <div class="mail-box-header">
                 <div class="pull-right tooltip-demo">
                     
-                    <a href="<c:url value='FeedbackServlet?action=refresh' />" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> <t:i18n id="Feedback.emailCompose.Discard"/></a>
+                    <a href="<c:url value='FeedbackServlet?action=refresh' />" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="<t:i18n id="Feedback.title.Discard"/>"><i class="fa fa-times"></i> <t:i18n id="Feedback.emailCompose.Discard"/></a>
                 </div>
                 <h2>
                     <t:i18n id="Feedback.emailCompose.ComposeMail"/>
@@ -103,7 +103,7 @@
 <div class="clearfix"></div>
                         </div>
                     <div class="mail-body text-right tooltip-demo">
-                        <a id="send" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailCompose.Send"/></a>
+                        <a id="send" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="<t:i18n id="Feedback.title.Send"/>"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailCompose.Send"/></a>
                         
                     </div>
                     <div class="clearfix"></div>
