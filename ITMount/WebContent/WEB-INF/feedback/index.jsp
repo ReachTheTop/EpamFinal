@@ -66,7 +66,7 @@
 								class="pull-right mail-search">
 								<div class="input-group">
 									<input type="text" class="form-control input-sm" name="search"
-										placeholder="Search email">
+										placeholder="<t:i18n id="Feedback.index.placeholder.search"/>">
 									<div class="input-group-btn">
 										<button type="submit" class="btn btn-sm btn-primary">
 											<t:i18n id="Feedback.index.Search"/></button>
@@ -87,22 +87,22 @@
 								<button
 									onclick="window.location.href='<c:url value='FeedbackServlet?action=refresh' />'"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
-									data-placement="left" title="Refresh inbox">
+									data-placement="left" title="<t:i18n id="Feedback.title.RefreshInbox"/> ">
 									<i class="fa fa-refresh"></i> <t:i18n id="Feedback.index.Refresh"/> 
 								</button>
 								<button
 								id="addRead" form="sendMail" type="submit" class="btn btn-white btn-sm" data-toggle="tooltip"
-									data-placement="top" title="Mark as read">
+									data-placement="top" title="<t:i18n id="Feedback.title.MarkRead"/>">
 									<i class="fa fa-eye"></i>
 								</button>
 								<button id="addImportant" form="sendMail" type="submit"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
-									data-placement="top" title="Mark as important">
+									data-placement="top" title="<t:i18n id="Feedback.title.MarkImportant"/>">
 									<i class="fa fa-exclamation"></i>
 								</button>
 								<button id="addTrash" form="sendMail" type="submit"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
-									data-placement="top" title="Mark as important">
+									data-placement="top" title="<t:i18n id="Feedback.title.MoveToTrash"/>">
 									<i class="fa fa-trash-o"></i>
 								</button>
 						

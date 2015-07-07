@@ -61,9 +61,9 @@
             <div class="col-lg-9 animated fadeInRight">
             <div class="mail-box-header">
                 <div class="pull-right tooltip-demo">
-                    <a href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailView.Reply"/></a>
+                    <a href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="<t:i18n id="Feedback.title.Reply"/>"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailView.Reply"/></a>
                   
-                    <a href="<c:url value='FeedbackServlet?action=moveTrash&id_trash=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a>
+                    <a href="<c:url value='FeedbackServlet?action=moveTrash&id_trash=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="<t:i18n id="Feedback.title.MoveToTrash"/>"><i class="fa fa-trash-o"></i> </a>
                 </div>
                 <h2>
                     <t:i18n id="Feedback.emailView.ViewMessage"/>

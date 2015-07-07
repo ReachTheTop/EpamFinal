@@ -181,13 +181,13 @@
 			function() {
 				 var object =$(this);
 				  swal({
-					  title: "Are you sure?",
-					  text: "You will not be able to recover this file!",
+					  title: "<t:i18n id='bootstrap.AreYouSure'/>?",
+					  text: "<t:i18n id='bootstrap.NotAbleRecoverFile'/>!",
 					  type: "warning",
 					  showCancelButton: true,
 					  confirmButtonClass: "btn-danger",
-					  confirmButtonText: "Yes, delete it!",
-					  cancelButtonText: "No, cancel plx!",
+					  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>!",
+					  cancelButtonText: "<t:i18n id='bootstrap.No'/>!",
 					  closeOnConfirm: true,
 					  closeOnCancel: true
 					},
@@ -237,7 +237,7 @@
 							$('#uploadFile')
 									.bootstrapValidator(
 											{
-												message : 'This value is not valid',
+												message : "<t:i18n id='bootstrap.ThisValueIsNotValid'/>",
 												feedbackIcons : {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
