@@ -29,7 +29,8 @@ li>a {
 	<div class="col-sm-3">
 		<nav class="nav-sidebar">
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a href="#tab1" data-toggle="tab">Profile</a></li>
+				<li class="active"><a href="#tab1" data-toggle="tab"><t:i18n
+							id="admin.profile" /></a></li>
 
 
 				<li class=""><a class="courses" data-toggle="tab" href="#tab4"><t:i18n

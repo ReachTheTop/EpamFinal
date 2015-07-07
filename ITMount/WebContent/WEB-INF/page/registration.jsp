@@ -147,7 +147,7 @@
 																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 															},
 															notEmpty : {
-																message : 'The email is required and cannot be empty'
+																message : '<t:i18n id="bootstrap.TheEmailIsRequiredAndCannotBeEmpty"/>'
 															}
 														}
 													},

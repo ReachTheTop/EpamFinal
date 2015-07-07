@@ -69,10 +69,10 @@
             <div class="mail-box-header">
                 <div class="pull-right tooltip-demo">
                     
-                    <a href="<c:url value='FeedbackServlet?action=refresh' />" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                    <a href="<c:url value='FeedbackServlet?action=refresh' />" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> <t:i18n id="Feedback.emailCompose.Discard"/></a>
                 </div>
                 <h2>
-                    Compse mail
+                    <t:i18n id="Feedback.emailCompose.ComposeMail"/>
                 </h2>
             </div>
                 <div class="mail-box">
@@ -81,11 +81,11 @@
                 <div class="mail-body">
 
                     <form class="form-horizontal" method="get">
-                        <div class="form-group"><label class="col-sm-2 control-label">To:</label>
+                        <div class="form-group"><label class="col-sm-2 control-label"><t:i18n id="Feedback.emailCompose.To"/>:</label>
 
                             <div class="col-sm-10"><input id="email" type="text" class="form-control" value="${feedback.email }"></div>
                         </div>
-                        <div class="form-group"><label class="col-sm-2 control-label">Subject:</label>
+                        <div class="form-group"><label class="col-sm-2 control-label"><t:i18n id="Feedback.emailCompose.Subject"/>:</label>
 								<input type ="hidden" id="name" value="${feedback.name }"></input>
 								<input type ="hidden" id="type" value="${feedback.type }"></input> 
                             <div class="col-sm-10"><input id="subject" type="text" class="form-control" value="${subject }"></div>
@@ -103,7 +103,7 @@
 <div class="clearfix"></div>
                         </div>
                     <div class="mail-body text-right tooltip-demo">
-                        <a id="send" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</a>
+                        <a id="send" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailCompose.Send"/></a>
                         
                     </div>
                     <div class="clearfix"></div>

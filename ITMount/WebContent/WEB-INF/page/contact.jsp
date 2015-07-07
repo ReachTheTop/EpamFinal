@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><t:i18n id="contact.contacts"/></title>
 <jsp:include page="../page/head.jsp" />
 <link rel="stylesheet" href="resources/css/tabPanel.css"></link>
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
@@ -23,7 +23,7 @@
 
 	<div class="section">
 		<div class="container">
-			<h2>Contacts</h2>
+			<h2><t:i18n id="contact.contacts"/></h2>
 			<div class="col-sm-6">
 
 				<!-- Map -->
@@ -36,9 +36,10 @@
 				</div>
 
 				<p class="contact-us-details">
-					<b>Address:</b> Stepana Bandery 28A, Lviv, Ukraine<br /> <b>Phone:</b>
-					+380986463663<br /> <b>Skype:</b> EpamLabItMount<br /> <b>Email:</b>
-					<a href="mailto:getintoutch@yourcompanydomain.com">epamlabfinalproject@gmail.com
+					<b><t:i18n id="contact.address"/>:</b> Stepana Bandery 28A, Lviv, Ukraine<br />
+					 <b><t:i18n id="contact.phone"/>:</b> +380986463663<br />
+					 <b>Skype:</b> EpamLabItMount<br /> 
+					 <b>Email:</b>	<a href="mailto:getintoutch@yourcompanydomain.com">epamlabfinalproject@gmail.com
 					</a>
 				</p>
 				<!-- End Map -->
@@ -48,18 +49,17 @@
 			<div class="col-sm-5">
 				<!-- Contact Form -->
 				<!-- Contact Form -->
-				<h3>Send Us a Message</h3>
+				<h3><t:i18n id="contact.SendUsAMessage"/></h3>
 				<div class="contact-form-wrapper">
 					<form id="sendUserMessage" action="<c:url value="/FeedbackServlet?action=sendUser"/>" class="form-horizontal" method="get"  role="form">
 						<div class="form-group">
-							<label for="Name" class="col-sm-3 control-label"><b>Your
-									name</b></label>
+							<label for="Name" class="col-sm-3 control-label"><b><t:i18n id="contact.YourName"/></b></label>
 							<div class="col-sm-9">
 								<input class="form-control"  name="name" type="text" placeholder="">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-email"  class="col-sm-3 control-label"><b>Your
+							<label for="contact-email"  class="col-sm-3 control-label"><b><t:i18n id="contact.Your"/>
 									Email</b></label>
 							<div class="col-sm-9">
 								<input class="form-control"  name="email" id="contact-email" type="text"
@@ -67,26 +67,25 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-message" class="col-sm-3 control-label"><b>Select
-									Topic</b></label>
+							<label for="contact-message" class="col-sm-3 control-label"><b><t:i18n id="contact.SelectTopic"/></b></label>
 							<div class="col-sm-9">
 								<select name = "type" class="form-control" id="prependedInput">
 									<option placeholder="Please select topic..."></option>
-									<option value="Сomplaint">Сomplaint</option>
-									<option value ="Bug">Bug</option>
-									<option value ="Message">Message</option>
+									<option value="Сomplaint"><t:i18n id="contact.Сomplaint"/></option>
+									<option value ="Bug"><t:i18n id="contact.Bug"/></option>
+									<option value ="Message"><t:i18n id="contact.Message"/></option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-message" class="col-sm-3 control-label"><b>Message</b></label>
+							<label for="contact-message" class="col-sm-3 control-label"><b><t:i18n id="contact.Message"/></b></label>
 							<div class="col-sm-9">
 								<textarea class="form-control"  name="message" rows="5" id="contact-message"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12">
-								<button type="submit" class="btn pull-right">Send</button>
+								<button type="submit" class="btn pull-right"><t:i18n id="contact.Send"/></button>
 							</div>
 						</div>
 					</form>
@@ -120,7 +119,7 @@
 													message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
 												},
 												notEmpty : {
-													message : 'The email is required and cannot be empty'
+													message : '<t:i18n id="bootstrap.TheEmailIsRequiredAndCannotBeEmpty"/>'
 												}
 											}
 										},

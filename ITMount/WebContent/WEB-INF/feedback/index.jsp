@@ -69,7 +69,7 @@
 										placeholder="Search email">
 									<div class="input-group-btn">
 										<button type="submit" class="btn btn-sm btn-primary">
-											Search</button>
+											<t:i18n id="Feedback.index.Search"/></button>
 									</div>
 								</div>
 							</form>
@@ -88,7 +88,7 @@
 									onclick="window.location.href='<c:url value='FeedbackServlet?action=refresh' />'"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
 									data-placement="left" title="Refresh inbox">
-									<i class="fa fa-refresh"></i> Refresh
+									<i class="fa fa-refresh"></i> <t:i18n id="Feedback.index.Refresh"/> 
 								</button>
 								<button
 								id="addRead" form="sendMail" type="submit" class="btn btn-white btn-sm" data-toggle="tooltip"
@@ -130,13 +130,13 @@
 											href="<c:url value='FeedbackServlet?action=view&id=${feedback.getId() }' />">${feedback.name}</a>
 											<c:choose>
 												<c:when test="${feedback.type=='Сomplaint'}">
-													<span class="label label-warning pull-right">Complaint</span>
+													<span class="label label-warning pull-right"><t:i18n id="Feedback.index.Complaint"/></span>
 												</c:when>
 												<c:when test="${feedback.type=='Bug'}">
-													<span class="label label-danger pull-right">Bug</span>
+													<span class="label label-danger pull-right"><t:i18n id="Feedback.index.Bug"/></span>
 												</c:when>
 												<c:otherwise>
-													<span class="label label-info pull-right">Message</span>
+													<span class="label label-info pull-right"><t:i18n id="Feedback.index.Message"/></span>
 												</c:otherwise>
 
 											</c:choose></td>

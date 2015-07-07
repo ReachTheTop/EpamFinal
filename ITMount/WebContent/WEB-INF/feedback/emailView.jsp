@@ -61,22 +61,22 @@
             <div class="col-lg-9 animated fadeInRight">
             <div class="mail-box-header">
                 <div class="pull-right tooltip-demo">
-                    <a href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>
+                    <a href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailView.Reply"/></a>
                   
                     <a href="<c:url value='FeedbackServlet?action=moveTrash&id_trash=${feedback.getId() }' />" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a>
                 </div>
                 <h2>
-                    View Message
+                    <t:i18n id="Feedback.emailView.ViewMessage"/>
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
 
 
                     <h3>
-                        <span class="font-noraml">Subject: </span>${feedback.type}
+                        <span class="font-noraml"><t:i18n id="Feedback.emailView.Subject"/>: </span>${feedback.type}
                     </h3>
                     <h5>
                         <span class="pull-right font-noraml">${feedback.timeMessage}</span>
-                        <span class="font-noraml">From: </span>${feedback.email}
+                        <span class="font-noraml"><t:i18n id="Feedback.emailView.From"/>: </span>${feedback.email}
                         
                     </h5>
                 </div>
@@ -96,8 +96,8 @@
                         </div>
                         </div>
                         <div class="mail-body text-right tooltip-demo">
-                                <a class="btn btn-sm btn-white" href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />"><i class="fa fa-reply"></i> Reply</a>
-                                 <a class="btn btn-sm btn-white" href="<c:url value='FeedbackServlet?action=moveTrash&id_trash=${feedback.getId() }' />"><i class="fa fa-trash-o"></i> Remove</a>
+                                <a class="btn btn-sm btn-white" href="<c:url value='FeedbackServlet?action=reply&id=${feedback.getId() }' />"><i class="fa fa-reply"></i> <t:i18n id="Feedback.emailView.Reply"/></a>
+                                 <a class="btn btn-sm btn-white" href="<c:url value='FeedbackServlet?action=moveTrash&id_trash=${feedback.getId() }' />"><i class="fa fa-trash-o"></i> <t:i18n id="Feedback.emailView.Remove"/></a>
                                
                         </div>
                         <div class="clearfix"></div>
