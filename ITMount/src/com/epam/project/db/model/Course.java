@@ -29,7 +29,7 @@ public class Course extends Validator implements Serializable {
 	private String icon;
 
 	@Column(value = "description")
-	@Size(min=1,max=700)
+	@Size(min=1,max=1000)
 	@Presence()
 	@Format(format="^[^<^>]*$")
 	private String description;

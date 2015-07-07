@@ -201,7 +201,10 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
+																message : "<t:i18n id='validation.not.empty'/>"
+																
+															},
+															stringLength : {
 																min : 2,
 																max : 30,
 																message : "<t:i18n id='validation.course.name.size'/>"
@@ -221,9 +224,11 @@
 													description : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 100,
-																max : 2000,
+																message : "<t:i18n id='validation.not.empty'/>"
+															},
+															stringLength : {
+																min : 2,
+																max : 1000,
 																message : "<t:i18n id='validation.course.description'/>"
 															}
 
