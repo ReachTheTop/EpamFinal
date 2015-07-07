@@ -106,10 +106,10 @@ a {
 								test="${user.role == 'lecturer' && group.teacher_id == user.id}">
 								<c:choose>
 									<c:when test="${group.isConfirmed == true}">
-										<a class='btn btn-danger'
+										<a id="disbandGroup" class='btn btn-danger'
 											style="padding-top: 12px; padding-bottom: 12px;"
-											onclick="return confirm('Are you sure?')"
-											href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />"><t:i18n
+											
+											><t:i18n
 												id='group.disband' /></a>
 									</c:when>
 									<c:otherwise>
@@ -142,9 +142,9 @@ a {
 							</c:when>
 							<c:when
 								test="${user.role == 'student' || user.role == 'applicant' }">
-								<a class='btn btn-danger'
-									onclick="return confirm('Are you sure?')"
-									href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />"><t:i18n
+								<a id="leaveGroup" class='btn btn-danger'
+								
+									><t:i18n
 										id='group.user.leave' /></a>
 
 							</c:when>
@@ -230,7 +230,71 @@ a {
 			</div>
 		</div>
 	</div>
+<script>
+$("a#leaveGroup").click(
+		
+		function() {
+			 var object =$(this);
+			  swal({
+				  title: "Are you sure?",
+				  text: "You will not be able to recover this file!",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonClass: "btn-danger",
+				  confirmButtonText: "Yes, delete it!",
+				  cancelButtonText: "No, cancel plx!",
+				  closeOnConfirm: true,
+				  closeOnCancel: true
+				},
+				
+				function(isConfirm) {
+					  
+					  if (isConfirm) {
+						  
+						  window.location.href = 'GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }';
+						
 
+					   
+					  }
+			
+
+		});
+		
+		
+	});
+	
+$("a#disbandGroup").click(
+		
+		function() {
+			 var object =$(this);
+			  swal({
+				  title: "Are you sure?",
+				  text: "You will not be able to recover this file!",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonClass: "btn-danger",
+				  confirmButtonText: "Yes, delete it!",
+				  cancelButtonText: "No, cancel plx!",
+				  closeOnConfirm: true,
+				  closeOnCancel: true
+				},
+				
+				function(isConfirm) {
+					  
+					  if (isConfirm) {
+						  
+						  window.location.href = 'GroupServlet?action=delete&group_id=${group.id }';
+						
+
+					   
+					  }
+			
+
+		});
+		
+		
+	});
+</script>
 
 	<jsp:include page="../page/footer.jsp" />
 </body>

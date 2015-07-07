@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="resources/css/font-awesome.css">
 <link rel="stylesheet" href="resources/css/animate.css">
 
+
 <title><c:out value="${ group.name }" /></title>
 
 <style type="text/css">
@@ -53,54 +54,57 @@ a {
 
 </head>
 <body>
-	<jsp:include page="../page/header.jsp" />
 
-	<div class="section section-breadcrumbs">
+	<div id="wrap">
+		<jsp:include page="../page/header.jsp" />
+
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>
+							<c:out value="${group.name }" />
+							<t:i18n id='group.events' />
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h1>
-						<c:out value="${group.name }" />
-						<t:i18n id='group.events' />
-					</h1>
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a
+							href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
+								class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
+								class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
+						<li class="active"><a
+							href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
+								class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
+								class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
+								class="fa fa-weixin"></i>
+							<t:i18n id='group.chat' /></a></li>
+						<c:if test="${user.role == 'student' }">
+							<li><a
+								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+									class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+						</c:if>
+					</ul>
+				</div>
+				<div class="col-md-9">
+
+					<jsp:include page="eventPanel.jsp"></jsp:include>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a
-						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
-					<li class="active"><a
-						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
-					<c:if test="${user.role == 'student' }">
-						<li><a
-							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
-					</c:if>
-				</ul>
-			</div>
-			<div class="col-md-9">
-
-				<jsp:include page="eventPanel.jsp"></jsp:include>
-
-			</div>
-		</div>
-	</div>
-
 
 	<jsp:include page="../page/footer.jsp" />
 </body>

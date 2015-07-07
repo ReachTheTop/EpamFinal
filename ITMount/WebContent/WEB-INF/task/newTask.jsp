@@ -193,7 +193,7 @@
 				success : function(text) {
 
 					$('#myModal').modal('hide');
-					showToaast("Task was  successfully created", 1);
+					//showToaast("Task was  successfully created", 1);
 					
 
 				},

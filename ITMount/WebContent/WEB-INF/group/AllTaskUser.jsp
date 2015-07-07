@@ -2,6 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
+
 <div class="panel-group" id="accordion" role="tablist"
 	aria-multiselectable="true">
 

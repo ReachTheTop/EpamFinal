@@ -184,3 +184,47 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('body').on(
+		'click',
+		'a#delete-language',
+		function() {
+			 var object =$(this);
+			  swal({
+				  title: "Are you sure?",
+				  text: "You will not be able to recover this language!",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonClass: "btn-danger",
+				  confirmButtonText: "Yes, delete it!",
+				  cancelButtonText: "No, cancel plx!",
+				  closeOnConfirm: true,
+				  closeOnCancel: true
+				},
+				
+				function(isConfirm) {
+					  
+					  if (isConfirm) {
+						  
+						  $.get('LanguageUploadServlet?action=delete&language_id=' +
+								 object.attr('name'),
+								  function(response) {
+				                         if (response.success) {
+				                        	object.parent().parent().remove();
+				                        	 showToaast(response.success, 1);
+				                         } else {                     
+				                        	 showToaast(response.fail, 0);
+
+				                         }
+								  });
+
+					   
+					  }
+			
+
+		});
+		
+			
+		});
+</script>

@@ -34,6 +34,8 @@
 <script type="text/javascript" src="assets/chat/chatHistory.js"></script>
 <link rel="stylesheet" href="assets/chat/css/chat.css">
 
+
+
 <title><c:out value="${ group.name }" /> <t:i18n id='group.chat'/></title>
 
 <style type="text/css">
@@ -59,6 +61,9 @@ a {
 
 </head>
 <body>
+
+
+<div id="wrap">
 	<jsp:include page="../page/header.jsp" />
 
 	<div class="section section-breadcrumbs">
@@ -73,6 +78,7 @@ a {
 			</div>
 		</div>
 	</div>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
@@ -100,7 +106,7 @@ a {
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" style ="margin-bottom: 80px ">
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-comment"></span> <t:i18n id='group.chat'/>
 					</div>
@@ -110,7 +116,7 @@ a {
 
 						</ul>
 					</div>
-					<div class="panel-footer">
+					<div class="panel-footer" style = "padding-bottom: 10px">
 						<div class="form-group">
 
 
@@ -125,6 +131,7 @@ a {
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 

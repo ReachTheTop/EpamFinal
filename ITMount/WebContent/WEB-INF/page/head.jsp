@@ -75,7 +75,10 @@
 	
 </script>
 
+
 <script src="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
 
 
 
