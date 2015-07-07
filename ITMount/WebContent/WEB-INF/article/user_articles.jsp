@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>
-						<a href="<c:url value='ArticleServlet' />"><t:i18n id='articles'/></a>
+						<t:i18n id='articles'/>
 					</h1>
 
 				</div>
