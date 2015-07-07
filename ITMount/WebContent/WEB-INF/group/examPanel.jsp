@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="t" uri="/WEB-INF/teg.tld"%>
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<c:if test="${group.teacher_id == user.id }">

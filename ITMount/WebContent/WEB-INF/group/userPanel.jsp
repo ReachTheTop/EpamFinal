@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
-<script src="assets/js/jquery.bootpag.min.js"></script>
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
 
 
 <div class="panel panel-default">

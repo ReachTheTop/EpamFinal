@@ -8,6 +8,9 @@
 	type="text/css">
 <link rel="stylesheet" href="resources/css/font-awesome.css"
 	type="text/css">
+	
+	<link rel="stylesheet" href="resources/css/sticky-footer.css">
+	
 
 <div class="ibox float-e-margins">
 	<div class="ibox-title  panel panel-default">

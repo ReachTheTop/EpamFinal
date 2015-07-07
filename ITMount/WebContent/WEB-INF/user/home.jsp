@@ -20,6 +20,9 @@
 <!-- <link rel="stylesheet" href="resources/css/tabPanel.css"></link> -->
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
 
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
+
 
 
 </head>
@@ -61,6 +64,9 @@
 	</c:choose>
 
 	<jsp:include page="../page/footer.jsp" />
+	
+	
+	
 	<label hidden="true" id="confirm"><t:i18n
 			id='admin.group.confirm' /></label>
 	<label hidden="true" id="ban"><t:i18n id='admin.user.ban' /></label>

@@ -39,6 +39,9 @@
 <script src="resources/js/template.js"></script>
 <script src="resources/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 <script src="resources/js/toastr.js"></script>
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
