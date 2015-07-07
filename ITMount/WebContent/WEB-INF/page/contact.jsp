@@ -153,7 +153,7 @@
 											message : '<t:i18n id="bootstrap.TheNameIsNotValid"/>',
 											validators : {
 												notEmpty : {
-													message : '<t:i18n id="bootstrap.TheNameIsRequiredAndCannotBeEmpty"/>'
+													message : '<t:i18n id="bootstrap.message.visitor"/>'
 												},
 												regexp : {
 													regexp : /^[^<^>]*$/,
@@ -190,7 +190,7 @@
 				if (data.success) {
 					$('#sendUserMessage').trigger('reset');
 					showToaast(data.success, 1);
-
+					form.data('bootstrapValidator').resetForm();
 				} else {
 					showToaast(data.fail, 0);
 
