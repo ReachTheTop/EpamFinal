@@ -423,21 +423,45 @@ a {
 		});
 
 		$("a#delete-homework").click(
-				function() {
+				
+					function() {
+						 var object =$(this);
+						  swal({
+							  title: "Are you sure?",
+							  text: "You will not be able to recover this file!",
+							  type: "warning",
+							  showCancelButton: true,
+							  confirmButtonClass: "btn-danger",
+							  confirmButtonText: "Yes, delete it!",
+							  cancelButtonText: "No, cancel plx!",
+							  closeOnConfirm: true,
+							  closeOnCancel: true
+							},
+							
+							function(isConfirm) {
+								  
+								  if (isConfirm) {
+									  
+									
+									  $.get('Homework?action=delete&id_homework='
+												+ object.data('delete'), function(response) {
+											if (response.success) {
+												object.parent().parent().remove();
+												showToaast(response.success, 1);
 
-					var object = $(this);
-					$.get('Homework?action=delete&id_homework='
-							+ $(this).data('delete'), function(response) {
-						if (response.success) {
-							object.parent().parent().remove();
-							showToaast(response.success, 1);
+											} else {
+												showToaast(response.fail, 0);
 
-						} else {
-							showToaast(response.fail, 1);
+											}
+										});
 
-						}
+								   
+								  }
+						
+
 					});
-
+					
+					
 				});
 
 		function showToaast(message, issucces) {

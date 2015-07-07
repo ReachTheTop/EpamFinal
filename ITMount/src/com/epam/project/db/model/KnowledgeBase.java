@@ -27,11 +27,30 @@ public class KnowledgeBase extends Validator implements Serializable {
 	
 	@Column(value="course_id")
 	private Integer course_id;
-	
+	@Column(value="box_id")
+	private String box_id;
+	@Column(value="box_session")
+	private String box_session;
 	public KnowledgeBase() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getBox_id() {
+		return box_id;
+	}
+
+	public void setBox_id(String box_id) {
+		this.box_id = box_id;
+	}
+
+	public String getBox_session() {
+		return box_session;
+	}
+
+	public void setBox_session(String box_session) {
+		this.box_session = box_session;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -67,7 +86,10 @@ public class KnowledgeBase extends Validator implements Serializable {
 	public String toString() {
 		return "KnowledgeBase [id=" + id + ", path=" + path + ", available="
 				+ available + ", is_active=" + is_active + ", course_id="
-				+ course_id + "]";
+				+ course_id + ", box_id=" + box_id + ", box_session="
+				+ box_session + "]";
 	}
+
+	
 	
 }

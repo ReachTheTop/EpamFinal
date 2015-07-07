@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><t:i18n id='knowledgebase'/></title>
 <jsp:include page="../page/head.jsp" />
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+
+<script src="resources/js/toastr.js"></script>
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />
@@ -51,30 +56,51 @@
 							document.write(fileName)
 						</script>
 					</h3>
+					<c:choose>
+					<c:when test="${kbase.key.getBox_id()!=null }">
+					<a id="document"
+							href="#boxView" data-toggle="modal" 
+							 data-session="${kbase.key.getBox_session()}"><img src="resources/img/fileicon/${kbase.value }.png"
+						onerror="this.src='resources/img/fileicon/other.png'" 
+						
+						class="img-rounded" width="128" height="128" alt="file"></a>
+					</c:when>
+					<c:when test="${kbase.key.getBox_id()==null }">
 					<img src="resources/img/fileicon/${kbase.value }.png"
 						onerror="this.src='resources/img/fileicon/other.png'" 
 						
 						class="img-rounded" width="128" height="128" alt="file">
+					</c:when>
+					</c:choose>
+					
 					
 					<p>
 							<a
 							href="<c:url value="/downloadFile?file=${kbase.key.getPath()}"/>"
-							class="btn btn-primary glyphicon glyphicon-download-alt"></a>
+							class="btn btn-warning glyphicon glyphicon-download-alt"></a>
+								<c:if test="${kbase.key.getBox_id()!=null }">
+								<a id="document"
+							href="#boxView" data-toggle="modal" 
+							class="btn btn-primary glyphicon glyphicon-eye-open" data-session="${kbase.key.getBox_session()}"></a>
+								</c:if>
+								
 					<c:if test="${is_lecturer==true}">
 						<a
-							href="<c:url value="/KnowledgeBaseServlet?action=delete&deleteFile=${kbase.key.getPath()}&id_kbase=${kbase.key.getId()}"/>"
-							class="btn btn-primary glyphicon glyphicon-trash"></a>
+							id="deleteKnowladge"
+							data-delete="${kbase.key.getId()}"
+							
+							class="btn btn-danger glyphicon glyphicon-trash"></a>
 							
 						<c:choose>
 						<c:when test="${kbase.key.getAvailable()==true}">
-						<a
-							href="<c:url value="/KnowledgeBaseServlet?action=active&active=false&id_kbase=${kbase.key.getId()}"/>"
-							class="btn btn-primary glyphicon glyphicon-thumbs-down"></a>
+						<a id="activeKnowladge" data-active="${kbase.key.getId()}"
+						
+							class="btn btn-danger glyphicon glyphicon-thumbs-down"></a>
 						</c:when>
 						<c:otherwise>
-						<a
-							href="<c:url value="/KnowledgeBaseServlet?action=active&active=true&id_kbase=${kbase.key.getId()}"/>"
-							class="btn btn-primary glyphicon glyphicon-thumbs-up"></a>
+						<a id="activeKnowladge"
+							data-active="${kbase.key.getId()}"
+							class="btn btn-success glyphicon glyphicon-thumbs-up"></a>
 						</c:otherwise>
 						</c:choose>	
 							</c:if>
@@ -120,7 +146,91 @@
 
 	</div>
 	
+	<div id="boxView" class="modal fade">
+		<div class="modal-dialog modal-lg " >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					
+				</div>
+				<div class="modal-body">
+					<iframe id="frameView" style="width: 840px; height: 500px; border-radius: 5px; border: 1px solid #d9d9d9;"  allowfullscreen="allowfullscreen"></iframe>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	
+	
 	<script type="text/javascript">
+	
+	
+	$("a#document").click(function(){
+		var link =$(this);
+		$("#frameView").attr("src","https://view-api.box.com/1/sessions/"+link.data('session')+"/view?theme=dark");
+	});
+	
+	</script>
+	
+	<script type="text/javascript">
+	
+	$("a#deleteKnowladge").click(
+			
+			function() {
+				 var object =$(this);
+				  swal({
+					  title: "Are you sure?",
+					  text: "You will not be able to recover this file!",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonClass: "btn-danger",
+					  confirmButtonText: "Yes, delete it!",
+					  cancelButtonText: "No, cancel plx!",
+					  closeOnConfirm: true,
+					  closeOnCancel: true
+					},
+					
+					function(isConfirm) {
+						  
+						  if (isConfirm) {
+							  
+							
+							  $.get('KnowledgeBaseServlet?action=delete&id_kbase='
+										+object.data("delete"), function(response) {
+									if (response.success) {
+										object.parent().parent().remove();
+										showToaast(response.success, 1);
+
+									}
+								});
+						   
+						  }
+				
+
+			});
+				});
+	
+	$("a#activeKnowladge").click(
+			function() {
+
+				var object = $(this);
+				$.get('KnowledgeBaseServlet?action=active&id_kbase='
+						+ $(this).data('active'), function(response) {
+					if (response.success) {
+						if(response.available){
+							object.attr('class',"btn btn-danger glyphicon glyphicon-thumbs-down");	
+						}else{
+							object.attr('class',"btn btn-success glyphicon glyphicon-thumbs-up");	
+							
+						}
+						showToaast(response.success, 1);
+
+					}
+				});
+
+			});
 		$(document)
 				.ready(
 						function() {
@@ -147,6 +257,69 @@
 												}
 											});
 						});
+		function showToaast(message, issucces) {
+			var i = -1;
+			var toastCount = 0;
+			var $toastlast;
+
+			var shortCutFunction;
+			if (issucces == 1) {
+				shortCutFunction = "success";
+			}
+
+			if (issucces == 0) {
+				shortCutFunction = "error";
+			}
+
+			var msg = $('#message').val();
+			var title = $('#title').val() || '';
+			var $showDuration = $('#showDuration');
+			var $hideDuration = $('#hideDuration');
+			var $timeOut = $('#timeOut');
+			var $extendedTimeOut = $('#extendedTimeOut');
+			var $showEasing = $('#showEasing');
+			var $hideEasing = $('#hideEasing');
+			var $showMethod = $('#showMethod');
+			var $hideMethod = $('#hideMethod');
+			var toastIndex = toastCount++;
+
+			toastr.options = {
+
+				closeButton : true,
+				debug : true,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				timeOut : 10000,
+				showDuration : 300,
+				hideDuration : 1000,
+				extendedTimeOut : 1000,
+
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+
+			};
+
+			msg = message;
+
+			$('#toastrOptions').text(
+					'Command: toastr["' + shortCutFunction + '"]("' + msg
+							+ (title ? '", "' + title : '')
+							+ '")\n\ntoastr.options = '
+							+ JSON.stringify(toastr.options, null, 2));
+
+			var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+			$toastlast = $toast;
+
+			if (typeof $toast === 'undefined') {
+				return;
+			}
+
+		}
 	</script>
 	<jsp:include page="../page/footer.jsp" />
 </body>
