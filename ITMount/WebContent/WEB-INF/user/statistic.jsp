@@ -16,18 +16,18 @@
 
 
 <a  href="#" 
-	id="openBtn">Statistic</a>
+	id="openBtn"><t:i18n id="admin.statistic"/></a>
 
 <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">×</button>
-				<h3>Statistic</h3>
+				<h3><t:i18n id="admin.statistic"/></h3>
 			</div>
 
 			<div class="modal-body">
-				<h4>Count student completed courses</h4>
+				<h4><t:i18n id="admin.statistic.CountStudentCompletedCourses"/></h4>
 
 				<select id="selectCourse" class="form-control input-lg">
 					<!-- 					<option value="option1">Option 1</option> -->
@@ -39,13 +39,13 @@
 
 
 			<div class="panel-body">
-				<h4>Count student on each course</h4>
+				<h4><t:i18n id="admin.statistic.CountStudentOnEachCourse"/></h4>
 				<div id="morris-donut-chart"></div>
 			</div>
 
 
 			<div class="modal-footer">
-				<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary" data-dismiss="modal"><t:i18n id="admin.statistic.close"/></a>
 
 			</div>
 		</div>

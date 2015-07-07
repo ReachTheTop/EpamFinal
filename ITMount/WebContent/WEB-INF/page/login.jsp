@@ -194,7 +194,7 @@
 														validators : {
 
 															notEmpty : {
-																message : '<t:i18n id="bootstrap.ThePasswordIsRequiredAndCannotBeEmpty"/>'
+																message : '<t:i18n id="bootstrap.TheEmailIsRequiredAndCannotBeEmpty"/>'
 															},
 															emailAddress : {
 																message : '<t:i18n id="bootstrap.TheInputIsNotAValidEmailAddress"/>'
