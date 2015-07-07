@@ -12,7 +12,6 @@
 
 <script src="assets/js/jquery.bootpag.min.js"></script>
 
-<script src="assets/js/jquery.bootpag.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../page/header.jsp" />

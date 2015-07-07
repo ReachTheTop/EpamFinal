@@ -3,86 +3,84 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<script src="assets/js/jquery.bootpag.min.js"></script>
 
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<p>Teacher Panel</p>
+		<a href="#myModal" class="btn btn-sm btn-primary" data-toggle="modal">Create
+			Task</a>
+	</div>
+	<div class="panel-body">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<p>Teacher Panel</p>
-			<a href="#myModal" class="btn btn-sm btn-primary" data-toggle="modal">Create
-				Task</a>
-		</div>
-		<div class="panel-body">
+		<h2>Group Users</h2>
 
-			<h2>Group Users</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
 
-			<table class="table">
-				<thead>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${users}" var="user">
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
+						<td>${user.name }${user.surname}</td>
+						<td>${user.email }</td>
+						<td><a
+							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
+								homework</a></td>
 
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${users}" var="user">
-						<tr>
-							<td>${user.name }${user.surname}</td>
-							<td>${user.email }</td>
-							<td><a
-								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />">Show
-									homework</a></td>
-
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div class="panel-footer">
-			<c:choose>
-				<c:when
-					test="${user.role == 'lecturer' && group.teacher_id == user.id}">
-					<c:choose>
-						<c:when test="${group.isConfirmed == true}">
-							<a class='btn btn-danger'
-								href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />">Disband
-								group</a>
-						</c:when>
-						<c:otherwise>
-							<a class='btn btn-success' id='confirmation' >Confirm
-								group</a>
-
-							<script type="text/javascript">
-								$('#confirmation')
-										.click(
-												function() {
-													$(this).remove();
-													$
-															.get(
-																	'AdminServlet?action=confirm&group_id='
-																			+ "${group.id}",
-																	function(
-																			response) {
-
-																	});
-													var $a = $("<a class='btn btn-danger' href='GroupServlet?action=delete&group_id=${group.id}'>Disband group</a>");
-													$("div#panel-footer")
-															.append($a);
-												});
-							</script>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:when
-					test="${user.role == 'student' || user.role == 'applicant' }">
-					<a
-						href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />">Leave
-						group</a>
-
-				</c:when>
-			</c:choose>
-		</div>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
+	<div class="panel-footer">
+		<c:choose>
+			<c:when
+				test="${user.role == 'lecturer' && group.teacher_id == user.id}">
+				<c:choose>
+					<c:when test="${group.isConfirmed == true}">
+						<a class='btn btn-danger'
+							href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />">Disband
+							group</a>
+					</c:when>
+					<c:otherwise>
+						<a class='btn btn-success' id='confirmation'>Confirm group</a>
+
+						<script type="text/javascript">
+							$('#confirmation')
+									.click(
+											function() {
+												$(this).remove();
+												$
+														.get(
+																'AdminServlet?action=confirm&group_id='
+																		+ "${group.id}",
+																function(
+																		response) {
+
+																});
+												var $a = $("<a class='btn btn-danger' href='GroupServlet?action=delete&group_id=${group.id}'>Disband group</a>");
+												$("div#panel-footer")
+														.append($a);
+											});
+						</script>
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:when test="${user.role == 'student' || user.role == 'applicant' }">
+				<a
+					href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />">Leave
+					group</a>
+
+			</c:when>
+		</c:choose>
+	</div>
+</div>
 
 
 
