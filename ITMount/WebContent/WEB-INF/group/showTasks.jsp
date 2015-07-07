@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="resources/css/font-awesome.css">
 <link rel="stylesheet" href="resources/css/animate.css">
 
+
 <title>${ group.name }</title>
 
 <style type="text/css">
@@ -53,8 +54,11 @@ a {
 
 </head>
 <body>
+
+ 
 	<jsp:include page="../page/header.jsp" />
 
+	<div id="wrap">
 	<div class="section section-breadcrumbs">
 		<div class="container">
 			<div class="row-fluid">
@@ -66,7 +70,8 @@ a {
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
+	
 	<div class="container">
 		<div class="row-fluid">
 			<div class="col-md-3">
@@ -108,7 +113,7 @@ a {
 		</div>
 	</div>
 
-
+</div>
 	<jsp:include page="../page/footer.jsp" />
 
 

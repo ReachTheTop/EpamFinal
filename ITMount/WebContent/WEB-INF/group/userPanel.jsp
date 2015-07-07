@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="resources/css/toastr.css" type="text/css">
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
 
 
 

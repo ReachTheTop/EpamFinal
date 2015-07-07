@@ -75,5 +75,8 @@
 	
 </script>
 
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
+
 
 

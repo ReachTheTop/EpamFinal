@@ -75,10 +75,13 @@ public class CreateTaskCommand implements Action {
 				task.setFile(fileName);
 				if (task.isValid()) {
 				TaskService.addNewTask(task);
-				Gson json = new Gson();
 				
-				response.setContentType("application/json");
-				response.getWriter().write(json.toJson(task));
+				
+			//	Gson json = new Gson();
+				
+				response.sendRedirect(request.getHeader("Referer"));
+			//	response.setContentType("application/json");
+			//	response.getWriter().write(json.toJson(task));
 			}else{
 				
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
