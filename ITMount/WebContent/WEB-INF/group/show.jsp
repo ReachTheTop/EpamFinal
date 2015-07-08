@@ -236,13 +236,13 @@ $("a#leaveGroup").click(
 		function() {
 			 var object =$(this);
 			  swal({
-				  title: "Are you sure?",
-				  text: "You will not be able to recover this file!",
+				  title: "<t:i18n id='bootstrap.AreYouSure'/>" ,
+				  text: "<t:i18n id='bootstrap.YouWillRegrate'/>",
 				  type: "warning",
 				  showCancelButton: true,
 				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "Yes, delete it!",
-				  cancelButtonText: "No, cancel plx!",
+				  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>",
+				  cancelButtonText: "<t:i18n id='bootstrap.No'/>",
 				  closeOnConfirm: true,
 				  closeOnCancel: true
 				},
@@ -268,13 +268,13 @@ $("a#disbandGroup").click(
 		function() {
 			 var object =$(this);
 			  swal({
-				  title: "Are you sure?",
-				  text: "You will not be able to recover this file!",
+				  title: "<t:i18n id='bootstrap.AreYouSure'/>" ,
+				  text: "<t:i18n id='bootstrap.YouWillRegrate'/>",
 				  type: "warning",
 				  showCancelButton: true,
 				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "Yes, delete it!",
-				  cancelButtonText: "No, cancel plx!",
+				  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>",
+				  cancelButtonText: "<t:i18n id='bootstrap.No'/>",
 				  closeOnConfirm: true,
 				  closeOnCancel: true
 				},

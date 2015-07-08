@@ -140,11 +140,10 @@
 							<a
 								href="<c:url
 							value="/GroupServlet?action=show&group_id=${group.id }" />">
-
-
-								<img src="upload/${group.course.icon }" class="img-circle"
-								alt="Cinque Terre" width="150" height="150"
-								alt="<c:out value='${group.name }' />">
+								<h4 style="margin: 0 auto; width: 84%;">
+									<c:out value='${group.name }' />
+								</h4> <img src="upload/${group.course.icon }" class="img-circle"
+								width="150" height="150" alt="<c:out value='${group.name }' />">
 
 							</a>
 						</div>
@@ -291,8 +290,9 @@
 							dataType : "json",
 
 							success : function(data) {
-								
-								$('#editUserForm').data('bootstrapValidator').resetForm();
+
+								$('#editUserForm').data('bootstrapValidator')
+										.resetForm();
 								var nameUser = data.name;
 								$("#userName").html(nameUser);
 								$("#userNameModal").html(nameUser);
