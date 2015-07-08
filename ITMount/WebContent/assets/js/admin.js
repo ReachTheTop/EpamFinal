@@ -195,7 +195,7 @@ $(function() {
 		var $groups = response.groups;
 
 		$.each($groups, function(index, item) {
-			$courseLink  = $("<a href='/ITMount/CourseServlet?action=show&course_id="+item.course['id']+"'>");
+			$courseLink  = $("<a href='/ITMount/CourseServlet?action=readMore&course_id="+item.course['id']+"'>");
 			$groupLink  = $("<a href='/ITMount/GroupServlet?action=show&group_id="+item['id']+"'>");
 			
 			

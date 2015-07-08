@@ -32,7 +32,7 @@ public class ShowCommand implements Action {
 				request.setAttribute("course", course);
 				request.getRequestDispatcher("/WEB-INF/courses/show.jsp")
 						.forward(request, response);
-				return;
+				
 			}
 		} catch (NumberFormatException e) {
 			response.sendError(404);
