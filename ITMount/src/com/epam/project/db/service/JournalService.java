@@ -7,10 +7,25 @@ import java.util.List;
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.JournalDAO;
 import com.epam.project.db.dao.TaskDAO;
+import com.epam.project.db.model.DayVisit;
 import com.epam.project.db.model.Journal;
 import com.epam.project.db.model.Task;
 
 public class JournalService {
+	
+	public static List<DayVisit> getJournalDayVisit(Integer idGroup, Integer idUser) {
+
+		Connection connection = DBConnection.getConnection();
+		List<DayVisit> journal = JournalDAO.getUserVisitingGroup(idGroup, idUser, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return journal;
+
+	}
 
 	public static Journal getJournal(Integer id) {
 

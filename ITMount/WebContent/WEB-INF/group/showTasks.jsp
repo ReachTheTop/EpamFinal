@@ -73,7 +73,7 @@ a {
 		</div>
 	
 	<div class="container">
-		<div class="row-fluid">
+		<div class="row">
 			<div class="col-md-3">
 				<ul class="nav nav-pills nav-stacked">
 					<li><a

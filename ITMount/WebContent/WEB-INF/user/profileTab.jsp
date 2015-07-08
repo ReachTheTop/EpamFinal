@@ -297,6 +297,8 @@
 								$("#userName").html(nameUser);
 								$("#userNameModal").html(nameUser);
 								$("#userNameHeader").html(nameUser);
+								
+								
 								var surNameUser = data.surname;
 								$("#userSurNameModal").html(surNameUser);
 								$("#userSurName").html(surNameUser);

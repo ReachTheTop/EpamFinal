@@ -36,8 +36,8 @@
 
 					<c:if test="${user!=null}">
 						<li class="shopping-cart-items"><a
-							href="<c:url value="/UserServlet" />"><i
-								class="glyphicon glyphicon-user icon-white"><b> <c:out
+							href="<c:url value="/UserServlet" />"><i 
+								class="glyphicon glyphicon-user icon-white"><b id = "userNameHeader"> <c:out
 											value="${user.getName()}" />
 								</b></i></a></li>
 						<li class="shopping-cart-items"><a

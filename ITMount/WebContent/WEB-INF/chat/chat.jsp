@@ -34,6 +34,8 @@
 <script type="text/javascript" src="assets/chat/chatHistory.js"></script>
 <link rel="stylesheet" href="assets/chat/css/chat.css">
 
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
 
 
 <title><c:out value="${ group.name }" /> <t:i18n id='group.chat'/></title>
@@ -72,7 +74,7 @@ a {
 				<div class="col-md-12">
 					<h1>
 						<c:out value="${group.name }" />
-						<t:i18n id='group.events' />
+						<t:i18n id='group.chat' />
 					</h1>
 				</div>
 			</div>
@@ -106,7 +108,7 @@ a {
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<div class="panel panel-primary" style ="margin-bottom: 80px ">
+				<div class="panel panel-primary" >
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-comment"></span> <t:i18n id='group.chat'/>
 					</div>
@@ -116,7 +118,7 @@ a {
 
 						</ul>
 					</div>
-					<div class="panel-footer" style = "padding-bottom: 10px">
+					<div class="panel-footer" >
 						<div class="form-group">
 
 

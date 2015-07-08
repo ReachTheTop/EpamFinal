@@ -5,10 +5,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.epam.project.db.model.DayVisit;
 import com.epam.project.db.model.Journal;
-import com.epam.project.db.model.Task;
 
 public class JournalTransformer {
+	
+	
+	public static List<DayVisit> getJournalDayUser(ResultSet rs) {
+
+		List<DayVisit> journal = new ArrayList<>();
+		DayVisit dv;
+		
+		try {
+			while (rs.next()) {
+				
+				dv = new DayVisit();
+				dv.setDayLesson(rs.getDate("date"));
+				dv.setPresent(rs.getBoolean("visit"));
+				journal.add(dv);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return journal;
+	}
 	
 	public static Journal getJournal(ResultSet rs) {
 
