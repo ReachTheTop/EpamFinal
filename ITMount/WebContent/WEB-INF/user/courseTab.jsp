@@ -135,8 +135,7 @@
 			</div>
 			<div class="modal-body">
 				<form action="CourseServlet?action=update" data-async
-					id='edit-course-form' method="post" enctype="multipart/form-data"
-					role="form" role="form">
+					id='edit-course-form' method="post"  enctype="multipart/form-data" role="form">
 					<div class="form-group" hidden="true">
 						<input class="form-control" type="text" name='course_id'
 							id='edit-course-id'>
@@ -150,7 +149,7 @@
 
 					<div class="form-group">
 						<label for="login-password"><i class="icon-lock"></i> <b><t:i18n
-									id="admin.course.image" /></b></label> <input name="image"
+									id="admin.course.image" /></b></label> <input name="icon"
 							class="form-control" id="course-icon-edit" type="file"
 							placeholder="">
 					</div>
@@ -184,18 +183,22 @@
 		$.ajax({
 			type : $form.attr('method'),
 			url : $form.attr('action'),
-			data : $form.serialize(),
+			data : new FormData(this),
+			processData : false,
+			contentType : false,
 
-			success : function(data, status) {
-				$('form').data('bootstrapValidator').resetForm();
-				$target.html(data);
+			success : function(data) {
+				if(data.success){
+					$('#editCourse').modal('hide');
+					showToaast("<t:i18n id='admin.course.toast'/>", 1);
+					
+				}else{
+					$('#editCourse').modal('hide');
+					showToaast(data.fail, 0);
+				}
 			}
 		});
 
 	});
 
-	$('button#submit-course-edit').click(function() {
-		$('#editCourse').modal('hide');
-		showToaast("<t:i18n id='admin.course.toast'/>", 1);
-	});
 </script>

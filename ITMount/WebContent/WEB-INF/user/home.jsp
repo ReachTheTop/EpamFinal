@@ -161,10 +161,8 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 5,
-																max : 30,
-																message : '<t:i18n id="validation.size"/>'
+																message : "<t:i18n id='validation.not.empty'/>"
+																
 															}
 
 														}
@@ -201,19 +199,17 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 2,
-																max : 30,
-																message : "<t:i18n id='validation.course.name.size'/>"
+																message : "<t:i18n id='validation.not.empty'/>"
+																
 															}
 
 														}
 													},
-													image : {
+													icon : {
 														validators : {
 															file : {
 																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
+															
 																message : "<t:i18n id='validation.course.image'/>"
 															}
 														}
@@ -221,10 +217,8 @@
 													description : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 100,
-																max : 2000,
-																message : "<t:i18n id='validation.course.description'/>"
+																message : "<t:i18n id='validation.not.empty'/>"
+															
 															}
 
 														}
