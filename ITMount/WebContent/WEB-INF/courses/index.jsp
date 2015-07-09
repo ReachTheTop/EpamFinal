@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Courses</title>
+<title><t:i18n id='courses'/></title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>

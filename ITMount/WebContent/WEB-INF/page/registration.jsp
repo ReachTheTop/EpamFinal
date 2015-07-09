@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registration page</title>
+<title><t:i18n id="registration.registrationPage" /></title>
 <jsp:include page="head.jsp" />
 </head>
 <body>

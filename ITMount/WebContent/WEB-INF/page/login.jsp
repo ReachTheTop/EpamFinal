@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Log in page</title>
+<title><t:i18n id="login.LogInPage" /></title>
 
 
 <jsp:include page="head.jsp" />
