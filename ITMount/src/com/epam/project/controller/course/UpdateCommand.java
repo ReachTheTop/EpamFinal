@@ -1,11 +1,15 @@
 package com.epam.project.controller.course;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.epam.project.command.Action;
 import com.epam.project.db.model.Course;
@@ -15,6 +19,8 @@ import com.epam.project.util.file.UploadFile;
 
 public class UpdateCommand implements Action {
 
+	private String message;
+	private String status;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,43 +32,47 @@ public class UpdateCommand implements Action {
 
 		course.setDescription(request.getParameter("description"));
 		course.setName(request.getParameter("name"));
-		if (request.getParameter("icon") != null) {
-			course.setIcon(request.getParameter("icon"));
-
-			Part file = request.getPart("icon");
+		Part file = request.getPart("icon");
+		ResourceBundle res = (ResourceBundle) request.getSession().getAttribute("bundle");
 
 			UploadFile m = new UploadFile();
 			if (file.getSize() > 0) {
 
-				try {
-					if (m.getExtension(file).contains("image")) {
+				
+					
 						String fileName = m.uploadFile(file,
 								request.getServletContext(), null);
 						DeleteFile.deleteFile(course.getIcon(),
 								request.getServletContext());
 						course.setIcon(fileName);
-					}
-				} catch (Exception e) {
-
-					response.sendRedirect(request.getHeader("Referer"));
-					return;
-				}
+					
+				
 
 			}
-		}
+		
 		response.setContentType("application/json");
 		if (course.isValid()) {
-
 			CourseService.updateCourse(course);
-			/*request.getRequestDispatcher(
-					"/CourseServlet?action=readMore&course_id="
-							+ course.getId()).forward(request, response);*/
+			status = "success";
+			message = res.getString("admin.course.toast.success");
+			
 			
 		} else {
-			/*response.sendRedirect(request.getHeader("Referer"));*/
-			
-		}
 
+			status = "fail";
+			if(course.validate().containsKey("icon")){
+			message = res.getString("admin.course.toast.error.file");
+			}else{
+				message = res.getString("admin.course.toast.error");
+			}
+		}
+		try {
+			
+			response.getWriter().print(new JSONObject().put(status, message));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

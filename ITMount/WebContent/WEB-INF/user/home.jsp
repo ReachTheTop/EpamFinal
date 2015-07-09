@@ -161,10 +161,8 @@
 													name : {
 														validators : {
 															notEmpty : {
-																message : "<t:i18n id='validation.not.empty'/>",
-																min : 5,
-																max : 30,
-																message : '<t:i18n id="validation.size"/>'
+																message : "<t:i18n id='validation.not.empty'/>"
+																
 															}
 
 														}
@@ -203,20 +201,22 @@
 															notEmpty : {
 																message : "<t:i18n id='validation.not.empty'/>"
 																
+
 															},
 															stringLength : {
 																min : 2,
 																max : 30,
 																message : "<t:i18n id='validation.course.name.size'/>"
+
 															}
 
 														}
 													},
-													image : {
+													icon : {
 														validators : {
 															file : {
 																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
+															
 																message : "<t:i18n id='validation.course.image'/>"
 															}
 														}
@@ -230,6 +230,7 @@
 																min : 2,
 																max : 1000,
 																message : "<t:i18n id='validation.course.description'/>"
+
 															}
 
 														}
