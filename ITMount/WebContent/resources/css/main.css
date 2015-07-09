@@ -1861,14 +1861,14 @@ span.color-red {
   font-size: 0.625em;
   margin: 0 auto 30px auto;
   position: relative;
-  height: 400px;
+  height: 200px;
 }
 #sequence img {
   max-width: 100%;
 }
 #sequence > .sequence-canvas {
   list-style-type: none;
-  height: 400px;
+  height: 200px;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -1889,7 +1889,7 @@ span.color-red {
 #sequence > .sequence-canvas > li {
   position: absolute;
   width: 100%;
-  height: 400px;
+  height: 200px;
   z-index: 1;
   -webkit-transition-property: background;
   -moz-transition-property: background;
@@ -2128,7 +2128,7 @@ span.color-red {
   opacity: 0;
   position: relative;
   height: auto !important;
-  max-height: 450px !important;
+  max-height: 250px !important;
   max-width: 45% !important;
 }
 .animate-in .slide-img {
