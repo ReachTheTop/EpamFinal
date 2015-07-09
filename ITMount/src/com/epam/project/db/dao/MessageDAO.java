@@ -132,23 +132,23 @@ public class MessageDAO {
 	}
 
 	public static void sendMessageToUsers(Connection connection,
-			Integer message_id, List<Integer> users_id) {
+			Integer message_id, Integer user_id) {
 		PreparedStatement statement = null;
 		try {
 			statement = connection
 					.prepareStatement("INSERT INTO user_message (message_id, receiver_id) VALUE (?,?);");
-			for (Integer user : users_id) {
+			
 				statement.setInt(1, message_id);
-				statement.setInt(2, user);
+				statement.setInt(2, user_id);
 				statement.executeUpdate();
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void sendMessageToRest(Connection connection,
-			Integer message_id, Integer group_id, List<Integer> users_id) {
+			Message message, Integer group_id, List<Integer> users_id) {
 		if (users_id.isEmpty()) {
 			return;
 		}
@@ -177,6 +177,7 @@ public class MessageDAO {
 			statement = connection
 					.prepareStatement("INSERT INTO user_message (message_id, receiver_id) VALUE (?,?);");
 			for (Integer integer : rest_users) {
+				Integer message_id = MessageDAO.addNewMessage(message, connection);
 				statement.setInt(1, message_id);
 				statement.setInt(2, integer);
 				statement.executeUpdate();

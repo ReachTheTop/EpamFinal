@@ -85,17 +85,19 @@ public class MessageService {
 	public static void sendMessageToUsers(Message message,
 			List<Integer> users_id) {
 		Connection connection = DBConnection.getConnection();
-		Integer message_id = MessageDAO.addNewMessage(message, connection);
-		MessageDAO.sendMessageToUsers(connection, message_id, users_id);
+		for (Integer user : users_id) {
+			Integer message_id = MessageDAO.addNewMessage(message, connection);
+			MessageDAO.sendMessageToUsers(connection, message_id, user);
+		}
 		closeConnection(connection);
 	}
 
 	public static void sendMessageToRest(Message message, Integer group_id,
 			List<Integer> users_id) {
 		Connection connection = DBConnection.getConnection();
-		Integer message_id = MessageDAO.addNewMessage(message, connection);
+		//Integer message_id = MessageDAO.addNewMessage(message, connection);
 		MessageDAO
-				.sendMessageToRest(connection, message_id, group_id, users_id);
+				.sendMessageToRest(connection, message, group_id, users_id);
 		closeConnection(connection);
 	}
 
@@ -117,16 +119,16 @@ public class MessageService {
 		MessageDAO.addArticleComment(connection, comment_id, article_id);
 		closeConnection(connection);
 	}
-	
-	public static List<Message> getNotificationHistory(Integer receiver_id){
+
+	public static List<Message> getNotificationHistory(Integer receiver_id) {
 		List<Message> messages = null;
 		Connection connection = DBConnection.getConnection();
 		messages = MessageDAO.getNotificationHistory(connection, receiver_id);
 		closeConnection(connection);
 		return messages;
 	}
-	
-	public static Integer newGroupMessage(Message message, Integer group_id){
+
+	public static Integer newGroupMessage(Message message, Integer group_id) {
 		Connection connection = DBConnection.getConnection();
 		Integer message_id = MessageDAO.addNewMessage(message, connection);
 		MessageDAO.addGroupMessage(connection, message_id, group_id);
@@ -134,9 +136,10 @@ public class MessageService {
 		return message_id;
 	}
 
-	public static List<Message> getChatHistory(Integer group_id, Integer last_id){
+	public static List<Message> getChatHistory(Integer group_id, Integer last_id) {
 		Connection connection = DBConnection.getConnection();
-		List<Message> messages = MessageDAO.getChatHistory(connection, group_id, last_id);
+		List<Message> messages = MessageDAO.getChatHistory(connection,
+				group_id, last_id);
 		for (Message message : messages) {
 			message.setSender(UserDAO.getUser(message.getSender_id(),
 					connection));
