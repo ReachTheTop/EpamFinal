@@ -55,65 +55,69 @@ a {
 </head>
 <body>
 
- 
+
 	<jsp:include page="../page/header.jsp" />
 
 	<div id="wrap">
-	<div class="section section-breadcrumbs">
-		<div class="container">
-			<div class="row-fluid">
-				<div class="col-md-12">
-					<h1>
-						<c:out value="${group.name }" />
-						<t:i18n id='group.tasks' />
-					</h1>
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row-fluid">
+					<div class="col-md-12">
+						<h1>
+							<c:out value="${group.name }" />
+							<t:i18n id='group.tasks' />
+						</h1>
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a
-						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
-					<li class="active"><a
-						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
 
-					<li><a
-						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i>
-						<t:i18n id='group.chat' /></a></li>
-					<c:if test="${user.role == 'student' }">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked">
 						<li><a
-							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
-					</c:if>
-					<c:if
-						test="${not empty group.teacher_id && user.id == group.teacher_id}">
-						<li><a href="#myModal" class="btn btn-sm btn-primary"
-							data-toggle="modal"><t:i18n id='group.task.create' /></a></li>
-					</c:if>
-				</ul>
-			</div>
-			<div class="col-md-9">
+							href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
+								class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
+						<li class="active"><a
+							href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
+								class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
+								class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
 
-				<jsp:include page="AllTaskUser.jsp"></jsp:include>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
+								class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
+								class="fa fa-weixin"></i> <t:i18n id='group.chat' /></a></li>
+						<c:if test="${user.role == 'lecturer' }">
+							<li><a
+								href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
+									class="fa fa-dashcube"></i> Visiting</a></li>
+						</c:if>
+						<c:if test="${user.role == 'student' }">
+							<li><a
+								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+									class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+						</c:if>
+						<c:if
+							test="${not empty group.teacher_id && user.id == group.teacher_id}">
+							<li><a href="#myModal" class="btn btn-sm btn-primary"
+								data-toggle="modal"><t:i18n id='group.task.create' /></a></li>
+						</c:if>
+					</ul>
+				</div>
+				<div class="col-md-9">
 
+					<jsp:include page="AllTaskUser.jsp"></jsp:include>
+
+				</div>
 			</div>
 		</div>
-	</div>
 
-</div>
+	</div>
 	<jsp:include page="../page/footer.jsp" />
 
 
@@ -204,11 +208,14 @@ a {
 				contentType : false,
 
 				success : function(text) {
-					$('#form1, #editTask').data('bootstrapValidator').resetForm();
-					$("a#task"+$("#task_id").val()).text(text.name);
-					$("td#taskName"+$("#task_id").val()).text(text.name);
-					$("td#taskDesc"+$("#task_id").val()).text(text.description);
-					$("a#taskFile"+$("#task_id").val()).attr("href","/ITMount/downloadFile?file="+text.file);
+					$('#form1, #editTask').data('bootstrapValidator')
+							.resetForm();
+					$("a#task" + $("#task_id").val()).text(text.name);
+					$("td#taskName" + $("#task_id").val()).text(text.name);
+					$("td#taskDesc" + $("#task_id").val()).text(
+							text.description);
+					$("a#taskFile" + $("#task_id").val()).attr("href",
+							"/ITMount/downloadFile?file=" + text.file);
 					$("#incorectData2").hide();
 
 					$('#myModalUpdate').modal('hide');
@@ -216,7 +223,7 @@ a {
 
 				},
 				error : function() {
-					
+
 					showToaast("<t:i18n id='group.task.error.update'/>", 0);
 
 				}
@@ -369,7 +376,7 @@ a {
 					</div>
 					<div class="modal-body">
 
-						
+
 
 
 						<div class="form-group">
@@ -435,7 +442,8 @@ a {
 
 								//data : form.serialize(),
 								success : function(text) {
-									$('#form1, #editTask').data('bootstrapValidator').resetForm();
+									$('#form1, #editTask').data(
+											'bootstrapValidator').resetForm();
 									$("#incorectData").hide();
 									document.getElementById("form1").reset();
 									$('#myModal').modal('hide');
@@ -463,7 +471,6 @@ a {
 		$(document).ready(function() {
 			$("#myModal").on("hidden.bs.modal", function() {
 				document.getElementById("form1").reset();
-				
 
 			});
 		});
@@ -484,9 +491,12 @@ a {
 													valid : 'glyphicon glyphicon-ok',
 													invalid : 'glyphicon glyphicon-remove',
 													validating : 'glyphicon glyphicon-refresh'
-												},submitHandler: function(validator, form, submitButton) {
-										          
-										        },
+												},
+												submitHandler : function(
+														validator, form,
+														submitButton) {
+
+												},
 												fields : {
 													email : {
 														validators : {
@@ -502,11 +512,11 @@ a {
 															notEmpty : {
 																message : "<t:i18n id='group.validation.name.empty'/>"
 															},
-										                    stringLength: {
-										                        min: 2,
-										                        max: 70,
-										                        message: "<t:i18n id='task.validation.name'/>"
-										                    }
+															stringLength : {
+																min : 2,
+																max : 70,
+																message : "<t:i18n id='task.validation.name'/>"
+															}
 														}
 													},
 													task_description : {
@@ -514,13 +524,13 @@ a {
 														validators : {
 															notEmpty : {
 																message : "<t:i18n id='group.validation.description.empty'/>",
-																
+
 															},
-										                    stringLength: {
-										                        min: 6,
-										                        max: 400,
-										                        message: "<t:i18n id='task.validation.desc'/>"
-										                    }
+															stringLength : {
+																min : 6,
+																max : 400,
+																message : "<t:i18n id='task.validation.desc'/>"
+															}
 
 														}
 													},
@@ -533,7 +543,7 @@ a {
 													},
 												}
 											});
-							
+
 						});
 	</script>
 

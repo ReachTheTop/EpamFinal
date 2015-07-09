@@ -83,7 +83,6 @@ a {
 							href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
 								class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
 						<li><a
-
 							href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
 								class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
 						<li><a
@@ -94,13 +93,12 @@ a {
 								class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
 						<li><a
 							href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-								class="fa fa-weixin"></i>
-							<t:i18n id='group.chat' /></a></li>
-						<li><a
-							href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
-								class="fa fa-dashcube"></i>
-							Visiting</a></li>
-
+								class="fa fa-weixin"></i> <t:i18n id='group.chat' /></a></li>
+						<c:if test="${user.role == 'lecturer' }">
+							<li><a
+								href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
+									class="fa fa-dashcube"></i> Visiting</a></li>
+						</c:if>
 						<c:if test="${user.role == 'student'  }">
 							<li><a
 								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
@@ -114,10 +112,8 @@ a {
 									<c:choose>
 										<c:when test="${group.isConfirmed == true}">
 											<a id="disbandGroup" class='btn btn-danger'
-												style="padding-top: 12px; padding-bottom: 12px;"
-										
-													><t:i18n
- 												id='group.disband' /></a>
+												style="padding-top: 12px; padding-bottom: 12px;"><t:i18n
+													id='group.disband' /></a>
 										</c:when>
 										<c:otherwise>
 											<a class='btn btn-success' id='confirmation'><t:i18n
@@ -149,11 +145,9 @@ a {
 								</c:when>
 								<c:when
 									test="${user.role == 'student' || user.role == 'applicant' }">
-									
-+								<a id="leaveGroup" class='btn btn-danger'
-+								
-+									><t:i18n
- 										id='group.user.leave' /></a>
+
+									<a id="leaveGroup" class='btn btn-danger'><t:i18n
+											id='group.user.leave' /></a>
 
 								</c:when>
 							</c:choose></li>
@@ -240,72 +234,68 @@ a {
 			</div>
 		</div>
 	</div>
-<script>
-$("a#leaveGroup").click(
-		
-		function() {
-			 var object =$(this);
-			  swal({
-				  title: "<t:i18n id='bootstrap.AreYouSure'/>" ,
-				  text: "<t:i18n id='bootstrap.YouWillRegrate'/>",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>",
-				  cancelButtonText: "<t:i18n id='bootstrap.No'/>",
-				  closeOnConfirm: true,
-				  closeOnCancel: true
-				},
-				
-				function(isConfirm) {
-					  
-					  if (isConfirm) {
-						  
-						  window.location.href = 'GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }';
-						
+	<script>
+		$("a#leaveGroup")
+				.click(
 
-					   
-					  }
-			
+						function() {
+							var object = $(this);
+							swal(
+									{
+										title : "<t:i18n id='bootstrap.AreYouSure'/>",
+										text : "<t:i18n id='bootstrap.YouWillRegrate'/>",
+										type : "warning",
+										showCancelButton : true,
+										confirmButtonClass : "btn-danger",
+										confirmButtonText : "<t:i18n id='bootstrap.Yes'/>",
+										cancelButtonText : "<t:i18n id='bootstrap.No'/>",
+										closeOnConfirm : true,
+										closeOnCancel : true
+									},
 
-		});
-		
-		
-	});
-	
-$("a#disbandGroup").click(
-		
-		function() {
-			
-			 var object =$(this);
-			  swal({
-				  title: "<t:i18n id='bootstrap.AreYouSure'/>" ,
-				  text: "<t:i18n id='bootstrap.YouWillRegrate'/>",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>",
-				  cancelButtonText: "<t:i18n id='bootstrap.No'/>",
-				  closeOnConfirm: true,
-				  closeOnCancel: true
-				},
-				
-				function(isConfirm) {
-					  
-					  if (isConfirm) {
-						  
-						  window.location.href = 'GroupServlet?action=delete&group_id=${group.id }';
-						
+									function(isConfirm) {
 
-					   
-					  }
-			
+										if (isConfirm) {
 
-		});
-		
-		
-	});
-</script>
+											window.location.href = 'GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }';
+
+										}
+
+									});
+
+						});
+
+		$("a#disbandGroup")
+				.click(
+
+						function() {
+
+							var object = $(this);
+							swal(
+									{
+										title : "<t:i18n id='bootstrap.AreYouSure'/>",
+										text : "<t:i18n id='bootstrap.YouWillRegrate'/>",
+										type : "warning",
+										showCancelButton : true,
+										confirmButtonClass : "btn-danger",
+										confirmButtonText : "<t:i18n id='bootstrap.Yes'/>",
+										cancelButtonText : "<t:i18n id='bootstrap.No'/>",
+										closeOnConfirm : true,
+										closeOnCancel : true
+									},
+
+									function(isConfirm) {
+
+										if (isConfirm) {
+
+											window.location.href = 'GroupServlet?action=delete&group_id=${group.id }';
+
+										}
+
+									});
+
+						});
+	</script>
 
 	<jsp:include page="../page/footer.jsp" />
 </body>

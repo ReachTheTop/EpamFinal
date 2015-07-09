@@ -38,7 +38,8 @@
 
 
 
-<title><c:out value="${ group.name }" /> <t:i18n id='group.chat'/></title>
+<title><c:out value="${ group.name }" /> <t:i18n
+		id='group.chat' /></title>
 
 <style type="text/css">
 .nav-pills>li.active>a {
@@ -65,75 +66,83 @@ a {
 <body>
 
 
-<div id="wrap">
-	<jsp:include page="../page/header.jsp" />
+	<div id="wrap">
+		<jsp:include page="../page/header.jsp" />
 
-	<div class="section section-breadcrumbs">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>
-						<c:out value="${group.name }" />
-						<t:i18n id='group.chat' />
-					</h1>
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>
+							<c:out value="${group.name }" />
+							<t:i18n id='group.chat' />
+						</h1>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a
-						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
-					<li class="active"><a
-						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
-					<c:if test="${user.role == 'student' }">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked">
 						<li><a
-							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
-					</c:if>
-				</ul>
-			</div>
-			<div class="col-md-9">
-				<div class="panel panel-primary" >
-					<div class="panel-heading">
-						<span class="glyphicon glyphicon-comment"></span> <t:i18n id='group.chat'/>
-					</div>
-					<div class="panel-body">
-						<ul class="chat">
-							<li><a id="history" ><t:i18n id='group.chat.history'/></a></li>
+							href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
+								class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
+								class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
+								class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
+								class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+						<li class="active"><a
+							href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
+								class="fa fa-weixin"></i>
+							<t:i18n id='group.chat' /></a></li>
 
-						</ul>
-					</div>
-					<div class="panel-footer" >
-						<div class="form-group">
+						<c:if test="${user.role == 'lecturer' }">
+							<li><a
+								href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
+									class="fa fa-dashcube"></i> Visiting</a></li>
+						</c:if>
+						<c:if test="${user.role == 'student' }">
+							<li><a
+								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+									class="fa fa-list fa-fw"></i> <t:i18n id='group.homework' /></a></li>
+						</c:if>
+					</ul>
+				</div>
+				<div class="col-md-9">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-comment"></span>
+							<t:i18n id='group.chat' />
+						</div>
+						<div class="panel-body">
+							<ul class="chat">
+								<li><a id="history"><t:i18n id='group.chat.history' /></a></li>
+
+							</ul>
+						</div>
+						<div class="panel-footer">
+							<div class="form-group">
 
 
-							<textarea id="input" class="form-control" disabled="disabled"></textarea>
-							<input hidden="true" type="text" id="room" value="${group.id }" />
-							<input hidden="true" type="text" id="author"
-								value="${user.name } ${user.surname}" /> <input hidden="true"
-								type="text" id="image" value="${user.image} " />
+								<textarea id="input" class="form-control" disabled="disabled"></textarea>
+								<input hidden="true" type="text" id="room" value="${group.id }" />
+								<input hidden="true" type="text" id="author"
+									value="${user.name } ${user.surname}" /> <input hidden="true"
+									type="text" id="image" value="${user.image} " />
 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 
