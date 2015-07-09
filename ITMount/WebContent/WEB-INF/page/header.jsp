@@ -71,7 +71,7 @@
 
 				<li id="faq"><a href="<c:url value="/FaqServlet" />">FAQ</a></li>
 
-				<li><a href="<c:url value="/Contact" />"><t:i18n
+				<li id="contacts"><a href="<c:url value="/Contact" />"><t:i18n
 							id="header.contact" /></a></li>
 
 

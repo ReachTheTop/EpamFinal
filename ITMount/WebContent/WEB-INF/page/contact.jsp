@@ -280,6 +280,13 @@
 	
 
 	<jsp:include page="footer.jsp" />
+	
+		<script type="text/javascript">
+$(function(){
+	$('nav.mainmenu  li.active').removeAttr('class');
+	$('nav.mainmenu  li#contacts').attr("class", "active");
+});
+</script>
 
 </body>
 </html>
