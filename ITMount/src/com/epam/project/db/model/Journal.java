@@ -1,7 +1,9 @@
 package com.epam.project.db.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import com.epam.project.db.model.annotation.Column;
 import com.epam.project.db.model.annotation.Table;

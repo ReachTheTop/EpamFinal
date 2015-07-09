@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
@@ -25,6 +26,32 @@ public class JournalDAO {
 	public static final String SQL_GET_JOURNAL = "SELECT * FROM journal WHERE id=?";
 	
 	public static final String SQL_GET_JOURNAL_USER ="select* from journal where group_id = ? and user_id = ? order by date desc";
+	
+	public static final String SQL_GET_ALL_JOURNAL_BY_DATE_AND_GROUP = "SELECT * FROM journal where group_id = ? and date = ?";
+
+	public static List<Journal> getListJournalGroup(Integer idGroup,
+			String dateLesson, Connection connection) {
+		
+		ResultSet rs = null;
+		List<Journal> listJournal = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(SQL_GET_ALL_JOURNAL_BY_DATE_AND_GROUP);
+			st.setInt(1, idGroup);
+			st.setString(2, dateLesson);
+			
+			rs = st.executeQuery();
+			listJournal = JournalTransformer.getListJournal(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listJournal;
+		
+		
+	}
+	
+	
 	
 	public static List<DayVisit> getUserVisitingGroup(Integer idGroup, Integer idUser, Connection connection){
 	
@@ -83,10 +110,10 @@ public class JournalDAO {
 	public static void addNewJournal(Journal journal, Connection connection) {
 
 		PreparedStatement stmt;
-		Connection con = DBConnection.getConnection();
+		
 
 		try {
-			stmt = con.prepareStatement(SQL_ADD_NEW_JOURNAL);
+			stmt = connection.prepareStatement(SQL_ADD_NEW_JOURNAL);
 			
 			stmt.setInt(1, journal.getGroupID());
 			stmt.setInt(2, journal.getUserID());
@@ -97,7 +124,7 @@ public class JournalDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-
+						
 			e.printStackTrace();
 		}
 	}
@@ -123,5 +150,7 @@ public class JournalDAO {
 		}
 
 	}
+
+	
 	
 }
