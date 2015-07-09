@@ -4,11 +4,23 @@ import java.util.Date;
 
 public class DayVisit {
 	
+	private Integer idJournal;
+	
 	private Date dayLesson;
 	
 	private String dayLessonString;
 	
 	private boolean present;
+	
+	
+
+	public Integer getIdJournal() {
+		return idJournal;
+	}
+
+	public void setIdJournal(Integer idJournal) {
+		this.idJournal = idJournal;
+	}
 
 	public Date getDayLesson() {
 		return dayLesson;
@@ -36,9 +48,12 @@ public class DayVisit {
 
 	@Override
 	public String toString() {
-		return "DayVisit [dayLesson=" + dayLesson + ", dayLessonString="
-				+ dayLessonString + ", isPresent=" + present + "]";
+		return "DayVisit [idJournal=" + idJournal + ", dayLesson=" + dayLesson
+				+ ", dayLessonString=" + dayLessonString + ", present="
+				+ present + "]";
 	}
+
+	
 
 	
 	

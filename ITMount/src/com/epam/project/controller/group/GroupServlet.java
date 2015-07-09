@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Menu;
+import com.epam.project.controller.visiting.AddNewVisiting;
+import com.epam.project.controller.visiting.ChangeVisitTriger;
 import com.epam.project.controller.visiting.ShowVisitingGroup;
 
-/**
- * Servlet implementation class GroupServlet
- */
 @WebServlet("/GroupServlet")
 public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +27,7 @@ public class GroupServlet extends HttpServlet {
 				new RemoveUsersFromGroup(), new AddUsersToGroup(),
 				new LeavUsersInGroup(), new RebaseUsers(),
 				new GetTeacherGroups(), new ShowEvents(), new ShowExams(),
-				new ShowTasks(), new GroupChat(), new GroupChatHistory(), new ShowVisitingGroup() );
+				new ShowTasks(), new GroupChat(), new GroupChatHistory(), new ShowVisitingGroup(), new AddNewVisiting(), new ChangeVisitTriger());
 	}
 
 	/**

@@ -58,6 +58,8 @@ public class ShowVisitingGroup implements Action {
 
 					listUserVisiting.add(userVisiting);
 				}
+				
+				//System.out.println(listUserVisiting);
 
 				request.setAttribute("listUserVisit", listUserVisiting);
 				request.setAttribute("user_id", user);

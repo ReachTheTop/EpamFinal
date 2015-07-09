@@ -2,16 +2,30 @@ package com.epam.project.db.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
 import com.epam.project.db.dao.JournalDAO;
-import com.epam.project.db.dao.TaskDAO;
 import com.epam.project.db.model.DayVisit;
 import com.epam.project.db.model.Journal;
-import com.epam.project.db.model.Task;
 
 public class JournalService {
+	
+	public static List<Journal> getAllJournalByDate(Integer idGroup, String dateLesson){
+		
+		Connection connection = DBConnection.getConnection();
+		List<Journal> listJournal = JournalDAO.getListJournalGroup(idGroup, dateLesson, connection);
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listJournal;
+		
+		
+	}
 	
 	public static List<DayVisit> getJournalDayVisit(Integer idGroup, Integer idUser) {
 
