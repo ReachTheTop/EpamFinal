@@ -180,7 +180,7 @@ public class UploadFile {
 		            new FileOutputStream(f), "UTF-8");
 		         
 			input = new BufferedReader(new InputStreamReader(
-		             part.getInputStream()));
+		             part.getInputStream(), "UTF-8"));
 			
 
 			int read = 0;
