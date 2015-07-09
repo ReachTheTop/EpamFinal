@@ -84,6 +84,13 @@ public class Course extends Validator implements Serializable {
 		this.is_active = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", icon=" + icon
+				+ ", description=" + description + ", is_active=" + is_active
+				+ "]";
+	}
+
 	
 
 	
