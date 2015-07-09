@@ -47,7 +47,7 @@ public class CreateCommand implements Action {
 
 		if (course.isValid()) {
 			course.setId(CourseService.addCourse(course));
-			response.sendRedirect(request.getHeader("Referer"));
+			response.sendRedirect("CourseServlet?action=readMore&course_id="+course.getId());
 			return;
 		} else {
 			response.sendRedirect(request.getHeader("Referer"));
