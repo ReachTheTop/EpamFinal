@@ -21,7 +21,7 @@ public class DBConnection {
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/epamfinalproject?useUnicode=true&amp;characterEncoding=utf8");		//SET DATA BASE
 		config.setUsername("root");								//CHANGE TO YOUR DB USER NAME
 
-		config.setPassword("rt6745683");								//CHANGE TO YOUR DB PASSWORD
+		config.setPassword("my");								//CHANGE TO YOUR DB PASSWORD
 
 
 		config.addDataSourceProperty("cachePrepStmts", "true");

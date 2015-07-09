@@ -181,7 +181,7 @@
 			function() {
 				 var object =$(this);
 				  swal({
-					  title: "<t:i18n id='bootstrap.AreYouSure'/>?",
+					  title: "<t:i18n id='bootstrap.AreYouSure'/>",
 					  text: "<t:i18n id='bootstrap.NotAbleRecoverFile'/>!",
 					  type: "warning",
 					  showCancelButton: true,

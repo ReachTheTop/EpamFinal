@@ -133,7 +133,7 @@
 								<li class="team-member-name"><t:i18n id="index.max"/></li>
 								<li>Web <t:i18n id="index.developer"/> <span class="team-member-social">
 										<a href="https://www.facebook.com/profile.php?id=100003795194298"><i class="fa fa-facebook"></i></a> <a href="https://vk.com/id116171656"><i
-											class="fa fa-vk"></i></a> <a href="https://www.linkedin.com/profile/view?id=408414786&trk=hp-identity-name"><i
+											class="fa fa-vk"></i></a> <a href="https://ua.linkedin.com/pub/borskyi-maksym/b4/93b/196/ru"><i
 											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>
@@ -151,7 +151,7 @@
 								<li class="team-member-name"><t:i18n id="index.petro"/></li>
 								<li>Web <t:i18n id="index.developer"/> <span class="team-member-social">
 										<a href="https://www.facebook.com/petro.chelsea"><i class="fa fa-facebook"></i></a> <a href="https://vk.com/mister_9"><i
-											class="fa fa-vk"></i></a> <a href="https://www.linkedin.com/profile/preview?locale=ru_RU&trk=prof-0-sb-preview-primary-button"><i
+											class="fa fa-vk"></i></a> <a href="https://ua.linkedin.com/pub/petro-andrushchak/100/b02/115"><i
 											class="fa fa-linkedin"></i></a>
 								</span>
 								</li>

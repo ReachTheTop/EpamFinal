@@ -192,13 +192,13 @@ $('body').on(
 		function() {
 			 var object =$(this);
 			  swal({
-				  title: "Are you sure?",
-				  text: "You will not be able to recover this language!",
+				  title: "<t:i18n id='bootstrap.AreYouSure'/>",
+				  text: "<t:i18n id='bootstrap.NotAbleRecoverLanguage'/>",
 				  type: "warning",
 				  showCancelButton: true,
 				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "Yes, delete it!",
-				  cancelButtonText: "No, cancel plx!",
+				  confirmButtonText: "<t:i18n id='bootstrap.button.Yes'/>!",
+				  cancelButtonText: "<t:i18n id='bootstrap.button.No'/>!",
 				  closeOnConfirm: true,
 				  closeOnCancel: true
 				},
