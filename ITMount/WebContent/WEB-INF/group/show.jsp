@@ -113,11 +113,11 @@ a {
 									test="${user.role == 'lecturer' && group.teacher_id == user.id}">
 									<c:choose>
 										<c:when test="${group.isConfirmed == true}">
-											<a class='btn btn-danger'
+											<a id="disbandGroup" class='btn btn-danger'
 												style="padding-top: 12px; padding-bottom: 12px;"
-												onclick="return confirm('Are you sure?')"
-												href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />"><t:i18n
-													id='group.disband' /></a>
+										
+													><t:i18n
+ 												id='group.disband' /></a>
 										</c:when>
 										<c:otherwise>
 											<a class='btn btn-success' id='confirmation'><t:i18n
@@ -149,10 +149,11 @@ a {
 								</c:when>
 								<c:when
 									test="${user.role == 'student' || user.role == 'applicant' }">
-									<a class='btn btn-danger'
-										onclick="return confirm('Are you sure?')"
-										href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />"><t:i18n
-											id='group.user.leave' /></a>
+									
++								<a id="leaveGroup" class='btn btn-danger'
++								
++									><t:i18n
+ 										id='group.user.leave' /></a>
 
 								</c:when>
 							</c:choose></li>
@@ -275,6 +276,7 @@ $("a#leaveGroup").click(
 $("a#disbandGroup").click(
 		
 		function() {
+			
 			 var object =$(this);
 			  swal({
 				  title: "<t:i18n id='bootstrap.AreYouSure'/>" ,
