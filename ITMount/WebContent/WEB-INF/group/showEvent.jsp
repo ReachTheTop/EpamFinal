@@ -29,7 +29,6 @@
 <link rel="stylesheet" href="resources/css/animate.css">
 
 
-<title><c:out value="${ group.name }" /></title>
 
 <style type="text/css">
 .nav-pills>li.active>a {

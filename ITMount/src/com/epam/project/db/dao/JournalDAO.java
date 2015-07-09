@@ -8,8 +8,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
+import com.epam.project.db.model.DayVisit;
 import com.epam.project.db.model.Journal;
 import com.epam.project.db.model.Task;
+import com.epam.project.db.model.UserVisiting;
 import com.epam.project.db.transformer.JournalTransformer;
 
 public class JournalDAO {
@@ -21,6 +23,29 @@ public class JournalDAO {
 
 	public static final String SQL_GET_ALL_JOURNAL = "SELECT * FROM journal";
 	public static final String SQL_GET_JOURNAL = "SELECT * FROM journal WHERE id=?";
+	
+	public static final String SQL_GET_JOURNAL_USER ="select* from journal where group_id = ? and user_id = ? order by date desc";
+	
+	public static List<DayVisit> getUserVisitingGroup(Integer idGroup, Integer idUser, Connection connection){
+	
+		ResultSet rs = null;
+		List<DayVisit> journal = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(SQL_GET_JOURNAL_USER);
+			st.setInt(1, idGroup);
+			st.setInt(2, idUser);
+			rs = st.executeQuery();
+			journal = JournalTransformer.getJournalDayUser(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return journal;
+		
+		
+		
+	}
 	
 	public static Journal getJournal(Integer id, Connection connection) {
 

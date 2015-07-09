@@ -76,83 +76,91 @@ a {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-			<c:if test="${user.role != 'student'|| user.role == 'student' && association.isActive == true }">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a
-						href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
-							class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
-							class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
-							class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
-							class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
-					<li><a
-						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
-							class="fa fa-weixin"></i><t:i18n id='group.chat'/></a></li>
-
-					<c:if test="${user.role == 'student'  }">
+				<c:if
+					test="${user.role != 'student'|| user.role == 'student' && association.isActive == true }">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a
+							href="<c:url value="/GroupServlet?action=show&group_id=${group.id }" />"><i
+								class="fa fa-home fa-fw"></i> <t:i18n id='group.main' /></a></li>
 						<li><a
-							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
-								class="fa fa-list fa-fw"></i> <t:i18n id='group.user.homework' /></a></li>
-					</c:if>
+
+							href="<c:url value="/GroupServlet?action=showTasks&group_id=${group.id }" />"><i
+								class="fa fa-tasks fa-fw"></i> <t:i18n id='group.tasks' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showEvents&group_id=${group.id }" />"><i
+								class="fa fa-users fa-fw"></i> <t:i18n id='group.events' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showExams&group_id=${group.id }" />"><i
+								class="fa fa-check fa-fw"></i> <t:i18n id='group.exams' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
+								class="fa fa-weixin"></i>
+							<t:i18n id='group.chat' /></a></li>
+						<li><a
+							href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
+								class="fa fa-dashcube"></i>
+							Visiting</a></li>
+
+						<c:if test="${user.role == 'student'  }">
+							<li><a
+								href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
+									class="fa fa-list fa-fw"></i> <t:i18n id='group.user.homework' /></a></li>
+						</c:if>
 
 
-					<li><c:choose>
-							<c:when
-								test="${user.role == 'lecturer' && group.teacher_id == user.id}">
-								<c:choose>
-									<c:when test="${group.isConfirmed == true}">
-										<a id="disbandGroup" class='btn btn-danger'
-											style="padding-top: 12px; padding-bottom: 12px;"
-											
-											><t:i18n
-												id='group.disband' /></a>
-									</c:when>
-									<c:otherwise>
-										<a class='btn btn-success' id='confirmation'><t:i18n
-												id='group.confirm' /></a>
+						<li><c:choose>
+								<c:when
+									test="${user.role == 'lecturer' && group.teacher_id == user.id}">
+									<c:choose>
+										<c:when test="${group.isConfirmed == true}">
+											<a class='btn btn-danger'
+												style="padding-top: 12px; padding-bottom: 12px;"
+												onclick="return confirm('Are you sure?')"
+												href="<c:url value="GroupServlet?action=delete&group_id=${group.id }" />"><t:i18n
+													id='group.disband' /></a>
+										</c:when>
+										<c:otherwise>
+											<a class='btn btn-success' id='confirmation'><t:i18n
+													id='group.confirm' /></a>
 
-										<script type="text/javascript">
-											$('#confirmation')
-													.click(
-															function() {
-																$(this)
-																		.remove();
-																$
-																		.get(
-																				'AdminServlet?action=confirm&group_id='
-																						+ "${group.id}",
-																				function(
-																						response) {
+											<script type="text/javascript">
+												$('#confirmation')
+														.click(
+																function() {
+																	$(this)
+																			.remove();
+																	$
+																			.get(
+																					'AdminServlet?action=confirm&group_id='
+																							+ "${group.id}",
+																					function(
+																							response) {
 
-																				});
-																var $a = $("<a class='btn btn-danger' href='GroupServlet?action=delete&group_id=${group.id}'>Disband group</a>");
-																$(
-																		"div#panel-footer")
-																		.append(
-																				$a);
-															});
-										</script>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-							<c:when
-								test="${user.role == 'student' || user.role == 'applicant' }">
-								<a id="leaveGroup" class='btn btn-danger'
-								
-									><t:i18n
-										id='group.user.leave' /></a>
+																					});
+																	var $a = $("<a class='btn btn-danger' href='GroupServlet?action=delete&group_id=${group.id}'>Disband group</a>");
+																	$(
+																			"div#panel-footer")
+																			.append(
+																					$a);
+																});
+											</script>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:when
+									test="${user.role == 'student' || user.role == 'applicant' }">
+									<a class='btn btn-danger'
+										onclick="return confirm('Are you sure?')"
+										href="<c:url value="GroupUserServlet?action=leaveGroup&group_id=${group.id }&user_id=${user.id }" />"><t:i18n
+											id='group.user.leave' /></a>
 
-							</c:when>
-						</c:choose></li>
+								</c:when>
+							</c:choose></li>
 
 
 
-				</ul>
+					</ul>
+
 				</c:if>
 			</div>
 			<div class="col-md-9">
@@ -184,49 +192,50 @@ a {
 						</c:choose>
 					</c:if>
 				</div>
-				<c:if test="${ user.role != 'student'||user.role == 'student' && association.isActive == true }">
-				<div class="contact-box">
+				<c:if
+					test="${ user.role != 'student'||user.role == 'student' && association.isActive == true }">
+					<div class="contact-box">
 
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th><t:i18n id='group.user.image' /></th>
-								<th><t:i18n id='group.user.name' /></th>
-								<th>Email</th>
-								<th><t:i18n id='group.user.contacts' /></th>
-								<c:if test="${user.role == 'lecturer' }">
-									<th><t:i18n id='group.user.homework' /></th>
-								</c:if>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${users}" var="userS">
-
+						<table class="table table-hover">
+							<thead>
 								<tr>
-									<td><img alt="image" class="img-circle img-responsive"
-										height="50px" width="50px" src="upload/${userS.image }"></td>
-									<td><a
-										href="<c:url value="UserServlet?user_id=${userS.id }" />">
-											<strong>${userS.name } <br> ${userS.surname}
-										</strong>
-									</a></td>
-									<td><strong>${userS.email }</strong></td>
-									<td><i class=" fa fa-skype"></i>&nbsp;
-										${userS.contacts.skype } <br> <i
-										class=" fa fa-mobile-phone"></i>&nbsp; ${userS.contacts.phone }
-									</td>
+									<th><t:i18n id='group.user.image' /></th>
+									<th><t:i18n id='group.user.name' /></th>
+									<th>Email</th>
+									<th><t:i18n id='group.user.contacts' /></th>
 									<c:if test="${user.role == 'lecturer' }">
-										<td><a class="btn btn-sm btn-primary"
-											href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${userS.id }" />"><t:i18n
-													id='group.user.homework.button' /></a></td>
+										<th><t:i18n id='group.user.homework' /></th>
 									</c:if>
 								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${users}" var="userS">
 
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-</c:if>
+									<tr>
+										<td><img alt="image" class="img-circle img-responsive"
+											height="50px" width="50px" src="upload/${userS.image }"></td>
+										<td><a
+											href="<c:url value="UserServlet?user_id=${userS.id }" />">
+												<strong>${userS.name } <br> ${userS.surname}
+											</strong>
+										</a></td>
+										<td><strong>${userS.email }</strong></td>
+										<td><i class=" fa fa-skype"></i>&nbsp;
+											${userS.contacts.skype } <br> <i
+											class=" fa fa-mobile-phone"></i>&nbsp; ${userS.contacts.phone }
+										</td>
+										<c:if test="${user.role == 'lecturer' }">
+											<td><a class="btn btn-sm btn-primary"
+												href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${userS.id }" />"><t:i18n
+														id='group.user.homework.button' /></a></td>
+										</c:if>
+									</tr>
+
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
