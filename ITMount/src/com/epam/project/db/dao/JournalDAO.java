@@ -28,6 +28,9 @@ public class JournalDAO {
 	public static final String SQL_GET_JOURNAL_USER ="select* from journal where group_id = ? and user_id = ? order by date desc";
 	
 	public static final String SQL_GET_ALL_JOURNAL_BY_DATE_AND_GROUP = "SELECT * FROM journal where group_id = ? and date = ?";
+	
+	public static final String SQL_GET_JOURNAL_BY_USER_AND_DATE = "SELECT * FROM journal WHERE user_id = ? and date = ?;";
+	public static final String DELETE_JOURNAL = "DELETE FROM journal WHERE id = ?;";
 
 	public static List<Journal> getListJournalGroup(Integer idGroup,
 			String dateLesson, Connection connection) {
@@ -150,7 +153,35 @@ public class JournalDAO {
 		}
 
 	}
+	
+	public static Journal getJournalByUserAndDate(Integer user_id, Date date, Connection connection) {
 
+		ResultSet rs = null;
+		Journal journal = null;
+		try {
+
+			PreparedStatement st = connection.prepareStatement(SQL_GET_JOURNAL_BY_USER_AND_DATE);
+			st.setInt(1, user_id);
+			st.setTimestamp(2, new Timestamp(date.getTime()));
+			rs = st.executeQuery();
+			journal = JournalTransformer.getJournal(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return journal;
+	}
 	
-	
+	public static void delJournal(Integer id, Connection connection) {
+
+		try {
+
+			PreparedStatement st = connection.prepareStatement(DELETE_JOURNAL);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
