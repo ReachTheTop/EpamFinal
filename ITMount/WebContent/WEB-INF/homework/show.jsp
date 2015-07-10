@@ -16,6 +16,9 @@
 
 <link rel="stylesheet" href="resources/css/font-awesome.css">
 <link rel="stylesheet" href="resources/css/animate.css">
+
+<link rel="stylesheet" href="resources/css/sticky-footer.css">
+
 <style type="text/css">
 .nav-pills>li.active>a {
 	background-color: #4B4B4C;
@@ -73,6 +76,9 @@ a {
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
 							class="fa fa-weixin"></i> <t:i18n id='group.chat' /></a></li>
+					<li><a
+							href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
+								class="fa fa-dashcube"></i> Visiting</a></li>		
 					<c:if test="${user.role == 'student' }">
 						<li class="active"><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
