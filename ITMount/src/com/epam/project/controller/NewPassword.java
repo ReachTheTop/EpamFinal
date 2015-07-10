@@ -2,6 +2,7 @@ package com.epam.project.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,26 +36,33 @@ public class NewPassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
+		ResourceBundle res = (ResourceBundle) sesion.getAttribute("bundle");
 		String email = request.getParameter("user");
 		String key = request.getParameter("key");
 		String code = request.getParameter("code");
+		Date date = new Date(Long.parseLong(code));
 		User user = UserService.getUserWhereEmail(email);
 		if(user!=null){
-			if(user.getKey().equals(key)){
-				user.setIs_confirmed(true);
-				UserService.updateUser(user);
-				sesion.setAttribute("passwordReset", "1");
-				sesion.setAttribute("newPasswordEmail", email);
-				sesion.setAttribute("newPasswordKey", key);
-				sesion.setAttribute("newPasswordCode", code);
-				request.getRequestDispatcher("WEB-INF/page/passwordReset.jsp").forward(request, response);
+			if(user.getKey().equals(key)&&date.after(new Date())){
+			
+					user.setIs_confirmed(true);
+					UserService.updateUser(user);
+					sesion.setAttribute("passwordReset", "1");
+					sesion.setAttribute("newPasswordEmail", email);
+					sesion.setAttribute("newPasswordKey", key);
+					sesion.setAttribute("newPasswordCode", code);
+					request.getRequestDispatcher("WEB-INF/page/passwordReset.jsp").forward(request, response);
+			
+				
 			}else{
-				response.sendError(404);
-				return;
+				request.setAttribute("inforeset", res.getString("login.passwordReset.errorLink"));
+				request.setAttribute("modalreset", "1");
+				request.getRequestDispatcher("WEB-INF/page/passwordReset.jsp").forward(request, response);
 			}
 		}else{
-			response.sendError(404);
-			return;
+			request.setAttribute("inforeset", res.getString("login.passwordReset.errorLink"));
+			request.setAttribute("modalreset", "1");
+			request.getRequestDispatcher("WEB-INF/page/passwordReset.jsp").forward(request, response);
 		}
 	
 		

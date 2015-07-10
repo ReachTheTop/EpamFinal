@@ -70,9 +70,9 @@ public class PasswordReset extends HttpServlet {
 				sesion.setAttribute("inforeset", res.getString("login.passwordReset"));
 				sesion.setAttribute("modalreset", "1");
 			
-			
+				
 		}else{
-			sesion.setAttribute("inforeset", "Error! "+email+" ");
+			sesion.setAttribute("inforeset",res.getString("login.UsernameOrEmail")+" \""+ email+"\" "+res.getString("login.passwordReset.noEmail"));
 			sesion.setAttribute("modalreset", "1");
 		}
 		
