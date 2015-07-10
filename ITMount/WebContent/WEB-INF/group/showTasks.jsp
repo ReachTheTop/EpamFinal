@@ -95,7 +95,7 @@ a {
 						<c:if test="${user.role == 'lecturer' }">
 							<li><a
 								href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
-									class="fa fa-dashcube"></i> Visiting</a></li>
+									class="fa fa-dashcube"></i> <t:i18n id='group.visiting' /></a></li>
 						</c:if>
 						<c:if test="${user.role == 'student' }">
 							<li><a
