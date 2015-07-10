@@ -265,11 +265,10 @@
 															},
 																													}
 													},
-													photo : {
+													file : {
 														validators : {
 															file : {
-																extension : 'png,jpg',
-																maxSize : 5 * 1024 * 1024,
+																extension : 'doc,docx,pdf,',
 																message : 'Please choose a image file with a size less than 5M.'
 															}
 														}

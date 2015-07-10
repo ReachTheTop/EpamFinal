@@ -483,7 +483,7 @@ a {
 		$(document)
 				.ready(
 						function() {
-							$('#form1, #editTask')
+							$('#form1')
 									.bootstrapValidator(
 											{
 												message : '<t:i18n id="group.validation"/>',
@@ -498,14 +498,7 @@ a {
 
 												},
 												fields : {
-													email : {
-														validators : {
-															emailAddress : {
-																message : "<t:i18n id='group.validation.email'/>"
-															}
-
-														}
-													},
+													
 													task_name : {
 														message : "<t:i18n id='group.validation.name'/>",
 														validators : {
@@ -534,6 +527,14 @@ a {
 
 														}
 													},
+													file : {
+														validators : {
+															file : {
+																extension : 'doc,docx,pdf,pptx,ppt,zip,rar,7z',
+																message : 'Please choose a correct file.'
+															}
+														}
+													},
 													task_deadline : {
 														validators : {
 															notEmpty : {
@@ -541,10 +542,81 @@ a {
 															},
 														}
 													},
+													
 												}
 											});
 
 						});
+		
+		$(document)
+		.ready(
+				function() {
+					$('#editTask')
+							.bootstrapValidator(
+									{
+										message : '<t:i18n id="group.validation"/>',
+										feedbackIcons : {
+											valid : 'glyphicon glyphicon-ok',
+											invalid : 'glyphicon glyphicon-remove',
+											validating : 'glyphicon glyphicon-refresh'
+										},
+										submitHandler : function(
+												validator, form,
+												submitButton) {
+
+										},
+										fields : {
+											
+											task_name : {
+												message : "<t:i18n id='group.validation.name'/>",
+												validators : {
+													notEmpty : {
+														message : "<t:i18n id='group.validation.name.empty'/>"
+													},
+													stringLength : {
+														min : 2,
+														max : 70,
+														message : "<t:i18n id='task.validation.name'/>"
+													}
+												}
+											},
+											task_description : {
+												message : "<t:i18n id='group.validation.description'/>",
+												validators : {
+													notEmpty : {
+														message : "<t:i18n id='group.validation.description.empty'/>",
+
+													},
+													stringLength : {
+														min : 6,
+														max : 400,
+														message : "<t:i18n id='task.validation.desc'/>"
+													}
+
+												}
+											},
+											fileUpdate : {
+												validators : {
+													file : {
+														extension : 'doc,docx,pdf,pptx,ppt,zip,rar,7z, xlsx,xls',
+														message : '<t:i18n id='task.validation.file'/>'
+													}
+												}
+											},
+											task_deadline : {
+												validators : {
+													notEmpty : {
+														message : "<t:i18n id='group.validation.deadline'/>"
+													},
+												}
+											},
+											
+										}
+									});
+
+				});
+	
+	
 	</script>
 
 
