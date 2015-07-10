@@ -34,6 +34,8 @@ public class ComplitedCourseServlet extends HttpServlet {
 		
 		int idCourse = Integer.parseInt(request.getParameter("idCourse"));
 		List<CourseComplited> list2 = CourseService.getCountStudentCoursesComplited(idCourse);
+		
+		
 	
 		String json = new Gson().toJson(list2);
 		response.setContentType("application/json");
