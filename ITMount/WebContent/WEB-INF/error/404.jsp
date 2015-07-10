@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error page</title>
+<title><t:i18n id="404.errorPage"/></title>
 <jsp:include page="../page/head.jsp" />
 </head>
 <body>

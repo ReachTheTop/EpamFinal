@@ -14,7 +14,9 @@ public class FaqCategoryDAO {
 	private static String GET_CATEGORIES = "SELECT * from faq_category;";
 	private static String ADD_CATEGORY = "INSERT INTO faq_category(category) VALUE (?)";
 	private static String UPDATE_CATEGORY = "UPDATE faq_category SET category = ? WHERE id = ?";
-
+	private static String GET_CATEGORY_BY_ID = "SELECT * from faq_category WHERE id = ?;";
+	private static String DELETE_CATEGORY= "DELETE from faq_category WHERE id = ?;";
+	
 	public static List<FaqCategory> getCategories(Connection connectionn) {
 		List<FaqCategory> categories = null;
 		PreparedStatement statement = null;
@@ -56,6 +58,32 @@ public class FaqCategoryDAO {
 			statement.setString(1, category.getCategory());
 			statement.setInt(2, category.getId());
 			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static FaqCategory getCategoryById(Connection connectionn, Integer id) {
+		FaqCategory category = null;
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		try {
+			statement = connectionn.prepareStatement(GET_CATEGORY_BY_ID);
+			statement.setInt(1, id);
+			set = statement.executeQuery();
+			category = FaqCategoryTransformer.getCategory(set);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return category;
+	}
+	
+	public static void deleteCategory(Connection con, Integer id) {
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(DELETE_CATEGORY);
+			ps.setInt(1, id);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

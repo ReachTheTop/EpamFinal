@@ -83,7 +83,7 @@ a {
 					<div class="col-md-12">
 						<h1>
 							<c:out value="${group.name }" />
-							Visiting
+							<t:i18n id='visiting' />
 						</h1>
 					</div>
 				</div>
@@ -113,7 +113,7 @@ a {
 
 						<li class="active"><a
 							href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
-								class="fa fa-dashcube"></i> Visiting</a></li>
+								class="fa fa-dashcube"></i><t:i18n id='visiting' /></a></li>
 					</ul>
 				</div>
 
@@ -122,7 +122,7 @@ a {
 					<div class="panel panel-default">
 
 						<div class="panel-heading">
-							Visiting Panel
+							<t:i18n id='visiting.panel' />
 							
 							
 							<a data-toggle="modal" href="#addVisiting"><i
@@ -138,7 +138,7 @@ a {
 									
 									<thead>
 										<tr>
-											<th>Name</th>
+											<th><t:i18n id='visiting.name' /></th>
 											<c:forEach items="${requestScope.listUserVisit}" var="listUserVisit" end="0">
 											
 												<c:forEach items="${listUserVisit.dayVisit}" var="app">
@@ -210,7 +210,7 @@ a {
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
 				<h4 class="modal-title">
-					Add New Lesson
+					<t:i18n id='visiting.addNewLesson' />
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -223,7 +223,7 @@ a {
 						<div class="form-group">
 
 						<label for="login-username"><i class="icon-user"></i> <b>
-								Enter date lesson </b></label> <input name="dateLesson" class="form-control"
+								<t:i18n id='visiting.EnterDateLesson' /> </b></label> <input name="dateLesson" class="form-control"
 							id="dateLesson" type="date">
 						</div>
 
@@ -236,7 +236,7 @@ a {
 									<td >${user.userSurname }  ${user.userName }</td>
 									
 									<td id="userName"><p>						
-											<input type="checkbox" name = "checkBoxVisit" value="${user.userId }"  data-width="100"  data-size="small" checked data-toggle="toggle" data-on ="Present" data-off="Absent">
+											<input type="checkbox" name = "checkBoxVisit" value="${user.userId }"  data-width="100"  data-size="small" checked data-toggle="toggle" data-on ="<t:i18n id='visiting.Present' />" data-off="<t:i18n id='visiting.Absent' />">
 										</p></td>
 								</tr>
 							
@@ -252,7 +252,7 @@ a {
 						<div class="form-group">
 
 						<button id="addLesson" type="submit" class="btn btn-primary pull-right">
-							Add
+							<t:i18n id='visiting.Add' />
 						</button>
 						<div class="clearfix"></div>
 					</div>
@@ -288,9 +288,9 @@ a {
 			    	
 				    	
 				    	if(isEmpty(response) != true){
-				    		showToaast("Change visiting successfully changed",1);
+				    		showToaast("<t:i18n id='visiting.toast.ChangeSuccessfully'/>",1);
 				    	}else{
-				    		showToaast("Change visiting not successfully changed",0);
+				    		showToaast("<t:i18n id='visiting.toast.ChangeNotSuccessfully'/>",0);
 				    	}
 				    	
 				  
@@ -328,7 +328,7 @@ a {
 				dataType : "json",			
 				success : function(data) {
 								
-					setTimeout(showToaast("new Visit was added", 1), 5000)
+					setTimeout(showToaast("<t:i18n id='visiting.toast.NewAdded'/>", 1), 5000)
 
 					window.setTimeout(function() {
 						location.reload();
@@ -337,7 +337,7 @@ a {
 				},
 				error : function(data) {
 					
-					showToaast(" Error date !!! New visit was not added", 0)
+					showToaast("<t:i18n id='visiting.toast.NewNotAdded'/>", 0)
 
 				}
 			});

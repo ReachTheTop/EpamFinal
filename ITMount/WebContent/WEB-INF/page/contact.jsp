@@ -71,7 +71,7 @@
 							<div class="col-sm-9">
 								<select name = "type" class="form-control" id="prependedInput">
 									<option placeholder="Please select topic..."></option>
-									<option value="Сomplaint"><t:i18n id="contact.Сomplaint"/></option>
+									<option value="Сomplaint"><t:i18n id="contact.Complaint"/></option>
 									<option value ="Bug"><t:i18n id="contact.Bug"/></option>
 									<option value ="Message"><t:i18n id="contact.Message"/></option>
 								</select>

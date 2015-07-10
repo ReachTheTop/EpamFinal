@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.epam.project.db.model.Feedback;
@@ -29,6 +30,7 @@ public class FeedbackDAO {
 	private static final String GET_SEARCH_ALL_IMPORTANT = "SELECT * FROM feedback WHERE active = ? and important = ? and  (name = ? or email = ? or type = ? or content LIKE ?)";
 	private static final String GET_ALL_FILTER_TRASH = "SELECT * FROM feedback WHERE type = ? and active = ?";
 	private static final String GET_ALL_FILTER_IMPORTANT = "SELECT * FROM feedback WHERE type = ? and active = ? and important =?";
+	private static final String GET_MESSAGE_BY_EMAIL_AND_DATE = "SELECT * FROM feedback WHERE email = ? and timeMessage = ?;";
 	public static void addMessage(Feedback feedback, Connection connection){
 		try{
 			PreparedStatement st = connection.prepareStatement(NEW_MESSAGE);		
@@ -251,5 +253,21 @@ public class FeedbackDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public static Feedback getMessageByEmailAndDate(Connection connection, String email, Date date){
+		ResultSet rs = null;
+		Feedback message = null;
+		try {
+		
+			PreparedStatement st = connection.prepareStatement(GET_MESSAGE_BY_EMAIL_AND_DATE);
+			st.setString(1, email);
+			st.setTimestamp(2, new Timestamp(date.getTime()));
+			rs = st.executeQuery();
+			message = FeedbackTransformer.getFeedback(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return message;
 	}
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
-<title>Feedback</title>
+<title><t:i18n id="Feedback"/></title>
 
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/font-awesome.css" rel="stylesheet">
