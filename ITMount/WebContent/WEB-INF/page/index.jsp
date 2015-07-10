@@ -63,7 +63,7 @@
 
 	<!-- End Homepage Slider -->
 	<h2><t:i18n id='courses.our'/></h2>
-			<div class="row">
+			<div class="row-fluid">
 				<c:forEach items="${course }" var="cours">
 
 
@@ -93,10 +93,10 @@
 	<div class="section">
 		<div class="container">
 			<h2><t:i18n id="index.aboutUs"/></h2>
-			<div class="clients-logo-wrapper text-center row">
+			<div class="clients-logo-wrapper text-center row-fluid">
 
 				<div class="container">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-sm-6">
 							<h3><t:i18n id="index.OurMission"/></h3>
 							<p><t:i18n id="index.OurMission.text"/></p>
@@ -119,7 +119,7 @@
 		<div class="container">
 			<h2><t:i18n id="index.OurTeam"/></h2>
 
-			<div class="row">
+			<div class="row-fluid">
 				<blockquote class="pull-right">
 					<p><t:i18n id="index.quote"/></p>
 					<small><cite><t:i18n id="index.author"/></cite></small>
@@ -127,7 +127,7 @@
 
 			</div>
 
-			<div class="row">
+			<div class="row-fluid">
 				<!-- Team Member -->
 				<div class="col-md-3 col-sm-5">
 					<div class="team-member">
@@ -217,66 +217,63 @@
 	<div class="section">
 		<div class="container">
 			<h2><t:i18n id="index.technology"/></h2>
-			<div class="clients-logo-wrapper text-center row">
+			<div class="clients-logo-wrapper text-center row-fluid">
 
-				<div class="row">
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+				<div class="row-fluid">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/bootstrap.png"
 							alt="Client Name"></a>
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/log4j.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img
 							src="resources/img/technology/apache_maven.png" alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/eclipse.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/junit.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/mysql.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img
 							src="resources/img/technology/javaservlet.png" alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/jsp.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/xml.png"
 							alt="Client Name"></a>
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/json.png"
 							alt="Client Name"></a>
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
 						<a href="#"><img src="resources/img/technology/ajax.png"
 							alt="Client Name"></a>
 					</div>
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6">
-						<a href="#"><img src="resources/img/technology/tomcat.png"
-							alt="Client Name"></a>
-					</div>
+					
 
 				</div>
 
-				<div class="row">
+				<div class="row-fluid">
 
-					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6"
 						style="float: left;">
 						<a href="#"><img src="resources/img/technology/jdbc.png"
 							alt="Client Name"></a>
@@ -301,7 +298,10 @@
 						<a href="#"><img src="resources/img/technology/AsyncIO.png"
 							alt="Client Name"></a>
 					</div>
-
+<div class="col-lg-1 col-md-1 col-sm-2 col-xs-6">
+						<a href="#"><img src="resources/img/technology/tomcat.png"
+							alt="Client Name"></a>
+					</div>
 
 				</div>
 
