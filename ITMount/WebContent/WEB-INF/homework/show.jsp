@@ -76,9 +76,11 @@ a {
 					<li><a
 						href="<c:url value="/GroupServlet?action=chat&group_id=${group.id }" />"><i
 							class="fa fa-weixin"></i> <t:i18n id='group.chat' /></a></li>
-					<li><a
+					<c:if test="${user.role == 'lecturer' }">
+						<li><a
 							href="<c:url value="/GroupServlet?action=showVisiting&group_id=${group.id }" />"><i
-								class="fa fa-dashcube"></i> Visiting</a></li>		
+								class="fa fa-dashcube"></i> Visiting</a></li>
+					</c:if>
 					<c:if test="${user.role == 'student' }">
 						<li class="active"><a
 							href="<c:url value="/Homework?action=show&group_id=${group.id }&users_id=${user.id }" />"><i
@@ -91,49 +93,51 @@ a {
 
 				<c:forEach items="${homeworks}" var="home">
 
-					
-						<div class="service-wrapper col-md-12 vcenter">
-							<div class="col-md-3 vcenter">
-								<img src="resources/img/service-icon/box.png" alt="Task">
-								<h3>${home.value.getName()}</h3>
-								<c:if test="${home.key.getRating()>=0}">
-									<p>Rating: ${home.key.getRating()}</p>
-								</c:if>
-								<p id="ratingData" data-ratingHomework="${home.key.getId()}"></p>
-							</div>
-							<div class="col-md-6 vcenter">
-								<p><c:out value="${home.value.getDescription()}" /> </p>
-							</div>
-							<div class="col-md-3 vcenter">
-								
-								
-								
-									<a
-										href="<c:url value="/downloadFile?file=${home.key.getData()}"/>"
-										class="btn btn-warning glyphicon glyphicon-download-alt btn-md"></a>
-									<c:if test="${user.role =='lecturer' }">
-										<a id="delete-homework" data-delete="${home.key.getId()}"
-											class="btn btn-danger glyphicon glyphicon-trash btn-md"></a>
-									</c:if>
 
-									<c:if test="${user.role =='student' && home.key.getRating()<0}">
-										<a data-toggle="modal" href="#updateHomeWork"
-											data-delete="${home.key.getData()}"
-											data-homework="${home.key.getId()}"
-											class="open-updateHomeWork btn btn-success glyphicon glyphicon-edit btn-md"></a>
-									</c:if>
-								
-									<c:if
-										test="${user.role =='lecturer' && home.key.getRating()<0  }">
-										<a id="setReting" data-toggle="modal" href="#retingHomeWork"
-											data-homework="${home.key.getId()}"
-											class="open-ratingHomeWork btn btm-primary btn-sm"><t:i18n
-												id='group.homework.rating' /></a>
-									</c:if>
-								
-							</div>
+					<div class="service-wrapper col-md-12 vcenter">
+						<div class="col-md-3 vcenter">
+							<img src="resources/img/service-icon/box.png" alt="Task">
+							<h3>${home.value.getName()}</h3>
+							<c:if test="${home.key.getRating()>=0}">
+								<p>Rating: ${home.key.getRating()}</p>
+							</c:if>
+							<p id="ratingData" data-ratingHomework="${home.key.getId()}"></p>
 						</div>
-					
+						<div class="col-md-6 vcenter">
+							<p>
+								<c:out value="${home.value.getDescription()}" />
+							</p>
+						</div>
+						<div class="col-md-3 vcenter">
+
+
+
+							<a
+								href="<c:url value="/downloadFile?file=${home.key.getData()}"/>"
+								class="btn btn-warning glyphicon glyphicon-download-alt btn-md"></a>
+							<c:if test="${user.role =='lecturer' }">
+								<a id="delete-homework" data-delete="${home.key.getId()}"
+									class="btn btn-danger glyphicon glyphicon-trash btn-md"></a>
+							</c:if>
+
+							<c:if test="${user.role =='student' && home.key.getRating()<0}">
+								<a data-toggle="modal" href="#updateHomeWork"
+									data-delete="${home.key.getData()}"
+									data-homework="${home.key.getId()}"
+									class="open-updateHomeWork btn btn-success glyphicon glyphicon-edit btn-md"></a>
+							</c:if>
+
+							<c:if
+								test="${user.role =='lecturer' && home.key.getRating()<0  }">
+								<a id="setReting" data-toggle="modal" href="#retingHomeWork"
+									data-homework="${home.key.getId()}"
+									class="open-ratingHomeWork btn btm-primary btn-sm"><t:i18n
+										id='group.homework.rating' /></a>
+							</c:if>
+
+						</div>
+					</div>
+
 
 				</c:forEach>
 
@@ -429,45 +433,42 @@ a {
 		});
 
 		$("a#delete-homework").click(
-				
-					function() {
-						 var object =$(this);
-						  swal({
-							  title: "<t:i18n id='bootstrap.AreYouSure'/>",
-							  text: "<t:i18n id='bootstrap.NotAbleRecoverFile'/>!",
-							  type: "warning",
-							  showCancelButton: true,
-							  confirmButtonClass: "btn-danger",
-							  confirmButtonText: "<t:i18n id='bootstrap.Yes'/>!",
-							  cancelButtonText: "<t:i18n id='bootstrap.No'/>!",
-							  closeOnConfirm: true,
-							  closeOnCancel: true
-							},
-							
-							function(isConfirm) {
-								  
-								  if (isConfirm) {
-									  
-									
-									  $.get('Homework?action=delete&id_homework='
-												+ object.data('delete'), function(response) {
-											if (response.success) {
-												object.parent().parent().remove();
-												showToaast(response.success, 1);
 
-											} else {
-												showToaast(response.fail, 0);
+				function() {
+					var object = $(this);
+					swal({
+						title : "<t:i18n id='bootstrap.AreYouSure'/>",
+						text : "<t:i18n id='bootstrap.NotAbleRecoverFile'/>!",
+						type : "warning",
+						showCancelButton : true,
+						confirmButtonClass : "btn-danger",
+						confirmButtonText : "<t:i18n id='bootstrap.Yes'/>!",
+						cancelButtonText : "<t:i18n id='bootstrap.No'/>!",
+						closeOnConfirm : true,
+						closeOnCancel : true
+					},
 
-											}
-										});
+					function(isConfirm) {
 
-								   
-								  }
-						
+						if (isConfirm) {
+
+							$.get('Homework?action=delete&id_homework='
+									+ object.data('delete'),
+									function(response) {
+										if (response.success) {
+											object.parent().parent().remove();
+											showToaast(response.success, 1);
+
+										} else {
+											showToaast(response.fail, 0);
+
+										}
+									});
+
+						}
 
 					});
-					
-					
+
 				});
 
 		function showToaast(message, issucces) {
