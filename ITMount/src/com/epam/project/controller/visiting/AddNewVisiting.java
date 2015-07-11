@@ -53,7 +53,7 @@ public class AddNewVisiting implements Action {
 			return;
 		}
 			
-		if( !checkDateIsPresent(dateVisit,group_id) || !checkDateRange(dateVisit) ){
+		if( !checkDateIsPresent(request.getParameter("dateLesson"),group_id) || !checkDateRange(dateVisit) ){
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		}
@@ -84,17 +84,15 @@ public class AddNewVisiting implements Action {
 
 	}
 	
-	private boolean checkDateIsPresent(Date date, int  group_id){
+	private boolean checkDateIsPresent(String date, int  group_id){
 	
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		String dateString = df.format(date);
-		
-		List<Journal> jornal = JournalService.getAllJournalByDate(group_id, dateString);
-		
-		if(jornal.size() !=0){
+		List<Journal> jornal = JournalService.getAllJournalByDate(group_id,
+				date);
+
+		if (jornal.size() != 0) {
 			return false;
 		}
-		
+
 		return true;
 		
 	}

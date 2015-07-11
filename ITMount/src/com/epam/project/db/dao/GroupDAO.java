@@ -23,7 +23,7 @@ public class GroupDAO {
 	private static final String CALC_ROWS = "SELECT found_rows();";
 	private static final String NEW_GROUP = "INSERT INTO group1 (course_id, teacher_id, name) value (?, ?, ?);";
 	private static final String UPDATE = "UPDATE group1 SET course_id = ?, teacher_id = ?, name = ?, is_active = ? WHERE id = ?;";
-	private static final String DELETE = "UPDATE group1 SET is_active = 0 WHERE id = ?;";
+	private static final String DELETE = "UPDATE group1 SET is_active = 0, date_exam = now() WHERE id = ?;";
 
 	private static final String GET_GROUPS_USER_STUDY = "Select* from group1 where group1.is_active = 1 AND  group1.id in"
 			+ "(select group_id from group_user where group_user.id in"

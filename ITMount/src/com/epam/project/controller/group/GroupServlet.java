@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.project.command.Menu;
 import com.epam.project.controller.visiting.AddNewVisiting;
+import com.epam.project.controller.visiting.ChangeLessonDate;
 import com.epam.project.controller.visiting.ChangeVisitTriger;
 import com.epam.project.controller.visiting.ShowVisitingGroup;
 
@@ -27,7 +28,8 @@ public class GroupServlet extends HttpServlet {
 				new RemoveUsersFromGroup(), new AddUsersToGroup(),
 				new LeavUsersInGroup(), new RebaseUsers(),
 				new GetTeacherGroups(), new ShowEvents(), new ShowExams(),
-				new ShowTasks(), new GroupChat(), new GroupChatHistory(), new ShowVisitingGroup(), new AddNewVisiting(), new ChangeVisitTriger());
+				new ShowTasks(), new GroupChat(), new GroupChatHistory(), new ShowVisitingGroup(),
+				new AddNewVisiting(), new ChangeVisitTriger(), new ChangeLessonDate());
 	}
 
 	/**

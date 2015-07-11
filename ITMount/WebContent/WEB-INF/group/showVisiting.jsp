@@ -143,7 +143,7 @@ a {
 											
 												<c:forEach items="${listUserVisit.dayVisit}" var="app">
 											
-													<th>${app.dayLesson }</th>
+													<th class="lessonDate" oldDate = "${app.dayLesson }">${app.dayLesson }</th>
 											
 											</c:forEach>
 											</c:forEach>
@@ -201,8 +201,82 @@ a {
 
 	
 		<jsp:include page="../page/footer.jsp" />
+
+	<div id="changeDate" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Change lesson date</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<form action="GroupServlet?action=changeLessonDate&group_id=${group.id }"
+						id='changeLessonDate' method="post" role="form" role="form">
+
+						<div class="form-group">
+
+							<label for="login-username"><i class="icon-user"></i> <b>
+									New date</b></label> <input name="newDateLesson" class="form-control"
+								id="newDateLesson" type="date">						
+						</div>
+						
+						<div class="form-group" hidden="true">
+							<input name="oldLessonDate" class="form-control" id="oldLesson"
+								type="text" >
+						</div>	
+
+						<div class="form-group" >
+
+							<button id="updateLessonDate" type="submit"
+								class="btn btn-primary pull-right">Update Lesson</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+<script>
+
+
+
+$('form#changeLessonDate').on('submit', function(event) {
+	var $form = $(this);
+	
+	event.preventDefault();
+	event.stopImmediatePropagation();
+	$.ajax({
+		type : $form.attr('method'),
+		url : $form.attr('action'),
+		data : $form.serialize(),
+
+		success : function(data, status) {
+			
+			setTimeout(showToaast("Updating  lessons date was successful", 1), 5000)
+
+			window.setTimeout(function() {
+				location.reload();
+			}, 500);
+		},
+	
+	error : function(data) {
+		
+		showToaast("Error with updating  lessons date", 0)
+
+	}
+	});
 	
 	
+});
+	</script>
+
+
 	<div id="addVisiting" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -264,6 +338,21 @@ a {
 
 </div>
 <script type="text/javascript">
+
+$('.lessonDate').on('dblclick', function() {
+	
+	var object = $(this);
+	var oldDate = $(this).attr('oldDate');
+	//alert(oldDate);
+	
+	$("#oldLesson").val(oldDate);
+	
+	$('#changeDate').modal('show');
+	
+	
+	
+
+});
 
 
 	$('.dblclickable').on('dblclick', function() {
