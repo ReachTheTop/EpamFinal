@@ -506,8 +506,8 @@ a {
 																message : "<t:i18n id='group.validation.name.empty'/>"
 															},
 															stringLength : {
-																min : 2,
-																max : 70,
+																min : 1,
+																max : 40,
 																message : "<t:i18n id='task.validation.name'/>"
 															}
 														}
@@ -520,8 +520,8 @@ a {
 
 															},
 															stringLength : {
-																min : 6,
-																max : 400,
+																min : 1,
+																max : 500,
 																message : "<t:i18n id='task.validation.desc'/>"
 															}
 
@@ -574,8 +574,8 @@ a {
 														message : "<t:i18n id='group.validation.name.empty'/>"
 													},
 													stringLength : {
-														min : 2,
-														max : 70,
+														min : 1,
+														max : 40,
 														message : "<t:i18n id='task.validation.name'/>"
 													}
 												}
@@ -588,8 +588,8 @@ a {
 
 													},
 													stringLength : {
-														min : 6,
-														max : 400,
+														min : 1,
+														max : 500,
 														message : "<t:i18n id='task.validation.desc'/>"
 													}
 

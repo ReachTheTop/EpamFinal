@@ -21,7 +21,7 @@ public class Feedback extends Validator implements Serializable {
 	private Integer id;
 	@Column(value = "name")
 	@Presence
-	@Size(min=1,max=50)
+	@Size(min=1,max=30)
 	@Format(format="^[^\\d^\\s^!^(^)^#^@^#^$^*^?^+^-^<^>^.^,^/^|^%]*$")
 	private String name;
 	@Column(value = "email")

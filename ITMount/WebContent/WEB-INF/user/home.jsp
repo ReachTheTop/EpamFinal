@@ -204,8 +204,8 @@
 
 															},
 															stringLength : {
-																min : 2,
-																max : 30,
+																min : 1,
+																max : 50,
 																message : "<t:i18n id='validation.course.name.size'/>"
 
 															}
@@ -227,7 +227,7 @@
 																message : "<t:i18n id='validation.not.empty'/>"
 															},
 															stringLength : {
-																min : 2,
+																min : 1,
 																max : 1000,
 																message : "<t:i18n id='validation.course.description'/>"
 
@@ -261,8 +261,8 @@
 																message : "<t:i18n id='validation.not.empty'/>"
 															},
 															stringLength : {
-																min : 2,
-																max : 30,
+																min : 1,
+																max : 50,
 																message : '<t:i18n id="event.validate.title.length"/>'
 															}
 
@@ -275,8 +275,8 @@
 
 															},
 															stringLength : {
-																min : 2,
-																max : 30,
+																min : 1,
+																max : 50,
 																message : "<t:i18n id='validation.surname'/>"
 															}
 

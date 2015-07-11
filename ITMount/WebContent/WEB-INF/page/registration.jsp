@@ -167,8 +167,8 @@
 															},
 															stringLength : {
 																min : 1,
-																max : 30,
-																message : '<t:i18n id="bootstrap.Length"/>'
+																max : 50,
+																message : '<t:i18n id="bootstrap.Length.user"/>'
 															}
 														}
 													},
@@ -190,8 +190,8 @@
 															},
 															stringLength : {
 																min : 1,
-																max : 30,
-																message : '<t:i18n id="bootstrap.Length"/>'
+																max : 50,
+																message : '<t:i18n id="bootstrap.Length.user"/>'
 															}
 														}
 													},
@@ -214,8 +214,8 @@
 															},
 															stringLength : {
 																min : 1,
-																max : 30,
-																message : '<t:i18n id="bootstrap.Length"/>'
+																max : 50,
+																message : '<t:i18n id="bootstrap.Length.user"/>'
 															}
 														}
 													},
