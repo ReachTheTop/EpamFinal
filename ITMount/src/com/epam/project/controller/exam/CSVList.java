@@ -78,7 +78,7 @@ public class CSVList implements Action {
 				
 				cell = row.createCell(4);
 				cell.setCellValue(data.getString("phone"));
-				
+				i++;
 			}
 		
 		}catch(SQLException e){
