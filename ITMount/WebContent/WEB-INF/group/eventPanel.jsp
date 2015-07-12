@@ -300,8 +300,8 @@
 																message : '<t:i18n id="event.validate.title"/>'
 															},
 										                    stringLength: {
-										                        min: 2,
-										                        max: 70,
+										                        min: 1,
+										                        max: 40,
 										                        message: '<t:i18n id="event.validate.title.length"/>'
 										                    }
 														}

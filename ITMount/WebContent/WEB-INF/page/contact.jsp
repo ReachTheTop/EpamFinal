@@ -162,8 +162,8 @@
 				
 												stringLength : {
 													min : 1,
-													max : 900,
-													message : '<t:i18n id="bootstrap.Length"/>'
+													max : 1900,
+													message : '<t:i18n id="bootstrap.Length.decsription"/>'
 												}
 											}
 										},
