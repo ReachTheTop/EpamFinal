@@ -18,14 +18,17 @@ public class UpdateGroup implements Action {
 		Integer group_id = Integer.parseInt(request.getParameter("group_id"));
 		Group group = GroupService.getById(group_id);
 		group.setName(request.getParameter("name"));
-		group.setTeacher_id(Integer.parseInt(request.getParameter("teacher_id")));
+		if (request.getParameter("teacher_id") != null) {
+			group.setTeacher_id(Integer.parseInt(request
+					.getParameter("teacher_id")));
+		}
 		GroupService.updateGroup(group);
-		
+
 		response.setContentType("application/json");
-		/*request.getRequestDispatcher(
-				"/GroupServlet?action=show&group_id=" + group_id).forward(
-				request, response);
-*/
+		/*
+		 * request.getRequestDispatcher( "/GroupServlet?action=show&group_id=" +
+		 * group_id).forward( request, response);
+		 */
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.List;
 
 import com.epam.project.db.connection.DBConnection;
@@ -30,10 +31,10 @@ public class GroupDAO {
 			+ " (select group_user.id from group_user where user_id = ?))";
 	private static final String GET_GROUP_BY_TEACHER_COURSE = "SELECT * FROM group1 WHERE teacher_id = ? and course_id = ? ";
 	private static final String GET_GROUP_BY_USER_REGISTER_ON_COURSE = "SELECT *FROM group1 g  JOIN group_user gu ON g.id=gu.group_id  WHERE g.course_id=? AND gu.user_id =?  AND g.is_active='1'";
-	private static final String GET_GROUP_BY_ACCESS_TO_KNOWLADGE_BASE ="SELECT * FROM group1 g WHERE  g.course_id =? AND g.is_active='1'  AND g.confirmed='1' AND ( g.id in (SELECT gu.group_id FROM group_user gu WHERE gu.user_id=? AND gu.group_id=g.id AND gu.is_active='1' ) OR g.teacher_id=?) LIMIT 1";
-	
+	private static final String GET_GROUP_BY_ACCESS_TO_KNOWLADGE_BASE = "SELECT * FROM group1 g WHERE  g.course_id =? AND g.is_active='1'  AND g.confirmed='1' AND ( g.id in (SELECT gu.group_id FROM group_user gu WHERE gu.user_id=? AND gu.group_id=g.id AND gu.is_active='1' ) OR g.teacher_id=?) LIMIT 1";
+
 	private static final String GET_ALL_ACTIVE_GROUP = "SELECT * FROM group1 WHERE is_active = 1;";
-	
+
 	private Connection con;
 	private PreparedStatement statement;
 
@@ -47,7 +48,7 @@ public class GroupDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void completelyRemove(Integer id, Connection con) {
 		PreparedStatement ps = null;
 		try {
@@ -59,14 +60,14 @@ public class GroupDAO {
 		}
 	}
 
-
 	public static Integer addUser(Connection connection, User user, Integer id) {
 		Integer group_id = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
-			statement = connection.prepareStatement("SELECT  id from group1 where course_id = ? AND confirmed = 0;");
-			statement.setInt(1,  id);
+			statement = connection
+					.prepareStatement("SELECT  id from group1 where course_id = ? AND confirmed = 0;");
+			statement.setInt(1, id);
 			result = statement.executeQuery();
 			result.next();
 			group_id = result.getInt(1);
@@ -185,7 +186,11 @@ public class GroupDAO {
 			PreparedStatement st = connection.prepareStatement(UPDATE);
 
 			st.setInt(1, group.getCourse_id());
-			st.setInt(2, group.getTeacher_id());
+			if (group.getTeacher_id() != null) {
+				st.setInt(2, group.getTeacher_id());
+			} else {
+				st.setNull(2, Types.INTEGER);
+			}
 			st.setString(3, group.getName());
 			st.setBoolean(4, group.getIs_active());
 
@@ -279,6 +284,7 @@ public class GroupDAO {
 		return group;
 
 	}
+
 	public static Group getGroupByUserRegisterOnCourse(Integer user_id,
 			Integer course, Connection connection) {
 
@@ -299,6 +305,7 @@ public class GroupDAO {
 		return group;
 
 	}
+
 	public static Group getGroupByUserAcsessKnowladgeBase(Integer user_id,
 			Integer course, Connection connection) {
 
@@ -320,7 +327,7 @@ public class GroupDAO {
 		return group;
 
 	}
-	
+
 	public static List<Group> getAllActiveGroups(Connection connection) {
 
 		ResultSet rs = null;
