@@ -208,7 +208,7 @@ a {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Change lesson date</h4>
+					<h4 class="modal-title"><t:i18n id='visiting.date.change' /></h4>
 				</div>
 
 				<div class="modal-body">
@@ -219,7 +219,7 @@ a {
 						<div class="form-group">
 
 							<label for="login-username"><i class="icon-user"></i> <b>
-									New date</b></label> <input name="newDateLesson" class="form-control"
+									<t:i18n id='visiting.date.new' /></b></label> <input name="newDateLesson" class="form-control"
 								id="newDateLesson" type="date">						
 						</div>
 						
@@ -231,7 +231,7 @@ a {
 						<div class="form-group" >
 
 							<button id="updateLessonDate" type="submit"
-								class="btn btn-primary pull-right">Update Lesson</button>
+								class="btn btn-primary pull-right"><t:i18n id='visiting.date.update' /></button>
 							<div class="clearfix"></div>
 						</div>
 					</form>
