@@ -75,31 +75,36 @@
 		<t:i18n id='courses.our' />
 	</h2>
 	<div class="row-fluid">
+	<div class="section">
+		<div class="container">
 		<c:forEach items="${course }" var="cours">
 
 
-			<div class="col-md-4 col-sm-6">
-				<div class="portfolio-item">
-					<div class="portfolio-image">
-						<a href="#"><img src="upload/${cours.icon }"
-							style="min-widt: 250px; max-widt: 250px; min-height: 200px; max-height: 200px"
-							alt="Project Name"></a>
+		
+					<div class="col-md-4 col-sm-6">
+						<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="#"><img src="upload/${cours.icon }"
+									style="min-widt: 250px; max-widt: 250px; min-height: 200px; max-height: 200px"
+									alt="Project Name"></a>
+							</div>
+							<div class="portfolio-info-fade">
+								<ul>
+									<li class="portfolio-project-name"><c:out
+											value="${cours.name }" /></li>
+									<li class="read-more"><a
+										href="<c:url value="/CourseServlet?action=readMore&course_id=${cours.id }"/>"
+										class="btn btn-primary"><t:i18n id='courses.more'/></a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div class="portfolio-info-fade">
-						<ul>
-							<li class="portfolio-project-name"><c:out
-									value="${cours.name }" /></li>
-							<li class="read-more"><a
-								href="<c:url value="/CourseServlet?action=readMore&course_id=${cours.id }"/>"
-								class="btn btn-primary"><t:i18n id='courses.more' /></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
 
 
 
 		</c:forEach>
+		</div>
+		</div>
 	</div>
 	<div class="section">
 		<div class="container">
