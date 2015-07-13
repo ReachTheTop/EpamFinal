@@ -58,7 +58,7 @@
 											<span class="caret"></span> <span class="sr-only">Toggle
 												Dropdown</span>
 										</button>
-										<ul class="dropdown-menu">
+										<ul class="dropdown-menu  pull-right">
 											<li><a
 												href="<c:url value="/ArticleServlet?action=new" />"><t:i18n
 														id='article.new' /></a></li>

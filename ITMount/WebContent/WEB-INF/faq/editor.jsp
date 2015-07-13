@@ -25,7 +25,7 @@
 						<span class="caret"></span> <span class="sr-only">Toggle
 							Dropdown</span>
 					</button>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu  pull-right">
 
 						<li><a data-toggle="modal" href="#addCategory"><t:i18n id="faq.category.add"/></a></li>
 						<li><a data-toggle="modal" id="editCat" href="#editCategory"><t:i18n id="faq.category.edit"/></a></li>
